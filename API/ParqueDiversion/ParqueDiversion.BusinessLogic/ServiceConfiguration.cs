@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ParqueDiversion.BusinessLogic.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace ParqueDiversion.BusinessLogic
 
         public static void BusinessLogic(this IServiceCollection services)
         {
+            services.AddScoped<AccessServices>();
+            services.AddScoped<GeneralesServices>();
+            services.AddScoped<ParqueServices>();
+
         }
     }
 }
