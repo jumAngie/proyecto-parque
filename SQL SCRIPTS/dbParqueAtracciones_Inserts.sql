@@ -482,7 +482,128 @@ GO
 
 
 --ALTER TABLE acce.tbUsuarios
---ADD CONSTRAINT FK_acce_tbUsuarios_cons_tbEmpleados_empl_ID FOREIGN KEY (empl_ID) REFERENCES cons.tbEmpleados (empl_ID),
+--ADD CONSTRAINT FK_acce_tbUsuarios_cons_tbEmpleados_empl_ID FOREIGN KEY (empl_ID) REFERENCES parq.tbEmpleados (empl_ID),
 --	CONSTRAINT FK_acce_tbUsuarios_usua_UsuarioCreador_tbUsuarios_usua_ID FOREIGN KEY (usua_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
 --	CONSTRAINT FK_acce_tbUsuarios_usua_UsuarioModificador_tbUsuarios_usua_ID FOREIGN KEY (usua_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+
+--ALTER TABLE parq.tbCargos
+--ADD	CONSTRAINT FK_parq_tbCargos_carg_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (carg_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbCargos_carg_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (carg_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbRegiones
+--ADD
+--	CONSTRAINT FK_parq_tbRegiones_regi_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (regi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbRegiones_regi_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (regi_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbClientes
+--ADD
+--	CONSTRAINT FK_parq_tbClientes_clie_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (clie_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbClientes_clie_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (clie_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbClientesRegistrados 
+--ADD
+--	CONSTRAINT FK_parq_tbClientesRegistrados_clre_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (clre_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbClientesRegistrados_clre_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (clre_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbAreas
+--ADD
+--	CONSTRAINT FK_parq_tbAreas_area_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (area_UsuarioCreador) REFERENCES acce.tbUsuarios(usua_ID),
+--	CONSTRAINT FK_parq_tbAreas_area_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (area_UsuarioModificador) REFERENCES acce.tbUsuarios(usua_ID)
+--GO
+
+--ALTER TABLE parq.tbTickets
+--ADD
+--	CONSTRAINT FK_parq_tbTickets_tckt_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (tckt_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbTickets_tckt_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (tckt_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbTicketsCliente
+--ADD
+--	CONSTRAINT FK_parq_tbTicketsCliente_ticl_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (ticl_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbTicketsCliente_ticl_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (ticl_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+
+--ALTER TABLE parq.tbAtracciones
+--ADD
+--	CONSTRAINT FK_parq_tbAtracciones_atra_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (atra_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbAtracciones_atra_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (atra_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbEmpleados
+--ADD
+--	CONSTRAINT FK_parq_tbEmpleados_empl_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (empl_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbEmpleados_empl_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (empl_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbQuioscos
+--ADD
+--	CONSTRAINT FK_parq_tbQuioscos_quio_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (quio_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbQuioscos_quio_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (quio_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbGolosinas
+--ADD
+--	CONSTRAINT FK_parq_tbGolosinas_golo_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (golo_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbGolosinas_golo_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (golo_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbInsumosQuiosco
+--ADD
+--	CONSTRAINT FK_parq_tbInsumosQuiosco_insu_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (insu_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbInsumosQuiosco_insu_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (insu_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE parq.tbRatings
+--ADD
+--	CONSTRAINT FK_parq_tbRatings_rati_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (rati_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_parq_tbRatings_rati_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (rati_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fila.tbTemporizadores
+--ADD
+--	CONSTRAINT FK_fila_tbTemporizadores_temp_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (temp_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fila_tbTemporizadores_temp_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (temp_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fila.tbTipoFilas
+--ADD
+--	CONSTRAINT FK_fila_tbTipoFilas_tifi_UsuarioCreador_acce_tbUsuarios_usua_ID	FOREIGN KEY (tifi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fila_tbTipoFilas_tifi_UsuarioModificador_acce_tbUsuarios_usua_ID	FOREIGN KEY (tifi_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fila.tbFilasAtraccion
+--ADD
+--	CONSTRAINT FK_fila_tbFilasAtraccion_fiat_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (fiat_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fila_tbFilasAtraccion_fiat_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (fiat_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fila.tbHistorialFilasPosiciones
+--ADD
+--	CONSTRAINT FK_fila_tbHistorialFilasPosiciones_hipo_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (hipo_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fila_tbHistorialFilasPosiciones_hipo_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (hipo_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fila.tbHistorialVisitantesAtraccion
+--ADD
+--	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_hiat_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (hiat_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_hiat_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (hiat_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fact.tbVentasQuiosco
+--ADD
+--	CONSTRAINT FK_fact_tbVentasQuiosco_vent_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (vent_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fact_tbVentasQuiosco_vent_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (vent_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
+--GO
+
+--ALTER TABLE fact.tbVentasQuioscoDetalle
+--ADD
+--	CONSTRAINT FK_fact_tbVentasQuioscoDetalle_deta_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (deta_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
+--	CONSTRAINT FK_fact_tbVentasQuioscoDetalle_deta_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (deta_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)
 --GO

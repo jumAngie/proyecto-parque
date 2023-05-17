@@ -31,7 +31,6 @@ CREATE TABLE gral.tbEstadosCiviles(
 )
 GO
 
-
 --CREACION DE TABLA tbDepartamentos
 CREATE TABLE gral.tbDepartamentos(
 	dept_ID						INT IDENTITY(1,1),
@@ -49,7 +48,6 @@ CREATE TABLE gral.tbDepartamentos(
 	CONSTRAINT UQ_gral_tbDepartamentos_dept_Nombre UNIQUE (dept_Nombre),
 )
 GO
-
 
 --CREACION DE TABLA tbMunicipios
 CREATE TABLE gral.tbMunicipios(
