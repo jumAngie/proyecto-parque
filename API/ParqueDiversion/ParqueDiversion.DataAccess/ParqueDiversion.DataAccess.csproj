@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\Acce\**" />
+    <Compile Remove="Repositories\Gral\**" />
+    <Compile Remove="Repositories\Parq\**" />
+    <EmbeddedResource Remove="Repositories\Acce\**" />
+    <EmbeddedResource Remove="Repositories\Gral\**" />
+    <EmbeddedResource Remove="Repositories\Parq\**" />
+    <None Remove="Repositories\Acce\**" />
+    <None Remove="Repositories\Gral\**" />
+    <None Remove="Repositories\Parq\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -15,10 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ParqueDiversion.Entities\ParqueDiversion.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
