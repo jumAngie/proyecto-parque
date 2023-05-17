@@ -1,0 +1,59 @@
+@import 'theme';
+
+// <toolbars> //
+md-toolbar button.td-menu-button {
+  display: none;
+}
+
+md-toolbar.mat-primary {
+  min-height: 120px;
+
+  md-toolbar-row {
+    height: 100%;
+  }
+}
+
+@media (min-width: 600px) {
+  md-toolbar.mat-primary {
+    min-height: 64px;
+
+    md-toolbar-row {
+      height: 100%;
+    }
+  }
+}
+
+md-toolbar .small {
+  font-size: 1rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 960px) {
+  md-toolbar .small {
+    font-size: 1em;
+  }
+}
+
+// <geolocator button> //
+app-geolocator button[md-icon-button] {
+  background-color: mat-color($primary, 900);
+}
+
+// <geosearch input> //
+// TODO - remove rule, should be fixed in Covalent Beta3
+// https://github.com/Teradata/covalent/issues/412
+app-input-search .td-search-input {
+  height: 71px !important;
+}
+
+// <radius buttons> //
+app-radius-filter button[md-mini-fab].va-radius-selected:disabled {
+  background-color: mat-color($primary, 400);
+  color: currentColor;
+}
+
+// <app-footer mobile> //
+app-footer button:disabled {
+  background-color: mat-color($accent);
+}
