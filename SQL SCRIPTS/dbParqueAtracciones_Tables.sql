@@ -20,6 +20,7 @@ GO
 CREATE TABLE gral.tbEstadosCiviles(
 	civi_ID					INT IDENTITY(1,1),
 	civi_Descripcion		VARCHAR(200),
+	civi_Habilitado			INT DEFAULT 1,
 	civi_Estado				INT DEFAULT 1,
 	civi_UsuarioCreador		INT DEFAULT 1,
 	civi_FechaCreacion		DATETIME DEFAULT GETDATE(),
@@ -30,11 +31,13 @@ CREATE TABLE gral.tbEstadosCiviles(
 )
 GO
 
+
 --CREACION DE TABLA tbDepartamentos
 CREATE TABLE gral.tbDepartamentos(
 	dept_ID						INT IDENTITY(1,1),
 	dept_Codigo					CHAR(2),
 	dept_Nombre					NVARCHAR(200),
+	dept_Habilitado				INT DEFAULT 1,
 	dept_Estado					INT DEFAULT (1),
 	dept_UsuarioCreador			INT DEFAULT 1,
 	dept_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -47,12 +50,14 @@ CREATE TABLE gral.tbDepartamentos(
 )
 GO
 
+
 --CREACION DE TABLA tbMunicipios
 CREATE TABLE gral.tbMunicipios(
 	muni_ID						INT IDENTITY(1,1),
 	dept_ID						INT,
 	muni_Codigo					CHAR(4),
 	muni_Nombre					NVARCHAR(200),
+	muni_Habilitado				INT DEFAULT 1,
 	muni_Estado					INT DEFAULT 1,
 	muni_UsuarioCreador			INT DEFAULT 1,
 	muni_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -69,6 +74,7 @@ GO
 CREATE TABLE gral.tbMetodosPago(
 	pago_ID						INT IDENTITY(1,1),
 	pago_Nombre					NVARCHAR (200),
+	pago_Habilitado				INT DEFAULT 1,
 	pago_Estado					INT DEFAULT 1,
 	pago_UsuarioCreador			INT DEFAULT 1,
 	pago_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -144,6 +150,7 @@ CREATE TABLE acce.tbUsuarios(
 	empl_ID						INT,
 	role_ID                     INT,
 	usua_Img					NVARCHAR(MAX),
+	usua_Habilitado				INT DEFAULT 1,
 	usua_Estado					INT DEFAULT 1,
 	usua_UsuarioCreador			INT,
 	usua_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -166,6 +173,7 @@ GO
 CREATE TABLE parq.tbCargos(
 	carg_ID						INT IDENTITY(1,1),
 	carg_Nombre					VARCHAR(300),
+	carg_Habilitado				INT DEFAULT 1,
 	carg_Estado					INT DEFAULT 1,
 	carg_UsuarioCreador			INT,
 	carg_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -180,6 +188,7 @@ GO
 CREATE TABLE parq.tbRegiones(
 	regi_ID						INT IDENTITY(1,1),
 	regi_Nombre					VARCHAR(200),
+	regi_Habilitado				INT DEFAULT 1,
 	regi_Estado					INT DEFAULT 1,
 	regi_UsuarioCreador			INT,
 	regi_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -198,6 +207,7 @@ CREATE TABLE parq.tbClientes(
 	clie_DNI					CHAR(15),
 	clie_Sexo					CHAR(1),
 	clie_Telefono				CHAR(9),
+	clie_Habilitado				INT DEFAULT 1,
 	clie_Estado					INT DEFAULT 1,
 	clie_UsuarioCreador			INT DEFAULT 1,
 	clie_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -217,6 +227,7 @@ CREATE TABLE parq.tbClientesRegistrados(
 	clre_Usuario				VARCHAR(300),
 	clre_Email					NVARCHAR(300),
 	clre_Contraseña				NVARCHAR(300),
+	clre_Habilitado				INT DEFAULT 1,
 	clre_Estado					INT DEFAULT 1,
 	clre_UsuarioCreador			INT,
 	clre_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -238,6 +249,7 @@ CREATE TABLE parq.tbAreas(
 	regi_ID						INT,
 	area_UbicaionReferencia		VARCHAR(300),
 	area_Imagen					NVARCHAR(MAX),
+	area_Habilitado				INT DEFAULT 1,
 	area_Estado					INT DEFAULT 1,
 	area_UsuarioCreador			INT,
 	area_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -254,6 +266,7 @@ CREATE TABLE parq.tbTickets(
 	tckt_ID						INT IDENTITY(1,1),
 	tckt_Nombre					VARCHAR(300),
 	tckt_Precio					INT,
+	tckt_Habilitado				INT DEFAULT 1,
 	tckt_Estado					INT DEFAULT 1,
 	tckt_UsuarioCreador			INT,
 	tckt_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -273,6 +286,7 @@ CREATE TABLE parq.tbTicketsCliente(
 	ticl_Cantidad				INT,
 	ticl_FechaCompra			DATETIME DEFAULT GETDATE(),
 	ticl_FechaUso				DATETIME,
+	ticl_Habilitado				INT DEFAULT 1,
 	ticl_Estado					INT DEFAULT 1,
 	ticl_UsuarioCreador			INT,
 	ticl_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -296,6 +310,7 @@ CREATE TABLE parq.tbAtracciones(
 	atra_LimitePersonas			INT,
 	atra_DuracionRonda			TIME,
 	atra_Imagen					NVARCHAR(MAX),
+	atra_Habilitado				INT DEFAULT 1,
 	atra_Estado					INT DEFAULT 1,
 	atra_UsuarioCreador			INT,
 	atra_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -321,6 +336,7 @@ CREATE TABLE parq.tbEmpleados(
 	empl_Sexo					CHAR(1),
 	civi_ID						INT,
 	carg_ID						INT,
+	empl_Habilitado				INT DEFAULT 1,
 	empl_Estado					INT DEFAULT 1,
 	empl_UsuarioCreador			INT DEFAULT 1,
 	empl_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -344,6 +360,7 @@ CREATE TABLE parq.tbQuioscos(
 	regi_ID						INT,
 	quio_ReferenciaUbicacion	VARCHAR (300),
 	quio_Imagen					NVARCHAR(MAX),
+	quio_Habilitado				INT DEFAULT 1,
 	quio_Estado					INT DEFAULT 1,
 	quio_UsuarioCreador			INT,
 	quio_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -354,7 +371,7 @@ CREATE TABLE parq.tbQuioscos(
 	CONSTRAINT FK_parq_tbQuioscos_tbAreas_area_ID FOREIGN KEY (area_ID) REFERENCES parq.tbAreas (area_ID),
 	CONSTRAINT FK_parq_tbQuioscos_tbEmpleados_empl_ID FOREIGN KEY (empl_ID) REFERENCES parq.tbEmpleados (empl_ID),
 	CONSTRAINT FK_parq_tbQuioscos_tbRegiones_regi_ID FOREIGN KEY (regi_ID) REFERENCES parq.tbRegiones (regi_ID),
-	--CONSTRAINT UQ_parq_tbQuioscos_quio_Nombre UNIQUE (quio_Nombre),
+
 )
 GO
 
@@ -362,6 +379,7 @@ CREATE TABLE parq.tbGolosinas(
 	golo_ID						INT IDENTITY(1,1),
 	golo_Nombre					VARCHAR(300),
 	golo_Precio					INT,
+	golo_Habilitado				INT DEFAULT 1,
 	golo_Estado					INT DEFAULT 1,
 	golo_UsuarioCreador			INT,
 	golo_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -378,6 +396,7 @@ CREATE TABLE parq.tbInsumosQuiosco(
 	quio_ID						INT,
 	golo_ID						INT,
 	insu_Stock					INT,
+	insu_Habilitado				INT DEFAULT 1,
 	insu_Estado					INT DEFAULT 1,
 	insu_UsuarioCreador			INT,
 	insu_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -392,11 +411,12 @@ CREATE TABLE parq.tbInsumosQuiosco(
 GO
 
 CREATE TABLE parq.tbRatings(
-	rati_ID				INT IDENTITY(1,1),
-	atra_ID				INT,
-	clie_ID				INT,
-	rati_Estrellas		INT,
-	rati_Comentario		VARCHAR(300),
+	rati_ID						INT IDENTITY(1,1),
+	atra_ID						INT,
+	clie_ID						INT,
+	rati_Estrellas				INT,
+	rati_Comentario				VARCHAR(300),
+	rati_Habilitado				INT DEFAULT 1,
 	rati_Estado					INT DEFAULT 1,
 	rati_UsuarioCreador			INT,
 	rati_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -421,6 +441,7 @@ CREATE TABLE fila.tbTemporizadores(
 	temp_Expiracion				TIME,
 	temp_TiempoRestante			TIME,
 	temp_FilaPosicion			INT,
+	temp_Habilitado				INT DEFAULT 1,
 	temp_Estado					INT DEFAULT 1,
 	temp_UsuarioCreador			INT,
 	temp_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -436,6 +457,7 @@ GO
 CREATE TABLE fila.tbTipoFilas(
 	tifi_ID						INT IDENTITY(1,1),
 	tifi_Nombre					VARCHAR(300),
+	tifi_Habilitado				INT DEFAULT 1,
 	tifi_Estado					INT DEFAULT 1,
 	tifi_UsuarioCreador			INT,
 	tifi_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -450,6 +472,7 @@ CREATE TABLE fila.tbFilasAtraccion(
 	fiat_ID						INT IDENTITY(1,1),
 	tifi_ID						INT,
 	atra_ID						INT,
+	fiat_Habilitado				INT DEFAULT 1,
 	fiat_Estado					INT DEFAULT 1,
 	fiat_UsuarioCreador			INT,
 	fiat_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -480,6 +503,7 @@ CREATE TABLE fila.tbHistorialFilasPosiciones(
 	fiat_ID						INT,
 	ticl_ID						INT,
 	hipo_FechaIngreso			DATETIME,
+	hipo_Habilitado				INT DEFAULT 1,
 	hipo_Estado					INT DEFAULT 1,
 	hipo_UsuarioCreador			INT,
 	hipo_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -510,6 +534,7 @@ CREATE TABLE fila.tbHistorialVisitantesAtraccion(
 	hiat_ID						INT IDENTITY(1,1),
 	atra_ID						INT,
 	ticl_ID						INT,
+	hiat_Habilitado				INT DEFAULT 1,
 	hiat_Estado					INT DEFAULT 1,
 	hiat_UsuarioCreador			INT,
 	hiat_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -532,6 +557,7 @@ CREATE TABLE fact.tbVentasQuiosco(
 	quio_ID						INT,
 	clie_ID						INT,
 	pago_ID						INT,
+	vent_Habilitado				INT DEFAULT 1,
 	vent_Estado					INT DEFAULT 1,
 	vent_UsuarioCreador			INT,
 	vent_FechaCreacion			DATETIME DEFAULT GETDATE(),
@@ -550,6 +576,7 @@ CREATE TABLE fact.tbVentasQuioscoDetalle(
 	vent_ID						INT,
 	golo_ID						INT,
 	deta_Cantidad				INT,
+	deta_Habilitado				INT DEFAULT 1,
 	deta_Estado					INT DEFAULT 1,
 	deta_UsuarioCreador			INT,
 	deta_FechaCreacion			DATETIME DEFAULT GETDATE(),
