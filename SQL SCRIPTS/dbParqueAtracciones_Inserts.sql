@@ -378,11 +378,60 @@ UPDATE gral.tbMunicipios
 SET muni_UsuarioCreador = 1
 
 
+INSERT INTO parq.tbCargos(carg_Nombre)
+VALUES	('Ventanilla'),
+		('Vendedor'),
+		('Supervisor Atracciones'),
+		('Aseador')
+GO
+
+INSERT INTO parq.tbRegiones(regi_Nombre)
+VALUES	('Norte'),
+		('Sur'),
+		('Este'),
+		('Oeste'),
+		('Nordeste'),
+		('Sudeste'),
+		('Noroeste'),
+		('Sudoeste')
+GO		
+
+
+INSERT INTO parq.tbClientes(clie_Nombres, clie_Apellidos, clie_DNI, clie_Sexo, clie_Telefono)
+VALUES	('Juan', 'Camaney',   '0502-0045-57848', 'M', '8855-4477'),
+		('Maria', 'Antonieta','0224-5578-44157', 'F', '9985-2240'),
+		('David', 'Castillo', '0544-2235-42517', 'M', '7754-1142'),
+		('Alejandra', 'Peña', '0104-5575-11245', 'F', '8852-2241')
+GO
 
 
 
+INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Contraseña, clre_Email)
+VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com'),
+		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com')
+GO
 
 
+INSERT INTO parq.tbAreas (area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia)
+VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento, incluye piscinas!', 1, 'Ubicado en la zona norte del parque'),
+		('Montañas Rusas', 'Zona con un ambiente lleno de diversión y adrenalina!', 3, 'Ubicado en la zona Este del parque'),
+		('Zona Extrema', 'Zona con temáticas frenesí, desde paintball, hasta airsoft!', 2, 'Ubicado en la zona Sur del parque'),
+		('Zona Infantíl', 'Zona con un ambiente más tranquilo y familiar con lo pequeños!', '4', 'Ubicado en la zona Oeste del parque')
+GO
+
+
+INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio)
+VALUES	('Clásico', 150),
+		('VIP', 450)
+GO
+
+
+INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad)
+VALUES	(1, 1, 4),
+		(2, 4, 3),
+		(2, 2, 2),
+		(1, 3, 6)
+GO
 
 
 

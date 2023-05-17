@@ -11,8 +11,8 @@ CREATE SCHEMA acce
 GO
 CREATE SCHEMA fact
 GO
-
-
+CREATE SCHEMA fila
+GO
 
 /*TABLAS ESQUEMA GRAL*/
 
@@ -309,23 +309,6 @@ CREATE TABLE parq.tbAtracciones(
 )
 GO
 
-CREATE TABLE parq.tbTemporizadores(
-	temp_ID						INT IDENTITY(1,1),
-	clie_ID						INT,
-	atra_ID						INT,
-	temp_Expiracion				TIME,
-	temp_Estado					INT DEFAULT 1,
-	temp_UsuarioCreador			INT,
-	temp_FechaCreacion			DATETIME DEFAULT GETDATE(),
-	temp_UsuarioModificador		INT,
-	temp_FechaModificacion		DATETIME,
-
-	CONSTRAINT PK_parq_tbTemporizadores_temp_ID PRIMARY KEY (temp_ID),
-	CONSTRAINT FK_parq_tbTemporizadores_tbClientes FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes(clie_ID),
-	CONSTRAINT FK_parq_tbTemporizadores_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
-)
-GO
-
 CREATE TABLE parq.tbEmpleados(
 	empl_ID						INT IDENTITY(1,1),
 	empl_PrimerNombre			VARCHAR(300),
@@ -353,8 +336,6 @@ CREATE TABLE parq.tbEmpleados(
 )
 GO
 
-
-
 CREATE TABLE parq.tbQuioscos(
 	quio_ID						INT IDENTITY(1,1),
 	area_ID						INT,
@@ -373,7 +354,7 @@ CREATE TABLE parq.tbQuioscos(
 	CONSTRAINT FK_parq_tbQuioscos_tbAreas_area_ID FOREIGN KEY (area_ID) REFERENCES parq.tbAreas (area_ID),
 	CONSTRAINT FK_parq_tbQuioscos_tbEmpleados_empl_ID FOREIGN KEY (empl_ID) REFERENCES parq.tbEmpleados (empl_ID),
 	CONSTRAINT FK_parq_tbQuioscos_tbRegiones_regi_ID FOREIGN KEY (regi_ID) REFERENCES parq.tbRegiones (regi_ID),
-	CONSTRAINT UQ_parq_tbQuioscos_quio_Nombre UNIQUE (quio_Nombre),
+	--CONSTRAINT UQ_parq_tbQuioscos_quio_Nombre UNIQUE (quio_Nombre),
 )
 GO
 
@@ -410,9 +391,146 @@ CREATE TABLE parq.tbInsumosQuiosco(
 )
 GO
 
+CREATE TABLE parq.tbRatings(
+	rati_ID				INT IDENTITY(1,1),
+	atra_ID				INT,
+	clie_ID				INT,
+	rati_Estrellas		INT,
+	rati_Comentario		VARCHAR(300),
+	rati_Estado					INT DEFAULT 1,
+	rati_UsuarioCreador			INT,
+	rati_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	rati_UsuarioModificador		INT,
+	rati_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_parq_tbRatings_rati_ID PRIMARY KEY (rati_ID),
+	CONSTRAINT FK_parq_tbRatings_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones(atra_ID),
+	CONSTRAINT FK_parq_tbRatings_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes (clie_ID),
+	CONSTRAINT CK_parq_tbRatings_rati_Estrellas CHECK (rati_Estrellas BETWEEN 0 AND 5),
+)
+GO
+
+
+
+/*TABLAS ESQUEMA FILA*/
+
+CREATE TABLE fila.tbTemporizadores(
+	temp_ID						INT IDENTITY(1,1),
+	ticl_ID						INT,
+	atra_ID						INT,
+	temp_Expiracion				TIME,
+	temp_TiempoRestante			TIME,
+	temp_FilaPosicion			INT,
+	temp_Estado					INT DEFAULT 1,
+	temp_UsuarioCreador			INT,
+	temp_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	temp_UsuarioModificador		INT,
+	temp_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_fila_tbTemporizadores_temp_ID PRIMARY KEY (temp_ID),
+	CONSTRAINT FK_fila_tbTemporizadores_parq_tbTicketsCliente FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCLiente (ticl_ID),
+	CONSTRAINT FK_fila_tbTemporizadores_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
+)
+GO
+
+CREATE TABLE fila.tbTipoFilas(
+	tifi_ID						INT IDENTITY(1,1),
+	tifi_Nombre					VARCHAR(300),
+	tifi_Estado					INT DEFAULT 1,
+	tifi_UsuarioCreador			INT,
+	tifi_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	tifi_UsuarioModificador		INT,
+	tifi_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_fila_tbTipoFilas_tifi_ID PRIMARY KEY (tifi_ID),
+)
+GO
+
+CREATE TABLE fila.tbFilasAtraccion(
+	fiat_ID						INT IDENTITY(1,1),
+	tifi_ID						INT,
+	atra_ID						INT,
+	fiat_Estado					INT DEFAULT 1,
+	fiat_UsuarioCreador			INT,
+	fiat_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	fiat_UsuarioModificador		INT,
+	fiat_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_fila_tbFilasAtraccion_fiat_ID PRIMARY KEY (fiat_ID),
+	CONSTRAINT FK_fila_tbFilasAtraccion_tbTipoFilas_tifi_ID FOREIGN KEY (tifi_ID) REFERENCES fila.tbTipoFilas (tifi_ID),
+	CONSTRAINT FK_fila_tbFilasAtraccion_parq_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
+
+)
+GO
+
+CREATE TABLE fila.tbFilasPosiciones(
+	fipo_ID				INT IDENTITY(1,1),
+	fiat_ID				INT,
+	ticl_ID				INT,
+	fipo_HoraIngreso	TIME,
+	
+	CONSTRAINT PK_fila_tbFilasPosiciones_fipo_ID PRIMARY KEY (fipo_ID),
+	CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
+	CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
+)
+GO
+
+CREATE TABLE fila.tbHistorialFilasPosiciones(
+	hipo_ID						INT IDENTITY(1,1),
+	fiat_ID						INT,
+	ticl_ID						INT,
+	hipo_FechaIngreso			DATETIME,
+	hipo_Estado					INT DEFAULT 1,
+	hipo_UsuarioCreador			INT,
+	hipo_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	hipo_UsuarioModificador		INT,
+	hipo_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_fila_tbHistorialFilasPosiciones_hipo_ID PRIMARY KEY (hipo_ID),
+	CONSTRAINT FK_fila_tbHistorialFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
+	CONSTRAINT FK_fila_tbHistorialFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID),
+
+)
+GO
+
+CREATE TABLE fila.tbVisitantesAtraccion(
+	viat_ID				INT IDENTITY(1,1),
+	atra_ID				INT,
+	ticl_ID				INT,
+	viat_HoraEntrada	TIME,
+
+	CONSTRAINT PK_fila_tbVisitantesAtraccion_viat_ID PRIMARY KEY (viat_ID),
+	CONSTRAINT FK_fila_tbVisitantesAtraccion_parq_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
+	CONSTRAINT FK_fila_tbVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID),
+
+)
+GO
+
+CREATE TABLE fila.tbHistorialVisitantesAtraccion(
+	hiat_ID						INT IDENTITY(1,1),
+	atra_ID						INT,
+	ticl_ID						INT,
+	hiat_Estado					INT DEFAULT 1,
+	hiat_UsuarioCreador			INT,
+	hiat_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	hiat_UsuarioModificador		INT,
+	hiat_FechaModificacion		DATETIME,
+
+	CONSTRAINT PK_fila_tbHistorialVisitantesAtraccion_hiat_ID PRIMARY KEY (hiat_ID),
+	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
+	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID),
+
+)
+GO
+
+
+
+/*TABLAS ESQUEMA FACT*/
+
 CREATE TABLE fact.tbVentasQuiosco(
 	vent_ID						INT IDENTITY(1,1),
 	quio_ID						INT,
+	clie_ID						INT,
 	pago_ID						INT,
 	vent_Estado					INT DEFAULT 1,
 	vent_UsuarioCreador			INT,
@@ -422,6 +540,7 @@ CREATE TABLE fact.tbVentasQuiosco(
 
 	CONSTRAINT PK_fact_tbVentasQuiosco_vent_ID PRIMARY KEY (vent_ID),
 	CONSTRAINT FK_fact_tbVentasQuiosco_tbQuioscos_quio_ID FOREIGN KEY (quio_ID) REFERENCES parq.tbQuioscos (quio_ID),
+	CONSTRAINT FK_fact_tbVentasQuiosco_parq_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes (clie_ID),
 	CONSTRAINT FK_fact_tbVentasQuiosco_gral_tbMetodosPago_pago_ID FOREIGN KEY (pago_ID) REFERENCES gral.tbMetodosPago (pago_ID),
 )
 GO
@@ -443,20 +562,11 @@ CREATE TABLE fact.tbVentasQuioscoDetalle(
 )	
 GO
 
-CREATE TABLE parq.tbRatings(
-	rati_ID				INT IDENTITY(1,1),
-	atra_ID				INT,
-	clie_ID				INT,
-	rati_Estrellas		INT,
-	rati_Comentario		VARCHAR(300),
 
-	CONSTRAINT PK_parq_tbRatings_rati_ID PRIMARY KEY (rati_ID),
-	CONSTRAINT FK_parq_tbRatings_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones(atra_ID),
-	CONSTRAINT FK_parq_tbRatings_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes (clie_ID),
-	CONSTRAINT CK_parq_tbRatings_rati_Estrellas CHECK (rati_Estrellas BETWEEN 0 AND 5),
-)
-GO
+
+
 
 --DECLARE @RandomCode VARCHAR(30);
 --SET @RandomCode = CONVERT(VARCHAR(20), GETDATE(), 112) + '-' + REPLACE(NEWID(), '-', '');
 --SELECT @RandomCode AS UniqueCode;
+
