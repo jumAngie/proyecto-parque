@@ -128,6 +128,7 @@ BEGIN
 
 --*************** DELETE DE ROL ******************-
 GO
+
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargo_DELETE
 @carg_Id INT
 AS
