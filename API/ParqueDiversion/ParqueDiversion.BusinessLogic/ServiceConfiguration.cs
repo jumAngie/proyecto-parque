@@ -21,6 +21,7 @@ namespace ParqueDiversion.BusinessLogic
             services.AddScoped<GeneralesServices>();
             services.AddScoped<ParqueServices>();
             services.AddScoped<FacturacionServices>();
+            services.AddScoped<FilaServices>();
 
         }
     }
