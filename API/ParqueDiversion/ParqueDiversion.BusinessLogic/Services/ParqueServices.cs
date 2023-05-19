@@ -1,5 +1,7 @@
 ﻿using Paqueteria.BusinessLogic;
+using ParqueDiversion.DataAccess;
 using ParqueDiversion.DataAccess.Repositories;
+using ParqueDiversion.DataAccess.Repositories.Parq;
 using ParqueDiversion.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,20 +18,180 @@ namespace ParqueDiversion.BusinessLogic.Services
         private readonly GolosinasRepository _golosinasRepository;
         private readonly InsumosQuioscoRepository _insumosQuioscoRepository;
         private readonly RatingsRepository _ratingsRepository;
+        private readonly AreasRepository _areasRepository;
+        private readonly CargoRepository _cargoRepository;
+        private readonly RegionesRepository _regionesRepository;
+        private readonly ClientesRepository _clientesRepository;
+        private readonly ClientesRegistradosRepository _clientesRegistradosRepository;
+        private readonly TicketRepository _ticketRepository;
+        private readonly TicketClientesRepository _ticketClientesRepository;
+        private readonly AtraccionesRepository _atraccionesRepository;
+
         public ParqueServices(
+                ClientesRegistradosRepository clientesRegistradosRepository,
                 EmpleadosRepository empleadosRepository,
                 QuioscosRepository quioscosRepository,
                 GolosinasRepository golosinasRepository,
                 InsumosQuioscoRepository insumosQuioscoRepository,
-                RatingsRepository ratingsRepository
+                RatingsRepository ratingsRepository,
+                AreasRepository areasRepository,
+                CargoRepository cargoRepository,
+                RegionesRepository regionesRepository,
+                ClientesRepository clientesRepository,
+                TicketRepository ticketRepository,
+                TicketClientesRepository ticketClientesRepository,
+                AtraccionesRepository atraccionesRepository
             )
         {
+            _regionesRepository = regionesRepository;
+            _cargoRepository = cargoRepository;
             _empleadosRepository = empleadosRepository;
             _quioscosRepository = quioscosRepository;
             _golosinasRepository = golosinasRepository;
             _insumosQuioscoRepository = insumosQuioscoRepository;
             _ratingsRepository = ratingsRepository;
+            _areasRepository = areasRepository;
+            _clientesRepository = clientesRepository;
+            _clientesRegistradosRepository = clientesRegistradosRepository;
+            _ticketClientesRepository = ticketClientesRepository;
+            _ticketRepository = ticketRepository;
+            _atraccionesRepository = atraccionesRepository;
         }
+
+        #region Cargo
+        
+        public ServiceResult CargoList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _cargoRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        
+        public ServiceResult InsertarCargos(tbCargos item)
+        {
+            var result = new ServiceResult();
+
+            var map = _cargoRepository.Insert(item);
+            return result.Ok(map);
+        }
+
+        public VW_tbCargos FindCargo(int id)
+        {
+            try
+            {
+                return _cargoRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public RequestStatus BorrarCargo(int id)
+        {
+            try
+            {
+                return _cargoRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        
+
+        public RequestStatus UpdateCargo(tbCargos tabla)
+        {
+            try
+            {
+                return _cargoRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Regiones
+        public ServiceResult RegionList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _regionesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult InsertarRegiones(tbRegiones item)
+        {
+            var result = new ServiceResult();
+
+            var map = _regionesRepository.Insert(item);
+            return result.Ok(map);
+        }
+
+        public VW_tbRegiones FindRegiones(int id)
+        {
+            try
+            {
+                return _regionesRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public RequestStatus BorrarRegion(int id)
+        {
+            try
+            {
+                return _regionesRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
+        public RequestStatus UpdateRegiones(tbRegiones tabla)
+        {
+            try
+            {
+                return _regionesRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
 
         #region Empleados
         public IEnumerable<VW_tbEmpleados> ListadoEmpleados()

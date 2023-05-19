@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ParqueDiversion.DataAccess.Repositories.Parq
 {
-    class AtraccionesRepository : IRepository<tbAtracciones, VW_tbAtracciones>
+    public class AtraccionesRepository : IRepository<tbAtracciones, VW_tbAtracciones>
     {
         public RequestStatus Delete(int id)
         {

@@ -8,7 +8,7 @@ namespace ParqueDiversion.DataAccess
 {
     public class ScriptsDatabase
     {
-        #region Angie Procs
+        
 
                 #region Cargo
                 public static string UDP_Cargo_List = "parq.UDP_tbCargos_SELECT";
@@ -74,8 +74,7 @@ namespace ParqueDiversion.DataAccess
                 public static string UDP_Atracciones_Delete = "parq.UDP_tbAtracciones_DELETE";
                 #endregion
 
-        #endregion
-
+        
         #region Empleados
         public static string UDP_Empleados_List = "parq.UDP_VW_tbEmpleados_Select";
         public static string UDP_Empleados_Insert = "parq.UDP_tbEmpleados_Insert";
