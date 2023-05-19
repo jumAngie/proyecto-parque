@@ -167,19 +167,19 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Departementos
-        public static string INDEX_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_INDEX";
-        public static string FIND_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_FIND";
-        public static string INSERT_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_INSERT";
-        public static string UPDATE_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_UPDATE";
-        public static string DELETE_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_DELETE";
+        public static string INDEX_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_INDEX";
+        public static string FIND_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_FIND";
+        public static string INSERT_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_INSERT";
+        public static string UPDATE_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_UPDATE";
+        public static string DELETE_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_DELETE";
         #endregion
 
         #region Estados Civiles
-        public static string INDEX_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_INDEX";
-        public static string FIND_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_FIND";
-        public static string INSERT_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_INSERT";
-        public static string UPDATE_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_UPDATE";
-        public static string DELETE_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_DELETE";
+        public static string INDEX_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_INDEX";
+        public static string FIND_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_FIND";
+        public static string INSERT_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_INSERT";
+        public static string UPDATE_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_UPDATE";
+        public static string DELETE_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_DELETE";
         #endregion
 
         #region Métodos de Pago 
@@ -191,12 +191,12 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Municipios
-        public static string INDEX_MUNICIPIOS = "mant.UDP_tbMunicipios_INDEX";
-        public static string FIND_MUNICIPIOS = "mant.UDP_tbMunicipios_FIND";
-        public static string INSERT_MUNICIPIOS = "mant.UDP_tbMunicipios_INSERT";
-        public static string UPDATE_MUNICIPIOS = "mant.UDP_tbMunicipios_UPDATE";
-        public static string DELETE_MUNICIPIOS = "mant.UDP_tbMunicipios_DELETE";
-        public static string FILTRAR_MUNICIPIOS = "mant.UDP_tbMunicipios_FILTER";
+        public static string INDEX_MUNICIPIOS = "gral.UDP_tbMunicipios_INDEX";
+        public static string FIND_MUNICIPIOS = "gral.UDP_tbMunicipios_FIND";
+        public static string INSERT_MUNICIPIOS = "gral.UDP_tbMunicipios_INSERT";
+        public static string UPDATE_MUNICIPIOS = "gral.UDP_tbMunicipios_UPDATE";
+        public static string DELETE_MUNICIPIOS = "gral.UDP_tbMunicipios_DELETE";
+        public static string FILTRAR_MUNICIPIOS = "gral.UDP_tbMunicipios_FILTER";
         #endregion
 
 

@@ -78,8 +78,8 @@ namespace ParqueDiversion.DataAccess.Repositories
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@user_NombreUsuario", username, DbType.String, ParameterDirection.Input);
-            parametros.Add("@user_Contraseña", password, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_Usuario", username, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_Clave", password, DbType.String, ParameterDirection.Input);
 
             var result = db.QueryFirst<VW_Usuarios>(ScriptsDatabase.UDP_Usuarios_LOGIN, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;

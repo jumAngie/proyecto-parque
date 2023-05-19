@@ -420,9 +420,6 @@ VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento,
 GO
 
 
-SELECT* FROM parq.tbAreas
-SELECT * FROM parq.VW_tbAreas
-
 INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio)
 VALUES	('Clásico', 150),
 		('VIP', 450)
