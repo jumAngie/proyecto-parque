@@ -149,6 +149,7 @@ CREATE TABLE acce.tbUsuarios(
 	usua_Clave					VARCHAR(MAX),
 	empl_ID						INT,
 	role_ID                     INT,
+	usua_Admin					BIT,
 	usua_Img					NVARCHAR(MAX),
 	usua_Habilitado				INT DEFAULT 1,
 	usua_Estado					INT DEFAULT 1,

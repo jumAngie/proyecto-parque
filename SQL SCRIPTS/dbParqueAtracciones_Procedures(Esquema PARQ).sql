@@ -1,4 +1,36 @@
 USE dbParqueAtracciones
+GO
+
+CREATE OR ALTER VIEW acce.VW_Usuarios
+AS
+SELECT  usua_ID,
+        usua_Usuario,
+        usua_Clave,
+        T1.empl_Id,
+        nombreEmpleado = CONVERT(VARCHAR,T2.empl_PrimerNombre+' '+T2.empl_PrimerApellido),
+        usua_Admin,
+        CASE WHEN usua_Admin  = 1 THEN 'SI'
+        ELSE 'NO' END AS EsAdmin,
+        T1.role_ID,
+        CASE WHEN  role_Nombre is null THEN 'N/A' 
+        ELSE role_Nombre END AS role_Descripcion,
+        T1.usua_Estado,
+        T1.usua_UsuarioCreador,
+        (SELECT empl_PrimerNombre+' '+empl_PrimerApellido FROM parq.tbEmpleados
+        WHERE empl_Id IN (SELECT empl_Id FROM acce.tbUsuarios WHERE usua_ID = T1.usua_UsuarioCreador)) AS empl_Crea,
+        usua_FechaCreacion,
+        T1.usua_UsuarioModificador,
+        (SELECT empl_PrimerNombre+' '+empl_PrimerApellido FROM parq.tbEmpleados 
+        WHERE empl_Id IN (SELECT empl_Id FROM acce.tbUsuarios WHERE usua_ID = T1.usua_UsuarioModificador)) AS empl_Modifica,
+        usua_FechaModificacion
+        FROM acce.tbUsuarios T1
+        INNER JOIN parq.tbEmpleados T2
+        ON T1.empl_ID = T2.empl_ID
+        LEFT JOIN acce.tbRoles T3
+        ON T1.role_Id = T3.role_Id
+GO
+
+
 
 ---------------------------------------------------------------- ESQUEMA PARQ ----------------------------------------------------------------
 ------------------------------------------------------- //// PROCS PARA tbCargos -- ///// ----------------------------------------------------
@@ -101,7 +133,7 @@ BEGIN
 				WHERE	carg_ID   =		@carg_ID
 				SELECT 200 AS codeStatus, 'Cargo actualizado con éxito' AS messageStatus
 			END
-		ELSE IF NOT EXISTS (SELECT * FROM parq.tbCargos WHERE carg_Nombre = @carg_Nombre)
+		ELSE IF NOT EXISTS (SELECT * FROM parq.tbCargos WHERE carg_Nombre = @carg_Nombre AND carg_ID != @carg_ID)
 				BEGIN
 					UPDATE parq.tbCargos 
 					SET carg_Nombre = @carg_Nombre, carg_UsuarioModificador = @carg_UsuarioModificador
@@ -577,11 +609,11 @@ BEGIN
 					BEGIN
 						SET @MessageStatus += ', El E-mail ya existe.'
 					END
-			END
+				END
 				ELSE
 					BEGIN
 						SET @MessageStatus = 'El E-mail ya existe.'
-				END
+					END
 			 IF (@UsuarioOcupado = 0 AND @EmailOcupado = 0)
 			 BEGIN
 				UPDATE parq.tbClientesRegistrados
@@ -612,9 +644,474 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRAN 
 				UPDATE parq.tbClientesRegistrados
-				SET clre_Estado	=	0
-				WHERE clie_ID	=	@clre_ID
+				SET		clre_Estado	=	0
+				WHERE   clre_ID	= @clre_ID
 				SELECT 200 AS codeStatus, 'Usuario eliminado con éxito' AS messageStatus	
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+GO
+
+
+------------------------------------------------------- //// PROCS PARA tbAreas -- ///// ----------------------------------------------------
+
+--*****************************************************--
+--*************** VISTA DE AREAS ******************--
+CREATE OR ALTER VIEW parq.VW_tbAreas
+AS
+SELECT [area_ID]
+      ,[area_Nombre]
+      ,[area_Descripcion]
+      ,areas.regi_ID
+	  ,regi.regi_Nombre
+      ,[area_UbicaionReferencia]
+      ,[area_Imagen]
+      ,[area_Habilitado]
+      ,[area_Estado]
+      ,[area_UsuarioCreador]
+	  ,usu1.usua_Usuario AS usua_Creador
+      ,[area_FechaCreacion]
+      ,[area_UsuarioModificador]
+	  ,usu2.usua_Usuario AS usua_Modificar
+      ,[area_FechaModificacion]
+  FROM [parq].[tbAreas] areas
+  INNER JOIN acce.tbUsuarios usu1
+  ON	usu1.usua_ID = areas.area_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
+  ON	usu2.usua_ID = areas.area_UsuarioModificador
+  INNER JOIN parq.tbRegiones regi ON areas.regi_ID = regi.regi_ID
+
+--*************** SELECT DE AREAS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_SELECT
+AS
+BEGIN
+	SELECT *
+	FROM [parq].VW_tbAreas
+	WHERE area_Estado = 1  AND area_Habilitado = 1
+END
+
+--*************** FIND DE AREAS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_FIND
+@area_ID INT
+AS
+BEGIN
+	SELECT *
+	FROM [parq].VW_tbAreas
+	WHERE area_Estado = 1  
+	AND	area_ID = @area_ID
+END
+
+GO
+--*************** INSERT DE AREAS ******************-
+CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_INSERT
+	@area_Nombre				VARCHAR(300), 
+	@area_Descripcion			VARCHAR(300), 
+	@regi_ID					INT, 
+	@area_UbicaionReferencia	VARCHAR(300), 
+	@area_Imagen				NVARCHAR(MAX), 
+	@area_UsuarioCreador		INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			IF EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_Estado  = 1 )
+				 BEGIN
+					SELECT 409 AS codeStatus, 'El nombre del area ya existe' AS messageStatus
+				 END
+			 ELSE IF EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_Estado  = 0)
+				 BEGIN
+				   UPDATE parq.tbAreas
+						SET		area_Estado = 1, area_Habilitado = 1 ,
+								area_Descripcion = @area_Descripcion,
+								regi_ID = @regi_ID, area_UbicaionReferencia = @area_UbicaionReferencia,
+								area_Imagen = @area_Imagen , area_UsuarioModificador = @area_UsuarioCreador
+						WHERE	area_Nombre = @area_Nombre
+					SELECT 200 AS codeStatus, 'Area creada con éxito' AS messageStatus
+				 END
+		    ELSE IF NOT EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre)
+				BEGIN
+					INSERT INTO parq.tbAreas(area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia, area_Imagen, area_UsuarioCreador)
+					VALUES					(@area_Nombre, @area_Descripcion, @regi_ID, @area_UbicaionReferencia, @area_Imagen, @area_UsuarioCreador)
+					SELECT 200 AS codeStatus, 'Area creada con éxito' AS messageStatus
+				END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+--*************** UPDATE DE AREAS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_UPDATE
+	@area_ID					INT,
+	@area_Nombre				VARCHAR(300), 
+	@area_Descripcion			VARCHAR(300), 
+	@regi_ID					INT, 
+	@area_UbicaionReferencia	VARCHAR(300), 
+	@area_Imagen				NVARCHAR(MAX), 
+	@area_UsuarioModificador	INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+		IF EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_Estado  = 1 AND area_ID != @area_ID )
+				 BEGIN
+					SELECT 409 AS codeStatus, 'El nombre del area que quiere actualizar ya existe en otro registro.' AS messageStatus
+				 END
+		IF EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_Estado  = 0 AND area_ID != @area_ID)
+			BEGIN
+				UPDATE parq.tbAreas
+				SET		area_Nombre =	@area_Nombre, 
+						area_Descripcion = @area_Descripcion,
+						regi_Id = @regi_ID,
+						area_UbicaionReferencia = @area_UbicaionReferencia,
+						area_Imagen = @area_Imagen,
+						area_UsuarioModificador = @area_UsuarioModificador
+				WHERE	area_ID   =		@area_ID
+				SELECT 200 AS codeStatus, 'Area actualizada con éxito' AS messageStatus
+			END
+		 ELSE IF NOT EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_ID != @area_ID )
+			BEGIN
+					UPDATE parq.tbAreas
+				SET		area_Nombre =	@area_Nombre, 
+						area_Descripcion = @area_Descripcion,
+						regi_Id = @regi_ID,
+						area_UbicaionReferencia = @area_UbicaionReferencia,
+						area_Imagen = @area_Imagen,
+						area_UsuarioModificador = @area_UsuarioModificador
+				WHERE	area_ID   =		@area_ID
+				SELECT 200 AS codeStatus, 'Area actualizada con éxito' AS messageStatus
+			END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+
+--*************** DELETE DE AREA ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_DELETE
+	@area_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+				
+				DECLARE @QuioscosOcupa	  INT = (SELECT COUNT(*) FROM parq.tbQuioscos WHERE area_ID =	@area_ID)
+				DECLARE @AtraccionesOcupa INT = (SELECT COUNT(*) FROM parq.tbAreas	  WHERE area_ID =	@area_ID)
+				DECLARE @RegionesEnUso INT = @QuioscosOcupa + @AtraccionesOcupa
+
+				IF	@RegionesEnUso > 0
+					BEGIN
+						SELECT 500 AS codeStatus, 'El area que desea eliminar está en uso.' AS messageStatus
+					END
+				ELSE
+					BEGIN
+						UPDATE parq.tbAreas
+							SET area_Estado	= 0 WHERE area_Estado =	@area_ID
+						SELECT 200 AS codeStatus, 'Area eliminada con éxito' AS messageStatus
+					END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+GO
+
+
+------------------------------------------------------- //// PROCS PARA tbTickets -- ///// ----------------------------------------------------
+
+--*****************************************************--
+--*************** VISTA DE TICKET ******************--
+CREATE OR ALTER VIEW parq.VW_tbTickets
+AS
+SELECT [tckt_ID]
+      ,[tckt_Nombre]
+      ,[tckt_Precio]
+      ,[tckt_Habilitado]
+      ,[tckt_Estado]
+      ,[tckt_UsuarioCreador]
+	  ,usu1.usua_Usuario AS usu_Creador
+      ,[tckt_FechaCreacion]
+      ,[tckt_UsuarioModificador]
+	  ,usu2.usua_UsuarioModificador AS usu_Modificador
+      ,[tckt_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = tckt_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = tckt_UsuarioModificador)
+  FROM [parq].[tbTickets] tickets
+  INNER JOIN acce.tbUsuarios usu1
+  ON	usu1.usua_ID = tickets.tckt_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
+  ON	usu2.usua_ID = tickets.tckt_UsuarioModificador
+
+--*************** SELECT DE TICKETS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_SELECT
+AS
+BEGIN
+	SELECT *
+	FROM [parq].VW_tbTickets
+	WHERE tckt_Estado = 1  AND tckt_Habilitado = 1
+END
+
+--*************** FIND DE TICKETS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_FIND
+@tckt_ID INT
+AS
+BEGIN
+	SELECT *
+	FROM	[parq].VW_tbTickets
+	WHERE	tckt_Estado = 1  
+	AND		tckt_ID = @tckt_ID
+END
+
+GO
+--*************** INSERT DE TICKETS ******************-
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_INSERT
+	@tckt_Nombre		 VARCHAR(300), 
+	@tckt_Precio		 INT, 
+	@tckt_UsuarioCreador INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			IF EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_Estado  = 1 )
+				 BEGIN
+					SELECT 409 AS codeStatus, 'El nombre del ticket ya existe.' AS messageStatus
+				 END
+			 ELSE IF EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_Estado  = 0)
+				 BEGIN
+				   UPDATE parq.tbTickets
+						SET		tckt_Estado = 1, tckt_Habilitado = 1 ,
+								tckt_Nombre = @tckt_Nombre,
+								tckt_Precio = @tckt_Precio,
+								tckt_UsuarioCreador = @tckt_UsuarioCreador
+					WHERE		tckt_Nombre = @tckt_Nombre
+					SELECT 200 AS codeStatus, 'Ticket creado con éxito' AS messageStatus
+				 END
+		    ELSE IF NOT EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre)
+				BEGIN
+					INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio, tckt_UsuarioCreador)
+					VALUES					  (@tckt_Nombre, @tckt_Precio, @tckt_UsuarioCreador)
+					SELECT 200 AS codeStatus, 'Ticket creado con éxito' AS messageStatus
+				END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+--*************** UPDATE DE TICKETS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_UPDATE
+	@tckt_ID					INT,
+	@tckt_Nombre				VARCHAR(300), 
+	@tckt_Precio				INT, 
+	@tckt_UsuarioModificador	INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+		IF EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_Estado  = 1 AND tckt_ID != @tckt_ID )
+				 BEGIN
+					SELECT 409 AS codeStatus, 'El nombre del ticket que quiere actualizar ya existe en otro registro.' AS messageStatus
+				 END
+		IF EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_Estado  = 0 AND tckt_ID != @tckt_ID)
+			BEGIN
+				UPDATE parq.tbTickets
+				SET		tckt_Nombre =	@tckt_Nombre, 
+						tckt_Precio = @tckt_Precio,
+						tckt_UsuarioModificador = @tckt_UsuarioModificador
+				WHERE	tckt_ID   =		@tckt_ID
+				SELECT 200 AS codeStatus, 'Ticket actualizado con éxito' AS messageStatus
+			END
+		 ELSE IF NOT EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_ID != @tckt_ID )
+			BEGIN
+				UPDATE parq.tbTickets
+				SET		tckt_Nombre =	@tckt_Nombre, 
+						tckt_Precio = @tckt_Precio,
+						tckt_UsuarioModificador = @tckt_UsuarioModificador
+				WHERE	tckt_ID   =		@tckt_ID
+				SELECT 200 AS codeStatus, 'Ticket actualizado con éxito' AS messageStatus
+			END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+
+--*************** DELETE DE TICKETS ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_DELETE
+	@tckt_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+				
+				DECLARE @ClienteOcupa	 INT = (SELECT COUNT(*) FROM parq.tbTicketsCliente WHERE tckt_ID =	@tckt_ID)
+				
+
+				IF	@ClienteOcupa > 0
+					BEGIN
+						SELECT 500 AS codeStatus, 'El Ticket que desea eliminar está en uso.' AS messageStatus
+					END
+				ELSE
+					BEGIN
+						UPDATE parq.tbTickets
+							SET tckt_Estado	= 0 WHERE tckt_ID =	@tckt_ID
+						SELECT 200 AS codeStatus, 'Ticket eliminado con éxito' AS messageStatus
+					END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+GO
+
+
+
+------------------------------------------------------- //// PROCS PARA tbTicketsClientes -- ///// ----------------------------------------------------
+
+--*****************************************************--
+--*************** VISTA DE TICKETCLIENTES ******************--
+CREATE OR ALTER VIEW parq.VW_tbTicketClientes
+AS
+SELECT [ticl_ID]
+      ,[tckt_ID]
+      ,[clie_ID]
+      ,[ticl_Cantidad]
+      ,[ticl_FechaCompra]
+      ,[ticl_FechaUso]
+      ,[ticl_Habilitado]
+      ,[ticl_Estado]
+      ,[ticl_UsuarioCreador]
+	  ,usu1.usua_Usuario AS usu_Crea
+      ,[ticl_FechaCreacion]
+      ,[ticl_UsuarioModificador]
+	  ,usu2.usua_Usuario AS usu_Modifica
+      ,[ticl_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = ticl_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = ticl_UsuarioModificador)
+  FROM [parq].[tbTicketsCliente] tcli
+  INNER JOIN acce.tbUsuarios usu1
+  ON	usu1.usua_ID = tcli.ticl_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
+  ON	usu2.usua_ID = tcli.ticl_UsuarioModificador
+
+--*************** SELECT DE TICKETCLIENTES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_SELECT
+AS
+BEGIN
+	SELECT *
+	FROM [parq].VW_tbTicketClientes
+	WHERE ticl_Estado = 1  AND ticl_Habilitado = 1
+END
+
+--*************** FIND DE TICKETCLIENTES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_FIND
+@ticl_ID INT
+AS
+BEGIN
+	SELECT *
+	FROM	[parq].VW_tbTicketClientes
+	WHERE	ticl_Estado = 1  
+	AND		ticl_ID = @ticl_ID
+END
+
+GO
+--*************** INSERT DE TICKETCLIENTES ******************-
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_INSERT
+	@tckt_ID				INT, 
+	@clie_ID				INT, 
+	@ticl_Cantidad			INT, 
+	@ticl_FechaCompra		DATETIME, 
+	@ticl_FechaUso			DATETIME, 
+	@ticl_UsuarioCreador	INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+					INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, ticl_FechaCompra, ticl_FechaUso, ticl_UsuarioCreador)
+					VALUES							 (@tckt_ID, @clie_ID, @ticl_Cantidad, @ticl_FechaCompra, @ticl_FechaUso, @ticl_UsuarioCreador)
+					SELECT 200 AS codeStatus, 'Ticket Detalle creado con éxito' AS messageStatus
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+--*************** UPDATE DE TICKETCLIENTES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_UPDATE
+	@ticl_ID				INT,
+	@tckt_ID				INT, 
+	@clie_ID				INT, 
+	@ticl_Cantidad			INT, 
+	@ticl_FechaCompra		DATETIME, 
+	@ticl_FechaUso			DATETIME, 
+	@ticl_UsuarioModificador	INT
+ AS
+BEGIN
+	BEGIN TRY
+		
+				UPDATE parq.tbTicketsCliente
+				SET		tckt_ID =	@tckt_ID, 
+						clie_ID = @clie_ID,
+						ticl_Cantidad = @ticl_Cantidad,
+						ticl_FechaCompra = @ticl_FechaCompra,
+						ticl_FechaUso = @ticl_FechaUso,
+						ticl_UsuarioModificador = @ticl_UsuarioModificador
+				WHERE	ticl_ID   =		@ticl_ID
+				SELECT 200 AS codeStatus, 'Ticket Detalle actualizado con éxito' AS messageStatus
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+
+--*************** DELETE DE TICKETCLIENTES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_DELETE
+	@ticl_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+				
+				DECLARE @TemporizadorOcupa	 INT = (SELECT COUNT(*) FROM fila.tbTemporizadores		WHERE ticl_ID =	@ticl_ID)
+				DECLARE @VisitantesAtraccion			INT = (SELECT COUNT(*) FROM  fila.tbVisitantesAtraccion WHERE ticl_ID = @ticl_ID)
+				DECLARE @TicketsClientesOcupa INT = @TemporizadorOcupa + @VisitantesAtraccion
+
+				IF	@TicketsClientesOcupa > 0
+					BEGIN
+						SELECT 500 AS codeStatus, 'El Ticket Detalle que desea eliminar está en uso.' AS messageStatus
+					END
+				ELSE
+					BEGIN
+						UPDATE parq.VW_tbTicketClientes
+							SET ticl_Estado	= 0 WHERE ticl_ID =	@ticl_ID
+						SELECT 200 AS codeStatus, 'Ticket Detalle eliminado con éxito' AS messageStatus
+					END
 		COMMIT
 	END TRY
 	BEGIN CATCH
