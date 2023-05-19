@@ -71,12 +71,12 @@ END
 GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INSERT
-@usua_Usuario			NVARCHAR(200),
+@usua_Usuario				NVARCHAR(200),
 @empl_ID					INT,
-@usua_Clave			NVARCHAR(150),
+@usua_Clave					NVARCHAR(150),
 @usua_Admin					BIT,
 @role_ID					INT,
-@usua_UsuarioCreador				INT
+@usua_UsuarioCreador		INT
 AS
 BEGIN
 	BEGIN TRY
@@ -812,6 +812,18 @@ AS
 BEGIN
 	SELECT * FROM gral.VW_Municipios 
 	WHERE muni_ID = @muni_ID
+END
+
+GO
+
+
+CREATE OR ALTER PROC gral.UDP_tbMunicipios_FILTER 
+@dept_ID INT
+AS BEGIN
+
+SELECT * FROM gral.VW_Municipios
+WHERE dept_ID = @dept_ID
+
 END
 
 GO
