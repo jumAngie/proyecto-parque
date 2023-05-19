@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using ParqueDiversion.Entities.Entities;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ParqueDiversion.Entities.Entities;
 
 namespace ParqueDiversion.DataAccess.Repositories.Parq
 {
@@ -11,7 +14,12 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
     {
         public RequestStatus Delete(int id)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Atracciones_Delete, parametros, commandType: CommandType.StoredProcedure);
+
         }
 
         public VW_tbAtracciones Find(int id)
