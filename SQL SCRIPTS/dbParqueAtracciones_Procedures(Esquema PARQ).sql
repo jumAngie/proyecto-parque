@@ -35,10 +35,8 @@ GO
 ---------------------------------------------------------------- ESQUEMA PARQ ----------------------------------------------------------------
 ------------------------------------------------------- //// PROCS PARA tbCargos -- ///// ----------------------------------------------------
 
---*****************************************************--
---*************** VISTA DE CARGO ******************--
 
-GO
+--*************** VISTA DE CARGOS ******************-
 CREATE OR ALTER VIEW parq.VW_tbCargos
 AS
 SELECT [carg_ID]
@@ -59,6 +57,8 @@ SELECT [carg_ID]
 
 --*************** SELECT DE CARGOS ******************-
 GO
+
+--*************** SELECT DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_SELECT
 AS
 BEGIN
@@ -69,6 +69,8 @@ END
 
 --*************** FIND DE CARGOS ******************-
 GO
+
+--*************** FIND DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_FIND
 @carg_ID INT
 AS
@@ -80,6 +82,7 @@ BEGIN
 END
 
 GO
+
 --*************** INSERT DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_INSERT
 	@carg_Nombre			VARCHAR (300),
@@ -114,6 +117,8 @@ BEGIN
 END
 --*************** UPDATE DE CARGO ******************-
 GO
+
+--*************** UPDATE DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_UPDATE
 	@carg_ID				INT,
 	@carg_Nombre			VARCHAR (300),
@@ -151,6 +156,8 @@ BEGIN
 
 --*************** DELETE DE CARGO ******************-
 GO
+
+--*************** DELETE DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_DELETE
 @carg_Id INT
 AS
@@ -183,6 +190,12 @@ END
 --*************** VISTA DE REGIONES ******************--
 
 GO
+
+
+
+------------------------------------------------------- //// PROCS PARA tbRegiones -- ///// ----------------------------------------------------
+
+--*************** VISTA DE REGIONES ******************-
 CREATE OR ALTER VIEW parq.VW_tbRegiones
 AS
 SELECT [regi_ID]
@@ -202,6 +215,8 @@ SELECT [regi_ID]
 
 --*************** SELECT DE REGIONES ******************-
 GO
+
+--*************** SELECT DE REGIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbRegiones_SELECT
 AS
 BEGIN
@@ -212,6 +227,8 @@ END
 
 --*************** FIND DE REGIONES ******************-
 GO
+
+--*************** FIND DE REGIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbRegiones_FIND
 @regi_ID INT
 AS
@@ -223,6 +240,7 @@ BEGIN
 END
 
 GO
+
 --*************** INSERT DE REGIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbRegiones_INSERT
 	@regi_Nombre			VARCHAR (200),
@@ -257,6 +275,8 @@ BEGIN
 END
 --*************** UPDATE DE REGIONES ******************-
 GO
+
+--*************** UPDATE DE REGIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbRegiones_UPDATE
 	@regi_ID				INT,
 	@regi_Nombre			VARCHAR (200),
@@ -294,6 +314,8 @@ BEGIN
 
 --*************** DELETE DE REGIONES ******************-
 GO
+
+--*************** DELETE DE REGIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbRegiones_DELETE
 @regi_ID INT
 AS
@@ -328,9 +350,10 @@ BEGIN
 END
 GO
 
+
+
 ------------------------------------------------------- //// PROCS PARA tbClientes -- ///// ----------------------------------------------------
 
---*****************************************************--
 --*************** VISTA DE CLIENTES ******************--
 CREATE OR ALTER VIEW parq.VW_tbClientes
 AS
@@ -355,6 +378,8 @@ SELECT [clie_ID]
 
 --*************** SELECT DE CLIENTES ******************-
 GO
+
+--*************** SELECT DE CLIENTES ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_SELECT
 AS
 BEGIN
@@ -365,6 +390,8 @@ END
 
 --*************** FIND DE CLIENTES ******************-
 GO
+
+--*************** FIND DE CLIENTES ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_FIND
 @clie_ID INT
 AS
@@ -376,6 +403,7 @@ BEGIN
 END
 
 GO
+
 --*************** INSERT DE CLIENTES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_INSERT
 	@clie_Nombres			VARCHAR(300), 
@@ -407,6 +435,8 @@ BEGIN
 END
 --*************** UPDATE DE CLIENTES ******************-
 GO
+
+--*************** UPDATE DE CLIENTES ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_UPDATE
 	@clie_ID					INT,
 	@clie_Nombres				VARCHAR(300), 
@@ -442,6 +472,8 @@ BEGIN
 
 --*************** DELETE DE CLIENTES ******************-
 GO
+
+--*************** DELETE DE CLIENTES ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_DELETE
 	@clie_ID INT
 AS
@@ -478,17 +510,17 @@ END
 GO
 
 
+
 ------------------------------------------------------- //// PROCS PARA tbClientesRegistrados -- ///// ----------------------------------------------------
 
---*****************************************************--
---*************** VISTA DE CLIENTESREGISTRADOS ******************--
+--*************** VISTA DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER VIEW parq.VW_tbClientesRegistrados
 AS
 SELECT [clre_ID]
       ,[clie_ID]
       ,[clre_Usuario]
       ,[clre_Email]
-      ,[clre_Contrase�a]
+      ,clre_Clave
       ,[clre_Habilitado]
       ,[clre_Estado]
       ,[clre_UsuarioCreador]
@@ -504,6 +536,8 @@ SELECT [clre_ID]
 
 --*************** SELECT DE CLIENTESREGISTRADOS ******************-
 GO
+
+--*************** SELECT DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_SELECT
 AS
 BEGIN
@@ -514,6 +548,8 @@ END
 
 --*************** FIND DE CLIENTESREGISTRADOS ******************-
 GO
+
+--*************** FIND DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_FIND
 @clre_Id INT
 AS
@@ -525,12 +561,13 @@ BEGIN
 END
 
 GO
---*************** INSERT DE CLIENTESREGISTRADOS ******************-
+
+--*************** INSERT DE CLIENTES REGISTRADOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_INSERT
 	@clie_ID				INT,
 	@clre_Usuario			VARCHAR(300), 
 	@clre_Email				NVARCHAR(300), 
-	@clre_Contrase�a		NVARCHAR(300), 
+	@clre_Clave				NVARCHAR(300), 
 	@clre_UsuarioCreador	INT
  AS
 BEGIN
@@ -561,12 +598,12 @@ BEGIN
 			 IF (@UsuarioOcupado = 0 AND @EmailOcupado = 0)
 			 BEGIN
 
-				DECLARE @CLAVE2 VARBINARY (MAX) = HASHBYTES('SHA2_512', @clre_Contrase�a)
+				DECLARE @CLAVE2 VARBINARY (MAX) = HASHBYTES('SHA2_512', @clre_Clave)
 				DECLARE @INCRI2 VARCHAR(MAX) = CONVERT(VARCHAR(MAX), @CLAVE2 ,2)
 
-				INSERT INTO parq.tbClientesRegistrados([clie_ID], [clre_Usuario],[clre_Email], [clre_Contrase�a], [clre_UsuarioCreador])
+				INSERT INTO parq.tbClientesRegistrados([clie_ID], [clre_Usuario],[clre_Email], clre_Clave, [clre_UsuarioCreador])
 				VALUES								  (@clie_ID, @clre_Usuario, @clre_Email, @INCRI2, @clre_UsuarioCreador)
-				SELECT 200 AS codeStatus, 'El usuario fue registrado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'El usuario fue registrado con éxito' AS messageStatus
 			 END
 			 ELSE
 				BEGIN
@@ -581,6 +618,8 @@ BEGIN
 END
 --*************** UPDATE DE CLIENTESREGISTRADOS ******************-
 GO
+
+--*************** UPDATE DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_UPDATE
 	@clre_ID					INT,
 	@clie_ID					INT,
@@ -637,6 +676,8 @@ END
 
 --*************** DELETE DE CLIENTESREGISTRADOS ******************-
 GO
+
+--*************** DELETE DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_DELETE
 	@clre_ID INT
 AS
@@ -659,7 +700,7 @@ GO
 
 ------------------------------------------------------- //// PROCS PARA tbAreas -- ///// ----------------------------------------------------
 
---*****************************************************--
+
 --*************** VISTA DE AREAS ******************--
 CREATE OR ALTER VIEW parq.VW_tbAreas
 AS
@@ -686,6 +727,8 @@ SELECT [area_ID]
 
 --*************** SELECT DE AREAS ******************-
 GO
+
+--*************** SELECT DE AREAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_SELECT
 AS
 BEGIN
@@ -696,6 +739,8 @@ END
 
 --*************** FIND DE AREAS ******************-
 GO
+
+--*************** FIND DE AREAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_FIND
 @area_ID INT
 AS
@@ -707,6 +752,7 @@ BEGIN
 END
 
 GO
+
 --*************** INSERT DE AREAS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_INSERT
 	@area_Nombre				VARCHAR(300), 
@@ -748,6 +794,8 @@ BEGIN
 END
 --*************** UPDATE DE AREAS ******************-
 GO
+
+--*************** UPDATE DE AREAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_UPDATE
 	@area_ID					INT,
 	@area_Nombre				VARCHAR(300), 
@@ -798,6 +846,7 @@ END
 
 --*************** DELETE DE AREA ******************-
 GO
+
 CREATE OR ALTER PROCEDURE parq.UDP_tbAreas_DELETE
 	@area_ID INT
 AS
