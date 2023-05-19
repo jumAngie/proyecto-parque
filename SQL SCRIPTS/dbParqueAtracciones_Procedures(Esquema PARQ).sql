@@ -491,7 +491,8 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbClientesRegistrados
 AS
 SELECT [clre_ID]
-      ,[clie_ID]
+      ,clire.clie_ID
+	  ,clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
       ,[clre_Usuario]
       ,[clre_Email]
       ,[clre_Contraseña]
@@ -509,6 +510,7 @@ SELECT [clre_ID]
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = clire.clre_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
   ON	usu2.usua_ID = clire.clre_UsuarioModificador
+  INNER JOIN parq.tbClientes clie ON clire.clie_ID = clie.clie_ID
 
 --*************** SELECT DE CLIENTESREGISTRADOS ******************-
 GO
@@ -1003,8 +1005,10 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbTicketClientes
 AS
 SELECT [ticl_ID]
-      ,[tckt_ID]
-      ,[clie_ID]
+      ,tcli.tckt_ID
+	  ,tick.tckt_Nombre
+      ,tcli.clie_ID
+	  , clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
       ,[ticl_Cantidad]
       ,[ticl_FechaCompra]
       ,[ticl_FechaUso]
@@ -1022,6 +1026,8 @@ SELECT [ticl_ID]
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = tcli.ticl_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
   ON	usu2.usua_ID = tcli.ticl_UsuarioModificador
+  INNER JOIN parq.tbTickets tick ON tcli.tckt_ID = tick.tckt_ID
+  INNER JOIN parq.tbClientes clie ON tcli.clie_ID = clie.clie_ID
 
 --*************** SELECT DE TICKETCLIENTES ******************-
 GO
@@ -1138,7 +1144,8 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbAtracciones
 AS
 SELECT TOP (1000) [atra_ID]
-      ,[area_ID]
+      ,atracc.area_ID
+	  , are.area_Descripcion
       ,[atra_Nombre]
       ,[atra_Descripcion]
       ,atracc.regi_ID
@@ -1162,6 +1169,7 @@ SELECT TOP (1000) [atra_ID]
   ON	usu1.usua_ID = atracc.atra_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
   ON	usu2.usua_ID = atracc.atra_UsuarioModificador
   INNER JOIN parq.tbRegiones regi ON atracc.regi_ID = regi.regi_ID
+  INNER JOIN parq.tbAreas are ON atracc.area_ID = are.area_ID
 
 --*************** SELECT DE ATRACCIONES ******************-
 GO
