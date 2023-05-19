@@ -8,23 +8,23 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\daniz\\.nuget\\packages\\": {},
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniz\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
       "projectName": "ParqueDiversion.Entities",
-      "projectPath": "C:\\Users\\daniz\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
-      "packagesPath": "C:\\Users\\daniz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniz\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
+      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\daniz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

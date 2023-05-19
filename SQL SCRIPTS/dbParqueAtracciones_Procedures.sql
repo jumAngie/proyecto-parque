@@ -1504,7 +1504,7 @@ END
 GO
 
 --*************** FIND DE CLIENTES REGISTRADOS ******************--
-CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_FIND
+CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_FIND
 @clre_Id INT
 AS
 BEGIN
@@ -2073,7 +2073,7 @@ BEGIN
 END
 --*************** UPDATE DE TICKETCLIENTES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_UPDATE
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_UPDATE
 	@ticl_ID				INT,
 	@tckt_ID				INT, 
 	@clie_ID				INT, 
@@ -2104,7 +2104,7 @@ END
 
 --*************** DELETE DE TICKETCLIENTES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbTickets_DELETE
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_DELETE
 	@ticl_ID INT
 AS
 BEGIN

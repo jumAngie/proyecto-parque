@@ -8,6 +8,73 @@ namespace ParqueDiversion.DataAccess
 {
     public class ScriptsDatabase
     {
+        #region Angie Procs
+
+                #region Cargo
+                public static string UDP_Cargo_List = "parq.UDP_tbCargos_SELECT";
+                public static string UDP_Cargo_Insert = "parq.UDP_tbCargos_INSERT";
+                public static string UDP_Cargo_Find = "parq.UDP_tbCargos_FIND";
+                public static string UDP_Cargo_Update = "parq.UDP_tbCargos_UPDATE";
+                public static string UDP_Cargos_Delete = "parq.UDP_tbCargos_DELETE";
+                #endregion
+
+                #region Regiones
+                public static string UDP_Regiones_List = "parq.UDP_tbRegiones_SELECT";
+                public static string UDP_Regiones_Insert = "parq.UDP_tbRegiones_INSERT";
+                public static string UDP_Regiones_Find = "parq.UDP_tbRegiones_FIND";
+                public static string UDP_Regiones_Update = "parq.UDP_tbRegiones_UPDATE";
+                public static string UDP_Regiones_Delete = "parq.UDP_tbRegiones_DELETE";
+                #endregion
+
+                #region Clientes
+                public static string UDP_Clientes_List = "parq.UDP_tbClientes_SELECT";
+                public static string UDP_Clientes_Insert = "parq.UDP_tbClientes_INSERT";
+                public static string UDP_Clientes_Find = "parq.UDP_tbClientes_FIND";
+                public static string UDP_Clientes_Update = "parq.UDP_tbClientes_UPDATE";
+                public static string UDP_Clientes_Delete = "parq.UDP_tbClientes_DELETE";
+                #endregion
+
+                #region Clientes Registrados
+                public static string UDP_ClientesRegistrados_List = "parq.UDP_tbClientesRegistrados_SELECT";
+                public static string UDP_ClientesRegistrados_Insert = "parq.UDP_tbClientesRegistrados_INSERT";
+                public static string UDP_ClientesRegistrados_Find = "parq.UDP_tbClientesRegistrados_FIND";
+                public static string UDP_ClientesRegistrados_Update = "parq.UDP_tbClientesRegistrados_UPDATE";
+                public static string UDP_ClientesRegistrados_Delete = "parq.UDP_tbClientesRegistrados_DELETE";
+                #endregion
+
+                #region Areas
+                public static string UDP_Areas_List = "parq.UDP_tbAreas_SELECT";
+                public static string UDP_Areas_Insert = "parq.UDP_tbAreas_INSERT";
+                public static string UDP_Areas_Find = "parq.UDP_tbAreas_FIND";
+                public static string UDP_Areas_Update = "parq.UDP_tbAreas_UPDATE";
+                public static string UDP_Areas_Delete = "parq.UDP_tbAreas_DELETE";
+                #endregion
+
+                #region Ticket
+                public static string UDP_Ticket_List = "parq.UDP_tbTickets_SELECT";
+                public static string UDP_Ticket_Insert = "parq.UDP_tbTickets_INSERT";
+                public static string UDP_Ticket_Find = "parq.UDP_tbTickets_FIND";
+                public static string UDP_Ticket_Update = "parq.UDP_tbTickets_UPDATE";
+                public static string UDP_Ticket_Delete = "parq.UDP_tbTickets_DELETE";
+                #endregion
+
+                #region Ticket Clientes
+                public static string UDP_TicketClientes_List = "parq.UDP_tbTicketClientes_SELECT";
+                public static string UDP_TicketClientes_Insert = "parq.UDP_tbTicketClientes_INSERT";
+                public static string UDP_TicketClientes_Find = "parq.UDP_tbTicketClientes_FIND";
+                public static string UDP_TicketClientes_Update = "parq.UDP_tbTicketClientes_UPDATE";
+                public static string UDP_TicketClientes_Delete = "parq.UDP_tbTicketClientes_DELETE";
+                #endregion
+
+                #region Atracciones
+                public static string UDP_Atracciones_List = "parq.UDP_tbAtracciones_SELECT";
+                public static string UDP_Atracciones_Insert = "parq.UDP_tbAtracciones_INSERT";
+                public static string UDP_Atracciones_Find = "parq.UDP_tbAtracciones_FIND";
+                public static string UDP_Atracciones_Update = "parq.UDP_tbAtracciones_UPDATE";
+                public static string UDP_Atracciones_Delete = "parq.UDP_tbAtracciones_DELETE";
+                #endregion
+
+        #endregion
 
         #region Empleados
         public static string UDP_Empleados_List = "parq.UDP_VW_tbEmpleados_Select";
