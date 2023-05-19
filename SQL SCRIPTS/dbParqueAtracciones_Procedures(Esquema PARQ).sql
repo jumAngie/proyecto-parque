@@ -49,6 +49,8 @@ SELECT [carg_ID]
       ,[carg_UsuarioModificador]
 	  ,usu2.usua_Usuario AS usu_Modificador
       ,[carg_FechaModificacion]
+	   , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = carg_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = carg_UsuarioModificador)
   FROM [parq].[tbCargos] carg					
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = carg.carg_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
@@ -208,6 +210,8 @@ SELECT [regi_ID]
       ,[regi_UsuarioModificador]
 	  ,usu2.usua_Usuario AS usu_Modificador
       ,[regi_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = regi_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = regi_UsuarioModificador)
   FROM [parq].[tbRegiones] regi
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = regi.regi_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
@@ -371,6 +375,8 @@ SELECT [clie_ID]
       ,[clie_UsuarioModificador]
 	  ,usu2.usua_Usuario AS usu_Modificador
       ,[clie_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clie_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clie_UsuarioModificador)
   FROM [parq].[tbClientes] clie
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = clie.clie_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
@@ -517,7 +523,8 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbClientesRegistrados
 AS
 SELECT [clre_ID]
-      ,[clie_ID]
+      ,clire.clie_ID
+	  ,clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
       ,[clre_Usuario]
       ,[clre_Email]
       ,clre_Clave
@@ -529,10 +536,13 @@ SELECT [clre_ID]
       ,[clre_UsuarioModificador]
 	  ,usu2.usua_Usuario AS usu_Modificador
       ,[clre_FechaModificacion]
+	   , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clre_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clre_UsuarioModificador)
   FROM parq.tbClientesRegistrados clire
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = clire.clre_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
   ON	usu2.usua_ID = clire.clre_UsuarioModificador
+  INNER JOIN parq.tbClientes clie ON clire.clie_ID = clie.clie_ID
 
 --*************** SELECT DE CLIENTESREGISTRADOS ******************-
 GO
@@ -719,6 +729,8 @@ SELECT [area_ID]
       ,[area_UsuarioModificador]
 	  ,usu2.usua_Usuario AS usua_Modificar
       ,[area_FechaModificacion]
+	   , empl_crea =	(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = area_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = area_UsuarioModificador)
   FROM [parq].[tbAreas] areas
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = areas.area_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
@@ -1042,8 +1054,10 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbTicketClientes
 AS
 SELECT [ticl_ID]
-      ,[tckt_ID]
-      ,[clie_ID]
+      ,tcli.tckt_ID
+	  ,tick.tckt_Nombre
+      ,tcli.clie_ID
+	  , clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
       ,[ticl_Cantidad]
       ,[ticl_FechaCompra]
       ,[ticl_FechaUso]
@@ -1061,6 +1075,8 @@ SELECT [ticl_ID]
   INNER JOIN acce.tbUsuarios usu1
   ON	usu1.usua_ID = tcli.ticl_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
   ON	usu2.usua_ID = tcli.ticl_UsuarioModificador
+  INNER JOIN parq.tbTickets tick ON tcli.tckt_ID = tick.tckt_ID
+  INNER JOIN parq.tbClientes clie ON tcli.clie_ID = clie.clie_ID
 
 --*************** SELECT DE TICKETCLIENTES ******************-
 GO
@@ -1160,6 +1176,155 @@ BEGIN
 						UPDATE parq.VW_tbTicketClientes
 							SET ticl_Estado	= 0 WHERE ticl_ID =	@ticl_ID
 						SELECT 200 AS codeStatus, 'Ticket Detalle eliminado con ï¿½xito' AS messageStatus
+					END
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+GO
+
+------------------------------------------------------- //// PROCS PARA tbAtracciones -- ///// ----------------------------------------------------
+
+--*****************************************************--
+--*************** VISTA DE ATRACCIONES ******************--
+CREATE OR ALTER VIEW parq.VW_tbAtracciones
+AS
+SELECT TOP (1000) [atra_ID]
+      ,atracc.area_ID
+	  , are.area_Descripcion
+      ,[atra_Nombre]
+      ,[atra_Descripcion]
+      ,atracc.regi_ID
+	  ,regi.regi_Nombre
+      ,[atra_ReferenciaUbicacion]
+      ,[atra_LimitePersonas]
+      ,[atra_DuracionRonda]
+      ,[atra_Imagen]
+      ,[atra_Habilitado]
+      ,[atra_Estado]
+      ,[atra_UsuarioCreador]
+	  ,usu1.usua_Usuario AS usu_Crea
+      ,[atra_FechaCreacion]
+      ,[atra_UsuarioModificador]
+	  ,usu2.usua_Usuario AS usu_Modifica
+      ,[atra_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
+    FROM [parq].[tbAtracciones] atracc
+  INNER JOIN acce.tbUsuarios usu1
+  ON	usu1.usua_ID = atracc.atra_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
+  ON	usu2.usua_ID = atracc.atra_UsuarioModificador
+  INNER JOIN parq.tbRegiones regi ON atracc.regi_ID = regi.regi_ID
+  INNER JOIN parq.tbAreas are ON atracc.area_ID = are.area_ID
+
+--*************** SELECT DE ATRACCIONES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_SELECT
+AS
+BEGIN
+	SELECT *
+	FROM [parq].VW_tbAtracciones
+	WHERE atra_Estado = 1  AND atra_Habilitado = 1
+END
+
+--*************** FIND DE ATRACCIONES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
+@atra_ID INT
+AS
+BEGIN
+	SELECT *
+	FROM	[parq].VW_tbAtracciones
+	WHERE	atra_Estado = 1  
+	AND		atra_ID = @atra_ID
+END
+
+GO
+--*************** INSERT DE ATRACCIONES ******************-
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
+	@area_ID					INT, 
+	@atra_Nombre				VARCHAR(300), 
+	@atra_Descripcion			VARCHAR(300), 
+	@regi_ID					INT, 
+	@atra_ReferenciaUbicacion	VARCHAR(300), 
+	@atra_LimitePersonas		INT, 
+	@atra_DuracionRonda			TIME(7), 
+	@atra_Imagen				NVARCHAR(MAX),
+	@atra_UsuarioCreador		INT
+ AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
+					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
+					SELECT 200 AS codeStatus, 'Atraccion creada con éxito' AS messageStatus
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+--*************** UPDATE DE ATRACCIONES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
+	@atra_ID					INT,
+	@area_ID					INT, 
+	@atra_Nombre				VARCHAR(300), 
+	@atra_Descripcion			VARCHAR(300), 
+	@regi_ID					INT, 
+	@atra_ReferenciaUbicacion	VARCHAR(300), 
+	@atra_LimitePersonas		INT, 
+	@atra_DuracionRonda			TIME(7), 
+	@atra_Imagen				NVARCHAR(MAX),
+	@atra_UsuarioModificador	INT
+ AS
+BEGIN
+	BEGIN TRY
+				UPDATE parq.tbAtracciones
+				SET		area_ID =	@area_ID, 
+						atra_Nombre = @atra_Nombre,
+						regi_ID = @regi_ID,
+						atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
+						atra_DuracionRonda = @atra_DuracionRonda,
+						atra_Imagen = @atra_Imagen,
+						atra_UsuarioModificador = @atra_UsuarioModificador
+				WHERE	atra_ID   =		@atra_ID
+				SELECT 200 AS codeStatus, 'Atraccion actualizada con éxito' AS messageStatus
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+
+--*************** DELETE DE ATRACCIONES ******************-
+GO
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_DELETE
+	@atra_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+				
+				DECLARE @RatingsOcupa		  INT = (SELECT COUNT(*) FROM parq.tbRatings			  WHERE atra_ID =	@atra_ID)
+				DECLARE @VisitantesAtraccion  INT = (SELECT COUNT(*) FROM fila.tbVisitantesAtraccion  WHERE atra_ID = @atra_ID)
+				DECLARE @FilaAtraccion		  INT = (SELECT COUNT(*) FROM fila.tbFilasAtraccion		  WHERE atra_ID = @atra_ID)
+				DECLARE @TicketsClientesOcupa INT = @RatingsOcupa + @VisitantesAtraccion + @FilaAtraccion
+
+				IF	@TicketsClientesOcupa > 0
+					BEGIN
+						SELECT 500 AS codeStatus, 'La Atraccion que desea eliminar está en uso.' AS messageStatus
+					END
+				ELSE
+					BEGIN
+						UPDATE parq.VW_tbAtracciones
+							SET atra_Estado	= 0 WHERE atra_ID =	@atra_ID
+						SELECT 200 AS codeStatus, 'Atraccion eliminado con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
