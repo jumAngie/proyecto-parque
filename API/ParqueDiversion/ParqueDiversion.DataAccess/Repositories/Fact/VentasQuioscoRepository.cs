@@ -24,7 +24,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbVentasQuiosco item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -33,8 +32,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@pago_ID", item.pago_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@vent_UsuarioCreador", item.vent_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
             
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_VentasQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_VentasQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 

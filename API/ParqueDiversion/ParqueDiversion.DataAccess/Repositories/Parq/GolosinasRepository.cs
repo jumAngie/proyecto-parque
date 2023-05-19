@@ -14,13 +14,11 @@ namespace ParqueDiversion.DataAccess.Repositories
     {
         public RequestStatus Delete(int id)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@golo_ID", id, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Golosinas_Delete, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Golosinas_Delete, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -31,7 +29,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbGolosinas item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -40,8 +37,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@golo_Precio", item.golo_Precio, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@golo_UsuarioCreador", item.golo_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
 
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Golosinas_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Golosinas_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -55,7 +51,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Update(tbGolosinas item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -65,8 +60,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@golo_Precio", item.golo_Precio, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@golo_UsuarioModificador", item.golo_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
 
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Golosinas_Update, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Golosinas_Update, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
     }

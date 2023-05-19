@@ -24,7 +24,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbVentasQuioscoDetalle item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -33,8 +32,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@deta_Cantidad", item.deta_Cantidad, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@deta_UsuarioCreador", item.deta_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
 
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_VentasQuioscoDetalle_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_VentasQuioscoDetalle_Insert, parametros, commandType: CommandType.StoredProcedure);            
             return result;
         }
 

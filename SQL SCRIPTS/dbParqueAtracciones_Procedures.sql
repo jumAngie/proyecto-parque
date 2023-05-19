@@ -92,14 +92,11 @@ BEGIN
 			DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 
 
-			INSERT INTO acce.tbUsuarios
-			(usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
-			VALUES
-			(@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
+			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
+			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
 
 			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
 		END
-
 	END TRY
 	BEGIN CATCH
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus

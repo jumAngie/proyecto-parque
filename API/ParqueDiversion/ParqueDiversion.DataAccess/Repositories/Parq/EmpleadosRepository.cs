@@ -14,13 +14,12 @@ namespace ParqueDiversion.DataAccess.Repositories
     {
         public RequestStatus Delete(int id)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@empl_ID", id, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Empleados_Delete, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Empleados_Delete, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -31,7 +30,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbEmpleados item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -47,10 +45,10 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@civi_ID", item.civi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@carg_ID", item.carg_ID, DbType.Int32, ParameterDirection.Input);            
             parametros.Add("@empl_UsuarioCreador", item.empl_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Empleados_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Empleados_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
+
 
         public IEnumerable<VW_tbEmpleados> List()
         {
@@ -62,7 +60,7 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Update(tbEmpleados item)
         {
-            RequestStatus result = new();
+
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -79,8 +77,8 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@civi_ID", item.civi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@carg_ID", item.carg_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@empl_UsuarioModificador", item.empl_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Empleados_Update, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Empleados_Update, parametros, commandType: CommandType.StoredProcedure);
+
             return result;
         }
     }
