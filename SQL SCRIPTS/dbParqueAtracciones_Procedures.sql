@@ -36,6 +36,25 @@ SELECT	usua_ID,
 		ON T1.role_Id = T3.role_Id
 GO
 
+
+CREATE OR ALTER VIEW acce.VW_Pantallas
+AS
+SELECT	pant_Id, 
+		pant_Descripcion, 
+		pant_Identificador, 
+		pant_URL, 
+		pant_Estado, 
+		pant_UsuarioCreador,
+		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = pant_UsuarioCreador),
+		pant_FechaCreacion, 
+		pant_UsuarioModificador,
+		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = pant_UsuarioModificador), 
+		pant_FechaModificacion
+		FROM acce.tbPantallas
+
+GO
+
+
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INDEX
 AS
 BEGIN
@@ -136,8 +155,8 @@ END
 GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_LOGIN 
-@usua_Usuario					NVARCHAR(MAX),
-@usua_Clave					NVARCHAR(MAX)
+@usua_Usuario	NVARCHAR(MAX),
+@usua_Clave		NVARCHAR(MAX)
 AS
 BEGIN
 
@@ -159,7 +178,6 @@ DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 					usua_Usuario = 'Usuario o Contraseña Incorrectos'
 	END
 END
-
 GO
 
 
@@ -176,8 +194,8 @@ BEGIN
 END
 ELSE IF @Admin = 0
 BEGIN
-	SELECT DISTINCT (pant_Descripcion),pant_IDentificador,pant_href
-	FROM acce.tbPantallasPorRol T1
+	SELECT DISTINCT (pant_Descripcion),pant_IDentificador,pant_URL
+	FROM acce.tbRolesXPantallas T1
 	INNER JOIN acce.tbPantallas T2
 	ON T1.pant_ID = T2.pant_ID
 	WHERE role_ID = ( SELECT role_ID FROM acce.tbUsuarios 
@@ -327,22 +345,7 @@ GO
 
 
 --*********************************************************Tabla Pantallas Por Rol**************************************************************--
-CREATE OR ALTER VIEW acce.VW_Pantallas
-AS
-SELECT	pant_Id, 
-		pant_Descripcion, 
-		pant_Identificador, 
-		pant_URL, 
-		pant_Estado, 
-		pant_UsuarioCreador,
-		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = pant_UsuarioCreador),
-		pant_FechaCreacion, 
-		pant_UsuarioModificador,
-		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = pant_UsuarioModificador), 
-		pant_FechaModificacion
-		FROM acce.tbPantallas
 
-GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_CHECKED 
 @role_ID INT
@@ -586,6 +589,27 @@ SELECT	dept_Id,
 
 GO
 
+
+CREATE OR ALTER VIEW gral.VW_Municipios
+AS
+SELECT	T1.dept_Id,
+		T2.dept_Codigo,
+		T2.dept_Nombre, 
+		muni_Id,
+		muni_Codigo, 
+		muni_Nombre,
+		muni_Estado, 
+		muni_UsuarioCreador,
+		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = muni_UsuarioCreador), 
+		muni_FechaCreacion, 
+		muni_UsuarioModificador,
+		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = muni_UsuarioModificador),  
+		muni_FechaModificacion
+		FROM gral.tbMunicipios T1
+		INNER JOIN gral.tbDepartamentos T2
+		ON T1.dept_Id = T2.dept_Id
+GO
+
 CREATE OR ALTER PROC gral.UDP_tbDepartamentos_INDEX  
 AS 
 BEGIN
@@ -772,26 +796,7 @@ GO
 
 --************************************************************Tabla Municipios********************************************************************--
 
-CREATE OR ALTER VIEW gral.VW_Municipios
-AS
-SELECT	T1.dept_Id,
-		T2.dept_Codigo,
-		T2.dept_Nombre, 
-		muni_Id,
-		muni_Codigo, 
-		muni_Nombre,
-		muni_Estado, 
-		muni_UsuarioCreador,
-		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = muni_UsuarioCreador), 
-		muni_FechaCreacion, 
-		muni_UsuarioModificador,
-		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = muni_UsuarioModificador),  
-		muni_FechaModificacion
-		FROM gral.tbMunicipios T1
-		INNER JOIN gral.tbDepartamentos T2
-		ON T1.dept_Id = T2.dept_Id
 
-GO
 
 CREATE OR ALTER PROC gral.UDP_tbMunicipios_INDEX  
 AS
@@ -3054,7 +3059,7 @@ CREATE OR ALTER VIEW fact.VW_tbVentasQuioscoDetalle
 AS
 	SELECT  deta_ID, 
 			deta.vent_ID,
-			deta.golo_ID,
+			deta.insu_ID,
 			golo.golo_Nombre,
 			golo.golo_Precio,						
 			deta_Cantidad, 
@@ -3074,7 +3079,7 @@ AS
 
 	FROM fact.tbVentasQuioscoDetalle AS deta
 	INNER JOIN fact.tbVentasQuiosco AS vent ON deta.vent_ID = vent.vent_ID
-	INNER JOIN parq.tbGolosinas AS golo ON deta.golo_ID = golo.golo_ID
+	INNER JOIN parq.tbGolosinas AS golo ON deta.insu_ID = golo.golo_ID
 	INNER JOIN acce.tbUsuarios AS usr1 ON deta.deta_UsuarioCreador = usr1.usua_ID
 	LEFT JOIN acce.tbUsuarios AS usr2 ON deta.deta_UsuarioModificador = usr2.usua_ID
 GO
@@ -3090,15 +3095,15 @@ GO
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
 @vent_ID					INT,
-@golo_ID					INT,
+@insu_ID					INT,
 @deta_Cantidad				INT,
 @deta_UsuarioCreador		INT
 AS
 BEGIN
 	BEGIN TRY 
 		BEGIN TRANSACTION
-			INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, golo_ID, deta_Cantidad, deta_UsuarioCreador)
-			VALUES (@vent_ID, @golo_ID, @deta_Cantidad, @deta_UsuarioCreador)
+			INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+			VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
 
 			SELECT 200 AS codeStatus, 'Detalle añadido con éxito' AS messageStatus			
 		COMMIT

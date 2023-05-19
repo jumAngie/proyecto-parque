@@ -28,10 +28,25 @@ namespace ParqueDiversion.API.Extensions
             CreateMap<RatingsViewModel, tbRatings>().ReverseMap();
             #endregion
 
-
             #region Facturación
             CreateMap<VentasQuioscoViewModel, tbVentasQuiosco>().ReverseMap();
             CreateMap<VentasQuioscoDetalleViewModel, tbVentasQuioscoDetalle>().ReverseMap();
+            #endregion
+
+            #region Acceso
+            CreateMap<RolesViewModel, tbRoles>().ReverseMap();
+            CreateMap<RolesXPantallaViewModel, tbRolesXPantallas>().ReverseMap();
+            CreateMap<UsuariosViewModel, tbUsuarios>().ReverseMap();
+            #endregion
+
+            #region Generales
+            CreateMap<MunicipiosViewModel, tbMunicipios>().ReverseMap();
+            CreateMap<DepartamentosViewModel, tbDepartamentos>().ReverseMap();
+            CreateMap<EstadosCivilesViewModel, tbEstadosCiviles>().ReverseMap();
+            #endregion
+
+            #region Filas
+
             #endregion
         }
     }

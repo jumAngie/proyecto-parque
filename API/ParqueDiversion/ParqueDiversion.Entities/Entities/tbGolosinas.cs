@@ -11,7 +11,6 @@ namespace ParqueDiversion.Entities.Entities
         public tbGolosinas()
         {
             tbInsumosQuiosco = new HashSet<tbInsumosQuiosco>();
-            tbVentasQuioscoDetalle = new HashSet<tbVentasQuioscoDetalle>();
         }
 
         public int golo_ID { get; set; }
@@ -25,6 +24,5 @@ namespace ParqueDiversion.Entities.Entities
         public DateTime? golo_FechaModificacion { get; set; }
 
         public virtual ICollection<tbInsumosQuiosco> tbInsumosQuiosco { get; set; }
-        public virtual ICollection<tbVentasQuioscoDetalle> tbVentasQuioscoDetalle { get; set; }
     }
 }

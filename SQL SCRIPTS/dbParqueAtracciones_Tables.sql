@@ -146,7 +146,7 @@ GO
 CREATE TABLE acce.tbUsuarios( 
 	usua_ID						INT IDENTITY(1,1), 
 	usua_Usuario				NVARCHAR(100), 
-	usua_Clave					VARCHAR(MAX),
+	usua_Clave					NVARCHAR(MAX),
 	usua_Admin					BIT,
 	empl_ID						INT,
 	role_ID                     INT,
@@ -225,7 +225,7 @@ CREATE TABLE parq.tbClientesRegistrados(
 	clie_ID						INT,
 	clre_Usuario				VARCHAR(300),
 	clre_Email					NVARCHAR(300),
-	clre_Clave					NVARCHAR(300),
+	clre_Clave					NVARCHAR(MAX),
 	clre_Habilitado				INT DEFAULT 1,
 	clre_Estado					INT DEFAULT 1,
 	clre_UsuarioCreador			INT,
@@ -298,6 +298,7 @@ CREATE TABLE parq.tbTicketsCliente(
 	CONSTRAINT CK_parq_tbTicketsCliente_ticl_Cantidad CHECK (ticl_Cantidad > 0), 
 )
 GO
+
 
 CREATE TABLE parq.tbAtracciones(
 	atra_ID						INT IDENTITY(1,1),
@@ -573,7 +574,7 @@ GO
 CREATE TABLE fact.tbVentasQuioscoDetalle(
 	deta_ID						INT IDENTITY(1,1),
 	vent_ID						INT,
-	golo_ID						INT,
+	insu_ID						INT,
 	deta_Cantidad				INT,
 	deta_Habilitado				INT DEFAULT 1,
 	deta_Estado					INT DEFAULT 1,
@@ -583,7 +584,7 @@ CREATE TABLE fact.tbVentasQuioscoDetalle(
 	deta_FechaModificacion		DATETIME,
 	CONSTRAINT PK_fact_tbVentasQuioscoDetalle_deta_ID PRIMARY KEY (deta_ID),
 	CONSTRAINT FK_fact_tbVentasQuioscoDetalle_tbVentasQuiosco_vent_ID FOREIGN KEY (vent_ID) REFERENCES fact.tbVentasQuiosco (vent_ID),
-	CONSTRAINT FK_fact_tbVentasQuioscoDetalle_tbGolosinas_golo_ID FOREIGN KEY (golo_ID) REFERENCES parq.tbGolosinas (golo_ID),
+	CONSTRAINT FK_fact_tbVentasQuioscoDetalle_tbInsumosQuiosco_insu_ID FOREIGN KEY (insu_ID) REFERENCES parq.tbInsumosQuiosco (insu_ID),
 	CONSTRAINT CK_fact_tbVentasQuioscoDetalle_deta_Cantidad CHECK (deta_Cantidad > 0),
 )	
 GO

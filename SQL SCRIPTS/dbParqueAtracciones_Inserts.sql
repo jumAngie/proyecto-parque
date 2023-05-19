@@ -406,7 +406,7 @@ GO
 
 
 
-INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Contraseña, clre_Email)
+INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Clave, clre_Email)
 VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com'),
 		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com')
 GO
@@ -435,9 +435,114 @@ GO
 
 
 
+INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_UsuarioCreador)
+VALUES	(1, 'Montaña Rusa', 'Solo para valientes', 1, 'A 10 metros de la entrada al area', 20, '00:05:00:00', 1),
+		(2, 'La casa de los mil y un espejos', 'No te pierdas en el camino a la salida!', 2, 'Gira a la derecha despues de pasar el quiosco', 20, '00:15:00:00', 1),
+		(3, 'El tren infinito', 'No te vallas a marear!', 3, 'Dirigete al este del area', 20, '00:07:00:00', 1),
+		(4, 'Warzone', 'Solo puede quedar uno en pie!', 4, 'De la entrada al area dirígete a la izquierda y verás la entrada a la atracción', 20, '00:30:00:00', 1)
+GO       
 
 
-       
+INSERT INTO parq.tbEmpleados(empl_PrimerNombre, empl_SegundoNombre, empl_PrimerApellido, empl_SegundoApellido, empl_DNI, empl_Email, empl_Telefono, empl_Sexo, civi_ID, carg_ID, empl_UsuarioCreador)
+VALUES	('Juan', 'Pablo', 'González', 'López', '1234-6789-12345', 'juan.gonzalez@example.com', '1234-6789', 'M', 1, 1, 1),
+		('María', 'Elena', 'Rodríguez', 'Gómez', '9876-4321-98765', 'maria.rodriguez@example.com', '9876-4321', 'F', 2, 1, 1),
+		('Pedro', NULL, 'Sánchez', 'Martínez', '4567-9012-45678', 'pedro.sanchez@example.com', '4567-9012', 'M', 1, 2, 1),
+		('Ana', 'María', 'López', 'García', '234567890123456', 'ana.lopez@example.com', '234567890', 'F', 2, 2, 1),
+		('Carlos', 'Alberto', 'Ramírez', 'Vargas', '345678901234567', 'carlos.ramirez@example.com', '345678901', 'M', 3, 3, 1),
+		('Laura', 'Isabel', 'Gómez', 'Hernández', '456789012345678', 'laura.gomez@example.com', '456789012', 'F', 4, 2, 1)
+GO
+
+
+INSERT INTO parq.tbQuioscos(area_ID, quio_Nombre, empl_ID, regi_ID, quio_ReferenciaUbicacion, quio_UsuarioCreador)
+VALUES	(1, 'Quiosco La Delicia', 1, 1, 'A la par del letrero de baños', 1),
+		(2, 'Quiosco Fresh & Tasty', 2, 1, 'Junto a la entrada principal', 1),
+		(1, 'Quiosco La Esquina', 3, 2, 'Cerca de la fuente de agua', 1),
+		(2, 'Quiosco Sweet & Salty', 4, 2, 'En la plaza de comidas', 1),
+		(3, 'Quiosco Deli Corner', 5, 3, 'Al lado de la tienda de souvenirs', 1),
+		(3, 'Quiosco Snack Paradise', 6, 3, 'Cerca de la atracción principal', 1)
+GO
+
+
+INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
+VALUES	('ChocoDelight', 5, 1),
+		('Rainbow Drops', 3, 1),
+		('Cotton Candy Crunch', 2, 1),
+		('Sourlicious Gummies', 4, 1),
+		('Popcorn Munchies', 3, 1),
+		('Fruity Swirl Lollipop', 1, 1)
+GO
+
+
+INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCreador)
+VALUES	(1, 1, 50, 1),
+		(1, 2, 100, 1),
+		(2, 3, 75, 1),
+		(2, 4, 60, 1),
+		(3, 5, 80, 1),
+		(3, 6, 90, 1),
+		(4, 1, 70, 1),
+		(4, 2, 85, 1),
+		(5, 3, 55, 1),
+		(5, 4, 40, 1),
+		(6, 5, 65, 1),
+		(6, 6, 50, 1),
+		(1, 3, 90, 1),
+		(2, 4, 75, 1),
+		(3, 5, 60, 1),
+		(4, 6, 85, 1)
+GO
+
+
+INSERT INTO parq.tbRatings(atra_ID, clie_ID, rati_Estrellas, rati_Comentario, rati_UsuarioCreador)
+VALUES	(1, 1, 4, 'Excelente atracción. Me encantó la emoción que ofrece.', 1),
+		(2, 2, 5, 'Increíble experiencia. No puedo esperar para volver.', 1),
+		(3, 3, 3, 'La atracción estuvo bien, pero esperaba más emociones.', 1),
+		(4, 4, 2, 'No quedé satisfecho con esta atracción. Falta emoción.', 1)
+GO
+
+
+
+INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
+VALUES	(1, 1, 1, 1),
+		(2, 2, 2, 1),
+		(3, 3, 1, 1),
+		(4, 4, 2, 1)
+GO
+
+
+-- Inserts para la venta 1
+INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+VALUES	(1, 1, 2, 1),
+		(1, 2, 3, 1)
+GO
+
+-- Inserts para la venta 2
+INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+VALUES	(2, 4, 2, 1),
+		(2, 3, 1, 1)
+GO
+
+-- Inserts para la venta 3
+INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+VALUES	(3, 5, 3, 1),
+		(3, 6, 2, 1)
+GO
+
+-- Inserts para la venta 4
+INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+VALUES	(4, 1, 2, 1),
+		(4, 2, 3, 1)
+GO
+
+
+
+EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
+EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
+
+
+-- Agrega más inserts según sea necesario
+
+SELECT * FROM parq.VW_tbClientes
 --ALTER TABLE gral.tbEstadosCiviles
 --ADD CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
 --	CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)	

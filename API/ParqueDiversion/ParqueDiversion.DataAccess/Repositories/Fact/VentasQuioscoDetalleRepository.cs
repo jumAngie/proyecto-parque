@@ -29,7 +29,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@vent_ID", item.vent_ID, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@golo_ID", item.golo_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@insu_ID", item.insu_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@deta_Cantidad", item.deta_Cantidad, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@deta_UsuarioCreador", item.deta_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
 

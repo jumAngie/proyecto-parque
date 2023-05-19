@@ -73,7 +73,7 @@ namespace ParqueDiversion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<VW_Departamentos>(entity =>
             {
@@ -265,8 +265,6 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.usua_Clave).IsUnicode(false);
-
                 entity.Property(e => e.usua_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.usua_FechaModificacion).HasColumnType("datetime");
@@ -438,8 +436,6 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.clie_Nombres)
                     .HasMaxLength(600)
                     .IsUnicode(false);
-
-                entity.Property(e => e.clre_Clave).HasMaxLength(300);
 
                 entity.Property(e => e.clre_Email).HasMaxLength(300);
 
@@ -1009,8 +1005,6 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.HasIndex(e => e.clre_Usuario, "UQ_parq_tbClientesRegistrados_clre_Usuario")
                     .IsUnique();
-
-                entity.Property(e => e.clre_Clave).HasMaxLength(300);
 
                 entity.Property(e => e.clre_Email).HasMaxLength(300);
 
@@ -1682,8 +1676,6 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.HasIndex(e => e.usua_Usuario, "UQ_acce_tbUsuarios_usua_Usuario")
                     .IsUnique();
 
-                entity.Property(e => e.usua_Clave).IsUnicode(false);
-
                 entity.Property(e => e.usua_Estado).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.usua_FechaCreacion)
@@ -1747,10 +1739,10 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.Property(e => e.deta_Habilitado).HasDefaultValueSql("((1))");
 
-                entity.HasOne(d => d.golo)
+                entity.HasOne(d => d.insu)
                     .WithMany(p => p.tbVentasQuioscoDetalle)
-                    .HasForeignKey(d => d.golo_ID)
-                    .HasConstraintName("FK_fact_tbVentasQuioscoDetalle_tbGolosinas_golo_ID");
+                    .HasForeignKey(d => d.insu_ID)
+                    .HasConstraintName("FK_fact_tbVentasQuioscoDetalle_tbInsumosQuiosco_insu_ID");
 
                 entity.HasOne(d => d.vent)
                     .WithMany(p => p.tbVentasQuioscoDetalle)

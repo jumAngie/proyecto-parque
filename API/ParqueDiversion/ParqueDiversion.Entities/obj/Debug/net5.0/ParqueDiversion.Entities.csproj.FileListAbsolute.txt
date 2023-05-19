@@ -25,7 +25,6 @@ C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Ent
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ParqueDiversion.Entities.dll
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ref\ParqueDiversion.Entities.dll
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ParqueDiversion.Entities.pdb
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.csproj.AssemblyReference.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.AssemblyInfoInputs.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.AssemblyInfo.cs

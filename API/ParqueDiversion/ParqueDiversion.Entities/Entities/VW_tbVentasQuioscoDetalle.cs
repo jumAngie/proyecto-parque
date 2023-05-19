@@ -10,7 +10,7 @@ namespace ParqueDiversion.Entities.Entities
     {
         public int deta_ID { get; set; }
         public int? vent_ID { get; set; }
-        public int? golo_ID { get; set; }
+        public int? insu_ID { get; set; }
         public string golo_Nombre { get; set; }
         public int? golo_Precio { get; set; }
         public int? deta_Cantidad { get; set; }

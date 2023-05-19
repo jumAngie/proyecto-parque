@@ -144,6 +144,12 @@ C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiv
 C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ref\ParqueDiversion.API.dll
 C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.pdb
 C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.genruntimeconfig.cache
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.csproj.AssemblyReference.cache
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.AssemblyInfoInputs.cache
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.AssemblyInfo.cs
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.csproj.CoreCompileInputs.cache
+C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\appsettings.json
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\ParqueDiversion.API.exe
@@ -201,13 +207,7 @@ C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\ParqueDiversion.BusinessLogic.pdb
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\ParqueDiversion.DataAccess.pdb
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\bin\Debug\net5.0\ParqueDiversion.Entities.pdb
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.csproj.AssemblyReference.cache
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.AssemblyInfoInputs.cache
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.AssemblyInfo.cs
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.csproj.CoreCompileInputs.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\ParqueDiversion.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\staticwebassets\ParqueDiversion.API.StaticWebAssets.Manifest.cache
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\staticwebassets\ParqueDiversion.API.StaticWebAssets.xml
 C:\Users\LAB01\Documents\proyecto-parque\API\ParqueDiversion\ParqueDiversion.API\obj\Debug\net5.0\scopedcss\bundle\ParqueDiversion.API.styles.css

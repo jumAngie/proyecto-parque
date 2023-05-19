@@ -10,7 +10,7 @@ namespace ParqueDiversion.Entities.Entities
     {
         public int deta_ID { get; set; }
         public int? vent_ID { get; set; }
-        public int? golo_ID { get; set; }
+        public int? insu_ID { get; set; }
         public int? deta_Cantidad { get; set; }
         public int? deta_Habilitado { get; set; }
         public int? deta_Estado { get; set; }
@@ -19,7 +19,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? deta_UsuarioModificador { get; set; }
         public DateTime? deta_FechaModificacion { get; set; }
 
-        public virtual tbGolosinas golo { get; set; }
+        public virtual tbInsumosQuiosco insu { get; set; }
         public virtual tbVentasQuiosco vent { get; set; }
     }
 }

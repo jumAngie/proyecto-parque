@@ -8,6 +8,11 @@ namespace ParqueDiversion.Entities.Entities
 {
     public partial class tbInsumosQuiosco
     {
+        public tbInsumosQuiosco()
+        {
+            tbVentasQuioscoDetalle = new HashSet<tbVentasQuioscoDetalle>();
+        }
+
         public int insu_ID { get; set; }
         public int? quio_ID { get; set; }
         public int? golo_ID { get; set; }
@@ -21,5 +26,6 @@ namespace ParqueDiversion.Entities.Entities
 
         public virtual tbGolosinas golo { get; set; }
         public virtual tbQuioscos quio { get; set; }
+        public virtual ICollection<tbVentasQuioscoDetalle> tbVentasQuioscoDetalle { get; set; }
     }
 }
