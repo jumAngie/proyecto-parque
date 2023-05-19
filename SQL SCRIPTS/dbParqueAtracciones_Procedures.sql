@@ -97,7 +97,7 @@ BEGIN
 			VALUES
 			(@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Creado con ï¿½xito' AS messageStatus
 		END
 
 	END TRY
@@ -125,7 +125,7 @@ BEGIN
 				usua_UsuarioModificador	=	@usua_UsuarioModificador
 				WHERE [usua_ID]		=	@usua_ID
 
-			SELECT 200 AS codeStatus, 'Usuario Modificado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Modificado con ï¿½xito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -145,7 +145,7 @@ BEGIN
 				usua_Estado		=	0
 				WHERE [usua_ID]	=	@usua_ID
 
-			SELECT 200 AS codeStatus, 'Usuario Eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Eliminado con ï¿½xito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -175,7 +175,7 @@ DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 	IF NOT EXISTS (SELECT * FROM acce.VW_Usuarios WHERE usua_Usuario = @usua_Usuario AND usua_Clave = @Encrypt)
 	BEGIN
 			SELECT	usua_ID = 0 ,
-					usua_Usuario = 'Usuario o Contraseña Incorrectos'
+					usua_Usuario = 'Usuario o Contraseï¿½a Incorrectos'
 	END
 END
 GO
@@ -274,7 +274,7 @@ AS BEGIN
 			DECLARE @id INT= (SELECT CAST(IDENT_CURRENT('acce.tbRoles')AS INT))
 			DECLARE @Rol NVARCHAR(MAX) = (SELECT role_Nombre FROM acce.tbRoles WHERE role_ID = @id)
 
-			SELECT 200 AS codeStatus, 'Rol Creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Creado con ï¿½xito' AS messageStatus
 			UNION ALL
 			SELECT @id,@Rol
 
@@ -311,7 +311,7 @@ AS BEGIN
 		role_UsuarioModificador	= @role_UsuarioModificador
 		WHERE role_ID = @role_ID
 
-			SELECT 200 AS codeStatus, 'Rol Modificado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Modificado con ï¿½xito' AS messageStatus
 		END
 
 	END TRY
@@ -332,7 +332,7 @@ AS BEGIN
 				role_Estado		=	0
 				WHERE role_ID	=	@role_ID
 
-			SELECT 200 AS codeStatus, 'Rol Eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Eliminado con ï¿½xito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -367,7 +367,7 @@ BEGIN
 	VALUES
 	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
 
-	SELECT 200 AS codeStatus, 'Acceso Agregado con éxito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Agregado con ï¿½xito' AS messageStatus
 
 END
 
@@ -387,7 +387,7 @@ INSERT INTO [acce].tbRolesXPantallas
 	VALUES
 	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
 
-	SELECT 200 AS codeStatus, 'Acceso Editado con éxito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Editado con ï¿½xito' AS messageStatus
 
 END
 GO
@@ -459,7 +459,7 @@ BEGIN
 				civi_Estado				=	1
 				WHERE civi_ID			=	@ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con ï¿½xito' AS messageStatus
 
 			END
 	--si no existe
@@ -471,7 +471,7 @@ BEGIN
 			VALUES
 			(@civi_Descripcion, @civi_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con ï¿½xito' AS messageStatus
 		END
 		COMMIT
 	END TRY
@@ -497,20 +497,20 @@ BEGIN
 			IF EXISTS (SELECT * FROM gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion AND civi_Estado  = 1 AND civi_ID != @civi_ID)
 			BEGIN
 
-				SELECT 500 AS codeStatus, 'No puede Editar el Estado Civil, Ya existe esta Descripción' AS messageStatus
+				SELECT 500 AS codeStatus, 'No puede Editar el Estado Civil, Ya existe esta Descripciï¿½n' AS messageStatus
 
 			END
 
 			ELSE IF EXISTS (SELECT * FROM gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion AND civi_Estado  = 1 AND civi_ID = @civi_ID)
 			BEGIN
 
-				SELECT 200 AS codeStatus, 'Estado Civil Modificado con éxito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Estado Civil Modificado con ï¿½xito' AS messageStatus
 			END
 
 			ELSE IF EXISTS (SELECT * FROM gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion AND civi_Estado  = 0 )
 			BEGIN
 		
-				SELECT 409 AS codeStatus, 'No puede Editar el Estado Civil, Ya existe esta Descripción pero se encuentra Eliminado' AS messageStatus
+				SELECT 409 AS codeStatus, 'No puede Editar el Estado Civil, Ya existe esta Descripciï¿½n pero se encuentra Eliminado' AS messageStatus
 			END
 
 			ELSE IF NOT EXISTS (SELECT * FROM  gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion)
@@ -521,7 +521,7 @@ BEGIN
 				civi_UsuarioModificador	= @civi_UsuarioModificador
 				WHERE civi_ID			= @civi_ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil Modificado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil Modificado con ï¿½xito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -554,7 +554,7 @@ BEGIN
 				civi_Estado		=	0
 				WHERE civi_ID	=	@civi_ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil Eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil Eliminado con ï¿½xito' AS messageStatus
 			END
 
 		COMMIT
@@ -645,13 +645,13 @@ BEGIN
 	--si existe el nombre
 		IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Nombre  = @dept_Nombre AND dept_Estado  = 1)
 	     BEGIN
-            SELECT 409 AS codeStatus, 'El Nombre de Departamento ya está en uso' AS messageStatus
+            SELECT 409 AS codeStatus, 'El Nombre de Departamento ya estï¿½ en uso' AS messageStatus
          END
 
-	--si existe el Código
+	--si existe el Cï¿½digo
 		 ELSE IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Codigo = @dept_Codigo AND dept_Estado  = 1)
 	     BEGIN
-            SELECT 409 AS codeStatus, 'El Código de Departamento ya está en uso' AS messageStatus
+            SELECT 409 AS codeStatus, 'El Cï¿½digo de Departamento ya estï¿½ en uso' AS messageStatus
          END
 
 	--si existe pero esta eliminado
@@ -665,7 +665,7 @@ BEGIN
 				dept_Estado				=	1
 				WHERE dept_ID			=	@ID
 
-			SELECT 200 AS codeStatus, 'Departamento Civil creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Civil creado con ï¿½xito' AS messageStatus
 
 			END
 	--si no existe
@@ -677,7 +677,7 @@ BEGIN
 			VALUES
 			(@dept_Codigo,@dept_Nombre,@dept_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con ï¿½xito' AS messageStatus
 		END
 		COMMIT
 	END TRY
@@ -699,11 +699,11 @@ AS BEGIN
   	BEGIN TRY
 	BEGIN TRANSACTION
 
-			--validar Nombre y Código
+			--validar Nombre y Cï¿½digo
 			IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Nombre = @dept_Nombre AND dept_Codigo = @dept_Codigo AND dept_Estado = 1 AND dept_ID != @dept_ID)
 			BEGIN
 
-				SELECT 500 AS codeStatus, 'No puede Editar el Departamento, Ya existe este Nombre y Código' AS messageStatus
+				SELECT 500 AS codeStatus, 'No puede Editar el Departamento, Ya existe este Nombre y Cï¿½digo' AS messageStatus
 
 			END
 			--validar Nombre
@@ -717,14 +717,14 @@ AS BEGIN
 			IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Codigo = @dept_Codigo AND dept_Estado  = 1 AND dept_ID != @dept_ID)
 			BEGIN
 
-				SELECT 500 AS codeStatus, 'No puede Editar el Departamento, Ya existe este Código' AS messageStatus
+				SELECT 500 AS codeStatus, 'No puede Editar el Departamento, Ya existe este Cï¿½digo' AS messageStatus
 
 			END
 			--validar si existe pero son los mismos datos
 			ELSE IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Nombre = @dept_Nombre AND  dept_Codigo = @dept_Codigo AND dept_Estado  = 1 AND dept_ID = @dept_ID)
 			BEGIN
 
-				SELECT 200 AS codeStatus, 'Departamento Modificado con éxito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Departamento Modificado con ï¿½xito' AS messageStatus
 
 			END
 			--si existe pero esta eliminado
@@ -743,7 +743,7 @@ AS BEGIN
 				dept_UsuarioModificador	= @dept_UsuarioModificador
 				WHERE dept_ID			= @dept_ID
 
-			SELECT 200 AS codeStatus, 'Departamento Modificado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Modificado con ï¿½xito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -776,7 +776,7 @@ BEGIN
 				dept_Estado		=	0
 				WHERE dept_ID	=	@dept_ID
 
-			SELECT 200 AS codeStatus, 'Departamento Eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Eliminado con ï¿½xito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -842,7 +842,7 @@ BEGIN
 			WHERE muni_Nombre = @muni_Nombre
 			AND	  dept_ID = @dept_ID
 
-			SELECT 200 AS codeStatus, 'Municipio Creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Creado con ï¿½xito' AS messageStatus
 			
 			COMMIT
 			RETURN
@@ -851,7 +851,7 @@ BEGIN
 
 		ELSE IF EXISTS (SELECT * FROM gral.VW_Municipios WHERE dept_ID = @dept_ID AND muni_Nombre = @muni_Nombre AND muni_Estado = 0)
 		BEGIN
-			SELECT 409 AS codeStatus, 'Ya existe un Municipio con este Nombre, pero está Eliminado' AS messageStatus
+			SELECT 409 AS codeStatus, 'Ya existe un Municipio con este Nombre, pero estï¿½ Eliminado' AS messageStatus
 		END
 
 
@@ -870,7 +870,7 @@ BEGIN
 			VALUES
 			(@dept_ID,@muni_Codigo,@muni_Nombre,@muni_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Municipio Creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Creado con ï¿½xito' AS messageStatus
 		END
 
 		COMMIT
@@ -904,7 +904,7 @@ BEGIN
 			IF EXISTS (SELECT * FROM gral.VW_Municipios WHERE dept_ID = @dept_ID AND muni_Nombre = @muni_Nombre AND muni_Estado = 1 AND muni_ID = @muni_ID)
 		BEGIN
 			
-			SELECT 200 AS codeStatus, 'yes Municipio Editado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'yes Municipio Editado con ï¿½xito' AS messageStatus
 
 			COMMIT
 			RETURN
@@ -912,7 +912,7 @@ BEGIN
 
 		ELSE IF EXISTS (SELECT * FROM gral.VW_Municipios WHERE dept_ID = @dept_ID AND muni_Nombre = @muni_Nombre AND muni_Estado = 0)
 		BEGIN
-			SELECT 409 AS codeStatus, 'Ya existe un Municipio con este Nombre, pero está Eliminado' AS messageStatus
+			SELECT 409 AS codeStatus, 'Ya existe un Municipio con este Nombre, pero estï¿½ Eliminado' AS messageStatus
 		END
 
 		ELSE IF NOT EXISTS (SELECT * FROM gral.VW_Municipios WHERE dept_ID = @dept_ID AND muni_Nombre = @muni_Nombre AND muni_Estado = 0)
@@ -931,7 +931,7 @@ BEGIN
 				muni_UsuarioModificador = @muni_UsuarioModificador
 				WHERE muni_ID			= @muni_ID
 
-			SELECT 200 AS codeStatus, 'Municipio Editado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Editado con ï¿½xito' AS messageStatus
 		END
 
 		COMMIT
@@ -2216,7 +2216,7 @@ BEGIN
 		BEGIN TRAN
 					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
 					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Atraccion creada con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Atraccion creada con ï¿½xito' AS messageStatus
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2249,7 +2249,7 @@ BEGIN
 						atra_Imagen = @atra_Imagen,
 						atra_UsuarioModificador = @atra_UsuarioModificador
 				WHERE	atra_ID   =		@atra_ID
-				SELECT 200 AS codeStatus, 'Atraccion actualizada con éxito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Atraccion actualizada con ï¿½xito' AS messageStatus
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2274,13 +2274,13 @@ BEGIN
 
 				IF	@TicketsClientesOcupa > 0
 					BEGIN
-						SELECT 500 AS codeStatus, 'La Atraccion que desea eliminar está en uso.' AS messageStatus
+						SELECT 500 AS codeStatus, 'La Atraccion que desea eliminar estï¿½ en uso.' AS messageStatus
 					END
 				ELSE
 					BEGIN
 						UPDATE parq.VW_tbAtracciones
 							SET atra_Estado	= 0 WHERE atra_ID =	@atra_ID
-						SELECT 200 AS codeStatus, 'Atraccion eliminado con éxito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Atraccion eliminado con ï¿½xito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -2373,18 +2373,18 @@ BEGIN
 				END
 			ELSE IF EXISTS (SELECT * FROM parq.tbEmpleados WHERE empl_Telefono = @empl_Telefono)
 				BEGIN
-					SELECT 409 AS codeStatus, 'Este Teléfono ya existe' AS messageStatus
+					SELECT 409 AS codeStatus, 'Este Telï¿½fono ya existe' AS messageStatus
 				END
 			ELSE IF EXISTS (SELECT * FROM parq.tbEmpleados WHERE empl_Email = @empl_Email)
 				BEGIN
-					SELECT 409 AS codeStatus, 'Este Correo Electrónico ya existe' AS messageStatus
+					SELECT 409 AS codeStatus, 'Este Correo Electrï¿½nico ya existe' AS messageStatus
 				END
 			ELSE
 				BEGIN
 					INSERT INTO parq.tbEmpleados(empl_PrimerNombre, empl_SegundoNombre, empl_PrimerApellido, empl_SegundoApellido, empl_DNI, empl_Email, empl_Telefono, empl_Sexo, civi_ID, carg_ID, empl_UsuarioCreador)
 					VALUES(@empl_PrimerNombre, @empl_SegundoNombre, @empl_PrimerApellido, @empl_SegundoApellido, @empl_DNI, @empl_Email, @empl_Telefono, @empl_Sexo, @civi_ID, @carg_ID, @empl_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Empleado agregado con éxito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado agregado con ï¿½xito!' AS messageStatus
 				END
 		COMMIT
 	END TRY 
@@ -2421,11 +2421,11 @@ BEGIN
 				END
 			ELSE IF EXISTS (SELECT * FROM parq.tbEmpleados WHERE empl_Telefono = @empl_Telefono AND empl_ID != @empl_ID)
 				BEGIN
-					SELECT 409 AS codeStatus, 'Este Teléfono ya existe' AS messageStatus
+					SELECT 409 AS codeStatus, 'Este Telï¿½fono ya existe' AS messageStatus
 				END
 			ELSE IF EXISTS (SELECT * FROM parq.tbEmpleados WHERE empl_Email = @empl_Email AND empl_ID != @empl_ID)
 				BEGIN
-					SELECT 409 AS codeStatus, 'Este Correo Electrónico ya existe' AS messageStatus
+					SELECT 409 AS codeStatus, 'Este Correo Electrï¿½nico ya existe' AS messageStatus
 				END
 			ELSE 
 				BEGIN
@@ -2444,7 +2444,7 @@ BEGIN
 						empl_FechaModificacion = GETDATE()
 					WHERE empl_ID = @empl_ID
 
-					SELECT 200 AS codeStatus, 'Empleado actualizado con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado actualizado con ï¿½xito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2476,7 +2476,7 @@ BEGIN
 					SET empl_Estado = 0 
 					WHERE empl_ID = @empl_ID
 
-					SELECT 200 AS codeStatus, 'Empleado eliminado con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado eliminado con ï¿½xito' AS messageStatus
 				END
 		COMMIT 
 	END TRY
@@ -2555,7 +2555,7 @@ END
 GO
 
 --*************** CREATE DE QUISCOS ******************--
-CREATE OR ALTER PROCEDURE parq.UDP_tbQuioscos_Insert --1, 'MiniShop', 2, 1, 'A media cuadra de la montaña rusa', '', 1
+CREATE OR ALTER PROCEDURE parq.UDP_tbQuioscos_Insert --1, 'MiniShop', 2, 1, 'A media cuadra de la montaï¿½a rusa', '', 1
 	@area_ID					INT, 
 	@quio_Nombre				VARCHAR(300), 
 	@empl_ID					INT, 
@@ -2576,7 +2576,7 @@ BEGIN
 					INSERT INTO parq.tbQuioscos(area_ID, quio_Nombre, empl_ID, regi_ID, quio_ReferenciaUbicacion, quio_Imagen, quio_UsuarioCreador)
 					VALUES(@area_ID, @quio_Nombre, @empl_ID, @regi_ID, @quio_ReferenciaUbicacion, @quio_Imagen, @quio_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Quiosco ingresado con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Quiosco ingresado con ï¿½xito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2619,7 +2619,7 @@ BEGIN
 						quio_FechaModificacion = GETDATE()
 					WHERE quio_ID = @quio_ID
 
-					SELECT 200 AS codeStatus, 'Quiosco actualizado con éxito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Quiosco actualizado con ï¿½xito!' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2642,7 +2642,7 @@ BEGIN
 			SET quio_Estado = 0
 			WHERE quio_ID = @quio_ID
 
-			SELECT 200 AS codeStatus, 'Quiosco eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Quiosco eliminado con ï¿½xito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -2717,7 +2717,7 @@ BEGIN
 					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
 					VALUES(@golo_Nombre, @golo_Precio, @golo_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Golosina ingresada con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Golosina ingresada con ï¿½xito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2783,7 +2783,7 @@ BEGIN
 					SET golo_Estado = 0
 					WHERE golo_ID = @golo_ID
 
-					SELECT 200 AS codeStatus, 'Golosina eliminada con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Golosina eliminada con ï¿½xito' AS messageStatus
 				END
 		COMMIT
 	END TRY 
@@ -2876,7 +2876,7 @@ BEGIN
 					SET insu_Stock += @insu_Stock
 					WHERE quio_ID = @quio_ID AND golo_ID = @golo_ID
 
-					SELECT 200 AS codeStatus, 'Cantidad exitosamente añadida al stock' AS messageStatus
+					SELECT 200 AS codeStatus, 'Cantidad exitosamente aï¿½adida al stock' AS messageStatus
 				END
 			ELSE IF EXISTS (SELECT * FROM parq.tbInsumosQuiosco WHERE quio_ID = @quio_ID AND golo_ID = @golo_ID AND insu_Estado = 0)
 				BEGIN
@@ -2885,14 +2885,14 @@ BEGIN
 						insu_Stock = @insu_Stock
 					WHERE quio_ID = @quio_ID AND golo_ID = @golo_ID
 
- 					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus
+ 					SELECT 200 AS codeStatus, 'Insumo aï¿½adido con ï¿½xito' AS messageStatus
 				END
 			ELSE
 				BEGIN
 					INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCreador)
 					VALUES(@quio_ID, @golo_ID, @insu_Stock, @insu_UsuarioCreador)
 					
-					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Insumo aï¿½adido con ï¿½xito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2914,7 +2914,7 @@ BEGIN
 			UPDATE parq.tbInsumosQuiosco
 			SET insu_Estado = 0
 			WHERE insu_ID = @insu_ID
-			SELECT 200 AS codeStatus, 'Insumo eliminado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Insumo eliminado con ï¿½xito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -2949,14 +2949,14 @@ BEGIN
 						rati_Comentario = @rati_Comentario
 					WHERE atra_ID = @atra_ID AND clie_ID = @clie_ID
 					
-					SELECT 200 AS codeStatus, 'Rating agregado con éxito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Rating agregado con ï¿½xito!' AS messageStatus
 				END
 			ELSE
 				BEGIN
 					INSERT INTO parq.tbRatings(atra_ID, clie_ID, rati_Estrellas, rati_Comentario, rati_UsuarioCreador)
 					VALUES(@atra_ID, @clie_ID, @rati_Estrellas, @rati_Comentario, @rati_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Rating agregado con éxito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Rating agregado con ï¿½xito!' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -3037,7 +3037,7 @@ BEGIN
 			INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
 			VALUES (@quio_ID, @clie_ID, @pago_ID, @vent_UsuarioCreador)
 			
-			SELECT 200 AS codeStatus, 'Factura creada con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Factura creada con ï¿½xito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -3105,7 +3105,7 @@ BEGIN
 			INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
 			VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Detalle añadido con éxito' AS messageStatus			
+			SELECT 200 AS codeStatus, 'Detalle aï¿½adido con ï¿½xito' AS messageStatus			
 		COMMIT
 	END TRY
 

@@ -412,13 +412,16 @@ VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com'),
 GO
 
 
-INSERT INTO parq.tbAreas (area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia)
-VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento, incluye piscinas!', 1, 'Ubicado en la zona norte del parque'),
-		('Montañas Rusas', 'Zona con un ambiente lleno de diversión y adrenalina!', 3, 'Ubicado en la zona Este del parque'),
-		('Zona Extrema', 'Zona con temáticas frenesí, desde paintball, hasta airsoft!', 2, 'Ubicado en la zona Sur del parque'),
-		('Zona Infantíl', 'Zona con un ambiente más tranquilo y familiar con lo pequeños!', '4', 'Ubicado en la zona Oeste del parque')
+INSERT INTO parq.tbAreas (area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia, area_UsuarioCreador)
+VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento, incluye piscinas!', 1, 'Ubicado en la zona norte del parque', 1),
+		('Montañas Rusas', 'Zona con un ambiente lleno de diversión y adrenalina!', 3, 'Ubicado en la zona Este del parque', 1),
+		('Zona Extrema', 'Zona con temáticas frenesí, desde paintball, hasta airsoft!', 2, 'Ubicado en la zona Sur del parque', 1),
+		('Zona Infantíl', 'Zona con un ambiente más tranquilo y familiar con lo pequeños!', 4, 'Ubicado en la zona Oeste del parque', 1)
 GO
 
+
+SELECT* FROM parq.tbAreas
+SELECT * FROM parq.VW_tbAreas
 
 INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio)
 VALUES	('Clásico', 150),
@@ -535,9 +538,11 @@ VALUES	(4, 1, 2, 1),
 GO
 
 
+
+
+
 -- Agrega más inserts según sea necesario
 
-SELECT * FROM parq.VW_tbClientes
 --ALTER TABLE gral.tbEstadosCiviles
 --ADD CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),
 --	CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioModificador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioModificador) REFERENCES acce.tbUsuarios (usua_ID)	

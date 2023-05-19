@@ -15,6 +15,7 @@ GO
 CREATE SCHEMA fila
 GO
 
+
 /*TABLAS ESQUEMA GRAL*/
 
 --CREACION DE TABLA tbEstadosCiviles
