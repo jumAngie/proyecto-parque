@@ -193,6 +193,374 @@ namespace ParqueDiversion.BusinessLogic.Services
         }
         #endregion
 
+        #region Clientes
+
+        public ServiceResult ClientesList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _clientesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult InsertarClientes(tbClientes item)
+        {
+            var result = new ServiceResult();
+
+            var map = _clientesRepository.Insert(item);
+            return result.Ok(map);
+        }
+
+        public VW_tbClientes FindClientes(int id)
+        {
+            try
+            {
+                return _clientesRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public RequestStatus BorrarClientes(int id)
+        {
+            try
+            {
+                return _clientesRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
+        public RequestStatus UpdateClientes(tbClientes tabla)
+        {
+            try
+            {
+                return _clientesRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Clientes Registrados
+        public ServiceResult ClientesRegistradosList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _clientesRegistradosRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        public ServiceResult InsertarClientesRegistrados(tbClientesRegistrados item)
+        {
+            var result = new ServiceResult();
+
+            var map = _clientesRegistradosRepository.Insert(item);
+            return result.Ok(map);
+        }
+        public VW_tbClientesRegistrados FindClientesRegistrados(int id)
+        {
+            try
+            {
+                return _clientesRegistradosRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus BorrarClientesRegistrados(int id)
+        {
+            try
+            {
+                return _clientesRegistradosRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus UpdateClientesRegistrados(tbClientesRegistrados tabla)
+        {
+            try
+            {
+                return _clientesRegistradosRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Areas
+        public ServiceResult AreasList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _areasRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        public ServiceResult InsertarAreas(tbAreas item)
+        {
+            var result = new ServiceResult();
+
+            var map = _areasRepository.Insert(item);
+            return result.Ok(map);
+        }
+        public VW_tbAreas FindAreas(int id)
+        {
+            try
+            {
+                return _areasRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus BorrarAreas(int id)
+        {
+            try
+            {
+                return _areasRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus UpdateAreas(tbAreas tabla)
+        {
+            try
+            {
+                return _areasRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Ticket
+        public ServiceResult TicketList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _ticketRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        public ServiceResult InsertarTicket(tbTickets item)
+        {
+            var result = new ServiceResult();
+
+            var map = _ticketRepository.Insert(item);
+            return result.Ok(map);
+        }
+        public VW_tbTickets FindTicket(int id)
+        {
+            try
+            {
+                return _ticketRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus BorrarTicket(int id)
+        {
+            try
+            {
+                return _ticketRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus UpdateTicket(tbTickets tabla)
+        {
+            try
+            {
+                return _ticketRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Ticket Clientes
+        public ServiceResult TicketClientesList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _ticketClientesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        public ServiceResult InsertarTicketClientes(tbTicketsCliente item)
+        {
+            var result = new ServiceResult();
+
+            var map = _ticketClientesRepository.Insert(item);
+            return result.Ok(map);
+        }
+        public VW_tbTicketClientes FindTicketClientes(int id)
+        {
+            try
+            {
+                return _ticketClientesRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus BorrarTicketClientes(int id)
+        {
+            try
+            {
+                return _ticketClientesRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus UpdateTicketClientes(tbTicketsCliente tabla)
+        {
+            try
+            {
+                return _ticketClientesRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region Atracciones
+        public ServiceResult AtraccionesList()
+        {
+
+            var result = new ServiceResult();
+
+            try
+            {
+
+                var list = _atraccionesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+
+                return result.Error(e.Message);
+            }
+        }
+        public ServiceResult InsertarAtracciones(tbAtracciones item)
+        {
+            var result = new ServiceResult();
+
+            var map = _atraccionesRepository.Insert(item);
+            return result.Ok(map);
+        }
+        public VW_tbAtracciones FindAtracciones(int id)
+        {
+            try
+            {
+                return _atraccionesRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus BorrarAtracciones(int id)
+        {
+            try
+            {
+                return _atraccionesRepository.Delete(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public RequestStatus UpdateAtracciones(tbAtracciones tabla)
+        {
+            try
+            {
+                return _atraccionesRepository.Update(tabla);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Empleados
         public IEnumerable<VW_tbEmpleados> ListadoEmpleados()
         {
