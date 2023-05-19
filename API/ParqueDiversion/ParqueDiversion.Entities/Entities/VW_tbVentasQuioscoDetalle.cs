@@ -17,6 +17,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? deta_Habilitado { get; set; }
         public int? deta_Estado { get; set; }
         public string empl_crea { get; set; }
+        public string empl_modifica { get; set; }
         public int? deta_UsuarioCreador { get; set; }
         public string deta_UsuarioCreador_Nombre { get; set; }
         public DateTime? deta_FechaCreacion { get; set; }

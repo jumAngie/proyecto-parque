@@ -26,6 +26,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? vent_Habilitado { get; set; }
         public int? vent_Estado { get; set; }
         public string empl_crea { get; set; }
+        public string empl_modifica { get; set; }
         public int? vent_UsuarioCreador { get; set; }
         public string vent_UsuarioCreador_Nombre { get; set; }
         public DateTime? vent_FechaCreacion { get; set; }

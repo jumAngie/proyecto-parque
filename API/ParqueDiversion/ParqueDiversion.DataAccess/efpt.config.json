@@ -1,0 +1,181 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "DbparqueatraccionesContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Context",
+   "ProjectRootNamespace": "ParqueDiversion.DataAccess",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 1,
+   "Tables": [
+      {
+         "Name": "[acce].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbRolesXPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fact].[tbVentasQuiosco]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fact].[tbVentasQuioscoDetalle]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbFilasAtraccion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbFilasPosiciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbHistorialFilasPosiciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbHistorialVisitantesAtraccion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbTemporizadores]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbTipoFilas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fila].[tbVisitantesAtraccion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[gral].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[gral].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[gral].[tbMetodosPago]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[gral].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbAreas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbAtracciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbCargos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbClientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbClientesRegistrados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbEmpleados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbGolosinas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbInsumosQuiosco]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbQuioscos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbRatings]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbRegiones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbTickets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[parq].[tbTicketsCliente]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[VW_Usuarios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_tbVentasQuiosco]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_tbVentasQuioscoDetalle]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbEmpleados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbGolosinas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbInsumosQuiosco]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbQuioscos]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "DESKTOP-115L2GI\\SQLEXPRESS.dbParqueAtracciones",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

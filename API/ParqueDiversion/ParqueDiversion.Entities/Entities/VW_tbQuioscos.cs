@@ -25,6 +25,7 @@ namespace ParqueDiversion.Entities.Entities
         public string quio_Imagen { get; set; }
         public int? quio_Habilitado { get; set; }
         public string empl_crea { get; set; }
+        public string empl_modifica { get; set; }
         public int? quio_Estado { get; set; }
         public int? quio_UsuarioCreador { get; set; }
         public string quio_UsuarioCreador_Nombre { get; set; }

@@ -10,3 +10,15 @@ C:\Users\Usuario\Documents\GitHub\proyecto-parque\API\ParqueDiversion\ParqueDive
 C:\Users\Usuario\Documents\GitHub\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.dll
 C:\Users\Usuario\Documents\GitHub\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ref\ParqueDiversion.Entities.dll
 C:\Users\Usuario\Documents\GitHub\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.pdb
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ParqueDiversion.Entities.deps.json
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ParqueDiversion.Entities.dll
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ref\ParqueDiversion.Entities.dll
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\bin\Debug\net5.0\ParqueDiversion.Entities.pdb
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.csproj.AssemblyReference.cache
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.AssemblyInfoInputs.cache
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.AssemblyInfo.cs
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.csproj.CoreCompileInputs.cache
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.dll
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ref\ParqueDiversion.Entities.dll
+C:\Users\daniz\OneDrive\Documentos\proyecto-parque\API\ParqueDiversion\ParqueDiversion.Entities\obj\Debug\net5.0\ParqueDiversion.Entities.pdb

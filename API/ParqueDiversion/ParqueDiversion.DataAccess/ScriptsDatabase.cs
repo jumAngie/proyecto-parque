@@ -17,7 +17,6 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_Empleados_Delete = "parq.UDP_tbEmpleados_Delete";
         #endregion
 
-
         #region Quioscos
         public static string UDP_Quioscos_List = "parq.UDP_VW_tbQuioscos_Select";
         public static string UDP_Quioscos_Find = "parq.UDP_VW_tbQuioscos_Find";
@@ -26,7 +25,6 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_Quioscos_Delete = "parq.UDP_tbQuioscos_Delete";
 
         #endregion
-
 
         #region Golosinas
         public static string UDP_Golosinas_List = "parq.UDP_VW_tbGolosinas_Select";
@@ -41,20 +39,25 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_InsumosQuiosco_List = "parq.UDP_VW_tbInsumosQuiosco_Select";
         public static string UDP_InsumosQuiosco_Find = "parq.UDP_VW_tbInsumosQuiosco_Find";
         public static string UDP_InsumosQuiosco_Insert = "parq.UDP_tbInsumosQuiosco_Insert";
-        public static string UDP_InsumosQuiosco_Update = "";
+        //public static string UDP_InsumosQuiosco_Update = "";
         public static string UDP_InsumosQuiosco_Delete = "parq.UDP_tbInsumosQuiosco_Delete";
 
         #endregion
 
-
         #region Ratings
-        public static string UDP_Ratings_Insert = "";
+        public static string UDP_Ratings_Insert = "parq.UDP_tbRatings_Insert";
 
         #endregion
 
         #region Ventas Quiosco
-        public static string UDP_VentasQuiosco_Insert = "";
+        public static string UDP_VentasQuiosco_List = "fact.UDP_VW_tbVentasQuiosco_Select";
+        public static string UDP_VentasQuiosco_Insert = "fact.UDP_tbVentasQuiosco_Insert";
 
+        #endregion
+
+        #region Ventas Quiosco Detalles
+        public static string UDP_VentasQuioscoDetalle_List = "fact.UDP_VW_tbVentasQuioscoDetalle_Select";
+        public static string UDP_VentasQuioscoDetalle_Insert = "fact.UDP_tbVentasQuioscoDetalle_Insert";
         #endregion
     }
 }

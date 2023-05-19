@@ -61,6 +61,7 @@ AS
 			empl_Habilitado, 
 			
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = empl_UsuarioCreador),
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = empl_UsuarioModificador),
 			empl_Estado, 
 			empl_UsuarioCreador, 
 			usua1.usua_Usuario AS empl_UsuarioCreador_Nombre,
@@ -261,6 +262,8 @@ AS
 			quio_Habilitado, 
 			
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = quio_UsuarioCreador),
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = quio_UsuarioModificador),
+			
 			quio_Estado, 
 			quio_UsuarioCreador, 
 			usr1.usua_Usuario AS quio_UsuarioCreador_Nombre,
@@ -409,6 +412,8 @@ AS
 			
 			golo_Estado, 
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = golo_UsuarioCreador),
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = golo_UsuarioModificador),
+			
 			golo_UsuarioCreador, 
 			usr1.usua_Usuario AS golo_UsuarioCreador_Nombre,
 			golo_FechaCreacion, 
@@ -562,7 +567,10 @@ AS
 
 			insu_Habilitado, 
 			insu_Estado, 
+			
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = insu_UsuarioCreador),
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = insu_UsuarioModificador),
+			
 			insu_UsuarioCreador, 
 			usr1.usua_Usuario AS insu_UsuarioCreador_Nombre,
 			insu_FechaCreacion, 
@@ -731,7 +739,10 @@ AS
 
 			vent_Habilitado, 
 			vent_Estado,
+
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = vent_UsuarioCreador), 
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = vent_UsuarioModificador),
+			
 			vent_UsuarioCreador, 
 			usr1.usua_Usuario AS vent_UsuarioCreador_Nombre,
 			vent_FechaCreacion, 
@@ -748,8 +759,16 @@ AS
 	LEFT JOIN acce.tbUsuarios AS usr2 ON vent.vent_UsuarioModificador = usr2.usua_ID
 GO
 
+--*************** SELECT DE VENTAS QUIOSCO ******************--
+CREATE OR ALTER PROCEDURE fact.UDP_VW_tbVentasQuiosco_Select
+AS
+BEGIN
+	SELECT * FROM fact.VW_tbVentasQuiosco WHERE vent_Estado = 1
+END
+GO
+
 --*************** CREATE DE VENTAS QUIOSCO ******************--
-CREATE OR ALTER PROCEDURE UDP_tbVentasQuiosco_Insert
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuiosco_Insert
 	@quio_ID					INT, 
 	@clie_ID					INT, 
 	@pago_ID					INT, 
@@ -790,7 +809,10 @@ AS
 
 			deta_Habilitado, 
 			deta_Estado, 
+			
 			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = deta_UsuarioCreador),
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = deta_UsuarioModificador),
+			
 			deta_UsuarioCreador, 
 			usr1.usua_Usuario AS deta_UsuarioCreador_Nombre,
 			deta_FechaCreacion, 
@@ -805,10 +827,19 @@ AS
 	LEFT JOIN acce.tbUsuarios AS usr2 ON deta.deta_UsuarioModificador = usr2.usua_ID
 GO
 
-CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle
-@vent_ID					INT, 
-@golo_ID					INT, 
-@deta_Cantidad				INT, 
+--*************** SELECT DE VENTAS QUIOSCO DETALLE******************--
+CREATE OR ALTER PROCEDURE fact.UDP_VW_tbVentasQuioscoDetalle_Select
+AS
+BEGIN
+	SELECT * FROM fact.VW_tbVentasQuioscoDetalle WHERE deta_Estado = 1
+END
+GO
+
+--*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
+@vent_ID					INT,
+@golo_ID					INT,
+@deta_Cantidad				INT,
 @deta_UsuarioCreador		INT
 AS
 BEGIN
