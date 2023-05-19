@@ -535,11 +535,6 @@ VALUES	(4, 1, 2, 1),
 GO
 
 
-
-EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
-EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
-
-
 -- Agrega más inserts según sea necesario
 
 SELECT * FROM parq.VW_tbClientes

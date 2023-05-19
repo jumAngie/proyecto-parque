@@ -3115,3 +3115,7 @@ BEGIN
 	END CATCH
 END
 GO
+
+
+EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
+EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
