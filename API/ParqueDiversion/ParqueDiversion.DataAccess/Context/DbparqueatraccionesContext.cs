@@ -19,11 +19,25 @@ namespace ParqueDiversion.DataAccess.Context
         {
         }
 
+        public virtual DbSet<VW_Departamentos> VW_Departamentos { get; set; }
+        public virtual DbSet<VW_EstadosCiviles> VW_EstadosCiviles { get; set; }
+        public virtual DbSet<VW_MetodosPagos> VW_MetodosPagos { get; set; }
+        public virtual DbSet<VW_Municipios> VW_Municipios { get; set; }
+        public virtual DbSet<VW_Pantallas> VW_Pantallas { get; set; }
+        public virtual DbSet<VW_Roles> VW_Roles { get; set; }
         public virtual DbSet<VW_Usuarios> VW_Usuarios { get; set; }
+        public virtual DbSet<VW_tbAreas> VW_tbAreas { get; set; }
+        public virtual DbSet<VW_tbAtracciones> VW_tbAtracciones { get; set; }
+        public virtual DbSet<VW_tbCargos> VW_tbCargos { get; set; }
+        public virtual DbSet<VW_tbClientes> VW_tbClientes { get; set; }
+        public virtual DbSet<VW_tbClientesRegistrados> VW_tbClientesRegistrados { get; set; }
         public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
         public virtual DbSet<VW_tbGolosinas> VW_tbGolosinas { get; set; }
         public virtual DbSet<VW_tbInsumosQuiosco> VW_tbInsumosQuiosco { get; set; }
         public virtual DbSet<VW_tbQuioscos> VW_tbQuioscos { get; set; }
+        public virtual DbSet<VW_tbRegiones> VW_tbRegiones { get; set; }
+        public virtual DbSet<VW_tbTicketClientes> VW_tbTicketClientes { get; set; }
+        public virtual DbSet<VW_tbTickets> VW_tbTickets { get; set; }
         public virtual DbSet<VW_tbVentasQuiosco> VW_tbVentasQuiosco { get; set; }
         public virtual DbSet<VW_tbVentasQuioscoDetalle> VW_tbVentasQuioscoDetalle { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
@@ -61,6 +75,169 @@ namespace ParqueDiversion.DataAccess.Context
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<VW_Departamentos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Departamentos", "gral");
+
+                entity.Property(e => e.dept_Codigo)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.dept_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.dept_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.dept_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.dept_Nombre).HasMaxLength(200);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_EstadosCiviles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_EstadosCiviles", "gral");
+
+                entity.Property(e => e.civi_Descripcion)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.civi_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.civi_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.civi_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_MetodosPagos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_MetodosPagos", "gral");
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.pago_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.pago_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.pago_ID).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.pago_Nombre).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VW_Municipios>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Municipios", "gral");
+
+                entity.Property(e => e.dept_Codigo)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.dept_Nombre).HasMaxLength(200);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.muni_Codigo)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.muni_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.muni_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.muni_Nombre).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<VW_Pantallas>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Pantallas", "acce");
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.pant_Descripcion)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.pant_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.pant_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.pant_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.pant_Identificador).HasMaxLength(100);
+
+                entity.Property(e => e.pant_URL).HasMaxLength(300);
+            });
+
+            modelBuilder.Entity<VW_Roles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Roles", "acce");
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.role_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.role_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.role_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.role_Nombre)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<VW_Usuarios>(entity =>
             {
                 entity.HasNoKey();
@@ -95,6 +272,196 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.usua_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.usua_Usuario).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbAreas>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbAreas", "parq");
+
+                entity.Property(e => e.area_Descripcion)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.area_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.area_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.area_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.area_UbicaionReferencia)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.regi_Nombre)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usua_Creador).HasMaxLength(100);
+
+                entity.Property(e => e.usua_Modificar).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbAtracciones>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbAtracciones", "parq");
+
+                entity.Property(e => e.area_Descripcion)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.atra_Descripcion)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.atra_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.atra_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.atra_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.atra_ReferenciaUbicacion)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.regi_Nombre)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Crea).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modifica).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbCargos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbCargos", "parq");
+
+                entity.Property(e => e.carg_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.carg_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.carg_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Creador).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modificador).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbClientes>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbClientes", "parq");
+
+                entity.Property(e => e.clie_Apellidos)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_DNI)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.clie_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clie_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clie_Nombres)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_Sexo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.clie_Telefono)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Creador).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modificador).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbClientesRegistrados>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbClientesRegistrados", "parq");
+
+                entity.Property(e => e.clie_Nombres)
+                    .HasMaxLength(600)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clre_Clave).HasMaxLength(300);
+
+                entity.Property(e => e.clre_Email).HasMaxLength(300);
+
+                entity.Property(e => e.clre_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clre_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clre_Usuario)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Creador).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modificador).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbEmpleados>(entity =>
@@ -298,6 +665,93 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.regi_Nombre)
                     .HasMaxLength(200)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbRegiones>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbRegiones", "parq");
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.regi_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.regi_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.regi_Nombre)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Creador).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modificador).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbTicketClientes>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbTicketClientes", "parq");
+
+                entity.Property(e => e.clie_Nombres)
+                    .HasMaxLength(600)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.tckt_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ticl_FechaCompra).HasColumnType("datetime");
+
+                entity.Property(e => e.ticl_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.ticl_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.ticl_FechaUso).HasColumnType("datetime");
+
+                entity.Property(e => e.usu_Crea).HasMaxLength(100);
+
+                entity.Property(e => e.usu_Modifica).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VW_tbTickets>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbTickets", "parq");
+
+                entity.Property(e => e.empl_Modifica)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.empl_crea)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.tckt_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.tckt_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.tckt_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usu_Creador).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbVentasQuiosco>(entity =>
@@ -556,7 +1010,7 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.HasIndex(e => e.clre_Usuario, "UQ_parq_tbClientesRegistrados_clre_Usuario")
                     .IsUnique();
 
-                entity.Property(e => e.clre_Contraseña).HasMaxLength(300);
+                entity.Property(e => e.clre_Clave).HasMaxLength(300);
 
                 entity.Property(e => e.clre_Email).HasMaxLength(300);
 

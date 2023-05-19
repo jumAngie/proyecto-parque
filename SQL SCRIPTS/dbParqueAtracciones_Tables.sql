@@ -1,6 +1,7 @@
 CREATE DATABASE dbParqueAtracciones
 GO
 
+
 USE dbParqueAtracciones
 GO
 CREATE SCHEMA gral
@@ -140,6 +141,7 @@ CREATE TABLE acce.tbRolesXPantallas(
 )
 GO
 
+
 --------> CREACION DE TABLA tbUsuarios
 CREATE TABLE acce.tbUsuarios( 
 	usua_ID						INT IDENTITY(1,1), 
@@ -161,8 +163,6 @@ CREATE TABLE acce.tbUsuarios(
     
 )
 GO
-
-
 
 
 

@@ -135,12 +135,3 @@ SELECT	pago_ID,
 
 GO
 
---SELECT * FROM gral.VW_Departamentos
---SELECT * FROM gral.VW_Municipios
---SELECT * FROM gral.VW_EstadosCiviles
---SELECT * FROM gral.VW_MetodosPagos
-
-
---SELECT * FROM acce.VW_Usuarios
---SELECT * FROM acce.VW_Pantallas
---SELECT * FROM acce.VW_Roles

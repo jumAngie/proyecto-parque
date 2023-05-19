@@ -134,6 +134,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[acce].[VW_Pantallas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[acce].[VW_Roles]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[acce].[VW_Usuarios]",
          "ObjectType": 3
       },
@@ -143,6 +151,42 @@
       },
       {
          "Name": "[fact].[VW_tbVentasQuioscoDetalle]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[gral].[VW_Departamentos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[gral].[VW_EstadosCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[gral].[VW_MetodosPagos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[gral].[VW_Municipios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbAreas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbAtracciones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbCargos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbClientes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbClientesRegistrados]",
          "ObjectType": 3
       },
       {
@@ -159,6 +203,18 @@
       },
       {
          "Name": "[parq].[VW_tbQuioscos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbRegiones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbTicketClientes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbTickets]",
          "ObjectType": 3
       }
    ],
