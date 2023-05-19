@@ -24,8 +24,7 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbRatings item)
         {
-            RequestStatus result = new();
-
+            
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@atra_ID", item.atra_ID, DbType.Int32, ParameterDirection.Input);
@@ -33,8 +32,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@rati_Estrellas", item.rati_Estrellas, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@rati_Comentario", item.rati_Comentario, DbType.String, ParameterDirection.Input);
             parametros.Add("@rati_UsuarioCreador", item.rati_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Ratings_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Ratings_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 

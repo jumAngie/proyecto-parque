@@ -24,15 +24,15 @@ namespace ParqueDiversion.BusinessLogic.Services
         }
 
         #region Ventas Quiosco
-        public IEnumerable<VW_tbVentasQuioscoDetalle> ListadoVenta()
+        public IEnumerable<VW_tbVentasQuiosco> ListadoVenta()
         {
             try
             {
-                return _ventasQuioscoDetalleRepository.List();
+                return _ventasQuioscoRepository.List();
             }
             catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbVentasQuioscoDetalle>();
+                return Enumerable.Empty<VW_tbVentasQuiosco>();
             }
         }
 

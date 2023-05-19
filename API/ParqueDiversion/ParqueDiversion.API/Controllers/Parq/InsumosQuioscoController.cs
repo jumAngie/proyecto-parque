@@ -27,7 +27,7 @@ namespace ParqueDiversion.API.Controllers
         [HttpGet("Listado")]
         public IActionResult List()
         {
-            var listado = _parqueServices.ListadoEmpleados();
+            var listado = _parqueServices.ListadoInsumo();
             return Ok(listado);
         }
 

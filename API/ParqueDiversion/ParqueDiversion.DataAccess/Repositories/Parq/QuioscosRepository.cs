@@ -14,13 +14,11 @@ namespace ParqueDiversion.DataAccess.Repositories
     {
         public RequestStatus Delete(int id)
         {
-            RequestStatus result = new();
-    
+
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@quio_ID", id, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Quioscos_Delete, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Quioscos_Delete, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -31,7 +29,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbQuioscos item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -43,8 +40,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@quio_ReferenciaUbicacion", item.quio_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@quio_Imagen", item.quio_Imagen, DbType.String, ParameterDirection.Input);
             parametros.Add("@quio_UsuarioCreador", item.quio_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Quioscos_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Quioscos_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -58,7 +54,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Update(tbQuioscos item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -70,9 +65,8 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@regi_ID", item.regi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@quio_ReferenciaUbicacion", item.quio_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@quio_Imagen", item.quio_Imagen, DbType.String, ParameterDirection.Input);
-            parametros.Add("@quio_UsuarioCreador", item.quio_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Quioscos_Update, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            parametros.Add("@quio_UsuarioModificador", item.quio_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Quioscos_Update, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
     }

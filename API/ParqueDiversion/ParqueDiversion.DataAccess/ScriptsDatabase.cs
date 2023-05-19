@@ -167,16 +167,16 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Departementos
-        public static string INDEX_DEPARTAMENTOS  = "gral.UDP_tbDepartamentos_INDEX";
-        public static string FIND_DEPARTAMENTOS   = "gral.UDP_tbDepartamentos_FIND";
+        public static string INDEX_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_INDEX";
+        public static string FIND_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_FIND";
         public static string INSERT_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_INSERT";
         public static string UPDATE_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_UPDATE";
         public static string DELETE_DEPARTAMENTOS = "gral.UDP_tbDepartamentos_DELETE";
         #endregion
 
         #region Estados Civiles
-        public static string INDEX_ESTADOSCIVILES  = "gral.UDP_tbEstadosCiviles_INDEX";
-        public static string FIND_ESTADOSCIVILES   = "gral.UDP_tbEstadosCiviles_FIND";
+        public static string INDEX_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_INDEX";
+        public static string FIND_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_FIND";
         public static string INSERT_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_INSERT";
         public static string UPDATE_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_UPDATE";
         public static string DELETE_ESTADOSCIVILES = "gral.UDP_tbEstadosCiviles_DELETE";

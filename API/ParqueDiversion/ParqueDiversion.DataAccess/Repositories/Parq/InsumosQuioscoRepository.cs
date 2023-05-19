@@ -14,13 +14,11 @@ namespace ParqueDiversion.DataAccess.Repositories
     {
         public RequestStatus Delete(int id)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@insu_ID", id, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_Golosinas_Delete, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_InsumosQuiosco_Delete, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
@@ -31,7 +29,6 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public RequestStatus Insert(tbInsumosQuiosco item)
         {
-            RequestStatus result = new();
 
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
@@ -40,8 +37,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@golo_ID", item.golo_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@insu_Stock", item.insu_Stock, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@insu_UsuarioCreador", item.insu_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            var answer = db.QueryFirst<string>(ScriptsDatabase.UDP_InsumosQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
-            result.MessageStatus = answer;
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_InsumosQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 
