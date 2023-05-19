@@ -60,21 +60,17 @@ namespace ParqueDiversion.BusinessLogic.Services
 
         #region Cargo
         
-        public ServiceResult CargoList()
+        public IEnumerable<VW_tbCargos> CargoList()
         {
-
-            var result = new ServiceResult();
 
             try
             {
-
-                var list = _cargoRepository.List();
-                return result.Ok(list);
+                return _cargoRepository.List();
             }
             catch (Exception e)
             {
 
-                return result.Error(e.Message);
+                return Enumerable.Empty<VW_tbCargos>();
             }
         }
         

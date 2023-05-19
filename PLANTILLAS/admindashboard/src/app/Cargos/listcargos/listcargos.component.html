@@ -15,6 +15,7 @@
              <div class="card">
                 <div class="card-body">
                    <h5 class="card-title">Listado de Cargos</h5>
+                   <button class="btn btn-primary" style="margin-left: 10px;">Nuevo</button>
                    <table class="table datatable">
                       <thead>
                          <tr>
@@ -24,10 +25,13 @@
                          </tr>
                       </thead>
                       <tbody>
-                         <tr>
-                            <th scope="row">1</th>
-                            <td>Brandon Jacob</td>
-                            <td>Designer</td>
+                        <tr *ngFor="let item of cargos">
+                            <th scope="row">{{item.carg_ID}}</th>
+                            <td>{{item.carg_Nombre}}</td>
+                            <td> 
+                                <button class="btn btn-info">Editar</button>
+                                <button class="btn btn-danger" style="margin-left: 10px;">Eliminar</button>
+                            </td>
                          </tr>
                       </tbody>
                    </table>
