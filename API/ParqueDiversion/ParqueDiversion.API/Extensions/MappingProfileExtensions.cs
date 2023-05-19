@@ -18,6 +18,14 @@ namespace ParqueDiversion.API.Extensions
             CreateMap<GolosinasViewModel, tbGolosinas>().ReverseMap();
             CreateMap<InsumosQuioscoViewModel, tbInsumosQuiosco>().ReverseMap();
             CreateMap<RatingsViewModel, tbRatings>().ReverseMap();
+            CreateMap<AreasViewModel, tbAreas>().ReverseMap();
+            CreateMap<AtraccionesViewModel, tbAtracciones>().ReverseMap();
+            CreateMap<CargoViewModel, tbCargos>().ReverseMap();
+            CreateMap<ClientesRegistradosViewModel, tbClientesRegistrados>().ReverseMap();
+            CreateMap<ClientesViewModel, tbClientes>().ReverseMap();
+            CreateMap<RegionesViewModel, tbRegiones>().ReverseMap();
+            CreateMap<TicketClienteViewModel, tbTicketsCliente>().ReverseMap();
+            CreateMap<TicketViewModel, tbTickets>().ReverseMap();
             #endregion
 
 
