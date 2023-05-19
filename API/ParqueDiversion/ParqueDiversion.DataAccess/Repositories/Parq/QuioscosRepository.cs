@@ -65,7 +65,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@regi_ID", item.regi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@quio_ReferenciaUbicacion", item.quio_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@quio_Imagen", item.quio_Imagen, DbType.String, ParameterDirection.Input);
-            parametros.Add("@quio_UsuarioCreador", item.quio_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@quio_UsuarioModificador", item.quio_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
             var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Quioscos_Update, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }

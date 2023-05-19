@@ -18,7 +18,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@insu_ID", id, DbType.Int32, ParameterDirection.Input);
-            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Golosinas_Delete, parametros, commandType: CommandType.StoredProcedure);
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_InsumosQuiosco_Delete, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
 

@@ -2736,7 +2736,7 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION
-			IF EXISTS (SELECT * FROM parq.tbGolosinas WHERE golo_Nombre = golo_Nombre AND golo_ID != @golo_ID)
+			IF EXISTS (SELECT * FROM parq.tbGolosinas WHERE golo_Nombre = @golo_Nombre AND golo_ID != @golo_ID)
 				BEGIN
 					SELECT 409 AS codeStatus, 'Este nombre de golosina ya existe' AS messageStatus					
 				END
