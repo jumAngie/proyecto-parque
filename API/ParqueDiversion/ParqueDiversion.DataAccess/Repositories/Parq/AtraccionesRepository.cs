@@ -43,7 +43,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             parametros.Add("@regi_ID", item.area_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_ReferenciaUbicacion", item.atra_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_LimitePersonas", item.atra_LimitePersonas, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@atra_DuracionRonda", item.atra_DuracionRonda, DbType.Time, ParameterDirection.Input);
+            parametros.Add("@atra_DuracionRonda", item.atra_DuracionRonda, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_Imagen", item.atra_Imagen, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_UsuarioCreador", item.atra_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
 

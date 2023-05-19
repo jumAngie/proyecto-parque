@@ -374,7 +374,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _areasRepository.Update(tabla);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
@@ -494,7 +494,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _ticketClientesRepository.Update(tabla);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
@@ -532,7 +532,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _atraccionesRepository.Find(id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

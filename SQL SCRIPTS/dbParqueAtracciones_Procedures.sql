@@ -1818,7 +1818,7 @@ BEGIN
 		BEGIN TRAN 
 				
 				DECLARE @QuioscosOcupa	  INT = (SELECT COUNT(*) FROM parq.tbQuioscos WHERE area_ID =	@area_ID)
-				DECLARE @AtraccionesOcupa INT = (SELECT COUNT(*) FROM parq.tbAreas	  WHERE area_ID =	@area_ID)
+				DECLARE @AtraccionesOcupa INT = (SELECT COUNT(*) FROM parq.tbAtracciones WHERE area_ID = @area_ID)
 				DECLARE @RegionesEnUso INT = @QuioscosOcupa + @AtraccionesOcupa
 
 				IF	@RegionesEnUso > 0
@@ -2078,7 +2078,7 @@ BEGIN
 END
 --*************** UPDATE DE TICKETCLIENTES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_UPDATE
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_UPDATE
 	@ticl_ID				INT,
 	@tckt_ID				INT, 
 	@clie_ID				INT, 
@@ -2109,7 +2109,7 @@ END
 
 --*************** DELETE DE TICKETCLIENTES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_DELETE
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_DELETE
 	@ticl_ID INT
 AS
 BEGIN
@@ -2181,7 +2181,27 @@ GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_SELECT
 AS
 BEGIN
-	SELECT *
+	SELECT [atra_ID]
+      ,area_ID
+	  ,area_Descripcion
+      ,[atra_Nombre]
+      ,[atra_Descripcion]
+      ,regi_ID
+	  ,regi_Nombre
+      ,[atra_ReferenciaUbicacion]
+      ,[atra_LimitePersonas]
+      ,atra_DuracionRonda = CONVERT(NVARCHAR, atra_DuracionRonda)
+      ,[atra_Imagen]
+      ,[atra_Habilitado]
+      ,[atra_Estado]
+      ,[atra_UsuarioCreador]
+	  , usu_Crea
+      ,[atra_FechaCreacion]
+      ,[atra_UsuarioModificador]
+	  ,usu_Modifica
+      ,[atra_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
 	FROM [parq].VW_tbAtracciones
 	WHERE atra_Estado = 1  AND atra_Habilitado = 1
 END
@@ -2245,6 +2265,7 @@ BEGIN
 						atra_Nombre = @atra_Nombre,
 						regi_ID = @regi_ID,
 						atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
+						atra_LimitePersonas = @atra_LimitePersonas,
 						atra_DuracionRonda = @atra_DuracionRonda,
 						atra_Imagen = @atra_Imagen,
 						atra_UsuarioModificador = @atra_UsuarioModificador

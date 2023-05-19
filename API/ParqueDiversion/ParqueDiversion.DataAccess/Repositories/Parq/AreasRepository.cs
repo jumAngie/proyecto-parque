@@ -26,7 +26,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@clie_ID", id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@area_ID", id, DbType.Int32, ParameterDirection.Input);
 
             return db.QueryFirst<VW_tbAreas>(ScriptsDatabase.UDP_Areas_Find, parametros, commandType: CommandType.StoredProcedure);
 
