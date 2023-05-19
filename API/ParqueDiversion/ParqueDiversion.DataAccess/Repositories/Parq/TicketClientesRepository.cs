@@ -59,7 +59,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@ticl_ID", item.ticl_ID, DbType.DateTime, ParameterDirection.Input);
+            parametros.Add("@ticl_ID", item.ticl_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@tckt_ID", item.tckt_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@clie_ID", item.clie_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@ticl_Cantidad", item.ticl_Cantidad, DbType.Int32, ParameterDirection.Input);
