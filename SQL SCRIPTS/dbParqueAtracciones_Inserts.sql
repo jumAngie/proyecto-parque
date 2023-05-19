@@ -437,7 +437,6 @@ GO
 
 
 
-
        
 --ALTER TABLE gral.tbEstadosCiviles
 --ADD CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),

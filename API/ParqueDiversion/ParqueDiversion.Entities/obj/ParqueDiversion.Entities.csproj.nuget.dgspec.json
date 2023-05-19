@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {}
+    "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
+    "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
         "projectName": "ParqueDiversion.Entities",
-        "projectPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
-        "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
+        "projectPath": "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

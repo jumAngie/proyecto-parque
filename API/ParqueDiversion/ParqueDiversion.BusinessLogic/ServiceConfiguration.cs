@@ -37,6 +37,8 @@ namespace ParqueDiversion.BusinessLogic
             services.AddScoped<VentasQuioscoRepository>();
             services.AddScoped<VentasQuioscoDetalleRepository>();
             #endregion
+
+
         }
         
         public static void BusinessLogic(this IServiceCollection services)

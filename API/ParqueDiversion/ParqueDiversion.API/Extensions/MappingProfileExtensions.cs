@@ -13,11 +13,6 @@ namespace ParqueDiversion.API.Extensions
         public MappingProfileExtensions()
         {
             #region Parque
-            CreateMap<EmpleadosViewModel, tbEmpleados>().ReverseMap();
-            CreateMap<QuioscosViewModel, tbQuioscos>().ReverseMap();
-            CreateMap<GolosinasViewModel, tbGolosinas>().ReverseMap();
-            CreateMap<InsumosQuioscoViewModel, tbInsumosQuiosco>().ReverseMap();
-            CreateMap<RatingsViewModel, tbRatings>().ReverseMap();
             CreateMap<AreasViewModel, tbAreas>().ReverseMap();
             CreateMap<AtraccionesViewModel, tbAtracciones>().ReverseMap();
             CreateMap<CargoViewModel, tbCargos>().ReverseMap();
@@ -26,6 +21,11 @@ namespace ParqueDiversion.API.Extensions
             CreateMap<RegionesViewModel, tbRegiones>().ReverseMap();
             CreateMap<TicketClienteViewModel, tbTicketsCliente>().ReverseMap();
             CreateMap<TicketViewModel, tbTickets>().ReverseMap();
+            CreateMap<EmpleadosViewModel, tbEmpleados>().ReverseMap();
+            CreateMap<QuioscosViewModel, tbQuioscos>().ReverseMap();
+            CreateMap<GolosinasViewModel, tbGolosinas>().ReverseMap();
+            CreateMap<InsumosQuioscoViewModel, tbInsumosQuiosco>().ReverseMap();
+            CreateMap<RatingsViewModel, tbRatings>().ReverseMap();
             #endregion
 
 
