@@ -125,5 +125,81 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_VentasQuioscoDetalle_List = "fact.UDP_VW_tbVentasQuioscoDetalle_Select";
         public static string UDP_VentasQuioscoDetalle_Insert = "fact.UDP_tbVentasQuioscoDetalle_Insert";
         #endregion
+
+        #region LOGIN
+        public static string UDP_Usuarios_LOGIN = "acce.UDP_tbUsuarios_LOGIN";
+        public static string UDP_Usuarios_MENU = "acce.UDP_tbPantallasPorRol_MENU";
+
+        #endregion
+
+        #region Usuarios
+        public static string UDP_Usuario_INDEX = "acce.UDP_tbUsuarios_INDEX";
+        public static string UDP_Usuarios_FIND = "acce.UDP_tbUsuarios_FIND";
+        public static string UDP_Usuario_INSERT = "acce.UDP_tbUsuarios_INSERT";
+        public static string UDP_Usuarios_UPDATE = "acce.UDP_tbUsuarios_UPDATE";
+        public static string UDP_Usuarios_DELETE = "acce.UDP_tbUsuarios_DELETE";
+        #endregion
+
+        #region Roles
+        public static string INDEX_ROLES = "acce.UDP_tbRoles_INDEX";
+        public static string FIND_ROLES = "acce.UDP_tbRoles_FIND";
+        public static string INSERT_ROLES = "acce.UDP_tbRoles_INSERT";
+        public static string UPDATE_ROLES = "acce.UDP_tbRoles_UPDATE";
+        public static string DELETE_ROLES = "acce.UDP_tbRoles_DELETE";
+        #endregion
+
+        #region Pantallas Por Rol
+        public static string INDEX_PANTALLASROL = "acce.UDP_tbPantallasPorRol_INDEX";
+        public static string FIND_PANTALLASROL = "acce.UDP_tbPantallasPorRol_FIND";
+        public static string INSERT_PANTALLASROL = "acce.UDP_tbPantallasPorRol_INSERT";
+        public static string UPDATE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_UPDATE";
+        public static string DELETE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_DELETE";
+
+        public static string UDP_tbPantallasPorRol_Checked = "acce.UDP_tbPantallasPorRol_CHECKED";
+        #endregion
+
+        #region Pantallas
+        public static string INDEX_PANTALLAS = "acce.UDP_tbPantallas_INDEX";
+        public static string FIND_PANTALLAS = "acce.UDP_tbPantallas_FIND";
+        public static string INSERT_PANTALLAS = "acce.UDP_tbPantallas_INSERT";
+        public static string UPDATE_PANTALLAS = "acce.UDP_tbPantallas_UPDATE";
+        public static string DELETE_PANTALLAS = "acce.UDP_tbPantallas_DELETE";
+        #endregion
+
+        #region Departementos
+        public static string INDEX_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_INDEX";
+        public static string FIND_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_FIND";
+        public static string INSERT_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_INSERT";
+        public static string UPDATE_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_UPDATE";
+        public static string DELETE_DEPARTAMENTOS = "mant.UDP_tbDepartamentos_DELETE";
+        #endregion
+
+        #region Estados Civiles
+        public static string INDEX_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_INDEX";
+        public static string FIND_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_FIND";
+        public static string INSERT_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_INSERT";
+        public static string UPDATE_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_UPDATE";
+        public static string DELETE_ESTADOSCIVILES = "mant.UDP_tbEstadosCiviles_DELETE";
+        #endregion
+
+        #region Métodos de Pago 
+        public static string INDEX_METODOS = "fact.UDP_tbMetodosPagos_INDEX";
+        public static string FIND_METODOS = "fact.UDP_tbMetodosPagos_FIND";
+        public static string INSERT_METODOS = "fact.UDP_tbMetodosPagos_INSERT";
+        public static string UPDATE_METODOS = "fact.UDP_tbMetodosPagos_UPDATE";
+        public static string DELETE_METODOS = "fact.UDP_tbMetodosPagos_DELETE";
+        #endregion
+
+        #region Municipios
+        public static string INDEX_MUNICIPIOS = "mant.UDP_tbMunicipios_INDEX";
+        public static string FIND_MUNICIPIOS = "mant.UDP_tbMunicipios_FIND";
+        public static string INSERT_MUNICIPIOS = "mant.UDP_tbMunicipios_INSERT";
+        public static string UPDATE_MUNICIPIOS = "mant.UDP_tbMunicipios_UPDATE";
+        public static string DELETE_MUNICIPIOS = "mant.UDP_tbMunicipios_DELETE";
+        public static string FILTRAR_MUNICIPIOS = "mant.UDP_tbMunicipios_FILTER";
+        #endregion
+
+
+
     }
 }

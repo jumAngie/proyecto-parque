@@ -6814,23 +6814,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\isaac\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
       "projectName": "ParqueDiversion.BusinessLogic",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6845,8 +6845,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
+            "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
             }
           }
         }
