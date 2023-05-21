@@ -32,6 +32,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
             catch (Exception ex)
             {
+                _ = ex.Message;
                 return Enumerable.Empty<VW_tbVentasQuiosco>();
             }
         }
@@ -72,6 +73,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
             catch (Exception ex)
             {
+                _ = ex.Message;
                 return Enumerable.Empty<VW_tbVentasQuioscoDetalle>();
             }
         }
