@@ -34,6 +34,7 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'listcargos', component: ListcargosComponent},
   { path: 'listgolosinas', component: ListgolosinasComponent},
+  { path: 'listempleados', component: ListempleadosComponent}
 ];
 
 @NgModule({

@@ -40,7 +40,8 @@ import { PagesError404Component } from './pages/pages-error404/pages-error404.co
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component'
+import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.
     PagesError404Component,
     PagesBlankComponent,
     ListcargosComponent,
-    ListgolosinasComponent
+    ListgolosinasComponent,
+    ListempleadosComponent
   ],
   imports: [
     BrowserModule,

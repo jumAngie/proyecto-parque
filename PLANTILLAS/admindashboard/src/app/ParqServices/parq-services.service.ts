@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Cargos } from '../Models/Cargos';
 import { Golosinas } from '../Models/Golosinas';
+import { Empleados } from '../Models/Empleados';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +21,9 @@ export class ParqServicesService {
   getGolosinas(){
     return this.http.get<Golosinas[]>(this.Url + 'Golosinas/Listado');
   }
+
+  getEmpleados(){
+    return this.http.get<Empleados[]>(this.Url + 'Empleados/Listado')
+  }
+
 }
