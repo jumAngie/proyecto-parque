@@ -1,10 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import * as $ from 'jquery';
-import 'datatables.net';
-
-import { Categoria } from 'src/app/Models/Categoria';
+import { Component, OnInit } from '@angular/core';
 import { AcceService } from 'src/app/Service/acce.service';
 import { Router } from '@angular/router';
+import { Roles } from 'src/app/Models/Roles';
 
 @Component({
   selector: 'app-index',
@@ -12,19 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  categoria!: Categoria[]
+  rol: Roles[] = [];
   p: number = 1;
+  filtro: string = '';
 
-  constructor (private service: AcceService, private router: Router){}
+  constructor(private service: AcceService, private router: Router) { }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    
-    this.service.getCategoria()
-    .subscribe(data =>{
-      this.categoria = data;
+    this.service.getRoles().subscribe(data => {
+      this.rol = data;
       console.log(data);
-    })
+    });
+  }
+
+  filtrarRoles(): Roles[] {
+    return this.rol.filter(rol => {
+      return rol.role_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
+    });
   }
 }

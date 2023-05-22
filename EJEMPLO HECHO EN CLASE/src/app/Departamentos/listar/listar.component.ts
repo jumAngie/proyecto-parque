@@ -23,4 +23,9 @@ export class ListarComponent {
       console.log(data);
     })
   }
+
+  Editar(categoriaedit:Categoria):void{
+   localStorage.setItem("id", categoriaedit.role_Id!.toString());
+    this.router.navigate(['editar'])
+  }
 }

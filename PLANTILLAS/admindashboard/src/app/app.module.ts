@@ -49,6 +49,7 @@ import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/l
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
 import { IndexComponent } from './Roles/index/index.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

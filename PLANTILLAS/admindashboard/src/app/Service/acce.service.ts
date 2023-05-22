@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from 'src/app/Models/Categoria';
+import { Roles } from '../Models/Roles';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,10 @@ import { Categoria } from 'src/app/Models/Categoria';
 export class AcceService {
 
   constructor(private http: HttpClient) { }
-  Url = "https://api.thecatapi.com/v1/categories";
+  Url = "https://localhost:44322/api/Roles/Listado";
 
-  getCategoria(){
-    return this.http.get<Categoria[]>(this.Url);
-    console.log(Categoria)
+  getRoles(){
+    return this.http.get<Roles[]>(this.Url);
+    console.log(Roles)
   }
 }
