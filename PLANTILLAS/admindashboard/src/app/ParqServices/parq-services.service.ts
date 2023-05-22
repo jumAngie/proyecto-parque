@@ -6,6 +6,8 @@ import { Atracciones } from '../Models/Atracciones';
 import { VentasQuioscoDetalle } from '../Models/VentasQuioscoDetalle';
 import { InsumosQuiosco } from '../Models/InsumosQuiosco';
 import { ClientesRegistrados } from '../Models/ClientesRegistrados';
+import { Empleados } from '../Models/Empleados';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,4 +41,9 @@ export class ParqServicesService {
   getVentasQuioscoDetalle(){
     return this.http.get<VentasQuioscoDetalle[]>(this.Url + 'VentasQuioscoDetalle/Listado');
   }
+  
+  getEmpleados(){
+    return this.http.get<Empleados[]>(this.Url + 'Empleados/Listado')
+  }
+
 }

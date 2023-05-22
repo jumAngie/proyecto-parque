@@ -2609,7 +2609,7 @@ SELECT [ticl_ID]
       ,tcli.tckt_ID
 	  ,tick.tckt_Nombre
       ,tcli.clie_ID
-	  , clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
+	  , clie.clie_Nombres + + ' ' + clie.clie_Apellidos AS clie_Nombres
       ,[ticl_Cantidad]
       ,[ticl_FechaCompra]
       ,[ticl_FechaUso]
@@ -4120,11 +4120,11 @@ UPDATE gral.tbMunicipios
 SET muni_UsuarioCreador = 1
 
 
-INSERT INTO parq.tbCargos(carg_Nombre)
-VALUES	('Ventanilla'),
-		('Vendedor'),
-		('Supervisor Atracciones'),
-		('Aseador')
+INSERT INTO parq.tbCargos(carg_Nombre, carg_UsuarioCreador)
+VALUES	('Ventanilla', 1),
+		('Vendedor', 1),
+		('Supervisor Atracciones', 1),
+		('Aseador',1)
 GO
 
 INSERT INTO parq.tbRegiones(regi_Nombre)

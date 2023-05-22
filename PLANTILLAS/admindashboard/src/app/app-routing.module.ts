@@ -38,7 +38,7 @@ import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
-
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -81,6 +81,7 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
   
+  { path: 'listempleados', component: ListempleadosComponent}
 ];
 
 @NgModule({

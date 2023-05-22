@@ -9,14 +9,16 @@ import { ParqServicesService } from 'src/app/ParqServices/parq-services.service'
 })
 export class ListcargosComponent implements OnInit {
   cargos!: Cargos[];
+  dataTable: any;
 
   constructor(private service:ParqServicesService) { }
+
 
   ngOnInit(): void {
     this.service.getCargos()
     .subscribe(data=>{
       this.cargos = data;
     })
-  }
 
+  }
 }

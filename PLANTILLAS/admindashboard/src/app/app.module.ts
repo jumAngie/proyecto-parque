@@ -46,6 +46,7 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/l
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
     ListVentasQuioscoDetalleComponent,
+    ListempleadosComponent
   ],
   imports: [
     BrowserModule,
