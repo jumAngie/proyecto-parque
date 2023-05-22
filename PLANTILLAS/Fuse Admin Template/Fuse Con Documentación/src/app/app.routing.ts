@@ -4,6 +4,8 @@ import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { IndexComponent } from 'app/Roles/index/index.component';
+import { ListComponent } from './Atracciones/list/list.component';
+
 // @formatter:off
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -86,7 +88,12 @@ export const appRoutes: Route[] = [
             {path: 'access', children: [
                 { path: 'Roles', component: IndexComponent },
             ]},
-            
+            {
+                path: 'parque',
+                children: [
+                    {path: 'Atracciones', component: ListComponent},
+                ],
+            },
             // Apps
             {path: 'apps', children: [
                 {path: 'academy', loadChildren: () => import('app/modules/admin/apps/academy/academy.module').then(m => m.AcademyModule)},

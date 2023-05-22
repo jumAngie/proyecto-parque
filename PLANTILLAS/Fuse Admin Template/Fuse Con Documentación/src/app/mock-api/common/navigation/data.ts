@@ -16,7 +16,22 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon : 'heroicons_outline:currency-dollar',
                 link : '/access/Roles'
             },
-     
+        ]
+    },
+    {
+        id: 'parque',
+        title: 'Parque',
+        subtitle: 'Esquema Parque',
+        type: 'group',
+        icon    : 'heroicons_outline:home',
+        children:[
+            {
+                id: 'atracciones',
+                title: 'Atraccciones',
+                type: 'basic',
+                icon: 'heroicons_outline:home',
+                link: 'parque/Atracciones',                                 
+            },
         ]
     },
     {

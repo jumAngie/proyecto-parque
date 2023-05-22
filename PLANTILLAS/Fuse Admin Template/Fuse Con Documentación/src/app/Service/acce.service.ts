@@ -5,6 +5,7 @@ import { Categoria } from 'app/Model/Categoria';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AcceService {
 
   constructor(private http: HttpClient) { }

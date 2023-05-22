@@ -23,7 +23,8 @@ export const routes: Route[] = [
 
 @NgModule({
     declarations: [
-        CardsComponent
+        CardsComponent,
+        
     ],
     imports     : [
         RouterModule.forChild(routes),

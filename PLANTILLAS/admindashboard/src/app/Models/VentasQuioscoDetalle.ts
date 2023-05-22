@@ -1,0 +1,18 @@
+export class VentasQuioscoDetalle{
+    deta_ID!: number;
+    vent_ID!: number;
+    insu_ID!: number;
+    golo_Nombre!: String;
+    golo_Precio!: number;
+    deta_Cantidad!: number;
+    deta_Habilitado!: number;
+    deta_Estado!: number;
+    empl_crea!: String;
+    empl_modifica!: null;
+    deta_UsuarioCreador!: number;
+    deta_UsuarioCreador_Nombre!: String;
+    deta_FechaCreacion!: String;
+    deta_UsuarioModificador!: number;
+    deta_UsuarioModificador_Nombre!: String;
+    deta_FechaModificacion!: String
+}

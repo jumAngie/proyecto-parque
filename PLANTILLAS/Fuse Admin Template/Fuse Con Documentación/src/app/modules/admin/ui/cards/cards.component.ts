@@ -15,6 +15,7 @@ import { FuseCardComponent } from '@fuse/components/card';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class CardsComponent implements AfterViewInit
 {
     @ViewChildren(FuseCardComponent, {read: ElementRef}) private _fuseCards: QueryList<ElementRef>;
