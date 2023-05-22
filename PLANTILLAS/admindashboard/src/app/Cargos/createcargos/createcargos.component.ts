@@ -29,7 +29,7 @@ export class CreatecargosComponent {
       else
       {
         this.showErrorAlert = true;
-        this.errorMessage = response.data.messageStatus;
+        this.errorMessage = "Ha ocurrido un error. Vuelva a ingresar los datos";
       }
       
     })
