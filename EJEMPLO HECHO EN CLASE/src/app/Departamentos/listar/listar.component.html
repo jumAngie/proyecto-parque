@@ -15,10 +15,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let cat of categoria">
-                    <td>{{cat.id}}</td>
-                    <td>{{cat.name}}</td>
+                    <td>{{cat.cate_Id}}</td>
+                    <td>{{cat.cate_Descripcion}}</td>
                     <td>
-                        <button class="btn btn-warning">Editar</button>
+                        <button (click)="Editar(cat)" class="btn btn-warning">Editar</button>
                         <button class="btn btn-danger">Eliminar</button>
                     </td>
                 </tr>

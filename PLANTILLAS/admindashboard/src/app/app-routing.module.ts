@@ -82,7 +82,6 @@ const routes: Routes = [
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
-  
   { path: 'listempleados', component: ListempleadosComponent}
 ];
 
