@@ -35,6 +35,8 @@ import { UsersProfileComponent } from './pages/users-profile/users-profile.compo
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
+import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -72,7 +74,9 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'listcargos', component: ListcargosComponent},
   { path: 'listgolosinas', component: ListgolosinasComponent},
-  { path: 'listempleados', component: ListempleadosComponent}
+  { path: 'listempleados', component: ListempleadosComponent},
+  { path: 'createcargos', component: CreatecargosComponent},
+  {path: 'editarcargos', component: EditarcargosComponent}
 ];
 
 @NgModule({

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
@@ -41,7 +43,9 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
-import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
+import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
 
 @NgModule({
   declarations: [
@@ -83,12 +87,16 @@ import { ListempleadosComponent } from './Empleados/listempleados/listempleados.
     PagesBlankComponent,
     ListcargosComponent,
     ListgolosinasComponent,
-    ListempleadosComponent
+    ListempleadosComponent,
+    CreatecargosComponent,
+    EditarcargosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
