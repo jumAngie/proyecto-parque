@@ -34,12 +34,14 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
+import { IndexComponent } from './Roles/index/index.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
+  { path: 'roles', component: IndexComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },

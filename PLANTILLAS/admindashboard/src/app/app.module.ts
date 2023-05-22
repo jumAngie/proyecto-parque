@@ -41,10 +41,12 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component'
+import { IndexComponent } from './Roles/index/index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    IndexComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
