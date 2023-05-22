@@ -18,9 +18,16 @@ export class ListarComponent {
     //Add 'implements OnInit' to the class.
     
     this.service.getCategoria()
-    .subscribe(data =>{
-      this.categoria = data;
-      console.log(data);
+    .subscribe((response: any) =>{
+      if(response.success){
+        this.categoria = response.data;
+        console.log(response.data);
+      }
     })
+  }
+
+  Editar(categoriaEdit: Categoria): void{
+    localStorage.setItem('id', categoriaEdit.cate_Id?.toString());
+    this.router.navigate(['editar'])
   }
 }

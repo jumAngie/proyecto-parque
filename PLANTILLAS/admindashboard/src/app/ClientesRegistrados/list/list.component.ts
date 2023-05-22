@@ -17,7 +17,7 @@ export class ListClientesRegistradosComponent implements OnInit {
   ) { };
 
   ngOnInit(): void {
-    this.service.getAtracciones()
+    this.service.getClientesRegistrados()
     .subscribe((response: any) => {
       if(response.success){
         this.clientesRegistrados = response.data;

@@ -1,6 +1,9 @@
 ﻿USE dbParqueAtracciones
 GO
 
+
+
+
 INSERT INTO gral.tbEstadosCiviles (civi_Descripcion)
 VALUES	('Soltero(a)'),
 		('Casado(a)'),
@@ -406,9 +409,9 @@ GO
 
 
 
-INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Clave, clre_Email)
-VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com'),
-		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com')
+INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Clave, clre_Email, clre_UsuarioCreador)
+VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
+		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com', 1)
 GO
 
 

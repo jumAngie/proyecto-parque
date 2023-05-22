@@ -1,4 +1,5 @@
 export class Categoria{
-    id: number | undefined;
-    name: String | undefined;
+    cate_Id!: number ;
+    cate_Descripcion!: String ;
+    cate_UsuCreacion!: number ;
 }

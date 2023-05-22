@@ -260,9 +260,7 @@ namespace ParqueDiversion.BusinessLogic.Services
         #region Clientes Registrados
         public ServiceResult ClientesRegistradosList()
         {
-
             var result = new ServiceResult();
-
             try
             {
 
@@ -500,12 +498,10 @@ namespace ParqueDiversion.BusinessLogic.Services
         #region Atracciones
         public ServiceResult AtraccionesList()
         {
-
             var result = new ServiceResult();
 
             try
             {
-
                 var list = _atraccionesRepository.List();
                 return result.Ok(list);
             }
@@ -594,7 +590,6 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
-
         public ServiceResult UpdateEmpleados(tbEmpleados item)
         {
             var result = new ServiceResult();
@@ -618,7 +613,6 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
-
         public ServiceResult DeleteEmpleado(tbEmpleados item)
         {
             var result = new ServiceResult();
