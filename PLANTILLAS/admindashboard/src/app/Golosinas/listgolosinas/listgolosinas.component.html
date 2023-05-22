@@ -22,42 +22,46 @@
                 </div>
               </div>
             </div>    
-          <div class="row">
+          <div class="row" style="margin-left: 10px; margin-right: 10px; margin-top: 20px;">
             <div class="col-md-4">
-              <div class="card" style="background-image: url('https://cdn-icons-png.flaticon.com/512/3330/3330559.png'); background-size: 170px; background-repeat: no-repeat; background-position: center right;">
+              <div class="card" style="background-image: url('https://cdn-icons-png.flaticon.com/512/3330/3330559.png'); background-size: 170px; background-repeat: no-repeat; background-position: center left;">
                 <div class="card-body">
-                <h5 class="card-title" style="text-align: center;">
-                 <b>Agregar Nueva Golosina</b>
-                </h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon-center rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-bookmark-plus-fill"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-            <div class="col-md-4" *ngFor="let item of golosinas">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    {{ item.golo_Nombre }}<b><span>| ID: {{ item.golo_ID }}</span></b>
+                  <h5 class="card-title" style="text-align: center;">
+                    <b>Agregar Nueva Golosina</b>
                   </h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cup-straw"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ item.golo_Precio + ' HNL' }}</h6>
+                  <div class="d-flex align-items-center justify-content-center mt-3">
+                    <div class="card-icon-center rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-patch-plus-fill"></i>
                     </div>
                   </div>
                 </div>
                 <div class="card-footer" style="text-align: center;">
-                  <button class="btn btn-outline-danger" ><i class="bi bi-trash-fill"></i></button>
-                  <button class="btn btn-outline-warning" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+                  <h4 style="color:#ffffff;">TEMPORAL</h4>
                 </div>
               </div>
             </div>
+            
+          <div class="col-md-4" *ngFor="let item of golosinas">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ item.golo_Nombre }}<b><span>| ID: {{ item.golo_ID }}</span></b>
+                </h5>
+                <div class="d-flex align-items-center">
+                  <div class="card-image-container">
+                    <img src="https://www.stockupmarket.com/wp-content/uploads/2020/08/CapN_Crunchs_Cotton_Candy_Crunch_Sweetened_Corn__Oat_Cereal_15.4_Ounce.png" alt="Imagen del producto" class="card-image">
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{ item.golo_Precio + ' HNL' }}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer" style="text-align: center;">
+                <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                <button class="btn btn-outline-warning" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+              </div>
+            </div>
+          </div>          
           </div>
         </div>
       </div>
