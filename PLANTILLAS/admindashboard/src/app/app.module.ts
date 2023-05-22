@@ -47,10 +47,13 @@ import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/lis
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
+import { IndexComponent } from './Roles/index/index.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
+    IndexComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -97,7 +100,8 @@ import { ListempleadosComponent } from './Empleados/listempleados/listempleados.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

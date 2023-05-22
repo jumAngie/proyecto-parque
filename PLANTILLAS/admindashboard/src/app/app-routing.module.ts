@@ -39,12 +39,14 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { IndexComponent } from './Roles/index/index.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
+  { path: 'roles', component: IndexComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },

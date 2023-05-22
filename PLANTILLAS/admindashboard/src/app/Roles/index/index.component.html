@@ -1,0 +1,50 @@
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-header">
+      <div class="bg-blue-500 text-white px-4 py-6 flex items-center justify-center" style="background-image: url('https://i.pinimg.com/originals/6b/c0/66/6bc06603eea44da0d4fce7a977690b4f.png'); background-size: cover; background-position: center;">
+        <div class="text-center">
+          <h3 class="text-3xl font-semibold">Roles</h3>
+          <p class="mt-2">Administración de Roles</p>
+        </div>
+      </div>
+    </div>      
+    <div class="card-body">
+      <button class="btn btn-sm btn-outline-primary">
+        <i class="fas fa-plus-circle mr-1"></i>
+        Agregar
+      </button>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+        <div *ngFor="let cat of categoria | paginate: { itemsPerPage: 8, currentPage: p }" class="card border border-gray-300 shadow rounded-md p-4">
+          <h3 class="text-xl font-semibold">{{ cat.name }}</h3>
+          <p class="mt-2 text-gray-600">ID: {{ cat.id }}</p>
+          <div class="mt-4 flex justify-center">
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{cat.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opciones
+              </button>
+              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + cat.id">
+                <a class="dropdown-item" href="#">
+                  Editar
+                  <i class="fas fa-edit ml-1"></i>
+                </a>
+                <a class="dropdown-item" href="#">
+                  Detalles
+                  <i class="fas fa-info-circle ml-1"></i>
+                </a>
+                <a class="dropdown-item" href="#">
+                  Eliminar
+                  <i class="fas fa-trash-alt ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination flex justify-center mt-4">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</main>
