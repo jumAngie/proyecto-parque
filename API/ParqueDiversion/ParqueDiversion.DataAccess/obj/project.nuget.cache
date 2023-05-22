@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wirCGyPqHdmYmmukTpWbiF3495Ji2RIpEJOCfWL2IQ7pS/SG7CtK3IYXhchTlq2HvuGVEnHd6ogn3xmCgM+Bkw==",
+  "dgSpecHash": "aBuMeAOgnJxkGaij6rmyHzew4v/2XqhMxnpEzC1HNh/+roXH47Oj/BlTLpt6Kda0jI+d5hhMsYJYqwZlY+F9mQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\isaac\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\isaac\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\isaac\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

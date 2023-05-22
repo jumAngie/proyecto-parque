@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LoOReZs5M9l7J+Yv+FdGrOJqB0w4LSHU+vrgwxRTBiUD2Bq04ZvLIIgZ3d85T2wqZGGFCuzbfg83YFaO4z9nzg==",
+  "dgSpecHash": "YXRpqt8xsQPWAorvrdHdHEkVcgkP4qVq7PZE/8Csq+gaCHl2He/wC6lULoUYEd9yCF9vNQg95WESOiABgXDvmA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
+  "projectFilePath": "C:\\Users\\isaac\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\isaac\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\isaac\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

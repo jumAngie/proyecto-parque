@@ -42,6 +42,7 @@ import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component'
 import { IndexComponent } from './Roles/index/index.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { IndexComponent } from './Roles/index/index.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

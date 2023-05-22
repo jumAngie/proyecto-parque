@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-  
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import * as $ from 'jquery';
+import 'datatables.net';
+
 import { Categoria } from 'src/app/Models/Categoria';
 import { AcceService } from 'src/app/Service/acce.service';
 import { Router } from '@angular/router';
@@ -11,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit {
   categoria!: Categoria[]
+  p: number = 1;
 
   constructor (private service: AcceService, private router: Router){}
 

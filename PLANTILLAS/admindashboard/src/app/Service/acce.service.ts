@@ -12,5 +12,6 @@ export class AcceService {
 
   getCategoria(){
     return this.http.get<Categoria[]>(this.Url);
+    console.log(Categoria)
   }
 }
