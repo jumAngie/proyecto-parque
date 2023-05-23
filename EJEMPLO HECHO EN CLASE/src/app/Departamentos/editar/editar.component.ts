@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Categoria } from 'src/app/Model/Categoria';
 import { ServiceService } from 'src/app/Service/service.service';
 
-
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',

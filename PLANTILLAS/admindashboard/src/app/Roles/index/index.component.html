@@ -1,0 +1,83 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Roles</h1>
+    <nav>
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
+          <li class="breadcrumb-item">Roles</li>
+          <li class="breadcrumb-item active">Index</li>
+       </ol>
+    </nav>
+ </div>
+  <div class="card">
+    <div class="card-header" style="padding: 0;">
+      <div class="banner" style="background-image: url('https://www.cisa.gov/sites/default/files/styles/hero_large/public/2023-01/23_0127_ecd_ps-cyber_header_1600x600.png?h=e0d9a4bb&itok=tn8cHABi%27);');border-top-left-radius:10px;border-top-right-radius:10px; background-size: cover; background-position: center;">
+        <div class="overlay"></div>
+        <div class="text-center" style="padding: 2rem;">
+          <h3 style="font-size: 2rem; font-weight: bold; color: white;">Roles</h3>
+          <p style="font-size: 1rem; color: white;">Administración de Roles</p>
+        </div>
+      </div>
+    </div>
+    
+      
+    <div class="card-body">
+      <div class="row col-lg-12 ms-1">
+        <button class="btn btn-sm btn-outline-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+          <i class="fas fa-plus-circle mr-1"></i>
+          Agregar
+        </button>
+        
+        <div class="search-bar mt-3 col-10">
+          <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 justify-content-center align-items-stretch gap-4 mt-4">
+        <div *ngFor="let rol of filtrarRoles() | paginate: { itemsPerPage: 8, currentPage: p }" class="card border shadow rounded-md p-4 d-flex flex-column">
+          <div class="card-body">
+            <p class="mt-2 text-gray-600">ID: {{ rol.role_Id }}</p>
+            <h3 class="text-xl font-semibold">{{ rol.role_Nombre }}</h3>
+          </div>
+      
+          <div class="mt-auto d-flex justify-content-center">
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{rol.role_Id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opciones
+              </button>
+              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + rol.role_Id">
+                <a class="dropdown-item" href="#">
+                  Editar
+                  <i class="fas fa-edit ml-1"></i>
+                </a>
+                <a class="dropdown-item" href="#">
+                  Detalles
+                  <i class="fas fa-info-circle ml-1"></i>
+                </a>
+                <a class="dropdown-item" href="#">
+                  Eliminar
+                  <i class="fas fa-trash-alt ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+      <div class="pagination d-flex justify-content-center mt-4">
+        <pagination-controls (pageChange)="p = $event"
+                             previousLabel="Anterior"
+                             nextLabel="Siguiente"
+                             firstLabel="Primera"
+                             lastLabel="Última"
+                             screenReaderPaginationLabel="Paginación"
+                             screenReaderPageLabel="Página"
+                             screenReaderCurrentLabel="Página actual">
+        </pagination-controls>
+      </div>
+
+    </div>
+  </div>
+</main>

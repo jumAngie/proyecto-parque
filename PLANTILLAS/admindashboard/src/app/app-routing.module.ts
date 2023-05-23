@@ -42,12 +42,14 @@ import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/l
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
+import { IndexComponent } from './Roles/index/index.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
+  { path: 'roles', component: IndexComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },

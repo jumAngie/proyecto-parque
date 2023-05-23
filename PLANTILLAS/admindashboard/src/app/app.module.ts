@@ -51,10 +51,13 @@ import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/l
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
+import { IndexComponent } from './Roles/index/index.component';
+//import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
+    IndexComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -106,6 +109,7 @@ import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.compon
     HttpClientModule,
     FormsModule,
     RouterModule
+    //NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
