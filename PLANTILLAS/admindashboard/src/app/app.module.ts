@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -46,14 +45,10 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
-import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
-import { IndexComponent } from './Roles/index/index.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -95,13 +90,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
     ListVentasQuioscoDetalleComponent,
-    ListempleadosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
