@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AcceService } from 'src/app/Service/acce.service';
 import { Router } from '@angular/router';
 import { Roles } from 'src/app/Models/Roles';
@@ -12,9 +12,37 @@ export class IndexComponent implements OnInit {
   rol: Roles[] = [];
   p: number = 1;
   filtro: string = '';
+  openDropdownIds: number[] = [];
 
-  constructor(private service: AcceService, private router: Router) { }
+  toggleDropdown(roleId: number) {
+    if (this.isDropdownOpen(roleId)) {
+      this.closeDropdown(roleId);
+    } else {
+      this.openDropdown(roleId);
+    }
+  }
 
+  isDropdownOpen(roleId: number): boolean {
+    return this.openDropdownIds.includes(roleId);
+  }
+
+  openDropdown(roleId: number): void {
+    if (!this.isDropdownOpen(roleId)) {
+      this.openDropdownIds.push(roleId);
+    }
+  }
+
+  closeDropdown(roleId: number): void {
+    const index = this.openDropdownIds.indexOf(roleId);
+    if (index !== -1) {
+      this.openDropdownIds.splice(index, 1);
+    }
+  }
+
+  constructor(private service: AcceService, private router: Router,private elementRef: ElementRef) { }
+
+
+  
   ngOnInit(): void {
     this.service.getRoles().subscribe(data => {
       this.rol = data;

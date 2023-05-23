@@ -3,7 +3,7 @@
     <h1>Roles</h1>
     <nav>
        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
           <li class="breadcrumb-item">Roles</li>
           <li class="breadcrumb-item active">Index</li>
        </ol>
@@ -22,8 +22,9 @@
     
       
     <div class="card-body">
-      <div class="row col-lg-12 ms-1">
-        <button class="btn btn-sm btn-outline-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+          
+      <div class="row ms-5 col-11">
+        <button class="ov-btn-grow-primary  mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal" data-bs-target="#crear">
           <i class="fas fa-plus-circle mr-1"></i>
           Agregar
         </button>
@@ -42,29 +43,33 @@
       
           <div class="mt-auto d-flex justify-content-center">
             <div class="dropdown">
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{rol.role_Id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opciones
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" [id]="'dropdownMenuButton' + rol.role_Id" (click)="toggleDropdown(rol.role_Id)" aria-haspopup="true" aria-expanded="false">
+                Acciones
               </button>
-              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + rol.role_Id">
-                <a class="dropdown-item" href="#">
+              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + rol.role_Id" [class.show]="isDropdownOpen(rol.role_Id)">
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#update">
+                  <i class="fas fa-edit"></i>
                   Editar
-                  <i class="fas fa-edit ml-1"></i>
                 </a>
-                <a class="dropdown-item" href="#">
-                  Detalles
+                <a class="dropdown-item" >
                   <i class="fas fa-info-circle ml-1"></i>
+                  Detalles
                 </a>
-                <a class="dropdown-item" href="#">
-                  Eliminar
+                <a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#pantallas">
+                  <i class="fas fa-desktop ml-1"></i>
+                  Pantallas
+                </a>                
+                <a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#eliminar">
                   <i class="fas fa-trash-alt ml-1"></i>
+                  Eliminar
                 </a>
               </div>
             </div>
           </div>
+          
+          
         </div>
       </div>
-      
-      
 
       <div class="pagination d-flex justify-content-center mt-4">
         <pagination-controls (pageChange)="p = $event"
@@ -81,3 +86,93 @@
     </div>
   </div>
 </main>
+
+
+<!--Modal Insert-->
+<div class="modal fade" id="crear" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title">Nuevo Rol</h5>
+        </div>
+        <div class="modal-body">
+          <label for="role_Nombre" class="label-form mt-2">Nombre del Rol</label>
+          <input id="role_Nombre" class="form-control"/>
+        </div>
+        <div class="modal-footer">           
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
+          <button type="button" class="btn btn-success btn ov-btn-grow-in p-2">Guardar</button></div>
+
+     </div>
+  </div>
+</div>
+<!--/Modal Insert-->
+
+
+
+<!--Modal Update-->
+<div class="modal fade" id="update" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title">Editar Rol</h5>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer"> 
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2">Guardar</button></div>
+
+     </div>
+  </div>
+</div>
+<!--/Modal Update-->
+
+
+
+<!--Modal Pantallas-->
+<div class="modal fade" id="pantallas" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title">Asignación de Pantallas</h5>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer"> 
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2">Guardar</button></div>
+
+     </div>
+  </div>
+</div>
+<!--/Modal Pantallas-->
+
+<!--Modal Eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+          <div class="row justify-content-center">
+           <h5 class="modal-title col-12">Esta seguro que desea eliminar este registro?</h5>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center mb-2">
+          <img src="https://img2.freepng.es/20180320/vuw/kisspng-symbol-font-trash-2-5ab0cac77f1e88.8245172715215356875207.jpg" alt="Not Found" class="w-50" srcset="">
+          </div>
+          <div class="row justify-content-center">
+          <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
+          <div class="col-lg-1"></div> 
+          <button type="button" class="ov-btn-grow-d col-lg-5">Aceptar</button></div>
+        </div>
+        </div>
+        <div class="modal-footer"> 
+     </div>
+  </div>
+</div>
+<!--/Modal Eliminar-->
+
+
