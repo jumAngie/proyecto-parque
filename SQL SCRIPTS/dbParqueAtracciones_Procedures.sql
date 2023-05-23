@@ -1057,7 +1057,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_INSERT
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			IF(@carg_UsuarioCreador = NULL OR @carg_UsuarioCreador = NULL OR @carg_UsuarioCreador = 0 OR @carg_UsuarioCreador = '')
+			IF(@carg_UsuarioCreador IS NULL OR @carg_UsuarioCreador  IS NULL OR @carg_UsuarioCreador = 0 OR @carg_UsuarioCreador = '')
 				BEGIN
 					SELECT 409 AS codeStatus, 'Los campos no pueden ser vacíos.' AS messageStatus
 				END
