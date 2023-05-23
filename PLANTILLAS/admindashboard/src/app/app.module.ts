@@ -55,6 +55,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 
 import { ParqServicesService } from './ParqServices/parq-services.service';
+import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { ParqServicesService } from './ParqServices/parq-services.service';
     ListempleadosComponent,
     CreatecargosComponent,
     EditarcargosComponent,
-    CreateAtraccionesComponent
+    CreateAtraccionesComponent,
+    CrearempleadosComponent
   ],
   imports: [
     BrowserModule,

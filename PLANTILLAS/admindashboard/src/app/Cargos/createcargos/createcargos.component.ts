@@ -48,46 +48,20 @@ export class CreatecargosComponent {
     
   }
   
-  showToastMessage(type: string, message: string) {
-    this.showToast = true;
-    this.toastMessage = message;
-
-    setTimeout(() => {
-      this.showToast = false;
-      this.toastMessage = '';
-    }, 1000);
-  }
-
-  closeSuccessAlert() {
-    this.showSuccessAlert = false;
-  }
-
   showSuccessToast(message: string) {
     SuccessToast(message);
-    setTimeout(() => {
-      this.showSuccessToast = close;
-    }, 1500);
   }
   
   showErrorToast(message: string) {
     ErrorToast(message);
-    setTimeout(() => {
-      this.showErrorToast = close;
-    }, 1500);
   }
   
   showInfoToast(message: string) {
     InfoToast(message);
-    setTimeout(() => {
-      this.showInfoToast = close;
-    }, 1500);
   }
   
   showWarningToast(message: string) {
     WarningToast(message);
-    setTimeout(() => {
-      this.showWarningToast = close;
-    }, 1500);
   }
   
 }

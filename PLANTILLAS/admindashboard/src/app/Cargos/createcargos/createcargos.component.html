@@ -11,7 +11,6 @@
   </div>
   <div id="toastContainer" *ngIf="showToast" class="alert alert-dismissible fade show" role="alert">
     <i class="bi bi-check-circle me-1"></i> {{ toastMessage }}
-    <button type="button" class="btn-close" aria-label="Close" (click)="closeSuccessAlert()"></button>
   </div>  
   <section class="section">
     <h5 class="card-title">Crear Cate</h5>
@@ -39,5 +38,4 @@
       <button (click)="Guardar()">Guardar</button>
     </div>
   </section>
-
 </main>
