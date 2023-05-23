@@ -20,46 +20,120 @@
                </div>
             </div>
          </div>
-         
+
          <div class="card-body">
+                  <h4 class="card-title">Nueva atracción</h4>
+                  <div class="row g-3">
+                     
+                     <div class="col-5">
+                        <div class="card">
+                           <div class="card-header">
+                              <h5 class="card-title">Ubicación</h5>
+                           </div>
+                           <div class="card-body">
+                              <div class="row g-3 mt-1">
+                                 <br>
+                                 <div class="col-md-12">
+                                    <div class="card">
+                                       <div class="card-body">
+                                          
+                                          <h5 class="card-title">Área </h5>                              
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop">Ver Areas</button>
+
+                                       </div>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                       <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones">
+                                          <option value="">Selecciona una opción...</option>
+                                          <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
+                                        </select>
+                                        <label for="floatingSelectRegion">Región</label>
+                                    </div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-7">
+                        <div class="card">
+                           <div class="card-header">
+                              <h4 class="card-title">Información</h4>
+                           </div>
+                           <div class="card-body">
+                              <div class="row g-3 mt-1">                                 
+                                    <div class="col-md-12">
+                                       <div class="form-floating"> <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> <label for="atra_Nombre">Nombre de la atracción</label></div>
+                                    </div>   
+                                    <div class="col-6">
+                                       <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea><label for="atra_Descripcion">Descripción</label></div>
+                                    </div>
+                                    <div class="col-6">
+                                       <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea><label for="atra_ReferenciaUbicacion">Referencia</label></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="col-md-12">
+                                          <div class="form-floating"> <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> <label for="atra_LimitePersonas">Límite de personas</label></div>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-4">                                       
+                                       <div class="form-floating"> <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda"> <label for="atra_DuracionRonda">Duración por ronda</label></div>
+                                    </div>
+                              </div>
+                           </div>
+   
+                        </div>
+                     </div>
+
+                     <div class="text-center"> 
+                        <button (click)="Guardar()" class="btn btn-primary">Agregar</button>
+                        <button (click)="Volver()" class="btn btn-secondary">Cancelar</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+</main>                                          
+
+
+<div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">Selecciona el Area donde estará la atracción</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
             <div class="card">
-               <div class="card-body">
-                  <h5 class="card-title">Floating labels Form</h5>
-                  <form class="row g-3">
-                     <div class="col-md-12">
-                        <div class="form-floating"> <input type="text" class="form-control" id="floatingName" placeholder="Your Name"> <label for="floatingName">Your Name</label></div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="form-floating"> <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email"> <label for="floatingEmail">Your Email</label></div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="form-floating"> <input type="password" class="form-control" id="floatingPassword" placeholder="Password"> <label for="floatingPassword">Password</label></div>
-                     </div>
-                     <div class="col-12">
-                        <div class="form-floating"><textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea><label for="floatingTextarea">Address</label></div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="col-md-12">
-                           <div class="form-floating"> <input type="text" class="form-control" id="floatingCity" placeholder="City"> <label for="floatingCity">City</label></div>
+               <div class="card-body">                                                                                             
+                  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                     <div class="carousel-inner">
+                        <div class="carousel-item" *ngFor="let item of areas; let i = index" [class.active]="i === 0">
+                           <div class="card" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())"> <!-- Aquí puedes agregar las clases y estilos necesarios para las cartas -->
+                              
+                              <div class="card-header">
+                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU" alt="" class="card-img-top">  
+                              </div>                              
+                              <div class="card-body">
+                                 <h4 class="card-title">{{ item.area_Nombre }}</h4>
+                              </div>
+
+                           </div>
                         </div>
                      </div>
-                     <div class="col-md-4">
-                        <div class="form-floating mb-3">
-                           <select class="form-select" id="floatingSelect" aria-label="State">
-                              <option selected>New York</option>
-                              <option value="1">Oregon</option>
-                              <option value="2">DC</option>
-                           </select>
-                           <label for="floatingSelect">State</label>
-                        </div>
-                     </div>
-                     <div class="col-md-2">
-                        <div class="form-floating"> <input type="text" class="form-control" id="floatingZip" placeholder="Zip"> <label for="floatingZip">Zip</label></div>
-                     </div>
-                     <div class="text-center"> <button type="submit" class="btn btn-primary">Submit</button> <button type="reset" class="btn btn-secondary">Reset</button></div>
-                  </form>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     </button>
+                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     </button>
+                  </div>
                </div>
             </div>
          </div>
-     </div>
-</main>
+         <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button></div>
+      </div>
+   </div>
+</div>

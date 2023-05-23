@@ -1,8 +1,7 @@
-import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
-import { DataTable } from 'simple-datatables';
 
 @Component({
   selector: 'app-list',
@@ -11,13 +10,11 @@ import { DataTable } from 'simple-datatables';
 })
 export class ListAtraccionesComponent implements OnInit {
   atracciones!: Atracciones[];
-  dataTable: DataTable | null = null;
   p: number = 1;
   filtro: string = '';
   constructor(
     private service: ParqServicesService,
     private router: Router,
-    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
@@ -56,6 +55,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 
 import { ParqServicesService } from './ParqServices/parq-services.service';
+
 @NgModule({
   declarations: [
     AppComponent,
