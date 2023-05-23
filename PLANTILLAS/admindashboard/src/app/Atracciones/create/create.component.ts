@@ -14,8 +14,8 @@ import { Regiones } from 'src/app/Models/Regiones';
 export class CreateAtraccionesComponent implements OnInit {
   atracciones: Atracciones = new Atracciones();
   areas!: Areas[];
+  areasForStile: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
   regiones!: Regiones[];
-
   constructor(
     private service: ParqServicesService,
     private router: Router,
@@ -27,6 +27,9 @@ export class CreateAtraccionesComponent implements OnInit {
       if(response.success){
         this.areas = response.data;
       }
+
+      this.areasForStile = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre}));
+      console.log(this.areasForStile);
     })
 
 
@@ -58,6 +61,13 @@ export class CreateAtraccionesComponent implements OnInit {
 
   // Función para manejar el clic en una carta
   mostrarIdCarta(cartaId: string) {
-    this.atracciones.area_ID = parseInt( cartaId);
+    this.atracciones.area_ID = parseInt(cartaId);
+    console.log(this.atracciones.area_ID);
+    
+    // Lógica para cambiar el estado de selección de la carta
+    this.areasForStile.forEach(carta => {
+      carta.isSelected = carta.area_ID === cartaId;
+    });
+
   }  
 }

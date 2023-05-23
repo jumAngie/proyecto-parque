@@ -5,7 +5,7 @@
            <ol class="breadcrumb">
               <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
               <li class="breadcrumb-item"><a routerLink="/listatracciones">Atracciones</a> </li>
-              <li class="breadcrumb-item active">Crear</li>
+              <li class="breadcrumb-item active">Nueva Atracción</li>
            </ol>
         </nav>
      </div>
@@ -22,79 +22,88 @@
          </div>
 
          <div class="card-body">
-                  <h4 class="card-title">Nueva atracción</h4>
-                  <div class="row g-3">
+            <div class="row g-3 mt-2">
+               <div class="col-7">
+                  <div class="card">
                      
-                     <div class="col-5">
-                        <div class="card">
-                           <div class="card-header">
-                              <h5 class="card-title">Ubicación</h5>
-                           </div>
-                           <div class="card-body">
-                              <div class="row g-3 mt-1">
-                                 <br>
-                                 <div class="col-md-12">
-                                    <div class="card">
-                                       <div class="card-body">
-                                          
-                                          <h5 class="card-title">Área </h5>                              
-                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop">Ver Areas</button>
-
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12">
-                                    <div class="form-floating mb-3">
-                                       <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones">
-                                          <option value="">Selecciona una opción...</option>
-                                          <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
-                                        </select>
-                                        <label for="floatingSelectRegion">Región</label>
-                                    </div>
-                                 </div>
-
-                              </div>
-                           </div>
-                        </div>
+                     <div class="card-header text-center text-dark ">                              
+                        <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
                      </div>
-                     <div class="col-7">
-                        <div class="card">
-                           <div class="card-header">
-                              <h4 class="card-title">Información</h4>
-                           </div>
-                           <div class="card-body">
-                              <div class="row g-3 mt-1">                                 
-                                    <div class="col-md-12">
-                                       <div class="form-floating"> <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> <label for="atra_Nombre">Nombre de la atracción</label></div>
-                                    </div>   
-                                    <div class="col-6">
-                                       <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea><label for="atra_Descripcion">Descripción</label></div>
-                                    </div>
-                                    <div class="col-6">
-                                       <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea><label for="atra_ReferenciaUbicacion">Referencia</label></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <div class="col-md-12">
-                                          <div class="form-floating"> <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> <label for="atra_LimitePersonas">Límite de personas</label></div>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-4">                                       
-                                       <div class="form-floating"> <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda"> <label for="atra_DuracionRonda">Duración por ronda</label></div>
-                                    </div>
+                     
+                     <div class="card-body">
+                        <div class="row g-3 mt-1">                                 
+                              <div class="col-md-12">
+                                 <div class="form-floating"> <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> <label for="atra_Nombre">Nombre de la atracción</label></div>
+                              </div>   
+                              <div class="col-6">
+                                 <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea><label for="atra_Descripcion">Descripción</label></div>
                               </div>
-                           </div>
-   
+                              <div class="col-6">
+                                 <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea><label for="atra_ReferenciaUbicacion">Referencia</label></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="col-md-12">
+                                    <div class="form-floating"> <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> <label for="atra_LimitePersonas">Límite de personas</label></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">                                       
+                                 <div class="form-floating"> <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda"> <label for="atra_DuracionRonda">Duración por ronda</label></div>
+                              </div>
                         </div>
+                     </div>   
+                  </div>
+               </div>
+
+               <div class="col-5">
+                  <div class="card">
+                     
+                     <div class="card-header text-center text-dark ">                                
+                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: crimson;"></i>Ubicación</h4>
                      </div>
 
-                     <div class="text-center"> 
-                        <button (click)="Guardar()" class="btn btn-primary">Agregar</button>
-                        <button (click)="Volver()" class="btn btn-secondary">Cancelar</button>
+                     <div class="card-body">
+                        <div class="row mt-3">
+                           
+                           <div class="col-img" *ngFor="let item of areasForStile; let i = index" [class.active]="i === 0">
+                              <div class="card my-card p-0 m-0" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
+                                 <img src="https://th.bing.com/th/id/OIP.2Z4PDxLVFR-nSemDRqPMEgHaFj?w=237&h=180&c=7&r=0&o=5&pid=1.7" alt="wdqwdqd" class="img-thumbnail-space">
+                                 <div class="card-img-overlay-mod">
+                                 <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
+                              </div>
+                                 <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
+                              </div>
+                              </div>
+
+                           <div class="col-md-12 mt-3">
+                              <div class="form-floating">
+                                 <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones">
+                                    <option value="">Selecciona una opción...</option>
+                                    <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
+                                    </select>
+                                    <label for="floatingSelectRegion">Región</label>
+                              </div>
+                           </div>
+
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
+         </div>
+
+         <div class="card-footer">
+            <div class="text-center"> 
+               <button (click)="Guardar()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+                  <i class="fas fa-plus-circle mr-1"></i>
+                  Agregar
+                </button>
+                <button (click)="Volver()" class="ov-btn-grow-d mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+                  <i class="fas fa-plus-circle mr-1"></i>
+                  Volver
+                </button>
+            </div>
+         </div>
+      </div>
 </main>                                          
 
 
@@ -133,7 +142,10 @@
                </div>
             </div>
          </div>
-         <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button></div>
+         <div class="modal-footer"> 
+            <button type="button" class="ov-btn-grow-d" data-bs-dismiss="modal">Close</button> 
+            <button type="button" class="ov-btn-grow-in">Save changes</button>
+         </div>
       </div>
    </div>
 </div>
