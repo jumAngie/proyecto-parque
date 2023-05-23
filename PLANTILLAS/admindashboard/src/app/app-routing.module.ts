@@ -34,7 +34,11 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
+
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
+import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
+
+
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
@@ -42,6 +46,8 @@ import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/l
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
+
+
 import { IndexComponent } from './Roles/index/index.component';
 
 const routes: Routes = [
@@ -81,7 +87,10 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'listcargos', component: ListcargosComponent},
   { path: 'listgolosinas', component: ListgolosinasComponent},
+  
   { path: 'listatracciones', component: ListAtraccionesComponent},
+  { path: 'crearatracciones', component: CreateAtraccionesComponent},
+  
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},

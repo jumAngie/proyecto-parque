@@ -52,8 +52,10 @@ import { ListempleadosComponent } from './Empleados/listempleados/listempleados.
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
 import { IndexComponent } from './Roles/index/index.component';
-//import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 
+import { ParqServicesService } from './ParqServices/parq-services.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,17 +103,18 @@ import { IndexComponent } from './Roles/index/index.component';
     ListVentasQuioscoDetalleComponent,
     ListempleadosComponent,
     CreatecargosComponent,
-    EditarcargosComponent
+    EditarcargosComponent,
+    CreateAtraccionesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
-    //NgxPaginationModule,
+    RouterModule,
+    NgxPaginationModule,
   ],
-  providers: [],
+  providers: [ParqServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

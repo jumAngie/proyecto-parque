@@ -40,28 +40,28 @@
                 </div>
               </div>
             </div>
-            
-          <div class="col-md-4" *ngFor="let item of golosinas">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">
-                  {{ item.golo_Nombre }}<b><span>| ID: {{ item.golo_ID }}</span></b>
-                </h5>
-                <div class="d-flex align-items-center">
-                  <div class="card-image-container">
-                    <img src="https://www.stockupmarket.com/wp-content/uploads/2020/08/CapN_Crunchs_Cotton_Candy_Crunch_Sweetened_Corn__Oat_Cereal_15.4_Ounce.png" alt="Imagen del producto" class="card-image">
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ item.golo_Precio + ' HNL' }}</h6>
+
+            <div class="col-md-4" *ngFor="let item of golosinas">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    {{ item.golo_Nombre }}<b><span>| ID: {{ item.golo_ID }}</span></b>
+                  </h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-image-container">
+                      <img src="https://www.stockupmarket.com/wp-content/uploads/2020/08/CapN_Crunchs_Cotton_Candy_Crunch_Sweetened_Corn__Oat_Cereal_15.4_Ounce.png" alt="Imagen del producto" class="card-image">
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{ item.golo_Precio + ' HNL' }}</h6>
+                    </div>
                   </div>
                 </div>
+                <div class="card-footer" style="text-align: center;">
+                  <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                  <button class="btn btn-outline-warning" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+                </div>
               </div>
-              <div class="card-footer" style="text-align: center;">
-                <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
-                <button class="btn btn-outline-warning" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
-              </div>
-            </div>
-          </div>          
+            </div>          
           </div>
         </div>
       </div>
@@ -69,6 +69,5 @@
     </section>
   </main>
 
- 
   
   

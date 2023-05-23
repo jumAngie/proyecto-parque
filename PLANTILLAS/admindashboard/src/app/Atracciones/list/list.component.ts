@@ -9,10 +9,11 @@ import { DataTable } from 'simple-datatables';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListAtraccionesComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ListAtraccionesComponent implements OnInit {
   atracciones!: Atracciones[];
   dataTable: DataTable | null = null;
-
+  p: number = 1;
+  filtro: string = '';
   constructor(
     private service: ParqServicesService,
     private router: Router,
@@ -24,30 +25,18 @@ export class ListAtraccionesComponent implements OnInit, AfterViewInit, OnDestro
       .subscribe((response: any) => {
         if (response.success) {
           this.atracciones = response.data;
-          console.log(response.data);
         }
       });
   }
 
-  ngAfterViewInit(): void {
-    this.initializeDataTable();
-  }
-
-  ngOnDestroy(): void {
-    if (this.dataTable) {
-      this.dataTable.destroy();
-      this.dataTable = null;
-    }
-  }
-
-  initializeDataTable(): void {
-    if (!this.atracciones) {
-      return;
-    }
-
-    setTimeout(() => {
-      const tableElement = this.elementRef.nativeElement.querySelector('.datatable');
-      this.dataTable = new DataTable(tableElement);
+  filtrarAtracciones(): Atracciones[] {
+    return this.atracciones.filter(atracciones => {
+      return atracciones.atra_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
     });
   }
+
+  AgregarAtraccion(){
+    this.router.navigate(['crearatracciones'])
+  }
+
 }

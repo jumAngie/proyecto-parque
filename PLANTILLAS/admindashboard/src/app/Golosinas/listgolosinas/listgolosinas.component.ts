@@ -22,7 +22,4 @@ export class ListgolosinasComponent implements OnInit {
       this.golosinas = data;
     })
   }
-
- 
-
 }
