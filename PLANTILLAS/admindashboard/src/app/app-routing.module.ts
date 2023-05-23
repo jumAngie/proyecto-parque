@@ -39,6 +39,9 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
+import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -81,6 +84,9 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
   
+  { path: 'listempleados', component: ListempleadosComponent},
+  { path: 'createcargos', component: CreatecargosComponent},
+  {path: 'editarcargos', component: EditarcargosComponent}
 ];
 
 @NgModule({

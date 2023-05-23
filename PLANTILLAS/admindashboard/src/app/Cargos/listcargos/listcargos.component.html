@@ -13,9 +13,17 @@
        <div class="row">
           <div class="col-lg-12">
              <div class="card">
+               <div class="card-header" style="padding: 0;">
+                  <div class="banner" style="background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-blue-minimalist-flat-information-security-banner-background-image_260795.jpg'); background-size: cover; background-position: center;">
+                    <div class="overlay"></div>
+                    <div class="text-center" style="padding: 2rem;">
+                      <h3 style="font-size: 2rem; font-weight: bold; color: white;">Cargos</h3>
+                      <p style="font-size: 1rem; color: white;">Administración de Cargos</p>
+                    </div>
+                  </div>
+                </div>                
                 <div class="card-body">
-                   <h5 class="card-title">Listado de Cargos</h5>
-                   <button class="btn btn-primary" style="margin-left: 10px;">Nuevo</button>
+                   <button class="btn btn-lg btn-primary" style="margin-left: 10px;" routerLink="/createcargos">Nuevo</button>
                    <table class="table datatable">
                       <thead>
                          <tr>
@@ -25,11 +33,11 @@
                          </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let item of cargos">
-                            <th scope="row">{{item.carg_ID}}</th>
-                            <td>{{item.carg_Nombre}}</td>
+                        <tr *ngFor="let cargos of cargos">
+                            <td scope="row">{{cargos.carg_ID}}</td>
+                            <td scope="row">{{cargos.carg_Nombre}}</td>
                             <td> 
-                                <button class="btn btn-info">Editar</button>
+                                <button class="btn btn-info" (click)="Editar(cargos)">Editar</button>
                                 <button class="btn btn-danger" style="margin-left: 10px;">Eliminar</button>
                             </td>
                          </tr>
