@@ -9,14 +9,16 @@ import { ServiceService } from 'src/app/Service/service.service';
   styleUrls: ['./crear.component.css']
 })
 export class CrearComponent {
+  categoria: Categoria = new Categoria();
 
-  categorianew:Categoria = new Categoria();
   constructor (private service: ServiceService, private router: Router){}
 
   Guardar(){
-    this.service.createCategoria()
-    .subscribe(data=>{
-      alert("Se agregó con exito")
+    this.service.createCategoria(this.categoria)
+    .subscribe(data => {
+      alert("Se agregó con éxito la categoria");
+      this.router.navigate(['index']);
+      console.log(data);
     })
   }
 }

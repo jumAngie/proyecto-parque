@@ -8,6 +8,7 @@ import { Roles } from 'src/app/Models/Roles';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
+
 export class IndexComponent implements OnInit {
   rol: Roles[] = [];
   p: number = 1;

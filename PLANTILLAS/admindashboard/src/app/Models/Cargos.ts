@@ -1,8 +1,8 @@
 export class Cargos{
     carg_ID!: number;
       carg_Nombre!:String;
-      carg_Habilitado!: Boolean;
-      carg_Estado!: number;
+      carg_Habilitado!: number;
+      carg_Estado!: Boolean;
       carg_UsuarioCreador!: number;
       usu_Creador!:String;
       carg_FechaCreacion!: Date;

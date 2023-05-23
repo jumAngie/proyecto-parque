@@ -8,17 +8,20 @@ import { Categoria } from '../Model/Categoria';
 export class ServiceService {
 
   constructor(private http: HttpClient) { }
-  Url = "https://api.thecatapi.com/v1/categories";
-  UrlCreate = "https://api.thecatapi.com/v1/categories";
-
+  Url = "http://serviciospublicitarios.somee.com/api/Categoria/Listado";
 
   getCategoria(){
     return this.http.get<Categoria[]>(this.Url);
   }
 
-  createCategoria(){
-    return this.http.post<Categoria[]>(this.Url,Categoria);
+  UrlCreate = "http://serviciospublicitarios.somee.com/api/Categoria/Insertar";
+
+  createCategoria(categoria: Categoria){
+    return this.http.post<Categoria[]>(this.UrlCreate, categoria);    
   }
 
-  
+  UrlEdit = "http://serviciospublicitarios.somee.com/api/Categoria/Buscar?id=";
+  findCategoria(id?: number){
+    return this.http.get<Categoria[]>(this.UrlEdit+id);
+  }
 }

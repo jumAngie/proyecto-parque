@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
@@ -46,11 +48,14 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
-import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component'
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
+import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
 import { IndexComponent } from './Roles/index/index.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 
+import { ParqServicesService } from './ParqServices/parq-services.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,16 +101,20 @@ import { FormsModule } from '@angular/forms';
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
     ListVentasQuioscoDetalleComponent,
-    ListempleadosComponent
+    ListempleadosComponent,
+    CreatecargosComponent,
+    EditarcargosComponent,
+    CreateAtraccionesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    RouterModule,
     NgxPaginationModule,
-    FormsModule
   ],
-  providers: [],
+  providers: [ParqServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

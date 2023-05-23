@@ -4,12 +4,10 @@ import { ListarComponent } from './Departamentos/listar/listar.component';
 import { CrearComponent } from './Departamentos/crear/crear.component';
 import { EditarComponent } from './Departamentos/editar/editar.component';
 
-
 const routes: Routes = [
   {path: 'index', component: ListarComponent},
   {path: 'crear', component: CrearComponent},
   {path: 'editar', component: EditarComponent}
-
 ];
 
 @NgModule({
