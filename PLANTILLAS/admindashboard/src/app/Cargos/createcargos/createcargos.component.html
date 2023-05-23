@@ -9,35 +9,10 @@
       </ol>
     </nav>
   </div>
-  <div
-    class="alert alert-danger alert-dismissible fade show"
-    role="alert"
-    *ngIf="showErrorAlert"
-  >
-    <i class="bi bi-exclamation-octagon me-1"></i> {{ errorMessage }}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-      (click)="closeErrorAlert()"
-    ></button>
-  </div>
-
-  <div
-    class="alert alert-success alert-dismissible fade show"
-    role="alert"
-    *ngIf="showSuccessAlert"
-  >
-    <i class="bi bi-check-circle me-1"></i> {{ successMessage }}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-      (click)="closeSuccessAlert()"
-    ></button>
-  </div>
+  <div id="toastContainer" *ngIf="showToast" class="alert alert-dismissible fade show" role="alert">
+    <i class="bi bi-check-circle me-1"></i> {{ toastMessage }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeSuccessAlert()"></button>
+  </div>  
   <section class="section">
     <h5 class="card-title">Crear Cate</h5>
     <div class="row mb-3">
@@ -64,4 +39,5 @@
       <button (click)="Guardar()">Guardar</button>
     </div>
   </section>
+
 </main>
