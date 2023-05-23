@@ -216,7 +216,7 @@ CREATE OR ALTER VIEW acce.VW_Roles
 AS
 SELECT	role_Id, 
 		role_Nombre, 
-		role_Cantidad = (SELECT COUNT(*) FROM acce.tbUsuarios WHERE role_ID = role_Id),
+		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios WHERE role_ID = role_Id),
 		role_Estado, 
 		role_UsuarioCreador,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = role_UsuarioCreador), 
