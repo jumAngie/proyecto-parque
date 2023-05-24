@@ -66,16 +66,20 @@ export class CrearempleadosComponent implements OnInit {
     }
 
     if(errors == 0){
+      this.empleados.empl_UsuarioCreador = 1;
       this.service.insertEmpleados(this.empleados)
       .subscribe((response: any) =>{
         console.log(response)
-        if(response.success){
-          ToastUtils.showSuccessToast(response.data.messageStatus);          
+        if(response.code == 200){
+          ToastUtils.showSuccessToast(response.messageStatus);          
           this.router.navigate(['listempleados']);
         }else{
-          ToastUtils.showErrorToast(response.data.messageStatus);
+          ToastUtils.showErrorToast(response.messageStatus);
         }
       })
+    }
+    else{
+      ToastUtils.showErrorToast('ERROR NO ENTRAAAA IDK WHY');
     }
   }
 
@@ -107,35 +111,14 @@ export class CrearempleadosComponent implements OnInit {
     if (!this.empleados.empl_DNI) {
       this.DNIRequerido = true;
       ToastUtils.showWarningToast('Campo "DNI" requerido.');
-      return false;
+      return true;
     } else if (!dniPattern.test(this.empleados.empl_DNI)) {
       this.DNIRequerido = false;
       ToastUtils.showWarningToast('Formato de DNI inválido. El formato debe ser XXXX-XXXX-XXXXX');
-      return false;
+      return true;
     } else {
       this.DNIRequerido = false;
-      return true;
-    }
-  }
-
-  formatoDNI() {
-    const dniSinGuiones = this.empleados.empl_DNI.replace(/-/g, '');
-    let grupos = dniSinGuiones.match(/^(\d{4})(\d{4})(\d+)/);
-    
-    if (grupos) {
-      grupos.shift();
-      this.empleados.empl_DNI = grupos.filter(Boolean).join('-');
-    }
-  }
-  
-  
-  formatoTelefono(){
-    const telefonoSinGuines = this.empleados.empl_Telefono.replace(/-/g, '');
-    let numeritos = telefonoSinGuines.match(/^(\d{4})(\d{4})/);
-
-    if(numeritos){
-      numeritos.shift();
-      this.empleados.empl_Telefono = numeritos.filter(Boolean).join('-');
+      return false;
     }
   }
 
@@ -145,14 +128,14 @@ export class CrearempleadosComponent implements OnInit {
   if (!this.empleados.empl_Email) {
     this.EmailRequerido = true;
     ToastUtils.showWarningToast('Campo "Correo Electrónico" requerido.');
-    return false;
+    return true;
   } else if (!emailPattern.test(this.empleados.empl_Email)) {
     this.EmailRequerido = false;
     ToastUtils.showWarningToast('Correo Electrónico inválido. Por favor, ingrese un correo válido.');
-    return false;
+    return true;
   } else {
     this.EmailRequerido = false;
-    return true;
+    return false;
   }
 }
 
@@ -170,14 +153,14 @@ export class CrearempleadosComponent implements OnInit {
 
   validarTelefono(){
 
-    const telefonitoPattern = /^(\d{4})(\d{4})/;
+    const telefonitoPattern = /^\d{4}-\d{4}$/;
 
     if(!this.empleados.empl_Telefono){
       this.TelefonoRequerido = true;
       ToastUtils.showWarningToast('Campo "Telefono" requerido.');
       return true;
     }else if (!telefonitoPattern.test(this.empleados.empl_Telefono)) {
-      this.DNIRequerido = false;
+      this.TelefonoRequerido = false;
       ToastUtils.showWarningToast('Formato de Telefono inválido. El formato debe ser XXXX-XXXX');
       return false;
     }
@@ -209,5 +192,32 @@ export class CrearempleadosComponent implements OnInit {
     }
   }
  
+
+  // formateos
+  formatoDNI() {
+    const dniSinGuiones = this.empleados.empl_DNI.replace(/-/g, '');
+    let grupos = dniSinGuiones.match(/^(\d{4})(\d{4})(\d+)/);
+    
+    if (grupos) {
+      grupos.shift();
+      this.empleados.empl_DNI = grupos.filter(Boolean).join('-');
+    }
+  }
+  
+  
+  formatoTelefono(){
+    const telefonoSinGuines = this.empleados.empl_Telefono.replace(/-/g, '');
+    let numeritos = telefonoSinGuines.match(/^(\d{4})(\d{4})/);
+
+    if(numeritos){
+      numeritos.shift();
+      this.empleados.empl_Telefono = numeritos.filter(Boolean).join('-');
+    }
+  }
+
+  Volver(){
+    this.router.navigate(['listempleados']);
+  }
+
   
 }

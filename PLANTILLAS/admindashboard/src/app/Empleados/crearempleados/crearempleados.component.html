@@ -183,6 +183,7 @@
                   ></span>
                   <input
                     [(ngModel)]="empleados.empl_Telefono"
+                    (input)="formatoTelefono()"
                     type="text"
                     maxlength="8"
                     class="form-control"
@@ -290,21 +291,13 @@
                 </div>
               </div>
               <div class="text-center">
-                <button
-                  class="ov-btn-grow-primary mt-3 col-2"
-                  style="height: 2.4rem; margin-left: 0"
-                  (click)="guardarEmpleado()"
-                >
+                <button (click)="guardarEmpleado()" class="ov-btn-grow-primary col-2" style="height: 3rem;">
                   <i class="fas fa-plus-circle mr-1"></i>
                   Agregar
-                </button>
-                <button
-                  class="ov-btn-grow-danger mt-3 col-2"
-                  style="height: 2.4rem; margin-left: 10px"
-                  routerLink="/listempleados"
-                >
-                  <i class="bi bi-x-square-fill"></i>
-                  Cancelar
+                </button>    
+                <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 3rem;">
+                  <i class="bi bi-reply-fill mr-1"></i>
+                  Volver
                 </button>
               </div>
             </div>
