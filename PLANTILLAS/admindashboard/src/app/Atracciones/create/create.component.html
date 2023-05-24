@@ -37,37 +37,52 @@
                               <div class="row g-3 mt-1">
 
                                  <div class="col-md-12">
+                                    <div class="mt-3"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
                                     <div class="input-group" style="height: 3rem;">                                        
                                        <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> 
+                                       <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre" (input)="clearNombreError()"> 
                                     </div>
                                  </div>   
 
                                  <div class="col-md-12">
-                                       <div class="input-group" >                                                                           
-                                          <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
-                                          <textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea>
-                                       </div>
+                                    <div class="mt-1"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DescripcionRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Descripción:</label>
+                                    <div class="input-group" style="height: 3rem;">                                                                           
+                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" (input)="clearDescripcionError()">                                                                               
+                                    </div>
                                  </div>
 
-                                 <div class="col-md-12">                                    
-                                    <div class="input-group">                                       
+                                 <div class="col-md-12">    
+                                    <div class="mt-1"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>                                
+                                    <div class="input-group" style="height: 3rem;">                                       
                                        <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
-                                       <textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea>                                    
+                                       <input [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">                                                                                                               
                                     </div>
                                  </div>
 
                                  <div class="col-md-12">
+                                    <div class="mt-1"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="LimitePersonasRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Límite personas:</label>
                                     <div class="input-group" style="height: 3rem;">                                       
                                        <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> 
+                                       <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas" (input)="clearLimitePersonasError()">                                                                               
                                     </div>                                                                        
                                  </div>
-
-                                 <div class="col-md-12">     
+                                 
+                                 <div class="col-md-12">  
+                                    <div class="mt-1"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DuracionRondaRequerido"></i>                                 
+                                    <label for="atra_DuracionRonda" class="ms-1 form-label text-dark">Duración Ronda:</label>  
                                     <div class="input-group" style="height: 3rem;">                                       
                                        <span class="input-group-text"><i class="bi bi-stopwatch-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda">                                                                            
+                                       <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda" (input)="clearDuracionRondaError()">                                                                                                                   
                                     </div>
                                  </div>
                               </div>
@@ -76,17 +91,28 @@
                            <div class="col-md-6">
                               <div class="row g-3 mt-1">
                                  <div class="col-md-12">
-                                    <div class="form-group">
-                                       <label for="imagen">Imagen:</label>
-                                       <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
-                                    </div>
-                                    <div class="card mt-3" *ngIf="selectedImage">
-                                       <img [src]="selectedImage" alt="Imagen seleccionada" class="img-thumbnail-space">
-                                       <div class="card-body text-center mt-2">
-                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-2" style="height: 2.4rem; margin-left: 0;">
+                                    <div class="card mt-1">
+                                       <div class="card-header text-center">                                          
+                                          <div class="form-group">
+                                             <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
+                                             <label for="imagen" class="ms-1 form-label text-dark">Imagen:</label>
+                                             <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
+                                          </div>
+                                       </div>
+                                       <div class="card-body text-center mt-3">
+                                          <div class="my-image-container">
+                                            <div class="my-circular-container">
+                                             <div class="card-body" *ngIf="selectedImage">
+                                                <img #imageInput [src]="selectedImage">
+                                             </div>
+                                            </div>
+                                          </div>
+                                        </div>                                        
+                                       <div class="card-footer text-center">
+                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-1" style="height: 2.4rem; margin-left: 0;">
                                              <i class="bi bi-trash-fill"></i>
                                              Quitar Imagen
-                                          </button>
+                                          </button>                                          
                                        </div>
                                     </div>
                                  </div>                                 
@@ -95,7 +121,6 @@
 
                         </div>
                      </div>   
-
                   </div>
                </div>
 
@@ -103,29 +128,34 @@
                   <div class="card">
                      
                      <div class="card-header text-center text-dark ">                                
-                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: crimson;"></i>Ubicación</h4>
+                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: orange;"></i>Ubicación</h4>
                      </div>
 
                      <div class="card-body">
-                        <div class="row mt-3">
-                           
-                           <div class="col-img" *ngFor="let item of areasForStile; let i = index" [class.active]="i === 0">
-                              <div class="card my-card p-0 m-0" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
-                                 <img src="https://th.bing.com/th/id/OIP.2Z4PDxLVFR-nSemDRqPMEgHaFj?w=237&h=180&c=7&r=0&o=5&pid=1.7" alt="wdqwdqd" class="img-thumbnail-space">
+                        <div class="row mt-2">
+                           <div class="card-title text-center mb-0">
+                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="AreaRequerido"></i>
+                              Elige la zona donde estará ubicada esta atracción:
+                           </div>
+                           <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
+                              <div class="card my-card p-0 m-0 mb-4" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
+                                 <img src="https://th.bing.com/th/id/OIP.2Z4PDxLVFR-nSemDRqPMEgHaFj?w=237&h=180&c=7&r=0&o=5&pid=1.7" class="img-thumbnail-space">
                                  <div class="card-img-overlay-mod">
-                                 <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
-                              </div>
+                                    <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
+                                 </div>
                                  <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
                               </div>
-                              </div>
+                           </div>
 
-                           <div class="col-md-12 mt-3">
-                              <div class="form-floating">
-                                 <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones">
-                                    <option value="">Selecciona una opción...</option>
+                           <div class="col-md-12 mt-4"> 
+
+                              <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="RegionRequerido"></i>
+                              <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Región:</label>
+                              <div class="input-group" style="height: 3rem;">
+                                 <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
+                                 <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
                                     <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
-                                    </select>
-                                    <label for="floatingSelectRegion">Región</label>
+                                 </select>
                               </div>
                            </div>
 
