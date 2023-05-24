@@ -216,6 +216,7 @@ CREATE OR ALTER VIEW acce.VW_Roles
 AS
 SELECT	role_Id, 
 		role_Nombre, 
+		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios WHERE role_ID = role_Id),
 		role_Estado, 
 		role_UsuarioCreador,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = role_UsuarioCreador), 
@@ -292,8 +293,22 @@ CREATE OR ALTER PROC acce.UDP_tbRoles_UPDATE
 AS BEGIN
 
 	BEGIN TRY
+			--validar codigo
+			IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Nombre = @role_Nombre AND role_Estado  = 1 AND role_ID != @role_ID)
+			BEGIN
+
+				SELECT 500 AS codeStatus, 'No puede Editar el Rol, Ya existe este Nombre' AS messageStatus
+
+			END
+			--validar si existe pero son los mismos datos
+			ELSE IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Nombre = @role_Nombre AND role_Estado  = 1 AND role_ID = @role_ID)
+			BEGIN
+
+				SELECT 200 AS codeStatus, 'Rol Modificado con éxito' AS messageStatus
+
+			END
 	--si existe
-		IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Nombre = @role_Nombre AND role_Estado  = 1)
+		ELSE IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Nombre = @role_Nombre AND role_Estado  = 1)
 	     BEGIN
             SELECT 409 AS codeStatus, 'El Rol ya existe' AS messageStatus
          END

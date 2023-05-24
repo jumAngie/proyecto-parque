@@ -11,10 +11,13 @@ import { Roles } from 'src/app/Models/Roles';
 
 export class IndexComponent implements OnInit {
   rol: Roles[] = [];
+  selectedRol: Roles = new Roles();
   p: number = 1;
   filtro: string = '';
   openDropdownIds: number[] = [];
+  constructor(private service: AcceService, private router: Router,private elementRef: ElementRef) { }
 
+  //acciones
   toggleDropdown(roleId: number) {
     if (this.isDropdownOpen(roleId)) {
       this.closeDropdown(roleId);
@@ -29,6 +32,9 @@ export class IndexComponent implements OnInit {
 
   openDropdown(roleId: number): void {
     if (!this.isDropdownOpen(roleId)) {
+      // Cerrar los elementos abiertos
+      this.closeAllDropdowns();
+      
       this.openDropdownIds.push(roleId);
     }
   }
@@ -40,9 +46,16 @@ export class IndexComponent implements OnInit {
     }
   }
 
-  constructor(private service: AcceService, private router: Router,private elementRef: ElementRef) { }
+  closeAllDropdowns(): void {
+    this.openDropdownIds = [];
+  }
+  //!acciones
 
-
+  //cargar datos al modal
+  selectRol(rol: Roles) {
+    this.selectedRol = { ...rol }; 
+  }
+  //!cargar datos al modal
   
   ngOnInit(): void {
     this.service.getRoles().subscribe(data => {
@@ -55,5 +68,16 @@ export class IndexComponent implements OnInit {
     return this.rol.filter(rol => {
       return rol.role_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
     });
+  }
+
+
+
+  EditarRol() {
+    this.service.EditarRol(this.selectedRol)
+    .subscribe((response: any) => {
+        console.log(response.code)
+      }, (error: any) => {
+        console.error('Error al guardar el rol', error);
+      });
   }
 }

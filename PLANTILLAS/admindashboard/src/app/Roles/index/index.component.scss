@@ -35,6 +35,43 @@
 }
 
 
+//btn info
+.ov-btn-grow-info {
+  background: #fff; /* color de fondo */
+  color: #77bcdb; /* color de fuente */
+  border: 2px solid #77bcdb; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-info:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-info::after {
+  content: "";
+  background: #77bcdb; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -50%; /* ajusta el valor para aumentar la altura */
+  bottom: -50%; /* ajusta el valor para aumentar la altura */
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-info:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+
 //insert button
 .ov-btn-grow-in {
   background: #fff; /* color de fondo */
@@ -145,3 +182,46 @@
   transform: skewX(-45deg) scale(1, 1);
 }
 
+//delete dark
+
+.ov-btn-grow-dark {
+  background: #fff; /* color de fondo */
+  color: #000000; /* color de fuente */
+  border: 2px solid #000000; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-dark:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-dark::after {
+  content: "";
+  background: #000000; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -50%; /* ajusta el valor para aumentar la altura */
+  bottom: -50%; /* ajusta el valor para aumentar la altura */
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-dark:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+.badge-custom {
+  white-space: nowrap;
+  overflow: visible;
+  padding: 6px 10px;
+  font-size: 14px;
+}
