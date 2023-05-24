@@ -98,54 +98,10 @@
                   Agregar
                 </button>
                 <button (click)="Volver()" class="ov-btn-grow-d mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
-                  <i class="fas fa-plus-circle mr-1"></i>
+                  <i class="bi bi-reply-fill mr-1"></i>
                   Volver
                 </button>
             </div>
          </div>
       </div>
 </main>                                          
-
-
-<div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title">Selecciona el Area donde estará la atracción</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-            <div class="card">
-               <div class="card-body">                                                                                             
-                  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                     <div class="carousel-inner">
-                        <div class="carousel-item" *ngFor="let item of areas; let i = index" [class.active]="i === 0">
-                           <div class="card" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())"> <!-- Aquí puedes agregar las clases y estilos necesarios para las cartas -->
-                              
-                              <div class="card-header">
-                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU" alt="" class="card-img-top">  
-                              </div>                              
-                              <div class="card-body">
-                                 <h4 class="card-title">{{ item.area_Nombre }}</h4>
-                              </div>
-
-                           </div>
-                        </div>
-                     </div>
-                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     </button>
-                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     </button>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="modal-footer"> 
-            <button type="button" class="ov-btn-grow-d" data-bs-dismiss="modal">Close</button> 
-            <button type="button" class="ov-btn-grow-in">Save changes</button>
-         </div>
-      </div>
-   </div>
-</div>
