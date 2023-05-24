@@ -79,6 +79,10 @@ export class ParqServicesService {
     return this.http.get<Empleados[]>(this.apiService.apiUrl + 'Empleados/Listado')
   }
 
+  insertEmpleados(empleados: Empleados){
+    return this.http.post<Empleados[]>(this.apiService.apiUrl + 'Empleados/Insertar', empleados)
+  }
+
  
   // servicios de areas//
   getAreas(){
