@@ -36,4 +36,9 @@ export class ListAtraccionesComponent implements OnInit {
     this.router.navigate(['crearatracciones'])
   }
 
+  EditarAtraccion(atracciones: Atracciones): void{
+    localStorage.setItem('atra_ID', atracciones.atra_ID?.toString());
+    this.router.navigate(['atracciones-editar']);
+  }
+
 }

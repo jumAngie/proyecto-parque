@@ -56,6 +56,7 @@ import { CreateAtraccionesComponent } from './Atracciones/create/create.componen
 
 import { ParqServicesService } from './ParqServices/parq-services.service';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
+import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { CrearempleadosComponent } from './Empleados/crearempleados/crearemplead
     CreatecargosComponent,
     EditarcargosComponent,
     CreateAtraccionesComponent,
-    CrearempleadosComponent
+    CrearempleadosComponent,
+    EditAtraccionesComponent
   ],
   imports: [
     BrowserModule,

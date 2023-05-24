@@ -37,7 +37,7 @@ import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.
 
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
-
+import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
 
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
@@ -91,7 +91,8 @@ const routes: Routes = [
   
   { path: 'listatracciones', component: ListAtraccionesComponent},
   { path: 'crearatracciones', component: CreateAtraccionesComponent},
-  
+  { path: 'atracciones-editar', component: EditAtraccionesComponent},
+
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},

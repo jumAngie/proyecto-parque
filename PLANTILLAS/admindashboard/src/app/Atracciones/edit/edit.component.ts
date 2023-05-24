@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild  } from '@angular/core';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Areas } from 'src/app/Models/Areas';
@@ -6,23 +6,19 @@ import { Atracciones } from 'src/app/Models/Atracciones';
 import { Regiones } from 'src/app/Models/Regiones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
-
-
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-
-export class CreateAtraccionesComponent implements OnInit {
+export class EditAtraccionesComponent implements OnInit {
   atracciones: Atracciones = new Atracciones();
   areas!: Areas[];
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
   selectedImage: any;
   @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
-  
-
+    
   //VALIRABLES PARA VALIDACIÓN DE S
   NombreRequerido = false;
   DescripcionRequerido = false;
@@ -32,7 +28,6 @@ export class CreateAtraccionesComponent implements OnInit {
   RegionRequerido = false;
   AreaRequerido = false;
 
-  
   constructor(
     private service: ParqServicesService,
     private router: Router,
@@ -41,22 +36,36 @@ export class CreateAtraccionesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getData();
+
     this.service.getAreas()
     .subscribe((response: any) =>{
       if(response.success){
         this.areas = response.data;
-      }
-
-      this.areasForStyle = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre}));
-      console.log(this.areasForStyle);
-    })
-
-
+      }    
+    });
+      
     this.service.getRegiones()
     .subscribe((response: any) =>{
       if(response.success){
         this.regiones = response.data;
       }
+    });
+
+    this.areasForStyle = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre}));
+
+    this.areasForStyle.forEach(carta => {
+      carta.isSelected = carta.area_ID === this.atracciones.area_ID.toString();
+    });
+  }
+
+  getData(){
+    const id: number | undefined = isNaN(parseInt(localStorage.getItem('atra_ID') ?? '', 0)) ? undefined: parseInt(localStorage.getItem('atra_ID') ?? '', 0);
+    this.atracciones.atra_ID = id ?? 0;
+    this.service.findAtracciones(this.atracciones)
+    .subscribe((response: any) =>{
+      console.log(response);
+      this.atracciones = response;
     })
   }
 
@@ -81,8 +90,8 @@ export class CreateAtraccionesComponent implements OnInit {
     }
 
     if(errors == 0){
-      this.atracciones.atra_UsuarioCreador = 1;
-      this.service.insertAtracciones(this.atracciones)
+      this.atracciones.atra_UsuarioModificador = 1;
+      this.service.editAtracciones(this.atracciones)
       .subscribe((response: any) =>{
         console.log(response)
         if(response.code == 200){
@@ -90,13 +99,11 @@ export class CreateAtraccionesComponent implements OnInit {
           this.router.navigate(['listatracciones']);
         }else if(response.code == 409){
           ToastUtils.showWarningToast(response.message);
-        }
-        else{
-          ToastUtils.showErrorToast(response.message);
+        }else{
+          ToastUtils.showErrorToast(response.message);          
         }
       })
     }
-
   }
 
   validarNombre() {
@@ -218,21 +225,24 @@ export class CreateAtraccionesComponent implements OnInit {
     }    
   }
 
+
+
   Volver(){
     this.router.navigate(['listatracciones']);
+    
   }
 
   // Función para manejar el clic en una carta
   mostrarIdCarta(cartaId: string) {
     this.atracciones.area_ID = parseInt(cartaId);
     this.clearAreaError();
-    console.log(this.atracciones.area_ID);
-    // Lógica para cambiar el estado de selección de la carta
+  
+    // Establecer la carta seleccionada al cargar el componente        
     this.areasForStyle.forEach(carta => {
       carta.isSelected = carta.area_ID === cartaId;
     });
-
-  }  
+  }
+   
   
   handleImageChange(event: any) {
     const file = event.target.files[0];
@@ -249,7 +259,5 @@ export class CreateAtraccionesComponent implements OnInit {
     this.selectedImage = '';
     this.imageInput.nativeElement.value = '';
   }
-
-
 
 }

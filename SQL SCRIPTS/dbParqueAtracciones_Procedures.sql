@@ -2185,7 +2185,7 @@ SELECT TOP (1000) [atra_ID]
 	  ,regi.regi_Nombre
       ,[atra_ReferenciaUbicacion]
       ,[atra_LimitePersonas]
-      ,[atra_DuracionRonda]
+      ,CONVERT(NVARCHAR(300), [atra_DuracionRonda]) AS [atra_DuracionRonda]
       ,[atra_Imagen]
       ,[atra_Habilitado]
       ,[atra_Estado]
@@ -2262,9 +2262,16 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
+			IF EXISTS (SELECT * FROM parq.tbAtracciones WHERE atra_Nombre = @atra_Nombre)
+				BEGIN
+					SELECT 409 AS codeStatus, 'Ya existe una atracción con este nombre' AS messageStatus					
+				END
+			ELSE 
+				BEGIN
 					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
 					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Atraccion creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Atracción creada con éxito' AS messageStatus
+				END
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2282,23 +2289,31 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME(7), 
+	@atra_DuracionRonda			TIME, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioModificador	INT
  AS
 BEGIN
 	BEGIN TRY
-				UPDATE parq.tbAtracciones
-				SET		area_ID =	@area_ID, 
-						atra_Nombre = @atra_Nombre,
-						regi_ID = @regi_ID,
-						atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
-						atra_LimitePersonas = @atra_LimitePersonas,
-						atra_DuracionRonda = @atra_DuracionRonda,
-						atra_Imagen = @atra_Imagen,
-						atra_UsuarioModificador = @atra_UsuarioModificador
-				WHERE	atra_ID   =		@atra_ID
-				SELECT 200 AS codeStatus, 'Atraccion actualizada con �xito' AS messageStatus
+		BEGIN TRANSACTION
+			IF EXISTS (SELECT * FROM parq.tbAtracciones WHERE  atra_Nombre = @atra_Nombre AND atra_ID != @atra_ID)
+				BEGIN
+					SELECT 409 AS codeStatus, 'Ya existe una atracción con este nombre' AS messageStatus
+				END
+			ELSE 
+				BEGIN
+					UPDATE parq.tbAtracciones
+					SET		area_ID =	@area_ID, 
+							atra_Nombre = @atra_Nombre,
+							regi_ID = @regi_ID,
+							atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
+							atra_LimitePersonas = @atra_LimitePersonas,
+							atra_DuracionRonda = @atra_DuracionRonda,
+							atra_Imagen = @atra_Imagen,
+							atra_UsuarioModificador = @atra_UsuarioModificador
+					WHERE	atra_ID   =		@atra_ID
+					SELECT 200 AS codeStatus, 'Atracción actualizada con éxito' AS messageStatus
+				END
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2323,13 +2338,13 @@ BEGIN
 
 				IF	@TicketsClientesOcupa > 0
 					BEGIN
-						SELECT 500 AS codeStatus, 'La Atraccion que desea eliminar est� en uso.' AS messageStatus
+						SELECT 500 AS codeStatus, 'La Atracción que desea eliminar está en uso.' AS messageStatus
 					END
 				ELSE
 					BEGIN
-						UPDATE parq.VW_tbAtracciones
+						UPDATE parq.tbAtracciones
 							SET atra_Estado	= 0 WHERE atra_ID =	@atra_ID
-						SELECT 200 AS codeStatus, 'Atraccion eliminado con �xito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Atracción eliminada con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY

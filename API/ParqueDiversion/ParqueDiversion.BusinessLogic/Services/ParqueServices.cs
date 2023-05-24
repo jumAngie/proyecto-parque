@@ -503,6 +503,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             try
             {
                 var list = _atraccionesRepository.List();
+
                 return result.Ok(list);
             }
             catch (Exception e)
@@ -514,9 +515,27 @@ namespace ParqueDiversion.BusinessLogic.Services
         public ServiceResult InsertarAtracciones(tbAtracciones item)
         {
             var result = new ServiceResult();
+            try
+            {
+                var map = _atraccionesRepository.Insert(item);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
 
-            var map = _atraccionesRepository.Insert(item);
-            return result.Ok(map);
         }
         public VW_tbAtracciones FindAtracciones(int id)
         {
@@ -540,15 +559,28 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return null;
             }
         }
-        public RequestStatus UpdateAtracciones(tbAtracciones tabla)
+        public ServiceResult UpdateAtracciones(tbAtracciones item)
         {
+            var result = new ServiceResult();
             try
             {
-                return _atraccionesRepository.Update(tabla);
+                var map = _atraccionesRepository.Update(item);
+                if (map.CodeStatus ==  200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
         #endregion

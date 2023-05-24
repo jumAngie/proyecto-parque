@@ -47,10 +47,16 @@ export class ParqServicesService {
   getAtracciones(){
     return this.http.get<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/List');
   }
-
   insertAtracciones(atracciones: Atracciones){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Insert', atracciones)
   }
+  findAtracciones(atracciones: Atracciones){
+    return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Find', atracciones);
+  }
+  editAtracciones(atracciones: Atracciones){
+    return this.http.put<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Update', atracciones)
+  }
+
 
   // servicios de quioscos//
   getInsumosQuiosco(){

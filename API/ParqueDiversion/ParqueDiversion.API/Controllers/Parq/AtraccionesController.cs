@@ -39,10 +39,10 @@ namespace ParqueDiversion.API.Controllers
         }
 
 
-        [HttpGet("Find/{id}")]
-        public IActionResult Edit(int id)
+        [HttpPost("Find")]
+        public IActionResult Find(AtraccionesViewModel item)
         {
-            var listado = _parqueServices.FindAtracciones(id);
+            var listado = _parqueServices.FindAtracciones(item.atra_ID);
             return Ok(listado);
         }
 
