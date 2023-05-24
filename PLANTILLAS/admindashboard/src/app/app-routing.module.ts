@@ -49,6 +49,7 @@ import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.compon
 
 
 import { IndexComponent } from './Roles/index/index.component';
+import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -95,8 +96,11 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
   
-  { path: 'listempleados', component: ListempleadosComponent},
-  { path: 'createcargos', component: CreatecargosComponent},
+  {path: 'listempleados', component: ListempleadosComponent},
+  {path: 'crearempleados', component: CrearempleadosComponent},
+
+  
+  {path: 'createcargos', component: CreatecargosComponent},
   {path: 'editarcargos', component: EditarcargosComponent}
 ];
 
