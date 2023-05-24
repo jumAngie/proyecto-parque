@@ -220,8 +220,16 @@
 }
 
 .badge-custom {
-  white-space: nowrap;
-  overflow: visible;
-  padding: 6px 10px;
-  font-size: 14px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 6px 9px;
+  font-size: 11px;
 }
+
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
