@@ -399,6 +399,9 @@ VALUES	('Norte'),
 		('Sudoeste')
 GO		
 
+UPDATE parq.tbRegiones
+SET regi_UsuarioCreador = 1
+
 
 INSERT INTO parq.tbClientes(clie_Nombres, clie_Apellidos, clie_DNI, clie_Sexo, clie_Telefono)
 VALUES	('Juan', 'Camaney',   '0502-0045-57848', 'M', '8855-4477'),

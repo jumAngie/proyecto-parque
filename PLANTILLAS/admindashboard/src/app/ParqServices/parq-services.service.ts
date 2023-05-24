@@ -7,43 +7,84 @@ import { VentasQuioscoDetalle } from '../Models/VentasQuioscoDetalle';
 import { InsumosQuiosco } from '../Models/InsumosQuiosco';
 import { ClientesRegistrados } from '../Models/ClientesRegistrados';
 import { Empleados } from '../Models/Empleados';
-
+import { ApiService } from '../api.service';
+import { Areas } from '../Models/Areas';
+import { Regiones } from '../Models/Regiones';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParqServicesService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private apiService: ApiService,
+    ) { }
 
-  Url="https://localhost:44322/api/";
 
+
+  // servicios de cargos //
   getCargos(){
-    return this.http.get<Cargos[]>(this.Url + 'Cargo/List');
+    return this.http.get<Cargos[]>(this.apiService.apiUrl + 'Cargo/List');
   }
 
+  createCargos(cargos: Cargos){
+    return this.http.post<Cargos[]>(this.apiService.apiUrl + 'Cargo/Insert', cargos)
+  }
+
+  getCargosId(idcargo?: number){
+    return this.http.get<Cargos>(this.apiService.apiUrl + 'Cargo/Find/'+ idcargo)
+  }
+
+
+
+  // servicios de golosinas //
   getGolosinas(){
-    return this.http.get<Golosinas[]>(this.Url + 'Golosinas/Listado');
+    return this.http.get<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Listado');
   }
 
+  // servicios de atracciones//
   getAtracciones(){
-    return this.http.get<Atracciones[]>(this.Url + 'Atracciones/List');
+    return this.http.get<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/List');
   }
 
+  insertAtracciones(atracciones: Atracciones){
+    return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Insert', atracciones)
+  }
+
+  // servicios de quioscos//
   getInsumosQuiosco(){
-    return this.http.get<InsumosQuiosco[]>(this.Url + 'InsumosQuiosco/Listado');
+    return this.http.get<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/Listado');
   }
 
+
+  // servicios de clientes registrados//
   getClientesRegistrados(){
-    return this.http.get<ClientesRegistrados[]>(this.Url + 'ClientesRegistrados/List');
+    return this.http.get<ClientesRegistrados[]>(this.apiService.apiUrl + 'ClientesRegistrados/List');
   }
 
+
+  // servicios de venta quiosco detalle//
   getVentasQuioscoDetalle(){
-    return this.http.get<VentasQuioscoDetalle[]>(this.Url + 'VentasQuioscoDetalle/Listado');
-  }
-  
-  getEmpleados(){
-    return this.http.get<Empleados[]>(this.Url + 'Empleados/Listado')
+    return this.http.get<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/Listado');
   }
 
+
+  // servicios de Empleados //
+  getEmpleados(){
+    return this.http.get<Empleados[]>(this.apiService.apiUrl + 'Empleados/Listado')
+  }
+
+ 
+  // servicios de areas//
+  getAreas(){
+    return this.http.get<Areas[]>(this.apiService.apiUrl + 'Areas/List');
+  }
+
+
+
+  // servicios de regiones//
+  getRegiones(){
+    return this.http.get<Regiones[]>(this.apiService.apiUrl + 'Regiones/List')
+  }
 }

@@ -1,0 +1,41 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Cargos</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
+        <li class="breadcrumb-item">Crear</li>
+        <li class="breadcrumb-item active">Cargos</li>
+      </ol>
+    </nav>
+  </div>
+  <div id="toastContainer" *ngIf="showToast" class="alert alert-dismissible fade show" role="alert">
+    <i class="bi bi-check-circle me-1"></i> {{ toastMessage }}
+  </div>  
+  <section class="section">
+    <h5 class="card-title">Crear Cate</h5>
+    <div class="row mb-3">
+      <label for="inputText" class="col-sm-2 col-form-label"
+        >Nombre del cargo</label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="cargos.carg_Nombre"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <label for="inputText" class="col-sm-2 col-form-label"
+        >Usuario Creador</label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="cargos.carg_UsuarioCreador"
+          type="number"
+          class="form-control"
+        />
+      </div>
+      <button (click)="Guardar()">Guardar</button>
+    </div>
+  </section>
+</main>

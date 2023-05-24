@@ -11,7 +11,9 @@ import { ServiceService } from 'src/app/Service/service.service';
 export class CrearComponent {
   categoria: Categoria = new Categoria();
 
-  constructor (private service: ServiceService, private router: Router){}
+  constructor (
+    private service: ServiceService, 
+    private router: Router){}
 
   Guardar(){
     this.service.createCategoria(this.categoria)

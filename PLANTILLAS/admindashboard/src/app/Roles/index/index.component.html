@@ -1,50 +1,179 @@
 <main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Roles</h1>
+    <nav>
+       <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item">Roles</li>
+          <li class="breadcrumb-item active">Index</li>
+       </ol>
+    </nav>
+ </div>
   <div class="card">
-    <div class="card-header">
-      <div class="bg-blue-500 text-white px-4 py-6 flex items-center justify-center" style="background-image: url('https://i.pinimg.com/originals/6b/c0/66/6bc06603eea44da0d4fce7a977690b4f.png'); background-size: cover; background-position: center;">
-        <div class="text-center">
-          <h3 class="text-3xl font-semibold">Roles</h3>
-          <p class="mt-2">Administración de Roles</p>
+    <div class="card-header" style="padding: 0;">
+      <div class="banner" style="background-image: url('https://www.cisa.gov/sites/default/files/styles/hero_large/public/2023-01/23_0127_ecd_ps-cyber_header_1600x600.png?h=e0d9a4bb&itok=tn8cHABi%27);');border-top-left-radius:10px;border-top-right-radius:10px; background-size: cover; background-position: center;">
+        <div class="overlay"></div>
+        <div class="text-center" style="padding: 2rem;">
+          <h3 style="font-size: 2rem; font-weight: bold; color: white;">Roles</h3>
+          <p style="font-size: 1rem; color: white;">Administración de Roles</p>
         </div>
       </div>
-    </div>      
+    </div>
+    
+      
     <div class="card-body">
-      <button class="btn btn-sm btn-outline-primary">
-        <i class="fas fa-plus-circle mr-1"></i>
-        Agregar
-      </button>
+          
+      <div class="row ms-5 col-11">
+        <button class="ov-btn-grow-primary  mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal" data-bs-target="#crear">
+          <i class="fas fa-plus-circle mr-1"></i>
+          Agregar
+        </button>
+        
+        <div class="search-bar mt-3 col-10">
+          <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+        </div>
+      </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-        <div *ngFor="let cat of categoria | paginate: { itemsPerPage: 8, currentPage: p }" class="card border border-gray-300 shadow rounded-md p-4">
-          <h3 class="text-xl font-semibold">{{ cat.name }}</h3>
-          <p class="mt-2 text-gray-600">ID: {{ cat.id }}</p>
-          <div class="mt-4 flex justify-center">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 justify-content-center align-items-stretch gap-4 mt-4">
+        <div *ngFor="let rol of filtrarRoles() | paginate: { itemsPerPage: 8, currentPage: p }" class="card border shadow rounded-md p-4 d-flex flex-column">
+          <div class="card-body">
+            <p class="mt-2 text-gray-600">ID: {{ rol.role_Id }}</p>
+            <h4 class="text-xl font-semibold ">{{ rol.role_Nombre }}</h4>
+            <span class="badge position-absolute top-0 start-0 badge-custom" title="Usuarios con este Rol" [ngClass]="{'bg-primary': rol.role_Cantidad_Usuarios == 0, 'bg-success': rol.role_Cantidad_Usuarios === 0}" style="padding: 6px 12px; border-bottom-right-radius: 9999px; border-top-right-radius: 9999px; white-space: nowrap;">{{ rol.role_Cantidad_Usuarios }}</span>
+          </div>
+      
+          <div class="mt-auto d-flex justify-content-center">
             <div class="dropdown">
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{cat.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opciones
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" [id]="'dropdownMenuButton' + rol.role_Id" (click)="toggleDropdown(rol.role_Id)" aria-haspopup="true" aria-expanded="false">
+                Acciones
               </button>
-              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + cat.id">
-                <a class="dropdown-item" href="#">
+              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + rol.role_Id" [class.show]="isDropdownOpen(rol.role_Id)">
+                <a class="dropdown-item btn ov-btn-grow-u p-3 "  style="border: none;"  data-bs-toggle="modal" data-bs-target="#update" (click)="selectRol(rol)">
+                  <i class="fas fa-edit"></i>
                   Editar
-                  <i class="fas fa-edit ml-1"></i>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item btn ov-btn-grow-info p-3"  style="border: none;"  >
+                  <i class=" fas fa-info-circle ml-1"></i>
                   Detalles
-                  <i class="fas fa-info-circle ml-1"></i>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;"  data-bs-toggle="modal" data-bs-target="#pantallas">
+                  <i class="  fas fa-desktop ml-1"></i>
+                  Pantallas
+                </a>                
+                <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar">
+                  <i class=" fas fa-trash-alt ml-1"></i>
                   Eliminar
-                  <i class="fas fa-trash-alt ml-1"></i>
                 </a>
               </div>
             </div>
           </div>
+          
         </div>
       </div>
 
-      <div class="pagination flex justify-center mt-4">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <div class="pagination d-flex justify-content-center mt-4">
+        <pagination-controls (pageChange)="p = $event"
+                             previousLabel="Anterior"
+                             nextLabel="Siguiente"
+                             firstLabel="Primera"
+                             lastLabel="Última"
+                             screenReaderPaginationLabel="Paginación"
+                             screenReaderPageLabel="Página"
+                             screenReaderCurrentLabel="Página actual">
+        </pagination-controls>
       </div>
+
     </div>
   </div>
 </main>
+
+
+<!--Modal Insert-->
+<div class="modal fade" id="crear" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title">Nuevo Rol</h5>
+        </div>
+        <div class="modal-body">
+          <label for="role_Nombre" class="label-form mt-2">Nombre del Rol</label>
+          <input id="role_Nombre" class="form-control"/>
+        </div>
+        <div class="modal-footer">           
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
+          <button type="button" class="btn btn-success btn ov-btn-grow-in p-2">Guardar</button></div>
+
+     </div>
+  </div>
+</div>
+<!--/Modal Insert-->
+
+
+ <!-- Modal Update -->
+<div class="modal fade" id="update" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Rol</h5>
+      </div>
+      <div class="modal-body">
+        <input id="update_role_Nombre" class="form-control" [(ngModel)]="selectedRol.role_Id" />
+        <label for="update_role_Nombre" class="label-form mt-2">Nombre del Rol</label>
+        <input id="update_role_Nombre" class="form-control" [(ngModel)]="selectedRol.role_Nombre" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="EditarRol()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal Update -->
+
+
+
+<!--Modal Pantallas-->
+<div class="modal fade" id="pantallas" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title">Asignación de Pantallas</h5>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer"> 
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2">Guardar</button></div>
+
+     </div>
+  </div>
+</div>
+<!--/Modal Pantallas-->
+
+<!--Modal Eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+        <div class="modal-header">
+          <div class="row justify-content-center">
+           <h5 class="modal-title col-12">Esta seguro que desea eliminar este registro?</h5>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center mb-2">
+          <img src="https://img2.freepng.es/20180320/vuw/kisspng-symbol-font-trash-2-5ab0cac77f1e88.8245172715215356875207.jpg" alt="Not Found" class="w-50" srcset="">
+          </div>
+          <div class="row justify-content-center">
+          <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
+          <div class="col-lg-1"></div> 
+          <button type="button" class="ov-btn-grow-d col-lg-5">Aceptar</button></div>
+        </div>
+        </div>
+        <div class="modal-footer"> 
+     </div>
+  </div>
+</div>
+<!--/Modal Eliminar-->
+
+
