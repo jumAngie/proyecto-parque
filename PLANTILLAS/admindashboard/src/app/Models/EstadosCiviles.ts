@@ -1,5 +1,5 @@
 export class EstadosCiviles {
-    civi_Id!: number;
+    civi_ID!: number;
     civi_Descripcion!: String;
     civi_Estado!: number;
     civi_UsuarioCreador!: number;

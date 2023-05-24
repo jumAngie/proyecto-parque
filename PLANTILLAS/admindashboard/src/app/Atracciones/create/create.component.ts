@@ -70,4 +70,22 @@ export class CreateAtraccionesComponent implements OnInit {
     });
 
   }  
+
+  selectedImage: any;
+
+handleImageChange(event: any) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = (e: any) => {
+    this.selectedImage = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+removeImage(){
+  this.selectedImage = null;
+}
+
 }

@@ -25,32 +25,77 @@
             <div class="row g-3 mt-2">
                <div class="col-7">
                   <div class="card">
-                     
+
                      <div class="card-header text-center text-dark ">                              
                         <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
                      </div>
                      
                      <div class="card-body">
-                        <div class="row g-3 mt-1">                                 
-                              <div class="col-md-12">
-                                 <div class="form-floating"> <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> <label for="atra_Nombre">Nombre de la atracción</label></div>
-                              </div>   
-                              <div class="col-6">
-                                 <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea><label for="atra_Descripcion">Descripción</label></div>
-                              </div>
-                              <div class="col-6">
-                                 <div class="form-floating"><textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea><label for="atra_ReferenciaUbicacion">Referencia</label></div>
-                              </div>
-                              <div class="col-md-6">
+                        <div class="row g-3">
+                           <div class="col-md-6">
+
+                              <div class="row g-3 mt-1">
+
                                  <div class="col-md-12">
-                                    <div class="form-floating"> <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> <label for="atra_LimitePersonas">Límite de personas</label></div>
+                                    <div class="input-group" style="height: 3rem;">                                        
+                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre"> 
+                                    </div>
+                                 </div>   
+
+                                 <div class="col-md-12">
+                                       <div class="input-group" >                                                                           
+                                          <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                          <textarea [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" style="height: 100px;"></textarea>
+                                       </div>
+                                 </div>
+
+                                 <div class="col-md-12">                                    
+                                    <div class="input-group">                                       
+                                       <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
+                                       <textarea [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" style="height: 100px;"></textarea>                                    
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="input-group" style="height: 3rem;">                                       
+                                       <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas"> 
+                                    </div>                                                                        
+                                 </div>
+
+                                 <div class="col-md-12">     
+                                    <div class="input-group" style="height: 3rem;">                                       
+                                       <span class="input-group-text"><i class="bi bi-stopwatch-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda">                                                                            
+                                    </div>
                                  </div>
                               </div>
-                              <div class="col-md-6">                                       
-                                 <div class="form-floating"> <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda"> <label for="atra_DuracionRonda">Duración por ronda</label></div>
-                              </div>
+
+                           </div>
+                           <div class="col-md-6">
+                              <div class="row g-3 mt-1">
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="imagen">Imagen:</label>
+                                       <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
+                                    </div>
+                                    <div class="card mt-3" *ngIf="selectedImage">
+                                       <img [src]="selectedImage" alt="Imagen seleccionada" class="img-thumbnail-space">
+                                       <div class="card-body text-center mt-2">
+                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-2" style="height: 2.4rem; margin-left: 0;">
+                                             <i class="bi bi-trash-fill"></i>
+                                             Quitar Imagen
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>                                 
+                              </div>                                 
+                           </div>
+
                         </div>
                      </div>   
+
                   </div>
                </div>
 
@@ -92,12 +137,12 @@
          </div>
 
          <div class="card-footer">
-            <div class="text-center"> 
-               <button (click)="Guardar()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+            <div class="d-flex justify-content-end">
+               <button (click)="Guardar()" class="ov-btn-grow-primary col-2" style="height: 3rem;">
                   <i class="fas fa-plus-circle mr-1"></i>
                   Agregar
-                </button>
-                <button (click)="Volver()" class="ov-btn-grow-d mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+                </button>            
+                <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 3rem;">
                   <i class="bi bi-reply-fill mr-1"></i>
                   Volver
                 </button>

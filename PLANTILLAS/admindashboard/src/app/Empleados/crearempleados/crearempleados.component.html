@@ -51,8 +51,8 @@
                      </div>
                       <div class="col-6">
                         <div class="form-floating mb-3">
-                            <select [(ngModel)]="estadosciviles.civi_Id" class="form-select" id="floatingSelectEstadoCivil" aria-label="Selecciona un Estado Civil">
-                               <option *ngFor="let option of estadosciviles" [value]="option.civi_Id">{{ option.civi_Descripcion }}</option>
+                            <select [(ngModel)]="estadosciviles" class="form-select" id="floatingSelectEstadoCivil" aria-label="Selecciona un Estado Civil">
+                               <option *ngFor="let option of estadosciviles" [value]="option.civi_ID">{{ option.civi_Descripcion }}</option>
                              </select>
                              <label for="floatingSelectEstadoCivil">Estado Civil</label>
                          </div>                      </div>
