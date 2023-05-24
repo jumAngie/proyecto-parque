@@ -102,9 +102,24 @@
     transition: all 0.3s ease;
   }
   
+  .campo-vacio {
+    border-color: red;
+  }
+  
+  .campo-vacio:not(:focus) {
+    border-color: #ced4da; /* Establece el color de borde predeterminado cuando no está enfocado */
+  }
+  
+  
   .ov-btn-grow-in:hover::after {
     transition: all 0.3s ease-out;
     transform: skewX(-45deg) scale(1, 1);
+  }
+  
+  .custom-input {
+    height: 40px; /* Ajusta la altura según tus preferencias */
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+    /* Otros estilos personalizados que desees aplicar */
   }
   
   

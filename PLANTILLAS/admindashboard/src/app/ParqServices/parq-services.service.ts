@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import { Cargos } from '../Models/Cargos';
 import { Golosinas } from '../Models/Golosinas';
 import { Atracciones } from '../Models/Atracciones';
+import { EstadosCiviles } from '../Models/EstadosCiviles';
 import { VentasQuioscoDetalle } from '../Models/VentasQuioscoDetalle';
 import { InsumosQuiosco } from '../Models/InsumosQuiosco';
 import { ClientesRegistrados } from '../Models/ClientesRegistrados';
@@ -22,6 +23,11 @@ export class ParqServicesService {
     ) { }
 
 
+    // servicios de estados civiles //
+
+    getEstadoCivil(){
+      return this.http.get<EstadosCiviles[]>(this.apiService.apiUrl + 'EstadosCiviles/Index');
+    }
 
   // servicios de cargos //
   getCargos(){
@@ -35,8 +41,6 @@ export class ParqServicesService {
   getCargosId(idcargo?: number){
     return this.http.get<Cargos>(this.apiService.apiUrl + 'Cargo/Find/'+ idcargo)
   }
-
-
 
   // servicios de golosinas //
   getGolosinas(){
