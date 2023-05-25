@@ -47,6 +47,8 @@ import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/lis
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
+
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
 import { IndexComponent } from './Roles/index/index.component';
@@ -56,6 +58,7 @@ import { TabsComponent } from '../app/tabs/tabs.component';
 import { ParqServicesService } from './ParqServices/parq-services.service';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -116,6 +119,7 @@ import { AgGridModule } from 'ag-grid-angular';
     CrearempleadosComponent,
     EditAtraccionesComponent,
     LoginComponent,
+    EditarempleadosComponent
   ],
   imports: [
     BrowserModule,

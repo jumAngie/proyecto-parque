@@ -39,6 +39,13 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
+        [HttpGet("Find/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var listado = _parqueServices.FindEmpleado(id);
+            return Ok(listado);
+        }
+
         [HttpPost("Actualizar")]
         public IActionResult Update([FromBody] EmpleadosViewModel data)
         {

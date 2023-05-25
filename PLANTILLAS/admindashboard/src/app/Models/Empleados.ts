@@ -1,5 +1,5 @@
 export class Empleados{
-    empl_ID!: 1;
+    empl_ID!: number;
     empl_PrimerNombre!:string;
     empl_SegundoNombre!: string;
     empl_PrimerApellido!: string;

@@ -7,11 +7,11 @@ import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-crearempleados',
-  templateUrl: './crearempleados.component.html',
-  styleUrls: ['./crearempleados.component.scss'],
+  selector: 'app-editarempleados',
+  templateUrl: './editarempleados.component.html',
+  styleUrls: ['./editarempleados.component.scss']
 })
-export class CrearempleadosComponent implements OnInit {
+export class EditarempleadosComponent {
   empleados: Empleados = new Empleados();
   cargos!: Cargos[];
   estadosciviles!: EstadosCiviles[];
@@ -26,22 +26,31 @@ export class CrearempleadosComponent implements OnInit {
   EstCivilRequerido = false;
   CargoRequerido = false;
 
-  constructor(
-    private service: ParqServicesService,
-    private elementRef: ElementRef,
-    private router: Router
-  ) {}
+  constructor(private service:ParqServicesService, private elementRef: ElementRef, private router:Router) { }
 
   ngOnInit(): void {
+    this.CargarDatos();
+  }
 
-      this.service.getEstadoCivil()
-      .subscribe(data => {
-        this.estadosciviles = data;
-      });
-
-      this.service.getCargos().subscribe(data => {
-        this.cargos = data;
+  CargarDatos(){
+    // DDL ESTADO CIVIL
+    this.service.getEstadoCivil()
+    .subscribe(data => {
+      this.estadosciviles = data;
     });
+
+    // DDL CARGOS
+    this.service.getCargos().subscribe(data => {
+      this.cargos = data;
+  });
+
+    // CARGAR LOS DATOS AL FORMULARIO
+    const idEmpleado: number | undefined = isNaN(parseInt(localStorage.getItem("idEmpleado") ?? '', 10)) ? undefined: parseInt(localStorage.getItem("idEmpleado") ?? '', 10)
+    this.service.getEmpleadosId(idEmpleado)
+    .subscribe((data)=>{
+      this.empleados = data;
+      console.log(data);
+    })
   }
 
   guardarEmpleado(){
@@ -211,5 +220,4 @@ export class CrearempleadosComponent implements OnInit {
     this.router.navigate(['listempleados']);
   }
 
-  
 }
