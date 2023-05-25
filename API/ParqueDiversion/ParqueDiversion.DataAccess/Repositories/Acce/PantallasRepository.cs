@@ -42,17 +42,25 @@ namespace ParqueDiversion.DataAccess.Repositories
             return db.Query<VW_Pantallas>(ScriptsDatabase.INDEX_PANTALLAS, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
-        public RequestStatus InsertP(tbRolesXPantallas item)
+        public RequestStatus InsertP(int role_Id, int pant_Id, int pantrol_UserCrea)
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@role_ID", item.role_ID, DbType.String, ParameterDirection.Input);
-            parametros.Add("@pant_ID", item.pant_ID, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@ropa_UsuarioCreador", item.ropa_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@role_ID", role_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@pant_ID", pant_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@ropa_UsuarioCreador", pantrol_UserCrea, DbType.Int32, ParameterDirection.Input);
 
 
-            return (RequestStatus)db.QueryFirst(ScriptsDatabase.INSERT_PANTALLASROL, parametros, commandType: CommandType.StoredProcedure);
+            var result = db.QueryFirst(ScriptsDatabase.INSERT_PANTALLASROL, parametros, commandType: CommandType.StoredProcedure);
+            var codeStatus = Convert.ToInt32(result.codeStatus);
+            var messageStatus = result.messageStatus.ToString();
+
+            return new RequestStatus
+            {
+                CodeStatus = codeStatus,
+                MessageStatus = messageStatus
+            };
         }
 
 
@@ -64,8 +72,15 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@role_ID", role_ID, DbType.String, ParameterDirection.Input);
             parametros.Add("@pant_ID", pant_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@ropa_UsuarioModificador", ropa_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
+            var result = db.QueryFirst(ScriptsDatabase.DELETE_PANTALLASROL, parametros, commandType: CommandType.StoredProcedure);
+            var codeStatus = Convert.ToInt32(result.codeStatus);
+            var messageStatus = result.messageStatus.ToString();
 
-            return (RequestStatus)db.QueryFirst(ScriptsDatabase.DELETE_PANTALLASROL, parametros, commandType: CommandType.StoredProcedure);
+            return new RequestStatus
+            {
+                CodeStatus = codeStatus,
+                MessageStatus = messageStatus
+            };
         }
 
         public RequestStatus Update(tbPantallas item)

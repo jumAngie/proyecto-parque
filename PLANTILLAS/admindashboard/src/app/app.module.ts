@@ -59,6 +59,7 @@ import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     EditarcargosComponent,
     CreateAtraccionesComponent,
     CrearempleadosComponent,
-    EditAtraccionesComponent
+    EditAtraccionesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +125,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbNavModule,
     NgIf,
     NgbAlertModule,
-    NgSelectModule
+    NgSelectModule,
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

@@ -358,6 +358,15 @@ GO
 
 --*********************************************************Tabla Pantallas Por Rol**************************************************************--
 
+CREATE OR ALTER PROC acce.UDP_tbPantallas_INDEX
+AS BEGIN
+
+SELECT * FROM acce.tbPantallas
+WHERE pant_Estado = 1;
+
+END
+
+GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_CHECKED 
 @role_ID INT

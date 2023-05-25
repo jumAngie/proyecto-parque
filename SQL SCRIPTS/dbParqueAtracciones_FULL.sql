@@ -943,38 +943,44 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_INSERT
-@role_ID INT,
-@pant_ID INT,
-@ropa_UsuarioCreador INT
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_INSERT 
+@role_Id INT,
+@pant_Id INT,
+@pantrol_UserCrea INT
 AS
 BEGIN
-	INSERT INTO [acce].tbRolesXPantallas
-	(role_ID, pant_ID, ropa_UsuarioCreador)
+BEGIN TRY
+	INSERT INTO [acce].[tbRolesXPantallas]
+	(role_Id, pant_Id, [ropa_UsuarioCreador])
 	VALUES
-	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
+	(@role_Id,@pant_Id,@pantrol_UserCrea)
 
-	SELECT 200 AS codeStatus, 'Acceso Agregado con �xito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Agregado con exito' AS messageStatus
+END TRY
+BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 
+END CATCH
 END
+
 
 GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
-@role_ID INT,
-@pant_ID INT,
-@ropa_UsuarioCreador INT
+@role_Id INT,
+@pant_Id INT,
+@ropa_UsuarioModificador INT
 AS
 BEGIN
-DELETE FROM  [acce].tbRolesXPantallas
-WHERE role_ID=@role_ID AND pant_ID = @pant_ID
+DELETE FROM  [acce].[tbRolesXPantallas]
+WHERE role_Id=@role_Id AND pant_Id = @pant_Id
 
-INSERT INTO [acce].tbRolesXPantallas
-	(role_ID, pant_ID, ropa_UsuarioCreador)
+INSERT INTO [acce].[tbRolesXPantallas]
+	(role_Id, pant_Id, [ropa_UsuarioCreador])
 	VALUES
-	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
+	(@role_Id,@pant_Id,@ropa_UsuarioModificador)
 
-	SELECT 200 AS codeStatus, 'Acceso Editado con �xito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Editado con éxito' AS messageStatus
 
 END
 GO

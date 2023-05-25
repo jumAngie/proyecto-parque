@@ -56,11 +56,11 @@
                   <i class=" fas fa-info-circle ml-1"></i>
                   Detalles
                 </a>
-                <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;"  data-bs-toggle="modal" data-bs-target="#pantallas">
+                <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;"  data-bs-toggle="modal" data-bs-target="#pantallas" (click)="selectRolFP(rol)">
                   <i class="  fas fa-desktop ml-1"></i>
                   Pantallas
                 </a>                
-                <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar">
+                <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar" (click)="selectRolID(rol)">
                   <i class=" fas fa-trash-alt ml-1"></i>
                   Eliminar
                 </a>
@@ -95,22 +95,24 @@
         <h5 class="modal-title">Nuevo Rol</h5>
       </div>
       <div class="modal-body">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-          <li [ngbNavItem]="1">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+          <li [ngbNavItem]="1" >
             <button ngbNavLink>Creación de Rol</button>
             <ng-template ngbNavContent>
               <div class="input-group mb-3 mt-5">
-                <span class="input-group-text" id="basic-addon1"></span> 
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-edit"></i>
+                </span> 
                 <input type="text" class="form-control" [(ngModel)]="rolinsert.role_Nombre" id="nombreRolInput" [disabled]="!isTabEnabled(1)" placeholder="Nombre del Rol" aria-label="Username" aria-describedby="basic-addon1" id="nombreRolInput">
               </div>
               <button type="button" class="btn ov-btn-grow-in" style="margin-left: 80%;"  [disabled]="!isTabEnabled(1)" (click)="InsertRol()">Siguiente</button>
             </ng-template>
           </li>
-          <li [ngbNavItem]="2" [class.disabled]="!isTabEnabled(2)">
+          <li [ngbNavItem]="2" >
             <button ngbNavLink>Asignación de Pantallas</button>
             <ng-template ngbNavContent>
               <p class="mb-5 mt-4">
-               <input id="idrol" class="form-control" [(ngModel)]="rolEnvio" hidden />
+               <input id="idrol" class="form-control" [(ngModel)]="rolEnvio"  />
                                 
                 <ng-select
                 [items]="people"
@@ -135,7 +137,7 @@
               <div class="row">
                 <button type="button" class="btn ov-btn-grow-primary col-4" data-bs-dismiss="modal" style="margin-left: 5px;" (click)="assignLater()">Asignar Luego</button>
                 <div class="col-3"></div>
-                <button type="button" class="btn ov-btn-grow-in col-4" style="margin-right: 5px; margin-left: 6%;" (click)="save()">Guardar</button>
+                <button type="button" class="btn ov-btn-grow-in col-4" style="margin-right: 5px; margin-left: 6%;" data-bs-dismiss="modal" (click)="save()">Guardar</button>
               </div>
             </ng-template>
           </li>
@@ -163,9 +165,12 @@
         <h5 class="modal-title">Editar Rol</h5>
       </div>
       <div class="modal-body">
-        <input id="update_role_Nombre" class="form-control" [(ngModel)]="selectedRol.role_Id" hidden/>
-        <label for="update_role_Nombre" class="label-form mt-2">Nombre del Rol</label>
-        <input id="update_role_Nombre" class="form-control" [(ngModel)]="selectedRol.role_Nombre" />
+        <div class="input-group mb-3 mt-5">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fas fa-edit"></i>
+        </span> 
+        <input type="text" class="form-control"  [(ngModel)]="selectedRol.role_Nombre" id="update_role_Nombre"  placeholder="Nombre del Rol" aria-label="Username" aria-describedby="basic-addon1" >
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
@@ -194,7 +199,7 @@
           [selectableGroup]="true"
           [selectableGroupAsModel]="false"
           [closeOnSelect]="false"
-          [(ngModel)]="selectedPeople">
+          [(ngModel)]="selectedPantallas">
           <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
               <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.pant_Id }}
           </ng-template>
@@ -205,7 +210,7 @@
         </div>
         <div class="modal-footer"> 
           <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2">Guardar</button></div>
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="saveUpdatePantallas()">Guardar</button></div>
 
      </div>
   </div>
@@ -228,7 +233,7 @@
           <div class="row justify-content-center">
           <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
           <div class="col-lg-1"></div> 
-          <button type="button" class="ov-btn-grow-d col-lg-5">Aceptar</button></div>
+          <button type="button" class="ov-btn-grow-d col-lg-5" (click)="DeleteRol()">Aceptar</button></div>
         </div>
         </div>
         <div class="modal-footer"> 

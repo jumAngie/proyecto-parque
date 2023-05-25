@@ -279,15 +279,17 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region PantallasPorRol
-        public ServiceResult PantallasAgg(tbRolesXPantallas pantrole)
+        public ServiceResult PantallasAgg(int role_Id, int pant_Id, int pantrol_UserCrea)
         {
             var result = new ServiceResult();
 
             try
             {
-                var list = _pantallasRepository.InsertP(pantrole);
-
-                return result.Ok(list);
+                var list = _pantallasRepository.InsertP(role_Id, pant_Id, pantrol_UserCrea);
+                if(list.CodeStatus==200)
+                return result.SetMessage(list.MessageStatus, ServiceResultType.Success);
+                else
+                    return result.Error(list.MessageStatus);
 
             }
             catch (Exception ex)
@@ -303,8 +305,10 @@ namespace ParqueDiversion.BusinessLogic.Services
             try
             {
                 var list = _pantallasRepository.DeleteP(role_Id, pant_Id, pantrol_UserCrea);
-
-                return result.Ok(list);
+                if (list.CodeStatus == 200)
+                    return result.SetMessage(list.MessageStatus, ServiceResultType.Success);
+                else
+                    return result.Error(list.MessageStatus);
 
             }
             catch (Exception ex)
