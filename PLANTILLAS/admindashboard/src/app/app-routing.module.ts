@@ -49,6 +49,7 @@ import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.compon
 
 
 import { IndexComponent } from './Roles/index/index.component';
+import {LoginComponent} from '../app/login/login.component'
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },

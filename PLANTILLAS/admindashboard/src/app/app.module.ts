@@ -57,6 +57,7 @@ import { ParqServicesService } from './ParqServices/parq-services.service';
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ListempleadosComponent,
     CreatecargosComponent,
     EditarcargosComponent,
-    CreateAtraccionesComponent
+    CreateAtraccionesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
