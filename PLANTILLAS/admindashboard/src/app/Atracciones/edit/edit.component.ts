@@ -17,8 +17,7 @@ export class EditAtraccionesComponent implements OnInit {
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
   selectedImage: any;
-  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
-    
+
   //VALIRABLES PARA VALIDACIÓN DE S
   NombreRequerido = false;
   DescripcionRequerido = false;
@@ -27,47 +26,80 @@ export class EditAtraccionesComponent implements OnInit {
   DuracionRondaRequerido = false;
   RegionRequerido = false;
   AreaRequerido = false;
-
   constructor(
     private service: ParqServicesService,
     private router: Router,
-    private elementRef: ElementRef,
-    private renderer2: Renderer2,
   ) { }
 
   ngOnInit(): void {
     this.getData();
+    this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
+  }
 
-    this.service.getAreas()
-    .subscribe((response: any) =>{
-      if(response.success){
-        this.areas = response.data;
-      }    
+  
+  getData() {
+    const id: number | undefined = isNaN(parseInt(localStorage.getItem('atra_ID') ?? '', 0))
+      ? undefined
+      : parseInt(localStorage.getItem('atra_ID') ?? '', 0);
+    this.atracciones.atra_ID = id ?? 0;
+
+    this.service.findAtracciones(this.atracciones).subscribe((response: any) => {
+      this.atracciones = response.data[0];
+      this.loadAreas();
     });
-      
-    this.service.getRegiones()
-    .subscribe((response: any) =>{
-      if(response.success){
+  
+    this.service.getRegiones().subscribe((response: any) => {
+      if (response.success) {
         this.regiones = response.data;
       }
     });
-
-    this.areasForStyle = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre}));
-
-    this.areasForStyle.forEach(carta => {
-      carta.isSelected = carta.area_ID === this.atracciones.area_ID.toString();
+  }
+  
+   convertirStringATime(string: any) {
+    const tiempo = string.split('.'); // Separar el string en partes: horas, minutos y segundos
+    const temp = tiempo[0];
+    console.log(temp);
+    const tempSplited = temp.split(':');
+    // Crear un objeto Date con los valores obtenidos del string
+    const date = new Date();
+    date.setHours(parseInt(tempSplited[0]));
+    date.setMinutes(parseInt(tempSplited[1]));
+    date.setSeconds(parseInt(tempSplited[2]));
+  
+    // Formatear el objeto Date en formato aceptado por el input de tipo time
+    const formatoTime = date.toISOString().substr(11, 8);
+  
+    return formatoTime;
+  }
+  
+  
+  loadAreas() {
+    this.service.getAreas().subscribe((response: any) => {
+      if (response.success) {
+        this.areas = response.data;
+        this.areasForStyle = this.areas.map(item => ({
+          area_ID: item.area_ID.toString(),
+          isSelected: item.area_ID === this.atracciones.area_ID,
+          area_Nombre: item.area_Nombre
+        }));
+  
+        this.selectCard();
+      }
     });
   }
-
-  getData(){
-    const id: number | undefined = isNaN(parseInt(localStorage.getItem('atra_ID') ?? '', 0)) ? undefined: parseInt(localStorage.getItem('atra_ID') ?? '', 0);
-    this.atracciones.atra_ID = id ?? 0;
-    this.service.findAtracciones(this.atracciones)
-    .subscribe((response: any) =>{
-      console.log(response);
-      this.atracciones = response;
-    })
+  
+  selectCard() {
+    const selectedCard = this.areasForStyle.find(carta => carta.isSelected);
+    if (selectedCard) {
+      selectedCard.isSelected = false;
+    }
+  
+    const currentCard = this.areasForStyle.find(carta => carta.area_ID === this.atracciones.area_ID.toString());
+    if (currentCard) {
+      currentCard.isSelected = true;
+    }
   }
+
 
   Guardar(){
     var errors = 0;
@@ -91,6 +123,7 @@ export class EditAtraccionesComponent implements OnInit {
 
     if(errors == 0){
       this.atracciones.atra_UsuarioModificador = 1;
+      console.log(this.atracciones);
       this.service.editAtracciones(this.atracciones)
       .subscribe((response: any) =>{
         console.log(response)
@@ -226,7 +259,6 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
 
-
   Volver(){
     this.router.navigate(['listatracciones']);
     
@@ -257,7 +289,6 @@ export class EditAtraccionesComponent implements OnInit {
 
   removeImage(){
     this.selectedImage = '';
-    this.imageInput.nativeElement.value = '';
   }
 
 }

@@ -41,4 +41,7 @@ export class ListAtraccionesComponent implements OnInit {
     this.router.navigate(['atracciones-editar']);
   }
 
+  EliminarAtraccion(){
+    
+  }
 }

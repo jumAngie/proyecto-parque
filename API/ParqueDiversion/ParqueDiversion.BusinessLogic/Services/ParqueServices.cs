@@ -537,15 +537,17 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
 
         }
-        public VW_tbAtracciones FindAtracciones(int id)
+        public ServiceResult FindAtracciones(int id)
         {
+            var result = new ServiceResult();
             try
             {
-                return _atraccionesRepository.Find(id);
+                var list = _atraccionesRepository.FindAtraccion(id);
+                return result.Ok(list);
             }
             catch (Exception e)
             {
-                return null;
+                return result.Error(e.Message);
             }
         }
         public RequestStatus BorrarAtracciones(int id)

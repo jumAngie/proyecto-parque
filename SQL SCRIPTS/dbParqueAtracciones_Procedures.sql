@@ -2218,7 +2218,7 @@ BEGIN
 	  ,regi_Nombre
       ,[atra_ReferenciaUbicacion]
       ,[atra_LimitePersonas]
-      ,atra_DuracionRonda = CONVERT(NVARCHAR, atra_DuracionRonda)
+      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
       ,[atra_Imagen]
       ,[atra_Habilitado]
       ,[atra_Estado]
@@ -2236,17 +2236,37 @@ END
 
 --*************** FIND DE ATRACCIONES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND 1
 @atra_ID INT
 AS
 BEGIN
-	SELECT *
+	SELECT [atra_ID]
+      ,area_ID
+	  ,area_Descripcion
+      ,[atra_Nombre]
+      ,[atra_Descripcion]
+      ,regi_ID
+	  ,regi_Nombre
+      ,[atra_ReferenciaUbicacion]
+      ,[atra_LimitePersonas]
+      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
+      ,[atra_Imagen]
+      ,[atra_Habilitado]
+      ,[atra_Estado]
+      ,[atra_UsuarioCreador]
+	  , usu_Crea
+      ,[atra_FechaCreacion]
+      ,[atra_UsuarioModificador]
+	  ,usu_Modifica
+      ,[atra_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
 	FROM	[parq].VW_tbAtracciones
 	WHERE	atra_Estado = 1  
 	AND		atra_ID = @atra_ID
 END
-
 GO
+
 --*************** INSERT DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 	@area_ID					INT, 
@@ -2310,7 +2330,8 @@ BEGIN
 							atra_LimitePersonas = @atra_LimitePersonas,
 							atra_DuracionRonda = @atra_DuracionRonda,
 							atra_Imagen = @atra_Imagen,
-							atra_UsuarioModificador = @atra_UsuarioModificador
+							atra_UsuarioModificador = @atra_UsuarioModificador,
+							atra_FechaModificacion = GETDATE()
 					WHERE	atra_ID   =		@atra_ID
 					SELECT 200 AS codeStatus, 'Atracción actualizada con éxito' AS messageStatus
 				END
