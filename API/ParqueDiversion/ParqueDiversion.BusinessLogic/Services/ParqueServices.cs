@@ -699,15 +699,16 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region Quioscos
-        public IEnumerable<VW_tbQuioscos> ListadoQuiosco()
+        public ServiceResult ListadoQuiosco()
         {
+            var result = new ServiceResult();
             try
-            {
-                return _quioscosRepository.List();
+            {   var list =_quioscosRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbQuioscos>();
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
 

@@ -60,8 +60,7 @@ export class ListAtraccionesComponent implements OnInit {
       console.log(response);
       if(response.code == 200){
         ToastUtils.showSuccessToast(response.message);
-        this.getAtracciones();
-        this.router.navigate(['atracciones-listado']);
+        this.getAtracciones();        
       }else if(response.code == 409){
         ToastUtils.showWarningToast(response.message);
       }else{

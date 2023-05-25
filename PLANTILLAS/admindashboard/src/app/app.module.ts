@@ -38,13 +38,15 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
-import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
+
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
@@ -58,12 +60,14 @@ import { TabsComponent } from '../app/tabs/tabs.component';
 import { ParqServicesService } from './ParqServices/parq-services.service';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+  
 
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoginComponent } from './login/login.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
 
 
 @NgModule({
@@ -119,7 +123,8 @@ import { AgGridModule } from 'ag-grid-angular';
     CrearempleadosComponent,
     EditAtraccionesComponent,
     LoginComponent,
-    EditarempleadosComponent
+    EditarempleadosComponent,
+    ListarquioscosComponent
   ],
   imports: [
     BrowserModule,

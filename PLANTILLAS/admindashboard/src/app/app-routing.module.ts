@@ -32,26 +32,45 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+
+
+//Cargos
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
+import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
+import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
+
+//Golosinas
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
 
+//Quioscos
+import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
+
+
+//Atracciones
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
 
+//Insumos
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
+
+//Clientes
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
+
+// Ventas quiosco detalle
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
+//Empleados
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
-import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
-import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
-
-
-import { IndexComponent } from './Roles/index/index.component';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
-import {LoginComponent} from '../app/login/login.component'
 import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
+
+//Roles
+import { IndexComponent } from './Roles/index/index.component';
+
+//Login
+import {LoginComponent} from '../app/login/login.component'
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -88,23 +107,38 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+
+  //Cargos
   { path: 'listcargos', component: ListcargosComponent},
+  {path: 'createcargos', component: CreatecargosComponent},
+  {path: 'editarcargos', component: EditarcargosComponent},
+
+  //Golosinas
   { path: 'listgolosinas', component: ListgolosinasComponent},
   
+  //Atracciones
   { path: 'atracciones-listado', component: ListAtraccionesComponent},
   { path: 'atracciones-crear', component: CreateAtraccionesComponent},
   { path: 'atracciones-editar', component: EditAtraccionesComponent},
 
+  //Insumos
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
+
+  //Clientes
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
+
+  //Ventas quiosco detalle
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
   
+  //Empleados
   {path: 'listempleados', component: ListempleadosComponent},
   {path: 'crearempleados', component: CrearempleadosComponent},
   {path: 'editarempleados', component: EditarempleadosComponent},
   
-  {path: 'createcargos', component: CreatecargosComponent},
-  {path: 'editarcargos', component: EditarcargosComponent}
+  //Quioscos
+  {path: 'quioscos-listado', component: ListarquioscosComponent},
+
+
 ];
 
 @NgModule({

@@ -11,6 +11,7 @@ import { Empleados } from '../Models/Empleados';
 import { ApiService } from '../api.service';
 import { Areas } from '../Models/Areas';
 import { Regiones } from '../Models/Regiones';
+import { Quioscos } from '../Models/Quioscos';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,11 @@ export class ParqServicesService {
     ) { }
 
 
-    // servicios de estados civiles //
+  // servicios de estados civiles //
 
-    getEstadoCivil(){
-      return this.http.get<EstadosCiviles[]>(this.apiService.apiUrl + 'EstadosCiviles/Index');
-    }
+  getEstadoCivil(){
+    return this.http.get<EstadosCiviles[]>(this.apiService.apiUrl + 'EstadosCiviles/Index');
+  }
 
   // servicios de cargos //
   getCargos(){
@@ -65,9 +66,15 @@ export class ParqServicesService {
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Delete/'+id, id);
   }
 
+  
+  // servicios de quioscos// 
+  getQuioscos(){
+    return this.http.get<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Listado');
+  }
 
 
-  // servicios de quioscos//
+
+  // servicios de insumos quioscos//
   getInsumosQuiosco(){
     return this.http.get<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/Listado');
   }
