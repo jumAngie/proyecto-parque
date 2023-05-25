@@ -17,7 +17,6 @@ import { CardsComponent } from './components/cards/cards.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ListGroupComponent } from './components/list-group/list-group.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { TabsComponent } from './components/tabs/tabs.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { SpinnersComponent } from './components/spinners/spinners.component';
@@ -53,15 +52,19 @@ import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.compon
 import { IndexComponent } from './Roles/index/index.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
-
+import { TabsComponent } from '../app/tabs/tabs.component';
 import { ParqServicesService } from './ParqServices/parq-services.service';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
+    TabsComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -117,6 +120,10 @@ import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
     FormsModule,
     RouterModule,
     NgxPaginationModule,
+    NgbNavModule,
+    NgIf,
+    NgbAlertModule,
+    NgSelectModule
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]
