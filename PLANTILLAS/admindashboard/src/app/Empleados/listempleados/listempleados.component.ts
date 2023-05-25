@@ -71,5 +71,9 @@ export class ListempleadosComponent implements OnInit {
         });
     }
   }
+
+  Cerrar(){
+    localStorage.setItem('idEmpleadosEliminar', '');
+  }
   
   }  
