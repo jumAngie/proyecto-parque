@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZotWd1q4uOQwCdEMkXkxcCmTYN/gVlJbkbNtLRNJUBlK2RqhdFmVGR2dIpSZv3oqfhgXZyL6lhsxbFQpWZ1b0Q==",
+  "dgSpecHash": "Mj/6KsXHEW/o4adUAFhPM24JIyWn8qc4A1iFQnYsbi9GxBRaHDg4MJpeeeEMdtOxwKSpJH1RBQ6bq0dJBMQ6LA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB01\\Documents\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+  "projectFilePath": "C:\\Users\\isaac\\OneDrive\\Documentos\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -62,12 +62,11 @@ namespace ParqueDiversion.BusinessLogic.Services
         
         public IEnumerable<VW_tbCargos> CargoList()
         {
-
             try
             {
                 return _cargoRepository.List();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return Enumerable.Empty<VW_tbCargos>();
@@ -368,7 +367,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _areasRepository.Update(tabla);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -488,7 +487,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _ticketClientesRepository.Update(tabla);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -524,7 +523,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _atraccionesRepository.Find(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -560,7 +559,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _empleadosRepository.List();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Enumerable.Empty<VW_tbEmpleados>();
             }
@@ -647,7 +646,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _quioscosRepository.List();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Enumerable.Empty<VW_tbQuioscos>();
             }
@@ -737,7 +736,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _golosinasRepository.List();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Enumerable.Empty<VW_tbGolosinas>();
             }
@@ -827,7 +826,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             {
                 return _insumosQuioscoRepository.List();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Enumerable.Empty<VW_tbInsumosQuiosco>();
             }

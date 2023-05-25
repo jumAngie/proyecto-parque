@@ -6,6 +6,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pantallas } from 'src/app/Models/Pantallas';
+import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-index',
@@ -16,6 +17,7 @@ import { Pantallas } from 'src/app/Models/Pantallas';
 export class IndexComponent implements OnInit {
   rol: Roles[] = [];
   pantallas: Pantallas[] = [];
+  pantallasenvio: Pantallas[] = [];
   rolinsert: Roles = new Roles();
   selectedRol: Roles = new Roles();
   p: number = 1;
@@ -26,7 +28,7 @@ export class IndexComponent implements OnInit {
   rolEnvio: number=0 ;
   people: any[] = [];
   selectedPeople = [];
-
+  selectedPantallas = [];
 
 isTabEnabled(tabNumber: number): boolean {
   return this.tabEnabledStatus[tabNumber - 1];
@@ -39,13 +41,75 @@ this.tabEnabledStatus[this.active - 1] = true;
 
 }
 
+
+onNavChange(changeEvent: NgbNavChangeEvent) {
+  if (changeEvent.nextId == 1 || changeEvent.nextId == 2) {
+    changeEvent.preventDefault();
+  }
+}
+
 assignLater(): void {
   // Lógica para asignar luego en la segunda pestaña
 }
 
-save(): void {
-  // Lógica para guardar en la segunda pestaña
+saveUpdatePantallas(): void {
+  this.pantallasenvio = this.selectedPantallas.map((position, index) => {
+    return {
+      pant_Id: position,
+      pant_Descripcion: "", // Asigna la descripción adecuada si está disponible
+      role_ID: this.rolEnvio,
+      ropa_UsuarioCreador: 1
+
+    };
+  });
+
+  console.log(this.pantallasenvio);
+
+  this.pantallasenvio.forEach((pantalla) => {
+    this.service.RolPantPantallasElim(pantalla).subscribe(
+      (response: any) => {
+        console.log('Pantalla enviada:', pantalla);
+        console.log('Respuesta del servicio:', response);
+        // Realiza las acciones adicionales con la respuesta del servicio según tus necesidades
+      },
+      (error: any) => {
+        console.error('Error al enviar la pantalla:', pantalla);
+        console.error('Error del servicio:', error);
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    );
+  });
 }
+
+save(): void {
+  this.pantallasenvio = this.selectedPeople.map((position, index) => {
+    return {
+      pant_Id: position,
+      pant_Descripcion: "", // Asigna la descripción adecuada si está disponible
+      role_ID: this.rolEnvio,
+      ropa_UsuarioCreador: 1
+    };
+  });
+
+  console.log(this.pantallasenvio);
+  
+  this.pantallasenvio.forEach((pantalla) => {
+    this.service.RolPantAgg(pantalla).subscribe(
+      (response: any) => {
+        console.log('Pantalla enviada:', pantalla);
+        console.log('Respuesta del servicio:', response);
+        // Realiza las acciones adicionales con la respuesta del servicio según tus necesidades
+      },
+      (error: any) => {
+        console.error('Error al enviar la pantalla:', pantalla);
+        console.error('Error del servicio:', error);
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    );
+  });
+}
+
+
 
   constructor(private service: AcceService, private router: Router, private elementRef: ElementRef) {}
 
@@ -87,15 +151,30 @@ save(): void {
   selectRol(rol: Roles) {
     this.selectedRol = { ...rol };
   }
+
+  selectRolID(rol: Roles) {
+    this.selectedRol = { ...rol };
+  }
+
+  selectRolFP(rol: Roles) {
+    this.selectedRol = { ...rol };
+    this.service.RolPantCK(this.selectedRol).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.selectedPantallas = response.map((item: any) => item.pant_Id);
+        this.rolEnvio = rol.role_Id;
+      },
+      (error: any) => {
+        console.error('Error al guardar el rol', error);
+      }
+    );
+  }
+  
   //!cargar datos al modal
   ngOnInit(): void {
     this.service.getRoles().subscribe((data) => {
       this.rol = data;
-      this.people = data.map((item) => ({
-        role_Nombre: item.role_Nombre,
-        role_Id: item.role_Id
-      }));
-      console.log(this.people);
+      
     });
     
     this.service.getPantallas().subscribe((data) => {
@@ -116,19 +195,8 @@ save(): void {
   }
 
 
-
-  EditarRol() {
-    this.service.EditarRol(this.selectedRol).subscribe(
-      (response: any) => {
-        console.log(response.code);
-      },
-      (error: any) => {
-        console.error('Error al guardar el rol', error);
-      }
-    );
-  }
-
-
+  
+  
   
   InsertRol() {
     this.tabEnabledStatus[this.active - 1] = false;
@@ -144,9 +212,31 @@ save(): void {
       (error: any) => {
         console.error('Error al guardar el rol', error);
       }
-    );
-  }
+      );
+    }
+    
+      EditarRol() {
+        this.service.EditarRol(this.selectedRol).subscribe(
+          (response: any) => {
+            console.log(response.code);
+          },
+          (error: any) => {
+            console.error('Error al guardar el rol', error);
+          }
+        );
+      }
 
+      DeleteRol() {
+        console.log(this.selectedRol)
+        this.service.DeleteRol(this.selectedRol).subscribe(
+          (response: any) => {
+            console.log(response.code);
+          },
+          (error: any) => {
+            console.error('Error al guardar el rol', error);
+          }
+        );
+      }
   @Input() tabs: string[] = [];
   activeTab: string = '';
 

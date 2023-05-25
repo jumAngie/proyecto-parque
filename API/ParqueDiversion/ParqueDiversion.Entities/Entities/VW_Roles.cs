@@ -10,6 +10,8 @@ namespace ParqueDiversion.Entities.Entities
     {
         public int role_Id { get; set; }
         public string role_Nombre { get; set; }
+        public string role_Cantidad_Usuarios { get; set; }
+
         public int? role_Estado { get; set; }
         public int? role_UsuarioCreador { get; set; }
         public string empl_crea { get; set; }

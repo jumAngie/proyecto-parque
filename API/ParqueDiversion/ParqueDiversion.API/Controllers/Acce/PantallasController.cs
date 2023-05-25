@@ -37,7 +37,8 @@ namespace ParqueDiversion.API.Controllers
         public IActionResult PantallasAgg([FromBody] RolesXPantallaViewModel pr)
         {
             var item = _mapper.Map<tbRolesXPantallas>(pr);
-            var result = _accessService.PantallasAgg(item);
+            var result = _accessService.PantallasAgg((int)pr.role_ID, (int)pr.pant_ID, (int)pr.ropa_UsuarioCreador);
+            
             return Ok(result);
         }
 
