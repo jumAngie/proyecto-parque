@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Empleados } from 'src/app/Models/Empleados';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listempleados',
@@ -12,7 +13,7 @@ export class ListempleadosComponent implements OnInit {
   filtro: string = '';
   p: number = 1;
 
-  constructor(private service:ParqServicesService, private elementRef: ElementRef) { }
+  constructor(private service:ParqServicesService, private elementRef: ElementRef, private router:Router) { }
 
   ngOnInit(): void {
     this.service.getEmpleados()
@@ -38,7 +39,11 @@ export class ListempleadosComponent implements OnInit {
       return nombreValido || estadoCivilValido || dniValido || telefonoValido;
     });
   }
-  
-  
+
+  Editar(empleados: Empleados){
+    localStorage.setItem('idEmpleado', empleados.empl_ID.toString());
+    console.log(localStorage.getItem('idEmpleado'));
+    this.router.navigate(['editarempleados']);
+  }
   
 }  

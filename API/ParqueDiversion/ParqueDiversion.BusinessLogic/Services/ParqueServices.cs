@@ -566,6 +566,18 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
+        public VW_tbEmpleados FindEmpleado(int id)
+        {
+            try
+            {
+                return _empleadosRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public ServiceResult InsertEmpleado(tbEmpleados item)
         {
             var result = new ServiceResult();
