@@ -90,8 +90,8 @@ const routes: Routes = [
   { path: 'listcargos', component: ListcargosComponent},
   { path: 'listgolosinas', component: ListgolosinasComponent},
   
-  { path: 'listatracciones', component: ListAtraccionesComponent},
-  { path: 'crearatracciones', component: CreateAtraccionesComponent},
+  { path: 'atracciones-listado', component: ListAtraccionesComponent},
+  { path: 'atracciones-crear', component: CreateAtraccionesComponent},
   { path: 'atracciones-editar', component: EditAtraccionesComponent},
 
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},

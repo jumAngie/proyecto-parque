@@ -60,6 +60,8 @@ import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoginComponent } from './login/login.component';
+import { AgGridModule } from 'ag-grid-angular';
+
 
 @NgModule({
   declarations: [
@@ -113,7 +115,7 @@ import { LoginComponent } from './login/login.component';
     CreateAtraccionesComponent,
     CrearempleadosComponent,
     EditAtraccionesComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,6 +128,7 @@ import { LoginComponent } from './login/login.component';
     NgIf,
     NgbAlertModule,
     NgSelectModule,
+    AgGridModule,
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

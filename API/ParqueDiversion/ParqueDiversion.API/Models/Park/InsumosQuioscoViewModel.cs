@@ -9,11 +9,13 @@ namespace ParqueDiversion.API.Models
     {
         public int insu_ID { get; set; }
         public int? quio_ID { get; set; }
-        public int? area_ID { get; set; }
-        public string area_Nombre { get; set; }
         public string quio_Nombre { get; set; }
+        public int? area_ID { get; set; }
+        public string quio_area_Nombre { get; set; }
         public int? empl_ID { get; set; }
+        public string quio_empl_NombreCompleto { get; set; }
         public int? regi_ID { get; set; }
+        public string quio_regi_Nombre { get; set; }
         public string quio_ReferenciaUbicacion { get; set; }
         public string quio_Imagen { get; set; }
         public int? golo_ID { get; set; }

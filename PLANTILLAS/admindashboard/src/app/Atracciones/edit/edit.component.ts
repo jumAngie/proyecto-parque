@@ -47,7 +47,7 @@ export class EditAtraccionesComponent implements OnInit {
       this.atracciones = response.data[0];
       this.loadAreas();
     });
-  
+
     this.service.getRegiones().subscribe((response: any) => {
       if (response.success) {
         this.regiones = response.data;
@@ -55,6 +55,20 @@ export class EditAtraccionesComponent implements OnInit {
     });
   }
 
+  loadAreas() {
+    this.service.getAreas().subscribe((response: any) => {
+      if (response.success) {
+        this.areas = response.data;
+        this.areasForStyle = this.areas.map(item => ({
+          area_ID: item.area_ID.toString(),
+          isSelected: item.area_ID === this.atracciones.area_ID,
+          area_Nombre: item.area_Nombre
+        }));
+  
+        this.selectCard();
+      }
+    });
+  }
    convertirStringATime(string: any) {
     const tiempo = string.split('.'); // Separar el string en partes: horas, minutos y segundos
     const temp = tiempo[0];
@@ -73,20 +87,7 @@ export class EditAtraccionesComponent implements OnInit {
   }
   
   
-  loadAreas() {
-    this.service.getAreas().subscribe((response: any) => {
-      if (response.success) {
-        this.areas = response.data;
-        this.areasForStyle = this.areas.map(item => ({
-          area_ID: item.area_ID.toString(),
-          isSelected: item.area_ID === this.atracciones.area_ID,
-          area_Nombre: item.area_Nombre
-        }));
-  
-        this.selectCard();
-      }
-    });
-  }
+
   
   selectCard() {
     const selectedCard = this.areasForStyle.find(carta => carta.isSelected);
@@ -129,7 +130,7 @@ export class EditAtraccionesComponent implements OnInit {
         console.log(response)
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);          
-          this.router.navigate(['listatracciones']);
+          this.router.navigate(['atracciones-listado']);
         }else if(response.code == 409){
           ToastUtils.showWarningToast(response.message);
         }else{
@@ -262,7 +263,7 @@ export class EditAtraccionesComponent implements OnInit {
 
 
   Volver(){
-    this.router.navigate(['listatracciones']);
+    this.router.navigate(['atracciones-listado']);
     
   }
 

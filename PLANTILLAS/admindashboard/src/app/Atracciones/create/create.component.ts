@@ -85,7 +85,7 @@ export class CreateAtraccionesComponent implements OnInit {
         console.log(response)
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);          
-          this.router.navigate(['listatracciones']);
+          this.router.navigate(['atracciones-listado']);
         }else if(response.code == 409){
           ToastUtils.showWarningToast(response.message);
         }
@@ -96,8 +96,7 @@ export class CreateAtraccionesComponent implements OnInit {
     }else{
       ToastUtils.showWarningToast('Hay campos vacios!');
     }
-
-  }
+  };
 
   validarNombre() {
     if(!this.atracciones.atra_Nombre){
@@ -219,7 +218,7 @@ export class CreateAtraccionesComponent implements OnInit {
   }
 
   Volver(){
-    this.router.navigate(['listatracciones']);
+    this.router.navigate(['atracciones-listado']);
   }
 
   // Función para manejar el clic en una carta

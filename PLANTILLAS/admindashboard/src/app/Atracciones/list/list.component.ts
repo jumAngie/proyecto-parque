@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, TitleStrategy } from '@angular/router';
+import { Router, RouterEvent, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
@@ -22,13 +22,18 @@ export class ListAtraccionesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getAtracciones();
+  }
+  
+  getAtracciones(){
     this.service.getAtracciones()
       .subscribe((response: any) => {
         if (response.success) {
           this.atracciones = response.data;
         }
       });
-  }
+  };
+
 
   filtrarAtracciones(): Atracciones[] {
     return this.atracciones.filter(atracciones => {
@@ -37,7 +42,7 @@ export class ListAtraccionesComponent implements OnInit {
   }
 
   AgregarAtraccion(){
-    this.router.navigate(['crearatracciones'])
+    this.router.navigate(['atracciones-crear'])
   }
 
   EditarAtraccion(atracciones: Atracciones): void{
@@ -55,6 +60,8 @@ export class ListAtraccionesComponent implements OnInit {
       console.log(response);
       if(response.code == 200){
         ToastUtils.showSuccessToast(response.message);
+        this.getAtracciones();
+        this.router.navigate(['atracciones-listado']);
       }else if(response.code == 409){
         ToastUtils.showWarningToast(response.message);
       }else{

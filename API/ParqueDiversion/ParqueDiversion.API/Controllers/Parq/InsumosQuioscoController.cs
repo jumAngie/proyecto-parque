@@ -31,6 +31,13 @@ namespace ParqueDiversion.API.Controllers
             return Ok(listado);
         }
 
+        [HttpPost("InsumosByQuiosco/{id}")]
+        public IActionResult InsumosByQuiosco(int id)
+        {
+            var listado = _parqueServices.InsumosByQuiosco(id);
+            return Ok(listado);
+        }
+
         [HttpPost("Insertar")]
         public IActionResult Insert([FromBody] InsumosQuioscoViewModel data)
         {

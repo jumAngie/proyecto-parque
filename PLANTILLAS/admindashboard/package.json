@@ -20,11 +20,14 @@
     "@angular/router": "^16.0.2",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@ng-select/ng-select": "^10.0.4",
+    "ag-grid-angular": "^29.3.5",
+    "ag-grid-community": "^29.3.5",
     "angular-bootstrap-md": "^15.0.0",
     "autoprefixer": "^10.4.14",
     "bootstrap": "^5.2.3",
     "datatables.net": "^1.13.4",
     "jquery": "^3.7.0",
+    "ng-select": "^1.0.2",
     "ngx-pagination": "^6.0.3",
     "popper.js": "^1.16.1",
     "postcss": "^8.4.23",
@@ -47,5 +50,4 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~5.0.4"
   }
-  
 }

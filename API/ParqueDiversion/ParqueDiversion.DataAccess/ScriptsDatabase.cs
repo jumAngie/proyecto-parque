@@ -107,6 +107,7 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_InsumosQuiosco_Insert = "parq.UDP_tbInsumosQuiosco_Insert";
         //public static string UDP_InsumosQuiosco_Update = "";
         public static string UDP_InsumosQuiosco_Delete = "parq.UDP_tbInsumosQuiosco_Delete";
+        public static string UDP_InsumosQuiosco_InsumosByQuiosco = "parq.UDP_VW_tbInsumosQuiosco_SelectGolosinasByQuiosco";
 
         #endregion
 

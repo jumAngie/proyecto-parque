@@ -272,7 +272,7 @@ AS BEGIN
 			DECLARE @id INT= (SELECT CAST(IDENT_CURRENT('acce.tbRoles')AS INT))
 			DECLARE @Rol NVARCHAR(MAX) = (SELECT role_Nombre FROM acce.tbRoles WHERE role_ID = @id)
 
-			SELECT 200 AS codeStatus, 'Rol Creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Creado con éxito' AS messageStatus
 			UNION ALL
 			SELECT @id,@Rol
 
@@ -2245,8 +2245,8 @@ END
 
 --*************** FIND DE ATRACCIONES ******************-
 GO
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND 1
-@atra_ID INT
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
+	@atra_ID INT
 AS
 BEGIN
 	SELECT [atra_ID]
@@ -2794,6 +2794,7 @@ BEGIN
 END
 GO
 
+
 --*************** INSERT DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Insert
 	@golo_Nombre			VARCHAR(300), 
@@ -2901,16 +2902,15 @@ CREATE OR ALTER VIEW parq.VW_tbInsumosQuiosco
 AS
 	SELECT  insu_ID, 
 			insu.quio_ID, 
-			quio.area_ID, 
-			area.area_Nombre,
-
-
 			quio_Nombre, 
-			quio.empl_ID, 
-			quio.regi_ID, 
+			quio.area_ID,
+			(SELECT area_Nombre FROM parq.tbAreas WHERE area_ID = quio.area_ID) AS quio_area_Nombre, 		
+			quio.empl_ID,
+			(SELECT CONCAT(empl_PrimerNombre, ' ', empl_SegundoNombre, ' ', empl_PrimerApellido, ' ', empl_SegundoApellido) FROM parq.tbEmpleados WHERE empl_ID = quio.empl_ID) AS quio_empl_NombreCompleto,
+			quio.regi_ID,
+			(SELECT regi_Nombre FROM parq.tbRegiones WHERE regi_ID = quio.regi_ID) AS quio_regi_Nombre, 
 			quio_ReferenciaUbicacion, 
 			quio_Imagen, 
-			
 
 			insu.golo_ID, 
 			golo_Nombre,
@@ -2936,6 +2936,8 @@ AS
 	INNER JOIN acce.tbUsuarios AS usr1 ON insu.insu_UsuarioCreador = usr1.usua_ID
 	LEFT JOIN acce.tbUsuarios AS usr2 ON insu.insu_UsuarioModificador = usr2.usua_ID
 	INNER JOIN parq.tbAreas AS area ON quio.area_ID = area.area_ID
+	INNER JOIN parq.tbEmpleados AS empl ON quio.empl_ID = empl.empl_ID
+	INNER JOIN parq.tbRegiones AS regi ON quio.regi_ID = regi.regi_ID
 GO
 
 --*************** SELECT DE INSUMOS ******************--
@@ -2954,6 +2956,16 @@ BEGIN
 	SELECT * FROM parq.VW_tbInsumosQuiosco  WHERE insu_ID = @insu_ID
 END
 GO
+
+
+CREATE OR ALTER PROCEDURE parq.UDP_VW_tbInsumosQuiosco_SelectGolosinasByQuiosco
+	@quio_ID INT
+AS
+BEGIN
+	SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = @quio_ID
+END
+GO
+
 
 --*************** INSERT DE INSUMOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbInsumosQuiosco_Insert
@@ -3132,7 +3144,7 @@ BEGIN
 			INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
 			VALUES (@quio_ID, @clie_ID, @pago_ID, @vent_UsuarioCreador)
 			
-			SELECT 200 AS codeStatus, 'Factura creada con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Factura creada con éxito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -3212,5 +3224,11 @@ END
 GO
 
 
+
+
+
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
 EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
+
+
+

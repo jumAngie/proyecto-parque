@@ -2,8 +2,6 @@
 GO
 
 
-
-
 INSERT INTO gral.tbEstadosCiviles (civi_Descripcion)
 VALUES	('Soltero(a)'),
 		('Casado(a)'),

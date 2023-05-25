@@ -544,7 +544,7 @@ namespace ParqueDiversion.BusinessLogic.Services
                 var list = _atraccionesRepository.FindAtraccion(id);
                 return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return result.Error(e.Message);
             }
@@ -867,15 +867,31 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region InsumosQuiosco
-        public IEnumerable<VW_tbInsumosQuiosco> ListadoInsumo()
+        public ServiceResult ListadoInsumo()
         {
+            var result = new ServiceResult();
             try
             {
-                return _insumosQuioscoRepository.List();
+                var list = _insumosQuioscoRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbInsumosQuiosco>();
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
+        }
+
+        public ServiceResult InsumosByQuiosco(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _insumosQuioscoRepository.InsumosByQuiosco(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
 
