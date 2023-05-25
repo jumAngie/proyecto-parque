@@ -2342,9 +2342,10 @@ BEGIN
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 	END CATCH
 END
+GO
+
 
 --*************** DELETE DE ATRACCIONES ******************-
-GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_DELETE
 	@atra_ID INT
 AS
@@ -2359,7 +2360,7 @@ BEGIN
 
 				IF	@TicketsClientesOcupa > 0
 					BEGIN
-						SELECT 500 AS codeStatus, 'La Atracción que desea eliminar está en uso.' AS messageStatus
+						SELECT 409 AS codeStatus, 'La Atracción que desea eliminar está en uso.' AS messageStatus
 					END
 				ELSE
 					BEGIN

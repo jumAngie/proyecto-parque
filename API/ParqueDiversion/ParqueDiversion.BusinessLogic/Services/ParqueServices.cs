@@ -550,15 +550,28 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(e.Message);
             }
         }
-        public RequestStatus BorrarAtracciones(int id)
+        public ServiceResult BorrarAtracciones(int id)
         {
+            var result = new ServiceResult();
             try
             {
-                return _atraccionesRepository.Delete(id);
+                var map = _atraccionesRepository.Delete(id);
+                if(map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if(map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
         public ServiceResult UpdateAtracciones(tbAtracciones item)

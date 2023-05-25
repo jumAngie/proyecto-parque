@@ -54,7 +54,7 @@ export class EditAtraccionesComponent implements OnInit {
       }
     });
   }
-  
+
    convertirStringATime(string: any) {
     const tiempo = string.split('.'); // Separar el string en partes: horas, minutos y segundos
     const temp = tiempo[0];
@@ -136,13 +136,15 @@ export class EditAtraccionesComponent implements OnInit {
           ToastUtils.showErrorToast(response.message);          
         }
       })
+    }else{
+      ToastUtils.showWarningToast('Hay campos vacios!');
     }
   }
 
   validarNombre() {
     if(!this.atracciones.atra_Nombre){
       this.NombreRequerido = true;
-      ToastUtils.showWarningToast('Campo "Nombre" requerido');
+      //ToastUtils.showWarningToast('Campo "Nombre" requerido');
       return true;
     }else{
       this.NombreRequerido = false;
@@ -153,7 +155,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarDescripcion(){
     if(!this.atracciones.atra_Descripcion){
       this.DescripcionRequerido = true;
-      ToastUtils.showWarningToast('Campo "Descripción" requerido');
+      //ToastUtils.showWarningToast('Campo "Descripción" requerido');
       return true;
     }else{
       this.DescripcionRequerido = false;
@@ -164,7 +166,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarUbicacionReferencia(){      
     if(!this.atracciones.atra_ReferenciaUbicacion){
       this.UbicacionRequerido = true;
-      ToastUtils.showWarningToast('Campo "Ubicación Referencia" requerido');
+      //ToastUtils.showWarningToast('Campo "Ubicación Referencia" requerido');
       return true;
     }else{
       this.UbicacionRequerido = false;
@@ -175,7 +177,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarLimitePersonas(){
     if(!this.atracciones.atra_LimitePersonas){
       this.LimitePersonasRequerido = true;
-      ToastUtils.showWarningToast('Campo "Límite personas" requerido');
+      //ToastUtils.showWarningToast('Campo "Límite personas" requerido');
       return true;
     }else{
       this.LimitePersonasRequerido = false;
@@ -186,7 +188,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarTiempoDuracion(){
     if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = true;
-      ToastUtils.showWarningToast('Campo "Duración ronda" requerido');
+      //ToastUtils.showWarningToast('Campo "Duración ronda" requerido');
       return true;
     }else{
       this.DuracionRondaRequerido = false;
@@ -197,7 +199,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarRegion(){
     if(!this.atracciones.regi_ID){
       this.RegionRequerido = true;
-      ToastUtils.showWarningToast('Campo "Región" requerido');
+      //ToastUtils.showWarningToast('Campo "Región" requerido');
       return true;
     }else{
       this.RegionRequerido = false;
@@ -208,7 +210,7 @@ export class EditAtraccionesComponent implements OnInit {
   validarArea(){
     if(!this.atracciones.area_ID){
       this.AreaRequerido = true;
-      ToastUtils.showWarningToast('Debes seleccionar una Zona')
+      //ToastUtils.showWarningToast('Debes seleccionar una Zona')
       return true;
     }else{
       this.AreaRequerido = false;

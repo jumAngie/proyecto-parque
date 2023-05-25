@@ -43,19 +43,24 @@ export class ParqServicesService {
     return this.http.get<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Listado');
   }
 
+
   // servicios de atracciones//
   getAtracciones(){
     return this.http.get<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/List');
   }
   insertAtracciones(atracciones: Atracciones){
-    return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Insert', atracciones)
+    return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Insert', atracciones);
   }
   findAtracciones(atracciones: Atracciones){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Find', atracciones);
   }
   editAtracciones(atracciones: Atracciones){
-    return this.http.put<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Update', atracciones)
+    return this.http.put<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Update', atracciones);
   }
+  deleteAtracciones(id: number){
+    return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Delete/'+id, id);
+  }
+
 
 
   // servicios de quioscos//

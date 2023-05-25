@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+
 
 @Component({
   selector: 'app-list',
@@ -12,6 +14,8 @@ export class ListAtraccionesComponent implements OnInit {
   atracciones!: Atracciones[];
   p: number = 1;
   filtro: string = '';
+  deleteID!: number;
+
   constructor(
     private service: ParqServicesService,
     private router: Router,
@@ -41,7 +45,21 @@ export class ListAtraccionesComponent implements OnInit {
     this.router.navigate(['atracciones-editar']);
   }
 
+  getDeleteData(id: number): void{    
+    this.deleteID = id;
+    console.log(this.deleteID);
+  }
+
   EliminarAtraccion(){
-    
+    this.service.deleteAtracciones(this.deleteID).subscribe((response: any) =>{
+      console.log(response);
+      if(response.code == 200){
+        ToastUtils.showSuccessToast(response.message);
+      }else if(response.code == 409){
+        ToastUtils.showWarningToast(response.message);
+      }else{
+        ToastUtils.showErrorToast(response.message);
+      }
+    })
   }
 }
