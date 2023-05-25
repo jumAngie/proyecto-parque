@@ -79,14 +79,13 @@ export class CrearempleadosComponent implements OnInit {
       })
     }
     else{
-      ToastUtils.showErrorToast('ERROR NO ENTRAAAA IDK WHY');
+      ToastUtils.showWarningToast('Campos vacíos. Llene todos los campos obligatorios.')
     }
   }
 
   validarPrimerNombre() {
     if(!this.empleados.empl_PrimerNombre){
       this.PrimerNombreRequerido = true;
-      ToastUtils.showWarningToast('Campo "Primer Nombre" requerido');
       return true;
     }else{
       this.PrimerNombreRequerido = false;
@@ -97,7 +96,6 @@ export class CrearempleadosComponent implements OnInit {
   validarPrimerApellido(){
     if(!this.empleados.empl_PrimerApellido){
       this.PrimerApellidoRequerido = true;
-      ToastUtils.showWarningToast('Campo "Primer Apellido" requerido.');
       return true;
     }else{
       this.PrimerApellidoRequerido = false;
@@ -110,7 +108,6 @@ export class CrearempleadosComponent implements OnInit {
 
     if (!this.empleados.empl_DNI) {
       this.DNIRequerido = true;
-      ToastUtils.showWarningToast('Campo "DNI" requerido.');
       return true;
     } else if (!dniPattern.test(this.empleados.empl_DNI)) {
       this.DNIRequerido = false;
@@ -127,7 +124,6 @@ export class CrearempleadosComponent implements OnInit {
 
   if (!this.empleados.empl_Email) {
     this.EmailRequerido = true;
-    ToastUtils.showWarningToast('Campo "Correo Electrónico" requerido.');
     return true;
   } else if (!emailPattern.test(this.empleados.empl_Email)) {
     this.EmailRequerido = false;
@@ -143,7 +139,6 @@ export class CrearempleadosComponent implements OnInit {
   validarSexo(){
     if(!this.empleados.empl_Sexo){
       this.SexoRequerido = true;
-      ToastUtils.showWarningToast('Campo "Sexo" requerido.');
       return true;
     }else{
       this.SexoRequerido = false;
@@ -157,7 +152,6 @@ export class CrearempleadosComponent implements OnInit {
 
     if(!this.empleados.empl_Telefono){
       this.TelefonoRequerido = true;
-      ToastUtils.showWarningToast('Campo "Telefono" requerido.');
       return true;
     }else if (!telefonitoPattern.test(this.empleados.empl_Telefono)) {
       this.TelefonoRequerido = false;
@@ -173,7 +167,6 @@ export class CrearempleadosComponent implements OnInit {
   validarCargo(){
     if(!this.empleados.carg_ID){
       this.CargoRequerido = true;
-      ToastUtils.showWarningToast('Campo "Cargo" requerido.');
       return true;
     }else{
       this.CargoRequerido = false;
@@ -184,7 +177,6 @@ export class CrearempleadosComponent implements OnInit {
   validarEstadoCivil(){
     if(!this.empleados.civi_ID){
       this.EstCivilRequerido = true;
-      ToastUtils.showWarningToast('Campo "Estado Civil" requerido.');
       return true;
     }else{
       this.EstCivilRequerido = false;
