@@ -61,6 +61,7 @@ import { ParqServicesService } from './ParqServices/parq-services.service';
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     EditarcargosComponent,
     CreateAtraccionesComponent,
     CrearempleadosComponent,
-    EditarempleadosComponent
+    EditarempleadosComponent,
+    DetallesempleadosComponent
   ],
   imports: [
     BrowserModule,

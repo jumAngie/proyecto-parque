@@ -87,6 +87,9 @@ export class ParqServicesService {
     return this.http.get<Empleados>(this.apiService.apiUrl + 'Empleados/Find/'+ idEmpleado)
   }
 
+  deleteEmpleado(idEmpleado?: string){
+    return this.http.post<Empleados[]>(this.apiService.apiUrl + 'Empleados/Delete/' + idEmpleado, idEmpleado)
+  }
  
   // servicios de areas//
   getAreas(){

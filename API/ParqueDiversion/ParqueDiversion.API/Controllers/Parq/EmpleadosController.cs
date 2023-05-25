@@ -54,11 +54,11 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }        
         
-        [HttpPost("Delete")]
-        public IActionResult Delete([FromBody] EmpleadosViewModel data)
+        [HttpPost("Delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            var item = _mapper.Map<tbEmpleados>(data);
-            var respuesta = _parqueServices.DeleteEmpleado(item);
+            
+            var respuesta = _parqueServices.DeleteEmpleado(id);
             return Ok(respuesta);
         }
 
