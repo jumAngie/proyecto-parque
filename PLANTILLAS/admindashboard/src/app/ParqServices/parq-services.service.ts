@@ -12,6 +12,7 @@ import { ApiService } from '../api.service';
 import { Areas } from '../Models/Areas';
 import { Regiones } from '../Models/Regiones';
 import { Quioscos } from '../Models/Quioscos';
+import { htmlPrefilter } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -66,12 +67,23 @@ export class ParqServicesService {
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Delete/'+id, id);
   }
 
-  
+
   // servicios de quioscos// 
   getQuioscos(){
     return this.http.get<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Listado');
   }
-
+  getInsumos(id?: number){
+    return this.http.post<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/InsumosByQuiosco/'+id , id)
+  }
+  createQuioscos(quiosco: Quioscos){
+    return this.http.post<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Insertar', quiosco)
+  }
+  findQuiosco(id: number){
+    return this.http.post<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Find/'+ id, id);    
+  }  
+  updateQuiosco(quiosco: Quioscos){
+    return this.http.post<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Actualizar', quiosco)
+  }
 
 
   // servicios de insumos quioscos//

@@ -44,7 +44,9 @@ import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.
 
 //Quioscos
 import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
-
+import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
+import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
+import { CreateQuioscoComponent } from './Quioscos/create/create.component';
 
 //Atracciones
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
@@ -137,7 +139,9 @@ const routes: Routes = [
   
   //Quioscos
   {path: 'quioscos-listado', component: ListarquioscosComponent},
-
+  {path: 'quioscos-detalle', component: DetalleQuioscoComponent},
+  {path: 'quioscos-crear', component: CreateQuioscoComponent},
+  {path: 'quioscos-editar', component: EditQuioscoComponent},
 
 ];
 

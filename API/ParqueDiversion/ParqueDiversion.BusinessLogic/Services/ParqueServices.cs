@@ -600,15 +600,17 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region Empleados
-        public IEnumerable<VW_tbEmpleados> ListadoEmpleados()
+        public ServiceResult ListadoEmpleados()
         {
+            var result = new ServiceResult();
             try
             {
-                return _empleadosRepository.List();
+                var list = _empleadosRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbEmpleados>();
+                return result.Error(ex.Message);
             }
         }
 
@@ -734,6 +736,20 @@ namespace ParqueDiversion.BusinessLogic.Services
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult FindQuiosco (int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _quioscosRepository.FindQuiosco(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
 

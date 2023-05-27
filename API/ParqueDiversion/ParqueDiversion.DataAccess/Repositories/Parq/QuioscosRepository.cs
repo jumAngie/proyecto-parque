@@ -27,6 +27,15 @@ namespace ParqueDiversion.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public IEnumerable<VW_tbQuioscos> FindQuiosco(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@quio_ID", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbQuioscos>(ScriptsDatabase.UDP_Quioscos_Find, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Insert(tbQuioscos item)
         {
 

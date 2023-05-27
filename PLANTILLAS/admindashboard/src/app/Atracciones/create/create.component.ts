@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Areas } from 'src/app/Models/Areas';
@@ -20,8 +20,9 @@ export class CreateAtraccionesComponent implements OnInit {
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
   selectedImage: any;
-  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
   
+  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
+
 
   //VALIRABLES PARA VALIDACIÓN DE S
   NombreRequerido = false;
@@ -36,8 +37,6 @@ export class CreateAtraccionesComponent implements OnInit {
   constructor(
     private service: ParqServicesService,
     private router: Router,
-    private elementRef: ElementRef,
-    private renderer2: Renderer2,
   ) { }
 
   ngOnInit(): void {
@@ -94,7 +93,7 @@ export class CreateAtraccionesComponent implements OnInit {
         }
       })
     }else{
-      ToastUtils.showWarningToast('Hay campos vacios!');
+      ToastUtils.showWarningToast('Hay campos vacíos!');
     }
   };
 

@@ -21,7 +21,7 @@ export class Quioscos{
     quio_UsuarioCreador!: number;
     quio_UsuarioCreador_Nombre!: String;
     quio_FechaCreacion!: String;
-    quio_UsuarioModificador!: String ;
+    quio_UsuarioModificador!: number ;
     quio_UsuarioModificador_Nombre!: String;
     quio_FechaModificacion!: String
 }

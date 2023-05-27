@@ -28,22 +28,25 @@ export class ListarquioscosComponent implements OnInit{
   ngOnInit(): void{
     this.gridOptions = {
       columnDefs: [
-        {headerName: 'ID', field: 'quio_ID'},
-        {headerName: 'Quiosco', field: 'quio_Nombre'},
+        {headerName: 'ID', field: 'quio_ID', width: 75, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Quiosco', field: 'quio_Nombre', autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Dirección', field: 'quio_ReferenciaUbicacion', width: 300, autoHeight: true, autoHeaderHeight: true},
         {
           headerName: 'Acciones',
+          width: 290, 
+          sortable: false,
+          filter: false,
           cellRenderer: 'actionsRenderer',
           cellRendererParams: {
             onDetail: this.onDetail.bind(this),
             onEdit: this.onEdit.bind(this),
             onDelete: this.onDelete.bind(this),
           }
-        }
+        },
       ],
       rowData: this.quioscos,
       pagination: true,
       paginationPageSize: this.pageSize,
-      paginationAutoPageSize: true,
       quickFilterText: this.searchText,
       onGridReady: () =>{
         
@@ -72,15 +75,23 @@ export class ListarquioscosComponent implements OnInit{
     });
   };
 
-  onDetail(rowData: any): void{
-
+  onDetail(rowData: any): void{    
+    localStorage.setItem('quiosco', JSON.stringify(rowData));    
+    this.router.navigate(['quioscos-detalle']);
   }
 
   onEdit(rowData: any): void {
-    // Lógica para editar el registro
+    localStorage.setItem('quio_ID', rowData.quio_ID);
+            
+    this.router.navigate(['quioscos-editar']);         
   }
   
   onDelete(rowData: any): void {
     // Lógica para eliminar el registro
   }
+
+  Agregar(){
+    this.router.navigate(['quioscos-crear']);
+  }
+
 };

@@ -70,6 +70,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
+import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
+import { CreateQuioscoComponent } from './Quioscos/create/create.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +129,11 @@ import { DetallesempleadosComponent } from './Empleados/detallesempleados/detall
     LoginComponent,
     EditarempleadosComponent,
     ListarquioscosComponent,
-    DetallesempleadosComponent
+    DetallesempleadosComponent,
+    DetalleQuioscoComponent,
+    EditQuioscoComponent,
+    CreateQuioscoComponent,
+    
   ],
   imports: [
     BrowserModule,

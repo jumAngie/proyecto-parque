@@ -39,6 +39,13 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
+        [HttpPost("Find/{id}")]
+        public IActionResult Find(int id)
+        {
+            var listado = _parqueServices.FindQuiosco(id);
+            return Ok(listado);
+        }
+
         [HttpPost("Actualizar")]
         public IActionResult Update([FromBody] QuioscosViewModel data)
         {

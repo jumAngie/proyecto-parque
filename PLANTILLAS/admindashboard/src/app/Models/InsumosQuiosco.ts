@@ -1,11 +1,13 @@
 export class InsumosQuiosco{
     insu_ID!: number;
     quio_ID!: number;
-    area_ID!: number;
-    area_Nombre!: String;
     quio_Nombre!: String;
+    area_ID!: number;
+    quio_area_Nombre!: String;
     empl_ID!: number;
+    quio_empl_NombreCompleto!: String;    
     regi_ID!: number;
+    quio_regi_Nombre!: String;    
     quio_ReferenciaUbicacion!:String;
     quio_Imagen!:String;
     golo_ID!: number;
