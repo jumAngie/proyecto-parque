@@ -39,6 +39,13 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
+        [HttpGet("Find/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var listado = _parqueServices.FindEmpleado(id);
+            return Ok(listado);
+        }
+
         [HttpPost("Actualizar")]
         public IActionResult Update([FromBody] EmpleadosViewModel data)
         {
@@ -47,11 +54,11 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }        
         
-        [HttpPost("Delete")]
-        public IActionResult Delete([FromBody] EmpleadosViewModel data)
+        [HttpPost("Delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            var item = _mapper.Map<tbEmpleados>(data);
-            var respuesta = _parqueServices.DeleteEmpleado(item);
+            
+            var respuesta = _parqueServices.DeleteEmpleado(id);
             return Ok(respuesta);
         }
 

@@ -565,6 +565,18 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
+        public VW_tbEmpleados FindEmpleado(int id)
+        {
+            try
+            {
+                return _empleadosRepository.Find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public ServiceResult InsertEmpleado(tbEmpleados item)
         {
             var result = new ServiceResult();
@@ -612,12 +624,12 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
-        public ServiceResult DeleteEmpleado(tbEmpleados item)
+        public ServiceResult DeleteEmpleado(int id)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _empleadosRepository.Delete(item.empl_ID);
+                var map = _empleadosRepository.Delete(id);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);

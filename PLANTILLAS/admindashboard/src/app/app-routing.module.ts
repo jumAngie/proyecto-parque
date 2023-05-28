@@ -52,6 +52,8 @@ import { IndexComponent } from './Roles/index/index.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
 import {LoginComponent} from '../app/login/login.component' 
+import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
+import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -99,8 +101,11 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
   { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
   
-  { path: 'listempleados', component: ListempleadosComponent},
-  { path: 'createcargos', component: CreatecargosComponent},
+  {path: 'listempleados', component: ListempleadosComponent},
+  {path: 'crearempleados', component: CrearempleadosComponent},
+  {path: 'editarempleados', component: EditarempleadosComponent},
+  
+  {path: 'createcargos', component: CreatecargosComponent},
   {path: 'editarcargos', component: EditarcargosComponent}
 ];
 

@@ -9,13 +9,53 @@
       </ol>
     </nav>
   </div>
+
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
+          <div class="card-header" style="padding: 0; position: relative">
+            <div
+              class="banner"
+              style="
+                background-image: url('/assets/img/BANNERS/BANNER-EMPLEADOS-FINAL.png');
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-size: cover;
+                background-position: center;
+                height: 0;
+                padding-bottom: 22%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+              "
+            ></div>
+            <div
+              class="overlay"
+              style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+            ></div>
+          </div>
           <div class="card-body">
-            <h5 class="card-title">Listado de Empleados</h5>
-            <table class="table datatable">
+            <div class="row ms-4 col-11">
+              <button
+                class="ov-btn-grow-primary mt-3 col-2"
+                style="height: 2.4rem; margin-left: 0"
+                routerLink="/crearempleados"
+              >
+                <i class="fas fa-plus-circle mr-1"></i>
+                Agregar
+              </button>
+
+              <div class="search-bar mt-3 col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar..."
+                  [(ngModel)]="filtro"
+                />
+              </div>
+            </div>
+            <table
+              class="table table-hover"
+              style="margin-top: 20px; margin-left: 10px; margin-right: 10px"
+            >
               <thead>
                 <tr>
                   <th scope="col">ID</th>
@@ -28,7 +68,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of empleados">
+                <tr
+                  *ngFor="
+                    let item of filtrarEmpleados()
+                      | paginate : { itemsPerPage: 10, currentPage: p }
+                  "
+                >
                   <th scope="row">{{ item.empl_ID }}</th>
                   <td>{{ item.empl_NombreCompleto }}</td>
                   <td>{{ item.empl_DNI }}</td>
@@ -36,22 +81,55 @@
                   <td>{{ item.empl_Telefono }}</td>
                   <td>{{ item.civi_Descripcion }}</td>
                   <td>
-                    <button class="btn btn-info">
+                    <button class="btn btn-outline-warning" (click)="Editar(item)">
                       <i class="bi bi-pen-fill"></i> Editar
                     </button>
-                    <button class="btn btn-danger" style="margin-left: 10px">
+                    <button
+                      class="btn btn-outline-danger"
+                      style="margin-left: 10px"
+                      data-bs-toggle="modal"
+                      data-bs-target="#verticalycentered"
+                      (click)="GuardarId(item)"
+                    >
                       <i class="bi bi-trash-fill"></i> Eliminar
                     </button>
-                    <button class="btn btn-success" style="margin-left: 10px">
+                    <button class="btn btn-info" style="margin-left: 10px">
                       <i class="bi bi-newspaper"></i> Detalles
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <div class="pagination d-flex justify-content-center mt-4">
+              <pagination-controls
+                (pageChange)="p = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"
+                firstLabel="Primera"
+                lastLabel="Última"
+                screenReaderPaginationLabel="Paginación"
+                screenReaderPageLabel="Página"
+                screenReaderCurrentLabel="Página actual"
+              >
+              </pagination-controls>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="modal fade" id="verticalycentered" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body" style="text-align: center;">
+            <h5 style="text-align: center; margin-top: 20px;"><b>¿Desea eliminar este registro?</b></h5>
+            <img src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s" style="width: 100px; height: 100px; margin-right: 30px; text-align: center;" alt="Warning Sign">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="Eliminar()">Confirmar</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="Cerrar()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>    
   </section>
 </main>

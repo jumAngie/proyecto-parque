@@ -23,11 +23,11 @@
 
       <div class="card-body">
          <div class="row col-lg-12 ms-1">
-            <button (click)="AgregarAtraccion()" class="btn btn-sm btn-outline-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+            <button (click)="AgregarAtraccion()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
               <i class="fas fa-plus-circle mr-1"></i>
-              Agregar Atracción
+              Agregar
             </button>
-            
+
             <div class="search-bar mt-3 col-10">
               <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
             </div>
@@ -43,8 +43,8 @@
                <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
             </div>
             <div class="card-footer" style="text-align: center;">
-               <button class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
-               <button class="btn btn-outline-warning" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+               <button class="ov-btn-grow-d"><i class="bi bi-trash-fill"></i></button>
+               <button class="ov-btn-grow-u" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
              </div>
          </div>
       </div>

@@ -47,6 +47,9 @@ import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/lis
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
+import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
+import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
+
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component'
 import { IndexComponent } from './Roles/index/index.component';
@@ -54,11 +57,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 import { TabsComponent } from '../app/tabs/tabs.component';
 import { ParqServicesService } from './ParqServices/parq-services.service';
+
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
+
 import { LoginComponent } from './login/login.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+
+import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+
 
 @NgModule({
   declarations: [
@@ -111,7 +119,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     EditarcargosComponent,
     CreateAtraccionesComponent,
     LoginComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    CrearempleadosComponent,
+    EditarempleadosComponent,
+    DetallesempleadosComponent
   ],
   imports: [
     BrowserModule,

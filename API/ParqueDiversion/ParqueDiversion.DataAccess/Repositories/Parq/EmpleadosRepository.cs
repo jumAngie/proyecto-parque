@@ -25,7 +25,11 @@ namespace ParqueDiversion.DataAccess.Repositories
 
         public VW_tbEmpleados Find(int id)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@empl_ID", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<VW_tbEmpleados>(ScriptsDatabase.UDP_Empleados_Find, parametros, commandType: CommandType.StoredProcedure);
         }
 
         public RequestStatus Insert(tbEmpleados item)

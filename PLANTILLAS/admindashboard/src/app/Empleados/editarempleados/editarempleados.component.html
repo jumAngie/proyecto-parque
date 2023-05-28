@@ -1,0 +1,296 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Empleados</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
+          <li class="breadcrumb-item">Editar</li>
+          <li class="breadcrumb-item active">Empleados</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header" style="padding: 0; position: relative;">
+              <div class="banner" style="
+                background-image: url('/assets/img/BANNERS/BANNER-EMPLEADOS-FINAL.png');
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-size: cover;
+                background-position: center;
+                height: 0;
+                padding-bottom: 24%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+              "></div>
+              <div class="overlay" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"></div>
+            </div>                 
+            <div class="card-body">
+              <div class="row g-3" style="margin-top: 10px">
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="PrimerNombreRequerido"
+                  ></i>
+                  <span>Primer Nombre:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-person-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_PrimerNombre"
+                      type="text"
+                      class="form-control"
+                      id="PrimerNombre"
+                      placeholder="Primer Nombre"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>Segundo Nombre:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-person-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_SegundoNombre"
+                      type="text"
+                      class="form-control"
+                      id="floatingSNombre"
+                      placeholder="Segundo Nombre"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="PrimerApellidoRequerido"
+                  ></i>
+                  <span>Primer Apellido</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-person-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_PrimerApellido"
+                      type="text"
+                      class="form-control"
+                      id="floatingPApellido"
+                      placeholder="Primer Apellido"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>Segundo Apellido:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-person-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_SegundoApellido"
+                      type="text"
+                      class="form-control"
+                      id="floatingSApellido"
+                      placeholder="Segundo Apellido"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="DNIRequerido"
+                  ></i>
+                  <span>DNI:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text">
+                      <i
+                        class="bi bi-credit-card-2-back-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i>
+                    </span>
+                    <input
+                      [(ngModel)]="empleados.empl_DNI"
+                      maxlength="15"
+                      (input)="formatoDNI()"
+                      type="text"
+                      class="form-control"
+                      id="floatingDNI"
+                      placeholder="DNI"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="EmailRequerido"
+                  ></i>
+                  <span>Correo Electronico:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-envelope-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_Email"
+                      type="email"
+                      class="form-control"
+                      id="floatingEmail"
+                      placeholder="Correo"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="TelefonoRequerido"
+                  ></i>
+                  <span>Telefono / Celular:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-phone-vibrate-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <input
+                      [(ngModel)]="empleados.empl_Telefono"
+                      (input)="formatoTelefono()"
+                      type="text"
+                      maxlength="9"
+                      class="form-control"
+                      id="floatingTelefono"
+                      placeholder="Telefono"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="SexoRequerido"
+                  ></i>
+                  <span>Sexo:</span>
+                  <div class="text-center">
+                    <div class="form-check form-check-inline">
+                      <input
+                        [(ngModel)]="empleados.empl_Sexo"
+                        class="form-check-input"
+                        type="radio"
+                        name="Sexo"
+                        id="gridRadios1"
+                        value="F"
+                      />
+                      <label class="form-check-label" for="gridRadios1">
+                        Femenino
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        [(ngModel)]="empleados.empl_Sexo"
+                        class="form-check-input"
+                        type="radio"
+                        name="Sexo"
+                        id="gridRadios2"
+                        value="M"
+                      />
+                      <label class="form-check-label" for="gridRadios2">
+                        Masculino
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="EstCivilRequerido"
+                  ></i>
+                  <span>Estado Civil:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-heart-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <select
+                      [(ngModel)]="empleados.civi_ID"
+                      class="form-select"
+                      id="floatingSelectEstadoCivil"
+                      aria-label="Regiones"
+                    >
+                      <option
+                        *ngFor="let option of estadosciviles"
+                        [value]="option.civi_Id"
+                      >
+                        {{ option.civi_Descripcion }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <i
+                    class="bi bi-exclamation-circle-fill"
+                    style="color: orange; margin-right: 10px"
+                    *ngIf="CargoRequerido"
+                  ></i>
+                  <span>Cargo:</span>
+                  <div class="input-group" style="height: 3rem">
+                    <span class="input-group-text"
+                      ><i
+                        class="bi bi-person-badge-fill"
+                        style="color: rgb(43, 137, 226)"
+                      ></i
+                    ></span>
+                    <select
+                      [(ngModel)]="empleados.carg_ID"
+                      class="form-select"
+                      id="floatingSelectCargo"
+                      aria-label="cargos"
+                    >
+                      <option
+                        *ngFor="let option of cargos"
+                        [value]="option.carg_ID"
+                      >
+                        {{ option.carg_Nombre }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button (click)="actulizarEmpleado()" class="ov-btn-grow-primary col-2" style="height: 3rem;">
+                    <i class="fas fa-plus-circle mr-1"></i>
+                    Actualizar
+                  </button>    
+                  <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 3rem;">
+                    <i class="bi bi-reply-fill mr-1"></i>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
