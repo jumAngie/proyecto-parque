@@ -58,6 +58,7 @@ import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoginComponent } from './login/login.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { LoginComponent } from './login/login.component';
     CreatecargosComponent,
     EditarcargosComponent,
     CreateAtraccionesComponent,
-    LoginComponent
+    LoginComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

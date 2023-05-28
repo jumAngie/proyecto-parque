@@ -159,6 +159,34 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
 
         }
+
+        public ServiceResult Pass(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _usuarioRepository.Pass(item);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+
+        }
         #endregion
 
         #region Roles

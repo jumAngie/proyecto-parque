@@ -23,24 +23,26 @@
                                  <p class="text-center small h5">Ingrese su nombre de usuario y contraseña para iniciar sesión</p>
                               </div>
                               <form class="row g-3 needs-validation" novalidate>
+                                 
                                  <div class="col-12">
                                     <div class="input-group has-validation">
-                                       <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);">@</span>
-                                       <input type="text" name="username" class="col-11 custom-input" id="yourUsername" required placeholder="Usuario" style="text-indent: 10px;">
-                                       <div class="invalid-feedback">Por favor, ingrese su usuario</div>
+                                      <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);">@</span>
+                                      <input type="text" name="username" [(ngModel)]="username" class="col-11 custom-input" id="yourUsername" required placeholder="Usuario" style="text-indent: 10px;">
+                                      <div class="invalid-feedback">Por favor, ingrese su usuario</div>
                                     </div>
-                                 </div>
-                                 <div class="col-12">
+                                  </div>
+                                  <div class="col-12">
                                     <div class="input-group has-validation">
-                                       <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);"><i class="fas fa-lock"></i></span>
-                                       <input type="password" name="password" class="col-11 custom-input" id="yourPassword" required placeholder="Contraseña" style="text-indent: 10px;">
-                                       <div class="invalid-feedback">Por favor, ingrese su contraseña</div>
+                                      <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);"><i class="fas fa-lock"></i></span>
+                                      <input type="password" name="password" [(ngModel)]="password" class="col-11 custom-input" id="yourPassword" required placeholder="Contraseña" style="text-indent: 10px;">
+                                      <div class="invalid-feedback">Por favor, ingrese su contraseña</div>
                                     </div>
-                                 </div>
-                                 <div class="col-12"></div>
-                                 <div class="col-12">
-                                    <button class="raise col-12 p-1" style="max-width: 360px;" type="submit">Iniciar Sesión</button>
-                                 </div>
+                                  </div>
+                                  <div class="col-12"></div>
+                                  <div class="col-12">
+                                    <button class="raise col-11  p-1 " style="max-width: 360px;" type="submit" (click)="Login()">Iniciar Sesión</button>
+                                  </div>                                  
+
                                  <div class="col-12">
                                     <p class="small mb-0"><a routerLink="/pages-register">Cliente</a></p>
                                  </div>

@@ -49,6 +49,13 @@ namespace ParqueDiversion.API.Controllers
             return Ok(result);
         }
 
+        [HttpPut("Pass")]
+        public IActionResult Pass([FromBody] UsuariosViewModel Usuario)
+        {
+            var item = _mapper.Map<tbUsuarios>(Usuario);
+            var result = _accessService.Pass(item);
+            return Ok(result);
+        }
 
         [HttpPut("Eliminar")]
         public IActionResult Delete(int id)

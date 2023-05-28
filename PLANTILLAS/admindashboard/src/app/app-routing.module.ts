@@ -49,14 +49,16 @@ import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.compon
 
 
 import { IndexComponent } from './Roles/index/index.component';
-import {LoginComponent} from '../app/login/login.component'
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
+import {LoginComponent} from '../app/login/login.component' 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'roles', component: IndexComponent },
+  { path: 'usuarios', component: UsuariosComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },
@@ -84,6 +86,7 @@ const routes: Routes = [
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
   { path: 'pages-login', component: PagesLoginComponent },
+  { path: '', redirectTo: 'pages-login', pathMatch: 'full' },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'listcargos', component: ListcargosComponent},
