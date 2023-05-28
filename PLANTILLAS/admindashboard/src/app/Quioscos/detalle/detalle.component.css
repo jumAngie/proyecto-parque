@@ -145,4 +145,7 @@
     transform: skewX(-45deg) scale(1, 1);
   }
   
+  .modal-backdrop {
+    opacity: 0.5; /* Cambia el valor de opacidad según tus necesidades */
+  }
   

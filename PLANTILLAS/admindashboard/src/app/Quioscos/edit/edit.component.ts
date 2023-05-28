@@ -41,8 +41,10 @@ export class EditQuioscoComponent implements OnInit {
     this.quiosco.quio_ID = id ?? 0;
 
     this.service.findQuiosco(this.quiosco.quio_ID).subscribe((response: any) =>{
-      this.quiosco = response.data;
-      console.log(this.quiosco);
+      this.quiosco = response.data[0];
+      this.getAreas();
+      this.getRegiones();
+      this.getEmpleados();
     })
   }
 

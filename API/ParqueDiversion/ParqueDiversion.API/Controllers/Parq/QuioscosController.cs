@@ -54,11 +54,10 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
-        [HttpPost("Delete")]
-        public IActionResult Delete([FromBody] QuioscosViewModel data)
+        [HttpPost("Delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            var item = _mapper.Map<tbQuioscos>(data);
-            var respuesta = _parqueServices.DeleteQuiosco(item);
+            var respuesta = _parqueServices.DeleteQuiosco(id);
             return Ok(respuesta);
         }
     }

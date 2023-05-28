@@ -12,7 +12,7 @@ import { ApiService } from '../api.service';
 import { Areas } from '../Models/Areas';
 import { Regiones } from '../Models/Regiones';
 import { Quioscos } from '../Models/Quioscos';
-import { htmlPrefilter } from 'jquery';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -84,13 +84,17 @@ export class ParqServicesService {
   updateQuiosco(quiosco: Quioscos){
     return this.http.post<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Actualizar', quiosco)
   }
-
+  deleteQuiosco(id: number){
+    return this.http.post<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Delete/'+id, id)
+  }
 
   // servicios de insumos quioscos//
   getInsumosQuiosco(){
     return this.http.get<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/Listado');
   }
-
+  sendInsumos(insumo: InsumosQuiosco){
+    return this.http.post<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/Insertar', insumo);
+  }
 
   // servicios de clientes registrados//
   getClientesRegistrados(){

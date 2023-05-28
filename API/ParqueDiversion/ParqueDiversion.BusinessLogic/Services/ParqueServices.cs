@@ -778,12 +778,12 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
-        public ServiceResult DeleteQuiosco(tbQuioscos item)
+        public ServiceResult DeleteQuiosco(int item)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _quioscosRepository.Delete(item.quio_ID);
+                var map = _quioscosRepository.Delete(item);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
@@ -806,15 +806,17 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region Golosinas
-        public IEnumerable<VW_tbGolosinas> ListadoGolosina()
+        public ServiceResult ListadoGolosina()
         {
+            var result = new ServiceResult();
             try
             {
-                return _golosinasRepository.List();
+                var list = _golosinasRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbGolosinas>();
+                return result.Error(ex.Message);
             }
         }
 
