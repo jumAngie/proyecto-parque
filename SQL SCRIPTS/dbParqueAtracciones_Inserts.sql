@@ -381,11 +381,11 @@ UPDATE gral.tbMunicipios
 SET muni_UsuarioCreador = 1
 
 
-INSERT INTO parq.tbCargos(carg_Nombre)
-VALUES	('Ventanilla'),
-		('Vendedor'),
-		('Supervisor Atracciones'),
-		('Aseador')
+INSERT INTO parq.tbCargos(carg_Nombre, [carg_UsuarioCreador])
+VALUES	('Ventanilla', 1),
+		('Vendedor', 1),
+		('Supervisor Atracciones', 1),
+		('Aseador', 1)
 GO
 
 INSERT INTO parq.tbRegiones(regi_Nombre)
