@@ -11,6 +11,7 @@ import { Empleados } from '../Models/Empleados';
 import { ApiService } from '../api.service';
 import { Areas } from '../Models/Areas';
 import { Regiones } from '../Models/Regiones';
+import { TicketsCliente } from '../Models/TicketsCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +106,10 @@ export class ParqServicesService {
   // servicios de regiones//
   getRegiones(){
     return this.http.get<Regiones[]>(this.apiService.apiUrl + 'Regiones/List')
+  }
+
+  // servicios de tickets cliente //
+  getTicketsCliente(){
+    return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
   }
 }

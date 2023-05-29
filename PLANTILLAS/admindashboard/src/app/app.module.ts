@@ -68,6 +68,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
 import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
 import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
 
 
 @NgModule({
@@ -126,7 +128,9 @@ import { CreateticketsComponent } from './Tickets/createtickets/createtickets.co
     EditarempleadosComponent,
     DetallesempleadosComponent,
     ListticketsComponent,
-    CreateticketsComponent
+    CreateticketsComponent,
+    ListticketsclienteComponent,
+    CreateticketsclienteComponent
   ],
   imports: [
     BrowserModule,

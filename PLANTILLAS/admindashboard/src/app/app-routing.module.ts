@@ -55,6 +55,12 @@ import {LoginComponent} from '../app/login/login.component'
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
 
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
+
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
@@ -106,7 +112,13 @@ const routes: Routes = [
   {path: 'editarempleados', component: EditarempleadosComponent},
   
   {path: 'createcargos', component: CreatecargosComponent},
-  {path: 'editarcargos', component: EditarcargosComponent}
+  {path: 'editarcargos', component: EditarcargosComponent},
+
+  {path: 'listticketsclientes', component: ListticketsclienteComponent},
+  {path: 'createticketsclientes', component:CreateticketsclienteComponent},
+
+  {path: 'listtitckets', component:ListticketsComponent},
+  {path: 'createtickets', component:CreateticketsComponent}
 ];
 
 @NgModule({
