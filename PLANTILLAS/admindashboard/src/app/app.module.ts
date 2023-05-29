@@ -66,6 +66,7 @@ import { LoginComponent } from './login/login.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { DetallesempleadosComponent } from './Empleados/detallesempleados/detall
     UsuariosComponent,
     CrearempleadosComponent,
     EditarempleadosComponent,
-    DetallesempleadosComponent
+    DetallesempleadosComponent,
+    PagesLoginCComponent
   ],
   imports: [
     BrowserModule,
