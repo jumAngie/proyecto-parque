@@ -14,8 +14,8 @@ import { ToastUtils } from 'src/app/Utilities/ToastUtils';
   styleUrls: ['./detalle.component.css'],
 })
 export class DetalleQuioscoComponent implements OnInit{
-  insumos!: InsumosQuiosco[];  
   quiosco: Quioscos = new Quioscos();
+  insumos!: InsumosQuiosco[];  
   golosinas!: Golosinas[];
   sendInsumos: InsumosQuiosco = new InsumosQuiosco();
 
@@ -125,7 +125,7 @@ export class DetalleQuioscoComponent implements OnInit{
   }
 
   getInsumos(){    
-    this.service.getInsumos(this.quiosco.quio_ID).subscribe((response: any) =>{
+    this.service.getInsumosByQuisco(this.quiosco.quio_ID).subscribe((response: any) =>{
       if(response.success){
         this.insumos = response.data;
         this.gridOptions.api?.setRowData(this.insumos);

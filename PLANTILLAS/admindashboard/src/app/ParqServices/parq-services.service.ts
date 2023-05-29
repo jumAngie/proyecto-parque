@@ -14,6 +14,8 @@ import { Regiones } from '../Models/Regiones';
 import { Quioscos } from '../Models/Quioscos';
 import { AppComponent } from '../app.component';
 import { VentasQuiosco } from '../Models/VentasQuiosco';
+import { Pagos } from '../Models/Pagos';
+import { Clientes } from '../Models/Clientes';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +75,7 @@ export class ParqServicesService {
   getQuioscos(){
     return this.http.get<Quioscos[]>(this.apiService.apiUrl + 'Quioscos/Listado');
   }
-  getInsumos(id?: number){
+  getInsumosByQuisco(id: number){
     return this.http.post<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/InsumosByQuiosco/'+id , id)
   }
   createQuioscos(quiosco: Quioscos){
@@ -97,6 +99,13 @@ export class ParqServicesService {
     return this.http.post<InsumosQuiosco[]>(this.apiService.apiUrl + 'InsumosQuiosco/Insertar', insumo);
   }
 
+
+  //servicio  de clientes
+  getClientes(){
+    return this.http.get<Clientes[]>(this.apiService.apiUrl + 'Clientes/List');
+  }
+
+  
   // servicios de clientes registrados//
   getClientesRegistrados(){
     return this.http.get<ClientesRegistrados[]>(this.apiService.apiUrl + 'ClientesRegistrados/List');
@@ -115,6 +124,22 @@ export class ParqServicesService {
   getDetallesByVenta(id: number){
     return this.http.post<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/DetallesPorVenta/'+id, id);
   }
+
+  createVenta(venta: VentasQuiosco){
+    return this.http.post<VentasQuiosco[]>(this.apiService.apiUrl + 'VentasQuiosco/Insertar', venta);
+  }
+
+  createVentaDetalle(detalle: VentasQuioscoDetalle){
+    return this.http.post<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/Insertar', detalle);
+  }
+
+
+
+  // Servicio de Pagos
+  getPagos(){
+    return this.http.get<Pagos[]>(this.apiService.apiUrl + 'VentasQuiosco/ListadoMetodosPago');
+  }
+
 
 
   // servicios de Empleados //

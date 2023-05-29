@@ -9,7 +9,7 @@ VALUES	('Soltero(a)'),
 		('Viudo(a)'),
 		('Union Libre')
 GO
-
+SELECT * FROM fact.tbVentasQuiosco
 INSERT INTO gral.tbDepartamentos(dept_Codigo, dept_Nombre)
 VALUES	('01','Atlántida'),
 		('02','Colón'),
@@ -402,7 +402,8 @@ SET regi_UsuarioCreador = 1
 
 
 INSERT INTO parq.tbClientes(clie_Nombres, clie_Apellidos, clie_DNI, clie_Sexo, clie_Telefono)
-VALUES	('Juan', 'Camaney',   '0502-0045-57848', 'M', '8855-4477'),
+VALUES	('Consumidor', 'Final', '0000-0000-00000', NULL, '0000-0000'),
+		('Juan', 'Camaney',   '0502-0045-57848', 'M', '8855-4477'),
 		('Maria', 'Antonieta','0224-5578-44157', 'F', '9985-2240'),
 		('David', 'Castillo', '0544-2235-42517', 'M', '7754-1142'),
 		('Alejandra', 'Peña', '0104-5575-11245', 'F', '8852-2241')
@@ -411,7 +412,7 @@ GO
 
 
 INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Clave, clre_Email, clre_UsuarioCreador)
-VALUES	( 1, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
+VALUES	( 2, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
 		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com', 1)
 GO
 
@@ -431,10 +432,10 @@ GO
 
 
 INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad)
-VALUES	(1, 1, 4),
-		(2, 4, 3),
-		(2, 2, 2),
-		(1, 3, 6)
+VALUES	(1, 2, 4),
+		(2, 5, 3),
+		(2, 3, 2),
+		(1, 4, 6)
 GO
 
 
@@ -480,37 +481,38 @@ GO
 INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCreador)
 VALUES	(1, 1, 50, 1),
 		(1, 2, 100, 1),
+		(1, 3, 90, 1),
+		(1, 4, 100, 1),
 		(2, 3, 75, 1),
 		(2, 4, 60, 1),
+		(2, 4, 75, 1),
 		(3, 5, 80, 1),
 		(3, 6, 90, 1),
+		(3, 5, 60, 1),
 		(4, 1, 70, 1),
 		(4, 2, 85, 1),
+		(4, 6, 85, 1),
 		(5, 3, 55, 1),
 		(5, 4, 40, 1),
 		(6, 5, 65, 1),
-		(6, 6, 50, 1),
-		(1, 3, 90, 1),
-		(2, 4, 75, 1),
-		(3, 5, 60, 1),
-		(4, 6, 85, 1)
+		(6, 6, 50, 1)
 GO
 
 
 INSERT INTO parq.tbRatings(atra_ID, clie_ID, rati_Estrellas, rati_Comentario, rati_UsuarioCreador)
-VALUES	(1, 1, 4, 'Excelente atracción. Me encantó la emoción que ofrece.', 1),
-		(2, 2, 5, 'Increíble experiencia. No puedo esperar para volver.', 1),
-		(3, 3, 3, 'La atracción estuvo bien, pero esperaba más emociones.', 1),
-		(4, 4, 2, 'No quedé satisfecho con esta atracción. Falta emoción.', 1)
+VALUES	(1, 2, 4, 'Excelente atracción. Me encantó la emoción que ofrece.', 1),
+		(2, 3, 5, 'Increíble experiencia. No puedo esperar para volver.', 1),
+		(3, 4, 3, 'La atracción estuvo bien, pero esperaba más emociones.', 1),
+		(4, 5, 2, 'No quedé satisfecho con esta atracción. Falta emoción.', 1)
 GO
 
 
 
 INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
-VALUES	(1, 1, 1, 1),
-		(2, 2, 2, 1),
-		(3, 3, 1, 1),
-		(4, 4, 2, 1)
+VALUES	(1, 2, 1, 1),
+		(2, 3, 2, 1),
+		(3, 4, 1, 1),
+		(4, 5, 2, 1)
 GO
 
 
@@ -541,8 +543,6 @@ GO
 
 
 
-
--- Agrega más inserts según sea necesario
 
 --ALTER TABLE gral.tbEstadosCiviles
 --ADD CONSTRAINT FK_gral_tbEstadosCiviles_civi_UsuarioCreador_acce_tbUsuarios_usua_ID FOREIGN KEY (civi_UsuarioCreador) REFERENCES acce.tbUsuarios (usua_ID),

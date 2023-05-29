@@ -63,8 +63,10 @@ import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.componen
 //Clientes
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
 
-// Ventas quiosco detalle
-import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
+// Ventas quiosco
+import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
+import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
+import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 
 
 //Empleados
@@ -77,7 +79,6 @@ import { IndexComponent } from './Roles/index/index.component';
 
 //Login
 import {LoginComponent} from '../app/login/login.component'
-import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
 
 
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -143,9 +144,10 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
 
   //Ventas quiosco detalle
-  { path: 'ventasquiosco-listado', component: ListVentasQuioscoDetalleComponent},
+  {path: 'ventasquiosco-listado', component: VentasListComponent},
   {path: 'ventasquiosco-crear', component: VentasCrearComponent},
-  
+  {path: 'ventasquiosco-detalle', component: VentasDetalleComponent},
+
   //Empleados
   {path: 'listempleados', component: ListempleadosComponent},
   {path: 'crearempleados', component: CrearempleadosComponent},

@@ -1,3 +1,5 @@
+import { NgItemLabelDirective } from "@ng-select/ng-select";
+
 export class VentasQuiosco
 {
     vent_ID!: number;
@@ -24,5 +26,5 @@ export class VentasQuiosco
     vent_FechaCreacion!: String;
     vent_UsuarioModificador!: number;
     vent_UsuarioModificador_Nombre!: String;
-    vent_FechaModificacion!: String
+    vent_FechaModificacion!: String;
     }

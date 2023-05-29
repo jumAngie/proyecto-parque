@@ -75,12 +75,14 @@ import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
 import { CreateQuioscoComponent } from './Quioscos/create/create.component';
 
 import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
-import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
+
 import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
+
 
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
 import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
+import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 
 
 @NgModule({
@@ -128,7 +130,7 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
     ListAtraccionesComponent,
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
-    VentasListComponent,
+
     ListempleadosComponent,
     CreatecargosComponent,
     EditarcargosComponent,
@@ -144,9 +146,10 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
     DetalleQuioscoComponent,
     EditQuioscoComponent,
     CreateQuioscoComponent,
+    VentasListComponent,
     VentasCrearComponent,
     VentasDetalleComponent,
-    
+
     DetallesempleadosComponent,
     PagesLoginCComponent
   ],

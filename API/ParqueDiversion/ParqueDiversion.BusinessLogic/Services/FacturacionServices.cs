@@ -78,6 +78,21 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+
+        public ServiceResult PagosList()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ventasQuioscoRepository.PagosList();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
 

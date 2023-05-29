@@ -187,7 +187,7 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Métodos de Pago 
-        public static string INDEX_METODOS = "fact.UDP_tbMetodosPagos_INDEX";
+        public static string INDEX_METODOS = "gral.UDP_tbMetodosPago_List";
         public static string FIND_METODOS = "fact.UDP_tbMetodosPagos_FIND";
         public static string INSERT_METODOS = "fact.UDP_tbMetodosPagos_INSERT";
         public static string UPDATE_METODOS = "fact.UDP_tbMetodosPagos_UPDATE";

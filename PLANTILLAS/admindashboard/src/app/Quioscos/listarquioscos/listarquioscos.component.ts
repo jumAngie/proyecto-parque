@@ -4,7 +4,6 @@ import { ParqServicesService } from 'src/app/ParqServices/parq-services.service'
 import { Router } from '@angular/router';
 import { GridOptions, GridApi, ColumnApi } from 'ag-grid-community';
 import { QuioscoActionsRenderer } from './QuioscoActionsRenderer.component';
-import { DetalleRendererComponent } from './DetalleRendererComponent.component';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 @Component({

@@ -30,8 +30,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@quio_ID", item.quio_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@clie_ID", item.clie_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@pago_ID", item.pago_ID, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@vent_UsuarioCreador", item.vent_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            
+            parametros.Add("@vent_UsuarioCreador", item.vent_UsuarioCreador, DbType.Int32, ParameterDirection.Input);            
             var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_VentasQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
@@ -56,6 +55,13 @@ namespace ParqueDiversion.DataAccess.Repositories
         public RequestStatus Update(tbVentasQuiosco item)
         {
             throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<tbMetodosPago> PagosList()
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);            
+            return db.Query<tbMetodosPago>(ScriptsDatabase.INDEX_METODOS, null, commandType: CommandType.StoredProcedure);
         }
     }
 }

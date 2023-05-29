@@ -3,9 +3,6 @@ GO
 
 
 
-
-
-
 --*************************************************************Tabla Usuarios******************************************************************--
 CREATE OR ALTER VIEW acce.VW_Usuarios
 AS
@@ -1095,6 +1092,9 @@ END
 
 GO
 
+
+
+GO
 --*************** INSERT DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_INSERT
 	@carg_Nombre			VARCHAR (300),
@@ -1122,6 +1122,9 @@ BEGIN
 				BEGIN
 					INSERT INTO parq.tbCargos	(carg_Nombre, carg_UsuarioCreador)
 					VALUES						(@carg_Nombre, @carg_UsuarioCreador)
+					
+					SELECT SCOPE_IDENTITY()
+
 					SELECT 200 AS codeStatus, 'Cargo creado con exito' AS messageStatus
 				END
 		COMMIT
@@ -1133,7 +1136,16 @@ BEGIN
 END
 --*************** UPDATE DE CARGO ******************-
 GO
+EXECUTE parq.UDP_tbCargos_INSERT 'PRUEBA1', 1
+EXECUTE parq.UDP_tbCargos_INSERT 'PRUEBA2', 1
+GO
 
+CREATE OR ALTER PROCEDURE gral.UDP_tbMetodosPago_List
+AS
+BEGIN
+	SELECT * FROM gral.tbMetodosPago WHERE pago_Estado = 1
+END
+GO
 --*************** UPDATE DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_UPDATE
 	@carg_ID				INT,
@@ -3174,8 +3186,8 @@ BEGIN
 		BEGIN TRANSACTION
 			INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
 			VALUES (@quio_ID, @clie_ID, @pago_ID, @vent_UsuarioCreador)
-			
-			SELECT 200 AS codeStatus, 'Factura creada con éxito' AS messageStatus
+			DECLARE @CurrentID INT = (SELECT SCOPE_IDENTITY())
+			SELECT 200 AS codeStatus, @CurrentID AS messageStatus
 		COMMIT
 	END TRY
 
@@ -3185,8 +3197,6 @@ BEGIN
 	END CATCH
 END
 GO
-
-
 
 
 ------------------------------------------------------- //// PROCS PARA tbVentasQuioscoDetalle -- ///// ----------------------------------------------------
@@ -3230,6 +3240,7 @@ BEGIN
 END
 GO
 
+
 CREATE OR ALTER PROCEDURE fact.UDP_VW_VentasQuioscoDetalle_DetalleByVenta
 	@vent_ID INT
 AS
@@ -3238,7 +3249,13 @@ BEGIN
 END
 GO
 
+SELECT * FROM fact.tbVentasQuiosco
 
+SELECT * FROM fact.VW_tbVentasQuiosco WHERE vent_ID = 5
+SELECT * FROM FACT.VW_tbVentasQuioscoDetalle WHERE vent_ID = 5
+
+SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = 1
+GO
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
 @vent_ID					INT,
@@ -3249,10 +3266,24 @@ AS
 BEGIN
 	BEGIN TRY 
 		BEGIN TRANSACTION
-			INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
-			VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+			IF EXISTS (SELECT * FROM fact.tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID )
+				BEGIN
+					UPDATE fact.tbVentasQuioscoDetalle 
+					SET deta_Cantidad += @deta_Cantidad
+					WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
 
-			SELECT 200 AS codeStatus, 'Detalle a�adido con �xito' AS messageStatus			
+					DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
+
+					SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+
+				END
+			ELSE
+				BEGIN
+					INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+					VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+
+					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus			
+				END
 		COMMIT
 	END TRY
 

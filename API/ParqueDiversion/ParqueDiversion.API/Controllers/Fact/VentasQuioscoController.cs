@@ -46,5 +46,12 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
+        [HttpGet("ListadoMetodosPago")]
+        public IActionResult PagosList()
+        {
+            var listado = _facturacionServices.PagosList();
+            return Ok(listado);
+        }
+
     }
 }
