@@ -66,6 +66,8 @@ import { LoginComponent } from './login/login.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
 
 
 @NgModule({
@@ -122,7 +124,9 @@ import { DetallesempleadosComponent } from './Empleados/detallesempleados/detall
     UsuariosComponent,
     CrearempleadosComponent,
     EditarempleadosComponent,
-    DetallesempleadosComponent
+    DetallesempleadosComponent,
+    ListticketsComponent,
+    CreateticketsComponent
   ],
   imports: [
     BrowserModule,
