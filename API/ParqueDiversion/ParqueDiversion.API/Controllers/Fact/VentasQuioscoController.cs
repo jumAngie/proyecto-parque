@@ -30,6 +30,13 @@ namespace ParqueDiversion.API.Controllers
             var listado = _facturacionServices.ListadoVenta();
             return Ok(listado);
         }
+        
+        [HttpPost("Find/{id}")]
+        public IActionResult Find(int id)
+        {
+            var listado = _facturacionServices.ListadoVentaFind(id);
+            return Ok(listado);
+        }
 
         [HttpPost("Insertar")]
         public IActionResult Insert([FromBody] VentasQuioscoViewModel data)

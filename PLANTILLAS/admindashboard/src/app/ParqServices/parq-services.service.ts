@@ -13,6 +13,7 @@ import { Areas } from '../Models/Areas';
 import { Regiones } from '../Models/Regiones';
 import { Quioscos } from '../Models/Quioscos';
 import { AppComponent } from '../app.component';
+import { VentasQuiosco } from '../Models/VentasQuiosco';
 
 @Injectable({
   providedIn: 'root'
@@ -102,9 +103,17 @@ export class ParqServicesService {
   }
 
 
-  // servicios de venta quiosco detalle//
-  getVentasQuioscoDetalle(){
-    return this.http.get<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/Listado');
+  // servicios de ventas por quiosco//
+  getVentas(){
+    return this.http.get<VentasQuiosco[]>(this.apiService.apiUrl + 'VentasQuiosco/Listado');
+  }
+
+  findVenta(id: number){
+    return this.http.post<VentasQuiosco[]>(this.apiService.apiUrl + 'VentasQuiosco/Find/'+id, id);
+  }
+
+  getDetallesByVenta(id: number){
+    return this.http.post<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/DetallesPorVenta/'+id, id);
   }
 
 

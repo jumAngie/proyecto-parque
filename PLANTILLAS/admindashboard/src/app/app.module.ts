@@ -45,7 +45,6 @@ import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
-import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
@@ -70,9 +69,14 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+
 import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
 import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
 import { CreateQuioscoComponent } from './Quioscos/create/create.component';
+
+import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
+import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
+import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +123,7 @@ import { CreateQuioscoComponent } from './Quioscos/create/create.component';
     ListAtraccionesComponent,
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
-    ListVentasQuioscoDetalleComponent,
+    VentasListComponent,
     ListempleadosComponent,
     CreatecargosComponent,
     EditarcargosComponent,
@@ -133,6 +137,8 @@ import { CreateQuioscoComponent } from './Quioscos/create/create.component';
     DetalleQuioscoComponent,
     EditQuioscoComponent,
     CreateQuioscoComponent,
+    VentasCrearComponent,
+    VentasDetalleComponent,
     
   ],
   imports: [

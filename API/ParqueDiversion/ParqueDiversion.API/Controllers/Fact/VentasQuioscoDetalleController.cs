@@ -30,6 +30,13 @@ namespace ParqueDiversion.API.Controllers
             var listado = _facturacionServices.ListadoVentaDetalle();
             return Ok(listado);
         }
+        
+        [HttpPost("DetallesPorVenta/{id}")]
+        public IActionResult DetallesByVentas(int id)
+        {
+            var listado = _facturacionServices.DetallesByVenta(id);
+            return Ok(listado);
+        }
 
 
         [HttpPost("Insertar")]

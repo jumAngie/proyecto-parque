@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
+import { GridOptions, GridApi, ColumnApi } from 'ag-grid-community';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListVentasQuioscoDetalleComponent implements OnInit {
+
+export class VentasListComponent implements OnInit {
   ventasQuioscoDetalle!: VentasQuioscoDetalle[];
+  deleteID: any;
+  gridOptions: GridOptions = {};
+
 
   constructor(
     private service: ParqServicesService, 
@@ -17,7 +24,12 @@ export class ListVentasQuioscoDetalleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.service.getVentasQuioscoDetalle()
+
+    this.getVentas();
+  }
+
+  getVentas(){
+    this.service.getVentas()
     .subscribe((response: any) => {
       if(response.success){
         this.ventasQuioscoDetalle = response.data;
@@ -25,5 +37,11 @@ export class ListVentasQuioscoDetalleComponent implements OnInit {
       }
     })
   }
+
+
+  Agregar(){
+    this.router.navigate(['ventasquiosco-crear']);
+  };
+
 
 }

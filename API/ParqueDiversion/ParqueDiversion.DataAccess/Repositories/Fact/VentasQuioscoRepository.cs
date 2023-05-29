@@ -43,6 +43,16 @@ namespace ParqueDiversion.DataAccess.Repositories
             return db.Query<VW_tbVentasQuiosco>(ScriptsDatabase.UDP_VentasQuiosco_List, parametros, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbVentasQuiosco> FindVenta(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@vent_ID", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbVentasQuiosco>(ScriptsDatabase.UDP_VentasQuiosco_Find, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Update(tbVentasQuiosco item)
         {
             throw new NotImplementedException();

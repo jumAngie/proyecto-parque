@@ -72,6 +72,7 @@ import { IndexComponent } from './Roles/index/index.component';
 
 //Login
 import {LoginComponent} from '../app/login/login.component'
+import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
 
 
 const routes: Routes = [
@@ -130,7 +131,8 @@ const routes: Routes = [
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
 
   //Ventas quiosco detalle
-  { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
+  { path: 'ventasquiosco-listado', component: ListVentasQuioscoDetalleComponent},
+  {path: 'ventasquiosco-crear', component: VentasCrearComponent},
   
   //Empleados
   {path: 'listempleados', component: ListempleadosComponent},

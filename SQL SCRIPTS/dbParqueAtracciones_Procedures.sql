@@ -3131,6 +3131,15 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE fact.UDP_VW_tbVentasQuiosco_Find
+	@vent_ID INT
+AS
+BEGIN
+	SELECT * FROM fact.VW_tbVentasQuiosco WHERE vent_ID = @vent_ID
+END
+GO
+
 --*************** CREATE DE VENTAS QUIOSCO ******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuiosco_Insert
 	@quio_ID					INT, 
@@ -3198,6 +3207,15 @@ BEGIN
 	SELECT * FROM fact.VW_tbVentasQuioscoDetalle WHERE deta_Estado = 1
 END
 GO
+
+CREATE OR ALTER PROCEDURE fact.UDP_VW_VentasQuioscoDetalle_DetalleByVenta
+	@vent_ID INT
+AS
+BEGIN 
+	SELECT * FROM fact.VW_tbVentasQuioscoDetalle WHERE vent_ID = @vent_ID
+END
+GO
+
 
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
