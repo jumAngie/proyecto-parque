@@ -78,6 +78,11 @@ import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.compo
 import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
 
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
+import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,6 +133,8 @@ import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component'
     CreatecargosComponent,
     EditarcargosComponent,
     CreateAtraccionesComponent,
+    LoginComponent,
+    UsuariosComponent,
     CrearempleadosComponent,
     EditAtraccionesComponent,
     LoginComponent,
@@ -140,6 +147,8 @@ import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component'
     VentasCrearComponent,
     VentasDetalleComponent,
     
+    DetallesempleadosComponent,
+    PagesLoginCComponent
   ],
   imports: [
     BrowserModule,

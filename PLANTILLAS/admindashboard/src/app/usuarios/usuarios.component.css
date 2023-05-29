@@ -1,28 +1,7 @@
-/* Import fonts from google font */
-@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat&display=swap');
-
-.custom-input {
-   background-color: transparent;
-   border: none;
-   border-bottom: 1px solid white;
-   color: white;
-   max-width: 316px;
-}
-
-.custom-input:focus {
-   outline: none;
-   border-bottom: 2px solid white;
-}
-
-.custom-input::placeholder {
-   color: white;
-   opacity: 0.6;
-}
-
 
 .ov-btn-grow-primary {
-  background: #4741d7; /* color de fondo */
-  color: #fff; /* color de fuente */
+  background: #fff; /* color de fondo */
+  color: #4741d7; /* color de fuente */
   border: 2px solid #4741d7; /* tamaño y color de borde */
   border-radius: 3px; /* redondear bordes */
   position: relative;
@@ -54,7 +33,6 @@
   transition: all 0.3s ease-out;
   transform: skewX(-45deg) scale(1, 1);
 }
-
 
 
 .ov-btn-grow-info {
@@ -91,6 +69,7 @@
   transition: all 0.3s ease-out;
   transform: skewX(-45deg) scale(1, 1);
 }
+
 
 
 .ov-btn-grow-in {
@@ -166,6 +145,7 @@
 }
 
 
+
 .ov-btn-grow-d {
   background: #fff; /* color de fondo */
   color: #da5c3c; /* color de fuente */
@@ -200,6 +180,7 @@
   transition: all 0.3s ease-out;
   transform: skewX(-45deg) scale(1, 1);
 }
+
 
 
 .ov-btn-grow-dark {
@@ -251,206 +232,3 @@
   margin-top: 16px;
 }
 
-
-
-
-
-
-
-
-
-  .gradiente {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        animation: cambiarColor 1s linear infinite;
-    }
-
-@keyframes animate {
-    100% {
-        transform: translate(50%, 50%);
-    }
-}
-
-._card {
-  position: relative;
-  width: 90%;
-  height: auto;
-  background: linear-gradient(90deg, #000, #323232);
-  border-radius: 30px;
-} 
-
-
-
-._fondo:before,
-._fondo:after {
-    content: '';
-    position: absolute;
-    left: -8px;
-    top: -8px;
-    background: linear-gradient(120deg, #b19aff, #ffb3de, #ffc5aa, #f5f4e3, #aaffb3, #e3c4ff);
-    background-size: 300%;
-    width: calc(100% + 16px);
-    height: calc(100% + 16px);
-    z-index: -1;
-    animation: _fondogradiente 15s ease infinite; 
-    border-radius: 40px;
-}
-
-
-@keyframes  _fondogradiente {
-    0% {
-        background-position: 0% 200%;
-    }
-    50% {
-        background-position: 200% 0%;
-    }
-    100% {
-        background-position: 0% 330%;
-    }
-}
-
-._fondo:after {
-    filter: brightness(1.4) drop-shadow(16px 16px 20px rgb(248, 220, 97));
-    filter: blur(15px);
-}
-
-
-
-/*Nuevos botones*/
-
-.fill:hover,
-.fill:focus {
-  box-shadow: inset 0 0 0 2em var(--hover);
-}
-
-.pulse:hover,
-.pulse:focus,
-.pulse:active {
-  -webkit-animation: pulse 1s;
-          animation: pulse 1s;
-  box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
-}
-
-@-webkit-keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 var(--hover);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 var(--hover);
-  }
-}
-.close:hover,
-.close:focus {
-  box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
-}
-
-.raise:hover,
-.raise:focus {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-  -webkit-transform: translateY(-0.25em);
-          transform: translateY(-0.25em);
-}
-
-.up:hover,
-.up:focus {
-  box-shadow: inset 0 -3.25em 0 0 var(--hover);
-}
-
-.slide:hover,
-.slide:focus {
-  box-shadow: inset 6.5em 0 0 0 var(--hover);
-}
-
-.offset {
-  box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
-}
-.offset:hover, .offset:focus {
-  box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
-}
-
-.fill {
-  --color: #a972cb;
-  --hover: #cb72aa;
-}
-
-.pulse {
-  --color: #ffb3de;
-  --hover: #ffc5aa;
-}
-
-.close {
-  --color: #ff7f82;
-  --hover: #ffdc7f;
-}
-
-.raise {
-    --color: #ffb3de;
-    --hover: #ffc5aa;
-    
-  }
-  
-
-.up {
-  --color: #e4cb58;
-  --hover: #94e458;
-}
-
-.slide {
-  --color: #8fc866;
-  --hover: #66c887;
-}
-
-.offset {
-  --color: #19bc8b;
-  --hover: #1973bc;
-}
-
-button {
-  color: var(--color);
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
-}
-button:hover, button:focus {
-  border-color: var(--hover);
-  color: #fff;
-}
-
-body {
-  color: #fff;
-  background: #17181c;
-  font: 300 1em 'Fira Sans', sans-serif;
-  -webkit-box-pack: center;
-          justify-content: center;
-  align-content: center;
-  -webkit-box-align: center;
-          align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: flex;
-}
-
-button {
-  background: none;
-  border: 2px solid;
-  font: inherit;
-  line-height: 1;
-  margin: 0.5em;
-  padding: 1em 2em;
-}
-
-h1 {
-  font-weight: 400;
-}
-
-code {
-  color: #e4cb58;
-  font: inherit;
-}

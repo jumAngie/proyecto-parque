@@ -63,14 +63,26 @@ namespace ParqueDiversion.DataAccess.Repositories
             var parametros = new DynamicParameters();
 
 
-            parametros.Add("@usua_Usuario", item.usua_Usuario, DbType.String, ParameterDirection.Input);
-            parametros.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
-            parametros.Add("@usua_Admin", item.usua_Admin, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@usua_ID", item.usua_ID, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_ID", item.empl_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@role_ID", item.role_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usua_Admin", item.usua_Admin, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificador", item.usua_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Usuarios_UPDATE, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
+
+        public RequestStatus Pass(tbUsuarios item)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+
+            parametros.Add("@usua_ID", item.usua_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
+
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Usuarios_PASS, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
 

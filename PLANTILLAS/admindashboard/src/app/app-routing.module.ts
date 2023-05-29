@@ -30,6 +30,10 @@ import { PagesContactComponent } from './pages/pages-contact/pages-contact.compo
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
+
+import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
+
+
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 
@@ -62,6 +66,7 @@ import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/lis
 // Ventas quiosco detalle
 import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
 
+
 //Empleados
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
@@ -75,12 +80,15 @@ import {LoginComponent} from '../app/login/login.component'
 import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
 
 
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
+
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'roles', component: IndexComponent },
+  { path: 'usuarios', component: UsuariosComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },
@@ -108,6 +116,10 @@ const routes: Routes = [
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
   { path: 'pages-login', component: PagesLoginComponent },
+
+  { path: 'pages-login-c', component: PagesLoginCComponent },
+  
+  { path: '', redirectTo: 'pages-login', pathMatch: 'full' },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
 

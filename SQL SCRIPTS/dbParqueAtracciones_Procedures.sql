@@ -132,6 +132,28 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Pass
+@usua_ID	INT,
+@usua_Clave	NVARCHAR(MAX)
+AS
+BEGIN
+BEGIN TRY
+			DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
+			UPDATE acce.tbUsuarios
+			SET usua_Clave = @Encrypt
+			WHERE usua_ID = @usua_ID
+
+			SELECT 200 AS codeStatus, 'Contraseña Modificada con éxito' AS messageStatus
+
+END TRY
+BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+END CATCH
+END
+
+GO
+
+
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_DELETE
 @usua_ID					INT
 AS
@@ -216,7 +238,7 @@ CREATE OR ALTER VIEW acce.VW_Roles
 AS
 SELECT	role_Id, 
 		role_Nombre, 
-		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios WHERE role_ID = role_Id),
+		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios T2 WHERE T2.role_ID = T1.role_Id),
 		role_Estado, 
 		role_UsuarioCreador,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = role_UsuarioCreador), 
@@ -224,7 +246,7 @@ SELECT	role_Id,
 		role_UsuarioModificador,
 		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = role_UsuarioModificador), 
 		role_FechaModificacion
-		FROM acce.tbRoles
+		FROM acce.tbRoles T1
 
 GO
 

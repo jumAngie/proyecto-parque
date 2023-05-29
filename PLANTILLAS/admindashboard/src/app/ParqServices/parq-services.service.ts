@@ -133,6 +133,10 @@ export class ParqServicesService {
   deleteEmpleado(idEmpleado?: string){
     return this.http.post<Empleados[]>(this.apiService.apiUrl + 'Empleados/Delete/' + idEmpleado, idEmpleado)
   }
+
+  editEmpleados(empleados: Empleados){
+    return this.http.post<Empleados[]>(this.apiService.apiUrl + 'Empleados/Actualizar', empleados)
+  }
  
   // servicios de areas//
   getAreas(){

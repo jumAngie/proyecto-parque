@@ -135,11 +135,13 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Usuarios
-        public static string UDP_Usuario_INDEX = "acce.UDP_tbUsuarios_INDEX";
-        public static string UDP_Usuarios_FIND = "acce.UDP_tbUsuarios_FIND";
-        public static string UDP_Usuario_INSERT = "acce.UDP_tbUsuarios_INSERT";
+        public static string UDP_Usuario_INDEX   = "acce.UDP_tbUsuarios_INDEX";
+        public static string UDP_Usuarios_FIND   = "acce.UDP_tbUsuarios_FIND";
+        public static string UDP_Usuario_INSERT  = "acce.UDP_tbUsuarios_INSERT";
         public static string UDP_Usuarios_UPDATE = "acce.UDP_tbUsuarios_UPDATE";
         public static string UDP_Usuarios_DELETE = "acce.UDP_tbUsuarios_DELETE";
+        public static string UDP_Usuarios_PASS   = "acce.UDP_tbUsuarios_Pass";
+
         #endregion
 
         #region Roles

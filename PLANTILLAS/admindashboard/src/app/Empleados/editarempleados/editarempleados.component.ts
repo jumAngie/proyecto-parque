@@ -53,8 +53,9 @@ export class EditarempleadosComponent {
     })
   }
 
-  guardarEmpleado(){
+  actulizarEmpleado(){
     var errors = 0;
+    console.log(this.empleados);
     const errorsArray: boolean[] = [];
     errorsArray[0] = this.validarPrimerNombre();
     errorsArray[1] = this.validarPrimerApellido();
@@ -75,15 +76,16 @@ export class EditarempleadosComponent {
     }
 
     if(errors == 0){
-      this.empleados.empl_UsuarioCreador = 1;
-      this.service.insertEmpleados(this.empleados)
+      this.empleados.empl_UsuarioModificador = 1;
+      console.log(this.empleados);
+      this.service.editEmpleados(this.empleados)
       .subscribe((response: any) =>{
         console.log(response)
         if(response.code == 200){
-          ToastUtils.showSuccessToast(response.messageStatus);          
+          ToastUtils.showSuccessToast(response.message);          
           this.router.navigate(['listempleados']);
         }else{
-          ToastUtils.showErrorToast(response.messageStatus);
+          ToastUtils.showErrorToast(response.message);
         }
       })
     }
