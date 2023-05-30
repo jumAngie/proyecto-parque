@@ -2,28 +2,116 @@
    <ul class="sidebar-nav" id="sidebar-nav">
      <li class="nav-item">
        <a class="nav-link" routerLink="/dashboard">
-         <i class="bi bi-grid"></i>
+        <i> <img src="../../../assets/img/pagina-de-inicio.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
          <span>Inicio</span>
        </a>
      </li>
  
      <li class="nav-item" *ngIf="acce.length > 0">
-       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-gem"></i>
-         <span>Seguridad</span>
-         <i class="bi bi-chevron-down ms-auto"></i>
+       <a class="nav-link collapsed" data-bs-target="#acce-nav" data-bs-toggle="collapse" href="#">
+        <i> <img src="../../../assets/img/proteger.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
+        <span>Seguridad</span>
+        <i class="bi bi-chevron-down ms-auto"></i>        
        </a>
-       <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+       <ul id="acce-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
          <ng-container *ngFor="let item of acce">
            <li class="nav-item">
              <a class="nav-link" [routerLink]="item.pant_URL">
-               <i [class]="item.pant_Icono"></i>
+              <i [class]="item.pant_Icono"></i>
                <span>{{ item.pant_Descripcion }}</span>
              </a>
            </li>
          </ng-container>
        </ul>
      </li>
+
+     <li class="nav-item" *ngIf="generales.length > 0">
+      <a class="nav-link collapsed" data-bs-target="#generales-nav" data-bs-toggle="collapse" href="#">
+        <i> <img src="../../../assets/img/aglutinante.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
+       <span>Generales</span>
+       <i class="bi bi-chevron-down ms-auto"></i>        
+      </a>
+      <ul id="generales-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ng-container *ngFor="let item of generales">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.pant_URL">
+             <i [class]="item.pant_Icono"></i>
+              <span>{{ item.pant_Descripcion }}</span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+
+    <li class="nav-item" *ngIf="reportes.length > 0">
+      <a class="nav-link collapsed" data-bs-target="#reportes-nav" data-bs-toggle="collapse" href="#">
+        <i> <img src="../../../assets/img/sobresalir.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
+       <span>Reportes</span>
+       <i class="bi bi-chevron-down ms-auto"></i>        
+      </a>
+      <ul id="reportes-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ng-container *ngFor="let item of reportes">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.pant_URL">
+             <i [class]="item.pant_Icono"></i>
+              <span>{{ item.pant_Descripcion }}</span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+
+     <li class="nav-item" *ngIf="quioscos.length > 0">
+      <a class="nav-link collapsed" data-bs-target="#quioscos-nav" data-bs-toggle="collapse" href="#">
+        <i> <img src="../../../assets/img/quiosco.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
+       <span>Quioscos</span>
+       <i class="bi bi-chevron-down ms-auto"></i>        
+      </a>
+      <ul id="quioscos-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ng-container *ngFor="let item of quioscos">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.pant_URL">
+             <i [class]="item.pant_Icono"></i>
+              <span>{{ item.pant_Descripcion }}</span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+    <li class="nav-item" *ngIf="fila.length > 0">
+      <a class="nav-link collapsed" data-bs-target="#fila-nav" data-bs-toggle="collapse" href="#">
+        <i> <img src="../../../assets/img/cola.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>   
+       <span>Filas</span>
+       <i class="bi bi-chevron-down ms-auto"></i>        
+      </a>
+      <ul id="fila-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ng-container *ngFor="let item of fila">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.pant_URL">
+             <i [class]="item.pant_Icono"></i>
+              <span>{{ item.pant_Descripcion }}</span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+    <li class="nav-item" *ngIf="parq.length > 0">
+      <a class="nav-link collapsed" data-bs-target="#parq-nav" data-bs-toggle="collapse" href="#">
+       <i> <img src="../../../assets/img/montana-rusa.png" width="40px" style="margin-right: 5px;margin-left: -5px;" alt=""></i>
+       <span>Parque</span>
+       <i class="bi bi-chevron-down ms-auto"></i>        
+      </a>
+      <ul id="parq-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ng-container *ngFor="let item of parq">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="item.pant_URL">
+             <i [class]="item.pant_Icono"></i>
+              <span>{{ item.pant_Descripcion }}</span>
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
    </ul>
  </aside>
  

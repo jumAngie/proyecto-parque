@@ -101,7 +101,7 @@ const routes: Routes = [
   { path: 'listcargos', component: ListcargosComponent},
   { path: 'listgolosinas', component: ListgolosinasComponent},
   
-  { path: 'listatracciones', component: ListAtraccionesComponent},
+  { path: 'atracciones-listado', component: ListAtraccionesComponent},
   { path: 'crearatracciones', component: CreateAtraccionesComponent},
   
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
