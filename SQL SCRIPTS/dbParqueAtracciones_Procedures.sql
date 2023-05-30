@@ -198,7 +198,7 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU
 @usua_ID INT
 AS
 BEGIN
@@ -3361,4 +3361,23 @@ EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
 
 
 
-SELECT * FROM parq.tbInsumosQuiosco WHERE quio_ID = 1
+SET IDENTITY_INSERT [acce].[tbPantallas] ON 
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (1, N'Usuarios', N'/usuarios', N'', N'', N'ACCE', N'bi bi-circle', 1, 1, CAST(N'2023-05-24T15:14:37.347' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (2, N'Roles', N'/roles', NULL, NULL, N'ACCE', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T08:16:45.200' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (3, N'Golosinas', N'/listgolosinas', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T08:21:30.043' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (4, N'Quioscos', N'/quioscos-listado', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:10:30.873' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (5, N'Facturación Quiosco', N'/ventasquiosco-listado', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:28:15.537' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (6, N'Atracciones', N'/atracciones-listado', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:31:21.063' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (7, N'Empleados', N'/listempleados', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:34:48.790' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (8, N'Clientes', N'/clientes', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
+GO
+SET IDENTITY_INSERT [acce].[tbPantallas] OFF
+GO

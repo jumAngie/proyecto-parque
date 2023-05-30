@@ -444,7 +444,7 @@ INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, 
 VALUES	(1, 'Montaña Rusa', 'Solo para valientes', 1, 'A 10 metros de la entrada al area', 20, '00:05:00:00', 1),
 		(2, 'La casa de los mil y un espejos', 'No te pierdas en el camino a la salida!', 2, 'Gira a la derecha despues de pasar el quiosco', 20, '00:15:00:00', 1),
 		(3, 'El tren infinito', 'No te vallas a marear!', 3, 'Dirigete al este del area', 20, '00:07:00:00', 1),
-		(4, 'Warzone', 'Solo puede quedar uno en pie!', 4, 'De la entrada al area dirígete a la izquierda y verás la entrada a la atracción', 20, '00:30:00:00', 1)
+		(4, 'AirSoft', 'Solo puede quedar uno en pie!', 4, 'De la entrada al area dirígete a la izquierda y verás la entrada a la atracción', 20, '00:30:00:00', 1)
 GO       
 
 
