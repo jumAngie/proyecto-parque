@@ -9,7 +9,7 @@ VALUES	('Soltero(a)'),
 		('Viudo(a)'),
 		('Union Libre')
 GO
-SELECT * FROM fact.tbVentasQuiosco
+
 INSERT INTO gral.tbDepartamentos(dept_Codigo, dept_Nombre)
 VALUES	('01','Atlántida'),
 		('02','Colón'),
@@ -417,11 +417,11 @@ VALUES	( 2, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
 GO
 
 
-INSERT INTO parq.tbAreas (area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia, area_UsuarioCreador)
-VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento, incluye piscinas!', 1, 'Ubicado en la zona norte del parque', 1),
-		('Montañas Rusas', 'Zona con un ambiente lleno de diversión y adrenalina!', 3, 'Ubicado en la zona Este del parque', 1),
-		('Zona Extrema', 'Zona con temáticas frenesí, desde paintball, hasta airsoft!', 2, 'Ubicado en la zona Sur del parque', 1),
-		('Zona Infantíl', 'Zona con un ambiente más tranquilo y familiar con lo pequeños!', 4, 'Ubicado en la zona Oeste del parque', 1)
+INSERT INTO parq.tbAreas (area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia, area_UsuarioCreador, area_Imagen)
+VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento, incluye piscinas!', 1, 'Ubicado en la zona norte del parque', 1, 'MAPA-2.png'),
+		('Montañas Rusas', 'Zona con un ambiente lleno de diversión y adrenalina!', 3, 'Ubicado en la zona Este del parque', 1, 'MAPA-3.png'),
+		('Zona Extrema', 'Zona con temáticas frenesí, desde paintball, hasta airsoft!', 2, 'Ubicado en la zona Sur del parque', 1, 'MAPA-1.png'),
+		('Zona Infantíl', 'Zona con un ambiente más tranquilo y familiar con lo pequeños!', 4, 'Ubicado en la zona Oeste del parque', 1, 'MAPA-4.png')
 GO
 
 

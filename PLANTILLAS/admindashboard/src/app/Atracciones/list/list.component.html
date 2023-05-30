@@ -51,11 +51,11 @@
                <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
             </div>
             <div class="card-footer" style="text-align: center;">
-               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
-                  <i class="bi bi-trash-fill" ></i> <label class="ms-1  ">Eliminar</label>
-               </button>
                <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px">
                   <i class="bi bi-pen-fill"></i> <label class="ms-1">Editar</label> 
+               </button>
+               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d ms-2" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
+                  <i class="bi bi-trash-fill" ></i> <label class="ms-1">Eliminar</label>
                </button>
              </div>
          </div>
@@ -81,12 +81,12 @@
             </div>
             <div class="modal-body text-center text-dark"> ¿Está seguro que desea eliminar esta atracción?</div>
             <div class="modal-footer"> 
-               <button type="button" class="ov-btn-grow-d mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-                  <i class="bi bi-reply-fill"></i>Cancelar
-               </button> 
                <button (click)="EliminarAtraccion()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
                   <i class="bi bi-check-circle-fill "></i>Confirmar
                </button>
+               <button type="button" class="ov-btn-grow-d mb-2 mt-3 col-3 ms-1" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+                  <i class="bi bi-reply-fill"></i>Cancelar
+               </button> 
             </div>
          </div>
       </div>

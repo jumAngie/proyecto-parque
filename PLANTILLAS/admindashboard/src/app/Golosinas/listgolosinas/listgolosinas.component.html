@@ -37,7 +37,7 @@
               
             >
               <i class="fas fa-plus-circle mr-1"></i>
-              Agregar
+              Nuevo
             </button>
 
             <div class="search-bar mt-3 col-10">
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div
-            class="row"
+            class="row g-3"
             style="margin-left: 10px; margin-right: 10px; margin-top: 20px"
           >
             <div
@@ -60,7 +60,7 @@
                   | paginate : { itemsPerPage: 10, currentPage: p }
               "
             >
-              <div class="card">
+              <div class="card h-100 mb-3">
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ item.golo_Nombre }} ✦
@@ -88,20 +88,20 @@
                   class="card-footer"
                   style="
                     text-align: center;
-                    background-color: rgb(255, 250, 247);
+                    background-color: rgb(255, 255, 255);
                   "
                 >
-                  <button class="btn btn-danger">
+                  <button class="ov-btn-grow-d">
                     <i class="bi bi-trash-fill"></i> Eliminar
                   </button>
-                  <button class="btn btn-warning" style="margin-left: 10px">
+                  <button class="ov-btn-grow-u" style="margin-left: 10px">
                     <i class="bi bi-pen-fill"></i> Editar
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="pagination d-flex justify-content-center mt-4">
+          <div class="pagination d-flex justify-content-center mt-3">
             <pagination-controls
               (pageChange)="p = $event"
               previousLabel="Anterior"

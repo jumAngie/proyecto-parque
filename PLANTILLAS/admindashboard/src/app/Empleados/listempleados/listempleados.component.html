@@ -40,7 +40,7 @@
                 routerLink="/crearempleados"
               >
                 <i class="fas fa-plus-circle mr-1"></i>
-                Agregar
+                Nuevo
               </button>
 
               <div class="search-bar mt-3 col-10">
@@ -62,8 +62,6 @@
                   <th scope="col">Nombre Completo</th>
                   <th scope="col">DNI</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col">Estado Civil</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
@@ -78,25 +76,25 @@
                   <td>{{ item.empl_NombreCompleto }}</td>
                   <td>{{ item.empl_DNI }}</td>
                   <td>{{ item.empl_Email }}</td>
-                  <td>{{ item.empl_Telefono }}</td>
-                  <td>{{ item.civi_Descripcion }}</td>
+
                   <td>
                     <button
-                      class="btn btn-outline-warning"
+                      class="ov-btn-grow-u"
                       (click)="Editar(item)"
+                      style="margin-left: 10px; height: 2.5rem;"
                     >
                       <i class="bi bi-pen-fill"></i> Editar
                     </button>
                     <button
-                      class="btn btn-outline-danger"
-                      style="margin-left: 10px"
+                      class="ov-btn-grow-d"
+                      style="margin-left: 10px; height: 2.5rem;"
                       data-bs-toggle="modal"
                       data-bs-target="#verticalycentered"
                       (click)="GuardarId(item)"
                     >
                       <i class="bi bi-trash-fill"></i> Eliminar
                     </button>
-                    <button class="btn btn-info" style="margin-left: 10px">
+                    <button class="ov-btn-grow-primary" style="margin-left: 10px; height: 2.5rem;">
                       <i class="bi bi-newspaper"></i> Detalles
                     </button>
                   </td>
@@ -141,19 +139,21 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-danger"
+              class="ov-btn-grow-in"
               data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem;"
               (click)="Eliminar()"
             >
               Confirmar
             </button>
             <button
               type="button"
-              class="btn btn-dark"
+              class="ov-btn-grow-d"
               data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem;"
               (click)="Cerrar()"
             >
-              Cerrar
+              Cancelar
             </button>
           </div>
         </div>

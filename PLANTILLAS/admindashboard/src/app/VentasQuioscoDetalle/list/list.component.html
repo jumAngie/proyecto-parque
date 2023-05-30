@@ -5,7 +5,7 @@
           <ol class="breadcrumb">
              <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
              <li class="breadcrumb-item">Listados</li>
-             <li class="breadcrumb-item active">Cargos</li>
+             <li class="breadcrumb-item active">Ventas</li>
           </ol>
        </nav>
     </div>
@@ -32,8 +32,8 @@
                        style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
                      ></div>
                    </div>
-                   <button (click)="Agregar()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;">
-                     <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Agregar</label>
+                   <button (click)="Agregar()" class="ov-btn-grow-primary mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;">
+                     <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Nuevo</label>
                   </button>
                    <ag-grid-angular
                    style="width: 100%; height: 350px;"
@@ -47,26 +47,3 @@
        </div>
     </section>
  </main>
-<div class="modal" #modalElement tabindex="-1">
-   <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-         <div class="modal-header bg-danger">
-            <h5 class="modal-title text-light">Eliminar</h5>               
-         </div>
-         <div class="modal-body text-center text-dark"> 
-            <div class="d-flex justify-content-center mt-1">
-               <label for="">¿Está seguro que desea eliminar este registro?</label>
-               
-            </div>
-         </div>
-         <div class="modal-footer"> 
-            <button  type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-               <i class="bi bi-reply-fill"></i>Cancelar
-            </button> 
-            <button  class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-               <i class="bi bi-check-circle-fill "></i>Eliminar
-            </button>
-         </div>
-      </div>
-   </div>
-</div>
