@@ -83,6 +83,11 @@ import {LoginComponent} from '../app/login/login.component'
 
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -159,6 +164,14 @@ const routes: Routes = [
   {path: 'quioscos-crear', component: CreateQuioscoComponent},
   {path: 'quioscos-editar', component: EditQuioscoComponent},
 
+  {path: 'createcargos', component: CreatecargosComponent},
+  {path: 'editarcargos', component: EditarcargosComponent},
+
+  {path: 'listticketsclientes', component: ListticketsclienteComponent},
+  {path: 'createticketsclientes', component:CreateticketsclienteComponent},
+
+  {path: 'listtitckets', component:ListticketsComponent},
+  {path: 'createtickets', component:CreateticketsComponent}
 ];
 
 @NgModule({

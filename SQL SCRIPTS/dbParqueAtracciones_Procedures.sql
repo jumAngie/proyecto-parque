@@ -2081,7 +2081,7 @@ SELECT [ticl_ID]
       ,tcli.tckt_ID
 	  ,tick.tckt_Nombre
       ,tcli.clie_ID
-	  , clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
+	  , clie.clie_Nombres + ' ' + clie.clie_Apellidos AS clie_Nombres
       ,[ticl_Cantidad]
       ,[ticl_FechaCompra]
       ,[ticl_FechaUso]

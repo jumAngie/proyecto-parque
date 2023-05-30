@@ -69,6 +69,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
 
 import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
 import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
@@ -142,7 +146,6 @@ import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.c
     LoginComponent,
     EditarempleadosComponent,
     ListarquioscosComponent,
-    DetallesempleadosComponent,
     DetalleQuioscoComponent,
     EditQuioscoComponent,
     CreateQuioscoComponent,
@@ -151,7 +154,11 @@ import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.c
     VentasDetalleComponent,
 
     DetallesempleadosComponent,
-    PagesLoginCComponent
+    PagesLoginCComponent,
+    ListticketsComponent,
+    CreateticketsComponent,
+    ListticketsclienteComponent,
+    CreateticketsclienteComponent
   ],
   imports: [
     BrowserModule,

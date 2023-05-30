@@ -16,6 +16,7 @@ import { AppComponent } from '../app.component';
 import { VentasQuiosco } from '../Models/VentasQuiosco';
 import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
+import { TicketsCliente } from '../Models/TicketsCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -173,5 +174,10 @@ export class ParqServicesService {
   // servicios de regiones//
   getRegiones(){
     return this.http.get<Regiones[]>(this.apiService.apiUrl + 'Regiones/List')
+  }
+
+  // servicios de tickets cliente //
+  getTicketsCliente(){
+    return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
   }
 }
