@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Pagos } from 'src/app/Models/Pagos';
@@ -14,6 +14,7 @@ import { InsumosQuiosco } from 'src/app/Models/InsumosQuiosco';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
+
 export class VentasCrearComponent implements OnInit{
   quioscoID: any;
   pagos!: Pagos[];
@@ -26,7 +27,6 @@ export class VentasCrearComponent implements OnInit{
   venta: VentasQuiosco = new VentasQuiosco();
   detalle: VentasQuioscoDetalle = new VentasQuioscoDetalle();
   
-  
   PagoRequerido = false;
   ClienteRequerido = false;
   InsumoRequerido = false;
@@ -35,6 +35,8 @@ export class VentasCrearComponent implements OnInit{
   constructor(
     private service: ParqServicesService,
     private router: Router,
+    private elementRef: ElementRef,
+    private renderer2: Renderer2,
 
   ){}
 
@@ -44,13 +46,13 @@ export class VentasCrearComponent implements OnInit{
 
     this.loadTable();
 
-
     this.getPagos();
     this.getClientes();
     this.getInsumos();  
 
   };
 
+//#region CARGAR DATOS
   getPagos(){
     this.service.getPagos().subscribe((response: any) =>{
       if(response.success){
@@ -115,7 +117,17 @@ export class VentasCrearComponent implements OnInit{
       },
     };
   }
+//#endregion
 
+  dissableFields(){
+    const ClientesDDL = this.elementRef.nativeElement.querySelector('#clie_ID');
+    this.renderer2.setProperty(ClientesDDL, 'disabled', true);
+
+    const PagosDDL = this.elementRef.nativeElement.querySelector('#pago_ID');
+    this.renderer2.setProperty(PagosDDL, 'disabled', true);
+  }
+
+//#region ENVIAR DATOS 
 
   GuardarVenta(){
     var errors = 0;
@@ -140,16 +152,17 @@ export class VentasCrearComponent implements OnInit{
           ToastUtils.showSuccessToast('Factura creada con éxito!');
 
           this.detalle.vent_ID = response.message.toString();
-          console.log(this.detalle);
+          this.dissableFields();
+        }else if(response.code == 409){
+          ToastUtils.showWarningToast(response.message);
+        }else{
+          ToastUtils.showErrorToast(response.message);
         }
       })
-      //console.log(this.venta);
-
     }else{
       ToastUtils.showWarningToast('Hay campos vacíos!');
     }
   };
-
 
   GuardarDetalles(){
     var errors = 0;
@@ -228,6 +241,8 @@ export class VentasCrearComponent implements OnInit{
       })
     }
   };
+
+//#endregion
 
 
 
