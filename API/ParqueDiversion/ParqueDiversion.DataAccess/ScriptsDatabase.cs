@@ -159,6 +159,7 @@ namespace ParqueDiversion.DataAccess
         public static string INSERT_PANTALLASROL = "acce.UDP_tbPantallasPorRol_INSERT";
         public static string UPDATE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_UPDATE";
         public static string DELETE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_DELETE";
+        public static string DELETE_PANTALLASROLES = "acce.UDP_tbPantallasPorRol_DELETE_TOTAL";
 
         public static string UDP_tbPantallasPorRol_Checked = "acce.UDP_tbPantallasPorRol_CHECKED";
         #endregion

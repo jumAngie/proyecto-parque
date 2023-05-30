@@ -83,6 +83,24 @@ namespace ParqueDiversion.DataAccess.Repositories
             };
         }
 
+        public RequestStatus Update(int role_ID)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@role_ID", role_ID, DbType.String, ParameterDirection.Input);
+            
+            var result = db.QueryFirst(ScriptsDatabase.DELETE_PANTALLASROLES, parametros, commandType: CommandType.StoredProcedure);
+            var codeStatus = Convert.ToInt32(result.codeStatus);
+            var messageStatus = result.messageStatus.ToString();
+
+            return new RequestStatus
+            {
+                CodeStatus = codeStatus,
+                MessageStatus = messageStatus
+            };
+        }
+
         public RequestStatus Update(tbPantallas item)
         {
             throw new NotImplementedException();

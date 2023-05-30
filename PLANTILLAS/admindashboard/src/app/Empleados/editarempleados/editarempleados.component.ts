@@ -110,16 +110,17 @@ export class EditarempleadosComponent {
       })
     }
     else if(errors != 0){
-      ToastUtils.showWarningToast('Campos vacíos. Llene todos los campos obligatorios.')
+      ToastUtils.showWarningToast('Hay campos vacios!');
     }
     else if (errors == 0 && formatosinvalidos != 0){
 
     }
     else{
-      ToastUtils.showWarningToast('Entro al else final. Investigar POR QUE')
+      ToastUtils.showWarningToast('Entró al else final. Investigar POR QUÉ')
     }
   }
 
+  
   validarPrimerNombre() {
     if(!this.empleados.empl_PrimerNombre){
       this.PrimerNombreRequerido = true;

@@ -10,15 +10,24 @@
      </div>
 
      <div class="card">
-        <div class="card-header" style="padding: 0;">
-            <div class="banner" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU');border-top-left-radius:10px;border-top-right-radius:10px; background-size: cover; background-position: center;">
-               <div class="overlay"></div>
-               <div class="text-center" style="padding: 2rem;">
-                  <h3 style="font-size: 2rem; font-weight: bold; color: white;">Quioscos</h3>
-                  <p style="font-size: 1rem; color: white;">Administración de Quioscos</p>                        
-               </div>
-            </div>
-         </div>
+      <div class="card-header" style="padding: 0; position: relative">
+         <div
+           class="banner"
+           style="
+             background-image: url('/assets/img/BANNERS-VR-FINAL/QUIOSCOS.png');
+             border-top-left-radius: 10px;
+             border-top-right-radius: 10px;
+             background-size: contain;
+             background-position: center;
+             height: 0;
+             padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+           "
+         ></div>
+         <div
+           class="overlay"
+           style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+         ></div>
+      </div>
 
          <div class="card-body">
             <div class="row g-3 mt-2">
@@ -61,6 +70,7 @@
                                     <div class="input-group" style="height: 3rem;">
                                        <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
                                        <select [(ngModel)]="quiosco.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
+                                          <option value="0">Selecciona una opción...</option>
                                           <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
                                        </select>
                                     </div>
@@ -72,6 +82,7 @@
                                     <div class="input-group" style="height: 3rem;">
                                        <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
                                        <select [(ngModel)]="quiosco.empl_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearEmpleadoError()">
+                                          <option value="0">Selecciona una opción...</option>
                                           <option *ngFor="let option of empleados" [value]="option.empl_ID">{{ option.empl_Nombres }}</option>
                                        </select>
                                     </div>
@@ -119,7 +130,7 @@
                   <div class="card">
                      
                      <div class="card-header text-center text-dark ">                                
-                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: orange;"></i>Ubicación</h4>
+                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: blueviolet;"></i>Ubicación</h4>
                      </div>
 
                      <div class="card-body">
@@ -130,10 +141,7 @@
                            </div>
                            <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
                               <div class="card my-card p-0 m-0 mb-4" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
-                                 <img src="https://th.bing.com/th/id/OIP.2Z4PDxLVFR-nSemDRqPMEgHaFj?w=237&h=180&c=7&r=0&o=5&pid=1.7" class="img-thumbnail-space">
-                                 <div class="card-img-overlay-mod">
-                                    <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
-                                 </div>
+                                 <img [src]="'assets/img/MAPA/'+item.area_Imagen" class="img-thumbnail-space">
                                  <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
                               </div>
                            </div>

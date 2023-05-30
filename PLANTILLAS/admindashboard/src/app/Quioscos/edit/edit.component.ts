@@ -17,7 +17,7 @@ export class EditQuioscoComponent implements OnInit {
   areas!: Areas[];
   regiones!: Regiones[];
   empleados!: Empleados[];
-  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
+  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
   selectedImage: any;
 
   //VALIRABLES PARA VALIDACIÓN DE S
@@ -55,7 +55,8 @@ export class EditQuioscoComponent implements OnInit {
         this.areasForStyle = this.areas.map(item => ({
           area_ID: item.area_ID.toString(),
           isSelected: item.area_ID === this.quiosco.area_ID,
-          area_Nombre: item.area_Nombre
+          area_Nombre: item.area_Nombre,
+          area_Imagen: item.area_Imagen,
         }));
         this.selectCard();
       }      
@@ -136,7 +137,7 @@ export class EditQuioscoComponent implements OnInit {
   };
 
   validarEmpleado(){
-    if(!this.quiosco.empl_ID){
+    if(this.quiosco.empl_ID.toString().trim() == '' || this.quiosco.empl_ID == 0){
       this.EmpleadoRequerido = true;
       return true;
     }else{
@@ -156,7 +157,7 @@ export class EditQuioscoComponent implements OnInit {
   };
 
   validarRegion(){
-    if(!this.quiosco.regi_ID){
+    if(this.quiosco.regi_ID.toString().trim() == '' || this.quiosco.regi_ID == 0){
       this.RegionRequerido = true;
       return true;
     }else{

@@ -19,7 +19,7 @@ export class CreateQuioscoComponent implements OnInit{
   regiones!: Regiones[];
   empleados!: Empleados[];
 
-  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
+  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
   selectedImage: any;
 
   //VALIRABLES PARA VALIDACIÓN DE S
@@ -34,6 +34,8 @@ export class CreateQuioscoComponent implements OnInit{
     private router: Router,
   ){};
   ngOnInit(): void {
+    this.quiosco.empl_ID = 0;
+    this.quiosco.regi_ID = 0;
     this.getAreas();
     this.getRegiones();
     this.getEmpleados();
@@ -44,7 +46,7 @@ export class CreateQuioscoComponent implements OnInit{
       if(response.success){
         this.areas = response.data;
       }
-      this.areasForStyle = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre}));      
+      this.areasForStyle = this.areas.map(item => ({area_ID: item.area_ID.toString(), isSelected: false, area_Nombre: item.area_Nombre, area_Imagen: item.area_Imagen}));      
     })
   };
 
