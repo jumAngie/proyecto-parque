@@ -9,6 +9,15 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   acce: any[] = [];
+  quioscos: any[] = [];
+  fila: any[] = [];
+  parq: any[] = [];
+  generales: any[] = [];
+  reportes: any[] = [];
+
+
+
+
 
   constructor(private service: AcceService, private router: Router) {}
 
@@ -22,6 +31,12 @@ export class SidebarComponent implements OnInit {
     this.service.MenuID(parsedId).subscribe(
       (response: any) => {
         this.acce = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'ACCE');
+        this.quioscos = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'QUIO');
+        this.fila = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'FILA');
+        this.parq = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'PARQ');
+        this.generales = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'GRAL');
+        this.reportes = response.filter((item: { pant_Identificador: string; }) => item.pant_Identificador === 'REPO');
+
       },
       (error: any) => {
         console.error('Error:', error);

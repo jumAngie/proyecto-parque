@@ -12,6 +12,7 @@ namespace ParqueDiversion.Entities.Entities
         public string pant_Descripcion { get; set; }
         public string pant_Identificador { get; set; }
         public string pant_URL { get; set; }
+        public string pant_Icono { get; set; }
         public int? pant_Estado { get; set; }
         public int? pant_UsuarioCreador { get; set; }
         public string empl_crea { get; set; }
