@@ -56,6 +56,7 @@ import { CreateQuioscoComponent } from './Quioscos/create/create.component';
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
 
 //Insumos
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
@@ -141,6 +142,7 @@ const routes: Routes = [
   { path: 'atracciones-listado', component: ListAtraccionesComponent},
   { path: 'atracciones-crear', component: CreateAtraccionesComponent},
   { path: 'atracciones-editar', component: EditAtraccionesComponent},
+  { path: 'atracciones-detalle', component: AtraccionesDetailComponent  },
 
   //Insumos
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
