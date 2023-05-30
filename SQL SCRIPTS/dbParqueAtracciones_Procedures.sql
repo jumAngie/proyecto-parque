@@ -93,7 +93,7 @@ BEGIN
 			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
 			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Usuario Creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
 		END
 	END TRY
 	BEGIN CATCH
@@ -120,7 +120,7 @@ BEGIN
 				usua_UsuarioModificador	=	@usua_UsuarioModificador
 				WHERE [usua_ID]		=	@usua_ID
 
-			SELECT 200 AS codeStatus, 'Usuario Modificado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Modificado con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -162,7 +162,7 @@ BEGIN
 				usua_Estado		=	0
 				WHERE [usua_ID]	=	@usua_ID
 
-			SELECT 200 AS codeStatus, 'Usuario Eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Usuario Eliminado con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -192,7 +192,7 @@ DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 	IF NOT EXISTS (SELECT * FROM acce.VW_Usuarios WHERE usua_Usuario = @usua_Usuario AND usua_Clave = @Encrypt)
 	BEGIN
 			SELECT	usua_ID = 0 ,
-					usua_Usuario = 'Usuario o Contrase�a Incorrectos'
+					usua_Usuario = 'Usuario o Contraseña Incorrectos'
 	END
 END
 GO
@@ -343,7 +343,7 @@ AS BEGIN
 		role_UsuarioModificador	= @role_UsuarioModificador
 		WHERE role_ID = @role_ID
 
-			SELECT 200 AS codeStatus, 'Rol Modificado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Modificado con éxito' AS messageStatus
 		END
 
 	END TRY
@@ -364,7 +364,7 @@ AS BEGIN
 				role_Estado		=	0
 				WHERE role_ID	=	@role_ID
 
-			SELECT 200 AS codeStatus, 'Rol Eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Eliminado con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -408,7 +408,7 @@ BEGIN
 	VALUES
 	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
 
-	SELECT 200 AS codeStatus, 'Acceso Agregado con �xito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Agregado con éxito' AS messageStatus
 
 END
 
@@ -420,7 +420,7 @@ AS
 BEGIN
 DELETE FROM  [acce].tbRolesXPantallas
 WHERE role_ID = @role_ID 
-	SELECT 200 AS codeStatus, 'Acceso Eliminado con �xito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Eliminado con éxito' AS messageStatus
 
 END
 
@@ -438,7 +438,7 @@ INSERT INTO [acce].tbRolesXPantallas
 	VALUES
 	(@role_ID,@pant_ID,@ropa_UsuarioModificador)
 
-	SELECT 200 AS codeStatus, 'Acceso Editado con �xito' AS messageStatus
+	SELECT 200 AS codeStatus, 'Acceso Editado con éxito' AS messageStatus
 	END TRY
 	BEGIN CATCH
 	SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
@@ -513,7 +513,7 @@ BEGIN
 				civi_Estado				=	1
 				WHERE civi_ID			=	@ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
 
 			END
 	--si no existe
@@ -525,7 +525,7 @@ BEGIN
 			VALUES
 			(@civi_Descripcion, @civi_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
 		END
 		COMMIT
 	END TRY
@@ -558,7 +558,7 @@ BEGIN
 			ELSE IF EXISTS (SELECT * FROM gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion AND civi_Estado  = 1 AND civi_ID = @civi_ID)
 			BEGIN
 
-				SELECT 200 AS codeStatus, 'Estado Civil Modificado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Estado Civil Modificado con éxito' AS messageStatus
 			END
 
 			ELSE IF EXISTS (SELECT * FROM gral.tbEstadosCiviles WHERE civi_Descripcion = @civi_Descripcion AND civi_Estado  = 0 )
@@ -575,7 +575,7 @@ BEGIN
 				civi_UsuarioModificador	= @civi_UsuarioModificador
 				WHERE civi_ID			= @civi_ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil Modificado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil Modificado con éxito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -608,7 +608,7 @@ BEGIN
 				civi_Estado		=	0
 				WHERE civi_ID	=	@civi_ID
 
-			SELECT 200 AS codeStatus, 'Estado Civil Eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil Eliminado con éxito' AS messageStatus
 			END
 
 		COMMIT
@@ -719,7 +719,7 @@ BEGIN
 				dept_Estado				=	1
 				WHERE dept_ID			=	@ID
 
-			SELECT 200 AS codeStatus, 'Departamento Civil creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Civil creado con éxito' AS messageStatus
 
 			END
 	--si no existe
@@ -731,7 +731,7 @@ BEGIN
 			VALUES
 			(@dept_Codigo,@dept_Nombre,@dept_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Estado Civil creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Estado Civil creado con éxito' AS messageStatus
 		END
 		COMMIT
 	END TRY
@@ -778,7 +778,7 @@ AS BEGIN
 			ELSE IF EXISTS (SELECT * FROM gral.VW_Departamentos WHERE dept_Nombre = @dept_Nombre AND  dept_Codigo = @dept_Codigo AND dept_Estado  = 1 AND dept_ID = @dept_ID)
 			BEGIN
 
-				SELECT 200 AS codeStatus, 'Departamento Modificado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Departamento Modificado con éxito' AS messageStatus
 
 			END
 			--si existe pero esta eliminado
@@ -797,7 +797,7 @@ AS BEGIN
 				dept_UsuarioModificador	= @dept_UsuarioModificador
 				WHERE dept_ID			= @dept_ID
 
-			SELECT 200 AS codeStatus, 'Departamento Modificado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Modificado con éxito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -830,7 +830,7 @@ BEGIN
 				dept_Estado		=	0
 				WHERE dept_ID	=	@dept_ID
 
-			SELECT 200 AS codeStatus, 'Departamento Eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Departamento Eliminado con éxito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -908,7 +908,7 @@ BEGIN
 			WHERE muni_Nombre = @muni_Nombre
 			AND	  dept_ID = @dept_ID
 
-			SELECT 200 AS codeStatus, 'Municipio Creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Creado con éxito' AS messageStatus
 			
 			COMMIT
 			RETURN
@@ -936,7 +936,7 @@ BEGIN
 			VALUES
 			(@dept_ID,@muni_Codigo,@muni_Nombre,@muni_UsuarioCreador)
 
-			SELECT 200 AS codeStatus, 'Municipio Creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Creado con éxito' AS messageStatus
 		END
 
 		COMMIT
@@ -970,7 +970,7 @@ BEGIN
 			IF EXISTS (SELECT * FROM gral.VW_Municipios WHERE dept_ID = @dept_ID AND muni_Nombre = @muni_Nombre AND muni_Estado = 1 AND muni_ID = @muni_ID)
 		BEGIN
 			
-			SELECT 200 AS codeStatus, 'yes Municipio Editado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'yes Municipio Editado con éxito' AS messageStatus
 
 			COMMIT
 			RETURN
@@ -997,7 +997,7 @@ BEGIN
 				muni_UsuarioModificador = @muni_UsuarioModificador
 				WHERE muni_ID			= @muni_ID
 
-			SELECT 200 AS codeStatus, 'Municipio Editado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Municipio Editado con éxito' AS messageStatus
 		END
 
 		COMMIT
@@ -1178,14 +1178,14 @@ BEGIN
 				UPDATE parq.tbCargos
 				SET		carg_Nombre =	@carg_Nombre, carg_UsuarioModificador = @carg_UsuarioModificador
 				WHERE	carg_ID   =		@carg_ID
-				SELECT 200 AS codeStatus, 'Cargo actualizado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Cargo actualizado con éxito' AS messageStatus
 			END
 		ELSE IF NOT EXISTS (SELECT * FROM parq.tbCargos WHERE carg_Nombre = @carg_Nombre AND carg_ID != @carg_ID)
 				BEGIN
 					UPDATE parq.tbCargos 
 					SET carg_Nombre = @carg_Nombre, carg_UsuarioModificador = @carg_UsuarioModificador
 					WHERE	carg_ID = @carg_ID
-					SELECT 200 AS codeStatus, 'Cargo actualizado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Cargo actualizado con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -1216,7 +1216,7 @@ BEGIN
 							SET
 							carg_Estado		=	0
 							WHERE carg_ID	=	@carg_Id
-							SELECT 200 AS codeStatus, 'Cargo eliminado con �xito' AS messageStatus
+							SELECT 200 AS codeStatus, 'Cargo eliminado con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -1294,13 +1294,13 @@ BEGIN
 				   UPDATE parq.tbRegiones
 						SET		regi_Estado = 1, regi_Habilitado = 1, regi_UsuarioModificador = @regi_UsuarioCreador
 						WHERE	regi_Nombre = @regi_Nombre
-					SELECT 200 AS codeStatus, 'Regi�n creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Regi�n creada con éxito' AS messageStatus
 				 END
 			  ELSE IF NOT EXISTS (SELECT * FROM parq.tbRegiones WHERE regi_Nombre = @regi_Nombre)
 				BEGIN
 					INSERT INTO parq.tbRegiones	(regi_Nombre, regi_UsuarioCreador)
 					VALUES						(@regi_Nombre, @regi_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Regi�n creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Regi�n creada con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -1330,14 +1330,14 @@ BEGIN
 				UPDATE parq.tbRegiones
 				SET		regi_Nombre =	@regi_Nombre, regi_UsuarioModificador = @regi_UsuarioModificador
 				WHERE	regi_ID   =		@regi_ID
-				SELECT 200 AS codeStatus, 'Regi�n actualizada con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Regi�n actualizada con éxito' AS messageStatus
 			END
 		ELSE IF NOT EXISTS (SELECT * FROM parq.tbRegiones WHERE regi_Nombre = @regi_Nombre)
 				BEGIN
 					UPDATE parq.tbRegiones 
 					SET regi_Nombre = @regi_UsuarioModificador, regi_UsuarioModificador = @regi_UsuarioModificador
 					WHERE	regi_ID = @regi_ID
-					SELECT 200 AS codeStatus, 'Regi�n actualizada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Regi�n actualizada con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -1375,7 +1375,7 @@ BEGIN
 							SET
 							regi_Estado		=	0
 							WHERE regi_ID	=	@regi_ID
-							SELECT 200 AS codeStatus, 'Regi�n eliminada con �xito' AS messageStatus
+							SELECT 200 AS codeStatus, 'Regi�n eliminada con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -1464,7 +1464,7 @@ BEGIN
 			 BEGIN
 				INSERT INTO parq.tbClientes([clie_Nombres], [clie_Apellidos],[clie_DNI],[clie_Sexo], [clie_Telefono], [clie_UsuarioCreador])
 				VALUES						(@clie_Nombres, @clie_Apellidos, @clie_DNI, @clie_Sexo, @clie_Telefono, @clie_UsuarioCreador)
-				SELECT 200 AS codeStatus, 'Cliente registrado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Cliente registrado con éxito' AS messageStatus
 			 END
 		COMMIT
 	END TRY
@@ -1499,7 +1499,7 @@ BEGIN
 					SET		clie_Nombres =  @clie_Nombres, clie_Apellidos = @clie_Apellidos, clie_DNI = @clie_DNI,
 							clie_Sexo = @clie_Sexo, clie_Telefono = @clie_Telefono, clie_UsuarioModificador = @clie_UsuarioModificador
 					WHERE	clie_ID = @clie_ID
-					SELECT 200 AS codeStatus, 'Cliente actualizado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Cliente actualizado con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -1538,7 +1538,7 @@ BEGIN
 							SET
 							clie_Estado		=	0
 							WHERE clie_ID	=	@clie_ID
-							SELECT 200 AS codeStatus, 'Cliente eliminado con �xito' AS messageStatus
+							SELECT 200 AS codeStatus, 'Cliente eliminado con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -1704,7 +1704,7 @@ BEGIN
 					clre_Email = @clre_Email, 
 					clre_UsuarioModificador = @clre_UsuarioModificador
 				WHERE clre_ID = @clre_ID
-				SELECT 200 AS codeStatus, 'El usuario fue actualizado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'El usuario fue actualizado con éxito' AS messageStatus
 			 END
 			 ELSE
 				BEGIN
@@ -1825,13 +1825,13 @@ BEGIN
 								regi_ID = @regi_ID, area_UbicaionReferencia = @area_UbicaionReferencia,
 								area_Imagen = @area_Imagen , area_UsuarioModificador = @area_UsuarioCreador
 						WHERE	area_Nombre = @area_Nombre
-					SELECT 200 AS codeStatus, 'Area creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Area creada con éxito' AS messageStatus
 				 END
 		    ELSE IF NOT EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre)
 				BEGIN
 					INSERT INTO parq.tbAreas(area_Nombre, area_Descripcion, regi_ID, area_UbicaionReferencia, area_Imagen, area_UsuarioCreador)
 					VALUES					(@area_Nombre, @area_Descripcion, @regi_ID, @area_UbicaionReferencia, @area_Imagen, @area_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Area creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Area creada con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -1870,7 +1870,7 @@ BEGIN
 						area_Imagen = @area_Imagen,
 						area_UsuarioModificador = @area_UsuarioModificador
 				WHERE	area_ID   =		@area_ID
-				SELECT 200 AS codeStatus, 'Area actualizada con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Area actualizada con éxito' AS messageStatus
 			END
 		 ELSE IF NOT EXISTS (SELECT * FROM parq.tbAreas WHERE area_Nombre = @area_Nombre AND area_ID != @area_ID )
 			BEGIN
@@ -1882,7 +1882,7 @@ BEGIN
 						area_Imagen = @area_Imagen,
 						area_UsuarioModificador = @area_UsuarioModificador
 				WHERE	area_ID   =		@area_ID
-				SELECT 200 AS codeStatus, 'Area actualizada con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Area actualizada con éxito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -1914,7 +1914,7 @@ BEGIN
 					BEGIN
 						UPDATE parq.tbAreas
 							SET area_Estado	= 0 WHERE area_Estado =	@area_ID
-						SELECT 200 AS codeStatus, 'Area eliminada con �xito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Area eliminada con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -1996,13 +1996,13 @@ BEGIN
 								tckt_Precio = @tckt_Precio,
 								tckt_UsuarioCreador = @tckt_UsuarioCreador
 					WHERE		tckt_Nombre = @tckt_Nombre
-					SELECT 200 AS codeStatus, 'Ticket creado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Ticket creado con éxito' AS messageStatus
 				 END
 		    ELSE IF NOT EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre)
 				BEGIN
 					INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio, tckt_UsuarioCreador)
 					VALUES					  (@tckt_Nombre, @tckt_Precio, @tckt_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Ticket creado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Ticket creado con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2033,7 +2033,7 @@ BEGIN
 						tckt_Precio = @tckt_Precio,
 						tckt_UsuarioModificador = @tckt_UsuarioModificador
 				WHERE	tckt_ID   =		@tckt_ID
-				SELECT 200 AS codeStatus, 'Ticket actualizado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Ticket actualizado con éxito' AS messageStatus
 			END
 		 ELSE IF NOT EXISTS (SELECT * FROM parq.tbTickets WHERE tckt_Nombre = @tckt_Nombre AND tckt_ID != @tckt_ID )
 			BEGIN
@@ -2042,7 +2042,7 @@ BEGIN
 						tckt_Precio = @tckt_Precio,
 						tckt_UsuarioModificador = @tckt_UsuarioModificador
 				WHERE	tckt_ID   =		@tckt_ID
-				SELECT 200 AS codeStatus, 'Ticket actualizado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Ticket actualizado con éxito' AS messageStatus
 			END
 		COMMIT
 	END TRY
@@ -2072,7 +2072,7 @@ BEGIN
 					BEGIN
 						UPDATE parq.tbTickets
 							SET tckt_Estado	= 0 WHERE tckt_ID =	@tckt_ID
-						SELECT 200 AS codeStatus, 'Ticket eliminado con �xito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Ticket eliminado con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -2153,7 +2153,7 @@ BEGIN
 		BEGIN TRAN
 					INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, ticl_FechaCompra, ticl_FechaUso, ticl_UsuarioCreador)
 					VALUES							 (@tckt_ID, @clie_ID, @ticl_Cantidad, @ticl_FechaCompra, @ticl_FechaUso, @ticl_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Ticket Detalle creado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Ticket Detalle creado con éxito' AS messageStatus
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2183,7 +2183,7 @@ BEGIN
 						ticl_FechaUso = @ticl_FechaUso,
 						ticl_UsuarioModificador = @ticl_UsuarioModificador
 				WHERE	ticl_ID   =		@ticl_ID
-				SELECT 200 AS codeStatus, 'Ticket Detalle actualizado con �xito' AS messageStatus
+				SELECT 200 AS codeStatus, 'Ticket Detalle actualizado con éxito' AS messageStatus
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2213,7 +2213,7 @@ BEGIN
 					BEGIN
 						UPDATE parq.VW_tbTicketClientes
 							SET ticl_Estado	= 0 WHERE ticl_ID =	@ticl_ID
-						SELECT 200 AS codeStatus, 'Ticket Detalle eliminado con �xito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Ticket Detalle eliminado con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -2527,7 +2527,7 @@ BEGIN
 					INSERT INTO parq.tbEmpleados(empl_PrimerNombre, empl_SegundoNombre, empl_PrimerApellido, empl_SegundoApellido, empl_DNI, empl_Email, empl_Telefono, empl_Sexo, civi_ID, carg_ID, empl_UsuarioCreador)
 					VALUES(@empl_PrimerNombre, @empl_SegundoNombre, @empl_PrimerApellido, @empl_SegundoApellido, @empl_DNI, @empl_Email, @empl_Telefono, @empl_Sexo, @civi_ID, @carg_ID, @empl_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Empleado agregado con �xito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado agregado con éxito!' AS messageStatus
 				END
 		COMMIT
 	END TRY 
@@ -2587,7 +2587,7 @@ BEGIN
 						empl_FechaModificacion = GETDATE()
 					WHERE empl_ID = @empl_ID
 
-					SELECT 200 AS codeStatus, 'Empleado actualizado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado actualizado con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2619,7 +2619,7 @@ BEGIN
 					SET empl_Estado = 0 
 					WHERE empl_ID = @empl_ID
 
-					SELECT 200 AS codeStatus, 'Empleado eliminado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Empleado eliminado con éxito' AS messageStatus
 				END
 		COMMIT 
 	END TRY
@@ -2719,7 +2719,7 @@ BEGIN
 					INSERT INTO parq.tbQuioscos(area_ID, quio_Nombre, empl_ID, regi_ID, quio_ReferenciaUbicacion, quio_Imagen, quio_UsuarioCreador)
 					VALUES(@area_ID, @quio_Nombre, @empl_ID, @regi_ID, @quio_ReferenciaUbicacion, @quio_Imagen, @quio_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Quiosco ingresado con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Quiosco ingresado con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2762,7 +2762,7 @@ BEGIN
 						quio_FechaModificacion = GETDATE()
 					WHERE quio_ID = @quio_ID
 
-					SELECT 200 AS codeStatus, 'Quiosco actualizado con �xito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Quiosco actualizado con éxito!' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2785,7 +2785,7 @@ BEGIN
 			SET quio_Estado = 0
 			WHERE quio_ID = @quio_ID
 
-			SELECT 200 AS codeStatus, 'Quiosco eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Quiosco eliminado con éxito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -2861,7 +2861,7 @@ BEGIN
 					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
 					VALUES(@golo_Nombre, @golo_Precio, @golo_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Golosina ingresada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Golosina ingresada con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -2927,7 +2927,7 @@ BEGIN
 					SET golo_Estado = 0
 					WHERE golo_ID = @golo_ID
 
-					SELECT 200 AS codeStatus, 'Golosina eliminada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Golosina eliminada con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY 
@@ -3040,14 +3040,14 @@ BEGIN
 						insu_Stock = @insu_Stock
 					WHERE quio_ID = @quio_ID AND golo_ID = @golo_ID
 
- 					SELECT 200 AS codeStatus, 'Insumo a�adido con �xito' AS messageStatus
+ 					SELECT 200 AS codeStatus, 'Insumo a�adido con éxito' AS messageStatus
 				END
 			ELSE
 				BEGIN
 					INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCreador)
 					VALUES(@quio_ID, @golo_ID, @insu_Stock, @insu_UsuarioCreador)
 					
-					SELECT 200 AS codeStatus, 'Insumo a�adido con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Insumo a�adido con éxito' AS messageStatus
 				END
 		COMMIT
 	END TRY
@@ -3069,7 +3069,7 @@ BEGIN
 			UPDATE parq.tbInsumosQuiosco
 			SET insu_Estado = 0
 			WHERE insu_ID = @insu_ID
-			SELECT 200 AS codeStatus, 'Insumo eliminado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Insumo eliminado con éxito' AS messageStatus
 		COMMIT
 	END TRY
 
@@ -3104,14 +3104,14 @@ BEGIN
 						rati_Comentario = @rati_Comentario
 					WHERE atra_ID = @atra_ID AND clie_ID = @clie_ID
 					
-					SELECT 200 AS codeStatus, 'Rating agregado con �xito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Rating agregado con éxito!' AS messageStatus
 				END
 			ELSE
 				BEGIN
 					INSERT INTO parq.tbRatings(atra_ID, clie_ID, rati_Estrellas, rati_Comentario, rati_UsuarioCreador)
 					VALUES(@atra_ID, @clie_ID, @rati_Estrellas, @rati_Comentario, @rati_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Rating agregado con �xito!' AS messageStatus
+					SELECT 200 AS codeStatus, 'Rating agregado con éxito!' AS messageStatus
 				END
 		COMMIT
 	END TRY
