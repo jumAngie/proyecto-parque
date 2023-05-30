@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterEvent, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+
 
 @Component({
   selector: 'app-list',
@@ -12,19 +14,26 @@ export class ListAtraccionesComponent implements OnInit {
   atracciones!: Atracciones[];
   p: number = 1;
   filtro: string = '';
+  deleteID!: number;
+
   constructor(
     private service: ParqServicesService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.getAtracciones();
+  }
+  
+  getAtracciones(){
     this.service.getAtracciones()
       .subscribe((response: any) => {
         if (response.success) {
           this.atracciones = response.data;
         }
       });
-  }
+  };
+
 
   filtrarAtracciones(): Atracciones[] {
     return this.atracciones.filter(atracciones => {
@@ -33,7 +42,30 @@ export class ListAtraccionesComponent implements OnInit {
   }
 
   AgregarAtraccion(){
-    this.router.navigate(['crearatracciones'])
+    this.router.navigate(['atracciones-crear'])
   }
 
+  EditarAtraccion(atracciones: Atracciones): void{
+    localStorage.setItem('atra_ID', atracciones.atra_ID?.toString());
+    this.router.navigate(['atracciones-editar']);
+  }
+
+  getDeleteData(id: number): void{    
+    this.deleteID = id;
+    console.log(this.deleteID);
+  }
+
+  EliminarAtraccion(){
+    this.service.deleteAtracciones(this.deleteID).subscribe((response: any) =>{
+      console.log(response);
+      if(response.code == 200){
+        ToastUtils.showSuccessToast(response.message);
+        this.getAtracciones();        
+      }else if(response.code == 409){
+        ToastUtils.showWarningToast(response.message);
+      }else{
+        ToastUtils.showErrorToast(response.message);
+      }
+    })
+  }
 }

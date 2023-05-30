@@ -1,53 +1,142 @@
-<main>
-    <div class="container">
-       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-          <div class="container">
-             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-                   <div class="d-flex justify-content-center py-4"> <a routerLink="/" class="logo d-flex align-items-center w-auto"> <img src="assets/img/logo.png" alt=""> <span class="d-none d-lg-block">Admin</span> </a></div>
-                   <div class="card mb-3">
-                      <div class="card-body">
-                         <div class="pt-4 pb-2">
-                            <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                            <p class="text-center small">Enter your personal details to create account</p>
-                         </div>
-                         <form class="row g-3 needs-validation" novalidate>
-                            <div class="col-12">
-                               <label for="yourName" class="form-label">Your Name</label> <input type="text" name="name" class="form-control" id="yourName" required>
-                               <div class="invalid-feedback">Please, enter your name!</div>
-                            </div>
-                            <div class="col-12">
-                               <label for="yourEmail" class="form-label">Your Email</label> <input type="email" name="email" class="form-control" id="yourEmail" required>
-                               <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                            </div>
-                            <div class="col-12">
-                               <label for="yourUsername" class="form-label">Username</label>
-                               <div class="input-group has-validation">
-                                  <span class="input-group-text" id="inputGroupPrepend">@</span> <input type="text" name="username" class="form-control" id="yourUsername" required>
-                                  <div class="invalid-feedback">Please choose a username.</div>
-                               </div>
-                            </div>
-                            <div class="col-12">
-                               <label for="yourPassword" class="form-label">Password</label> <input type="password" name="password" class="form-control" id="yourPassword" required>
-                               <div class="invalid-feedback">Please enter your password!</div>
-                            </div>
-                            <div class="col-12">
-                               <div class="form-check">
-                                  <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required> <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                                  <div class="invalid-feedback">You must agree before submitting.</div>
-                               </div>
-                            </div>
-                            <div class="col-12"> <button class="btn btn-primary w-100" type="submit">Create Account</button></div>
-                            <div class="col-12">
-                               <p class="small mb-0">Already have an account? <a routerLink="/pages-login">Log in</a></p>
-                            </div>
-                         </form>
-                      </div>
-                   </div>
-                   <div class="credits"> Loved by <a href="https://freeetemplates.com/">FreeeTemplates</a></div>
-                </div>
+<main style="position: relative; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-repeat: no-repeat; background-image: url('../../../assets/img/fondo.png');">
+   <div class="gradiente "></div>
+   <div class="container">
+     <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4 align-items-center">
+       <div class="container">
+         <div class="row justify-content-center text-light">
+           <div class="card mb-2 _card _fondo pt-3 pb-3 rounded-5" style="max-width: 700px; background-color: rgba(0, 0, 0, 0.582);">
+             <div class="row g-0">
+               <div class="col-md-2 d-flex align-items-center">
+                 <img src="../../../assets/img/Tooniverse (1).png" class="img-fluid rounded-start" alt="...">
+               </div>
+               <div class="col-md-10 d-flex align-items-center">
+                 <h3 class="h4">Registrate</h3>
+               </div>
              </div>
-          </div>
-       </section>
-    </div>
+             <div class="row g-0">
+               <div class="col-md-12 d-flex">
+                 <div class="card-body">
+                    <form id="" action="">
+                       
+                       
+                       <!-- One "tab" for each step in the form: -->
+                       <div class="tab">
+                          <div class="row">
+                             <h3 class="h3 col-12">Datos Personales</h3>
+                             <div class="col-6">
+                             <div class="input-group has-validation ">
+                                <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);border-end-end-radius: 0px;"><i class="fas fa-user"></i></span>
+                                <input type="text" name="username" class="col-10 custom-input"  required placeholder="Nombres" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-6">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);border-end-end-radius: 0px"><i class="fas fa-user"></i></span>
+                                 <input type="text" name="username" class="col-10 custom-input"  required placeholder="Apellidos" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-6 mt-3">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0); border-end-end-radius: 0px;"><i class="fas fa-address-card"></i></span>   
+                                 <input type="text" name="username" class="col-10 custom-input"  required placeholder="DNI" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-6 mt-3">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0); border-end-end-radius: 0px;"><i class="fas fa-thin fa-mobile"></i></span>   
+                                 <input type="text" name="username" class="col-10 custom-input"  required placeholder="Teléfono" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-12 mt-3">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0); border-end-end-radius: 0px; height: 45px;"><i class="fas fa-venus-mars"></i></span> 
+                                 <span style="opacity: .5;" class="ms-3 me-2">Sexo:</span>
+                                 <div class="col-2 mt-3">
+                                   <input type="radio" name="Sexo" class="form-check-input smaller-radio" value="F">
+                                   <label for="" class="form-check-label">Femenino</label>
+                                 </div>
+                                 <div class="col-2 mt-3">
+                                   <input type="radio" name="Sexo" class="form-check-input smaller-radio" value="M">
+                                   <label for="" class="form-check-label">Masculino</label>
+                                 </div>
+                                 
+                              </div>
+                            </div>
+                            
+                           </div>
+                           
+                           
+                        </div>
+                        
+                        <div class="tab">
+                          <div class="row">
+                             <h3 class="h3 col-12">Datos De Usuario</h3>
+                             <div class="col-12 mt-3">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0); border-end-end-radius: 0px;"><i class="fas fa-thin fa-envelope"></i></span>   
+                                 <input type="text" name="username" class="col-11 custom-input"  required placeholder="Correo" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-6 mt-3">
+                             <div class="input-group has-validation ">
+                                <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);border-end-end-radius: 0px;"><i class="fas fa-sharp fa-light fa-user fa-beat"></i></span>
+                                <input type="text" name="username" class="col-10 custom-input"  required placeholder="Nombres" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                             <div class="col-6 mt-3">
+                              <div class="input-group has-validation">
+                                 <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);border-end-end-radius: 0px"><i class="fas fa-thin fa-key"></i></span>
+                                 <input type="text" name="username" class="col-10 custom-input"  required placeholder="Apellidos" style="text-indent: 10px;">
+                              </div>
+                             </div>
+                            
+                          </div>
+                        </div>
+
+
+                        <div class="tab align-items-center">
+                           <div class="col-12 d-flex align-items-center flex-column"> <!-- Agrega la clase "flex-column" para alinear en una columna -->
+                             <img src="../../../assets/img/customer.png" style="background-color: aliceblue; border-radius: 50%; width: 15%;" class="p-2 img-fluid">
+                             <div class="lds-roller">
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                               <div></div>
+                             </div>
+                             <p id="success-message" style="margin-top: 10px; color: green; font-weight: bold; display: none;">Registrado con éxito</p>
+                             <p id="redirect-message" style="margin-top: 10px; display: none;">Redirigiendo al login en <span id="countdown">10</span> segundos</p>
+                           </div>
+                         </div>
+
+                        <div style="overflow:auto;">
+                          <div style="float:left;">
+                           <button type="button" class="pulse btn" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                          </div>
+                          <div style="float:right;">
+                           <button type="button" class="pulse btn" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
+                        </div>
+                        </div>
+                        
+                        <!-- Circles which indicates the steps of the form: -->
+                        <div style="text-align:center;margin-top:40px;">
+                          <span class="step"></span>
+                          <span class="step"></span>
+                          <span class="step"></span>
+                        </div>
+                        
+                        </form>
+                     
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
+   </div>
  </main>
+ 

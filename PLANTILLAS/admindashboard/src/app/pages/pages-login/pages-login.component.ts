@@ -1,12 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { AcceService } from 'src/app/Service/acce.service';
 import { Router } from '@angular/router';
-import { Roles } from 'src/app/Models/Roles';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Pantallas } from 'src/app/Models/Pantallas';
-import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-pages-login',
@@ -24,7 +19,6 @@ export class PagesLoginComponent implements OnInit {
   }
 
   Login() {
-    console.log("sepa la vrg la mera vrd");
     console.log(this.username , this.password);
     this.service.login(this.username, this.password).subscribe(
       (response: any) => {

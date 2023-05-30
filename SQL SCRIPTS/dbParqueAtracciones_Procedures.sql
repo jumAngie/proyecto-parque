@@ -3,9 +3,6 @@ GO
 
 
 
-
-
-
 --*************************************************************Tabla Usuarios******************************************************************--
 CREATE OR ALTER VIEW acce.VW_Usuarios
 AS
@@ -294,7 +291,7 @@ AS BEGIN
 			DECLARE @id INT= (SELECT CAST(IDENT_CURRENT('acce.tbRoles')AS INT))
 			DECLARE @Rol NVARCHAR(MAX) = (SELECT role_Nombre FROM acce.tbRoles WHERE role_ID = @id)
 
-			SELECT 200 AS codeStatus, 'Rol Creado con �xito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Rol Creado con éxito' AS messageStatus
 			UNION ALL
 			SELECT @id,@Rol
 
@@ -1095,6 +1092,9 @@ END
 
 GO
 
+
+
+GO
 --*************** INSERT DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_INSERT
 	@carg_Nombre			VARCHAR (300),
@@ -1122,6 +1122,9 @@ BEGIN
 				BEGIN
 					INSERT INTO parq.tbCargos	(carg_Nombre, carg_UsuarioCreador)
 					VALUES						(@carg_Nombre, @carg_UsuarioCreador)
+					
+					SELECT SCOPE_IDENTITY()
+
 					SELECT 200 AS codeStatus, 'Cargo creado con exito' AS messageStatus
 				END
 		COMMIT
@@ -1133,7 +1136,16 @@ BEGIN
 END
 --*************** UPDATE DE CARGO ******************-
 GO
+EXECUTE parq.UDP_tbCargos_INSERT 'PRUEBA1', 1
+EXECUTE parq.UDP_tbCargos_INSERT 'PRUEBA2', 1
+GO
 
+CREATE OR ALTER PROCEDURE gral.UDP_tbMetodosPago_List
+AS
+BEGIN
+	SELECT * FROM gral.tbMetodosPago WHERE pago_Estado = 1
+END
+GO
 --*************** UPDATE DE CARGOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbCargos_UPDATE
 	@carg_ID				INT,
@@ -2216,7 +2228,7 @@ SELECT TOP (1000) [atra_ID]
 	  ,regi.regi_Nombre
       ,[atra_ReferenciaUbicacion]
       ,[atra_LimitePersonas]
-      ,[atra_DuracionRonda]
+      ,CONVERT(NVARCHAR(300), [atra_DuracionRonda]) AS [atra_DuracionRonda]
       ,[atra_Imagen]
       ,[atra_Habilitado]
       ,[atra_Estado]
@@ -2249,7 +2261,7 @@ BEGIN
 	  ,regi_Nombre
       ,[atra_ReferenciaUbicacion]
       ,[atra_LimitePersonas]
-      ,atra_DuracionRonda = CONVERT(NVARCHAR, atra_DuracionRonda)
+      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
       ,[atra_Imagen]
       ,[atra_Habilitado]
       ,[atra_Estado]
@@ -2268,16 +2280,36 @@ END
 --*************** FIND DE ATRACCIONES ******************-
 GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
-@atra_ID INT
+	@atra_ID INT
 AS
 BEGIN
-	SELECT *
+	SELECT [atra_ID]
+      ,area_ID
+	  ,area_Descripcion
+      ,[atra_Nombre]
+      ,[atra_Descripcion]
+      ,regi_ID
+	  ,regi_Nombre
+      ,[atra_ReferenciaUbicacion]
+      ,[atra_LimitePersonas]
+      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
+      ,[atra_Imagen]
+      ,[atra_Habilitado]
+      ,[atra_Estado]
+      ,[atra_UsuarioCreador]
+	  , usu_Crea
+      ,[atra_FechaCreacion]
+      ,[atra_UsuarioModificador]
+	  ,usu_Modifica
+      ,[atra_FechaModificacion]
+	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
+	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
 	FROM	[parq].VW_tbAtracciones
 	WHERE	atra_Estado = 1  
 	AND		atra_ID = @atra_ID
 END
-
 GO
+
 --*************** INSERT DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 	@area_ID					INT, 
@@ -2293,9 +2325,16 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
+			IF EXISTS (SELECT * FROM parq.tbAtracciones WHERE atra_Nombre = @atra_Nombre)
+				BEGIN
+					SELECT 409 AS codeStatus, 'Ya existe una atracción con este nombre' AS messageStatus					
+				END
+			ELSE 
+				BEGIN
 					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
 					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
-					SELECT 200 AS codeStatus, 'Atraccion creada con �xito' AS messageStatus
+					SELECT 200 AS codeStatus, 'Atracción creada con éxito' AS messageStatus
+				END
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2313,23 +2352,32 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME(7), 
+	@atra_DuracionRonda			TIME, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioModificador	INT
  AS
 BEGIN
 	BEGIN TRY
-				UPDATE parq.tbAtracciones
-				SET		area_ID =	@area_ID, 
-						atra_Nombre = @atra_Nombre,
-						regi_ID = @regi_ID,
-						atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
-						atra_LimitePersonas = @atra_LimitePersonas,
-						atra_DuracionRonda = @atra_DuracionRonda,
-						atra_Imagen = @atra_Imagen,
-						atra_UsuarioModificador = @atra_UsuarioModificador
-				WHERE	atra_ID   =		@atra_ID
-				SELECT 200 AS codeStatus, 'Atraccion actualizada con �xito' AS messageStatus
+		BEGIN TRANSACTION
+			IF EXISTS (SELECT * FROM parq.tbAtracciones WHERE  atra_Nombre = @atra_Nombre AND atra_ID != @atra_ID)
+				BEGIN
+					SELECT 409 AS codeStatus, 'Ya existe una atracción con este nombre' AS messageStatus
+				END
+			ELSE 
+				BEGIN
+					UPDATE parq.tbAtracciones
+					SET		area_ID =	@area_ID, 
+							atra_Nombre = @atra_Nombre,
+							regi_ID = @regi_ID,
+							atra_ReferenciaUbicacion = @atra_ReferenciaUbicacion,
+							atra_LimitePersonas = @atra_LimitePersonas,
+							atra_DuracionRonda = @atra_DuracionRonda,
+							atra_Imagen = @atra_Imagen,
+							atra_UsuarioModificador = @atra_UsuarioModificador,
+							atra_FechaModificacion = GETDATE()
+					WHERE	atra_ID   =		@atra_ID
+					SELECT 200 AS codeStatus, 'Atracción actualizada con éxito' AS messageStatus
+				END
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -2337,9 +2385,10 @@ BEGIN
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 	END CATCH
 END
+GO
+
 
 --*************** DELETE DE ATRACCIONES ******************-
-GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_DELETE
 	@atra_ID INT
 AS
@@ -2354,13 +2403,13 @@ BEGIN
 
 				IF	@TicketsClientesOcupa > 0
 					BEGIN
-						SELECT 500 AS codeStatus, 'La Atraccion que desea eliminar est� en uso.' AS messageStatus
+						SELECT 409 AS codeStatus, 'La Atracción que desea eliminar está en uso.' AS messageStatus
 					END
 				ELSE
 					BEGIN
-						UPDATE parq.VW_tbAtracciones
+						UPDATE parq.tbAtracciones
 							SET atra_Estado	= 0 WHERE atra_ID =	@atra_ID
-						SELECT 200 AS codeStatus, 'Atraccion eliminado con �xito' AS messageStatus
+						SELECT 200 AS codeStatus, 'Atracción eliminada con éxito' AS messageStatus
 					END
 		COMMIT
 	END TRY
@@ -2779,6 +2828,7 @@ BEGIN
 END
 GO
 
+
 --*************** INSERT DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Insert
 	@golo_Nombre			VARCHAR(300), 
@@ -2886,16 +2936,15 @@ CREATE OR ALTER VIEW parq.VW_tbInsumosQuiosco
 AS
 	SELECT  insu_ID, 
 			insu.quio_ID, 
-			quio.area_ID, 
-			area.area_Nombre,
-
-
 			quio_Nombre, 
-			quio.empl_ID, 
-			quio.regi_ID, 
+			quio.area_ID,
+			(SELECT area_Nombre FROM parq.tbAreas WHERE area_ID = quio.area_ID) AS quio_area_Nombre, 		
+			quio.empl_ID,
+			(SELECT CONCAT(empl_PrimerNombre, ' ', empl_SegundoNombre, ' ', empl_PrimerApellido, ' ', empl_SegundoApellido) FROM parq.tbEmpleados WHERE empl_ID = quio.empl_ID) AS quio_empl_NombreCompleto,
+			quio.regi_ID,
+			(SELECT regi_Nombre FROM parq.tbRegiones WHERE regi_ID = quio.regi_ID) AS quio_regi_Nombre, 
 			quio_ReferenciaUbicacion, 
 			quio_Imagen, 
-			
 
 			insu.golo_ID, 
 			golo_Nombre,
@@ -2921,6 +2970,8 @@ AS
 	INNER JOIN acce.tbUsuarios AS usr1 ON insu.insu_UsuarioCreador = usr1.usua_ID
 	LEFT JOIN acce.tbUsuarios AS usr2 ON insu.insu_UsuarioModificador = usr2.usua_ID
 	INNER JOIN parq.tbAreas AS area ON quio.area_ID = area.area_ID
+	INNER JOIN parq.tbEmpleados AS empl ON quio.empl_ID = empl.empl_ID
+	INNER JOIN parq.tbRegiones AS regi ON quio.regi_ID = regi.regi_ID
 GO
 
 --*************** SELECT DE INSUMOS ******************--
@@ -2939,6 +2990,16 @@ BEGIN
 	SELECT * FROM parq.VW_tbInsumosQuiosco  WHERE insu_ID = @insu_ID
 END
 GO
+
+
+CREATE OR ALTER PROCEDURE parq.UDP_VW_tbInsumosQuiosco_SelectGolosinasByQuiosco
+	@quio_ID INT
+AS
+BEGIN
+	SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = @quio_ID
+END
+GO
+
 
 --*************** INSERT DE INSUMOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbInsumosQuiosco_Insert
@@ -3104,6 +3165,15 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE fact.UDP_VW_tbVentasQuiosco_Find
+	@vent_ID INT
+AS
+BEGIN
+	SELECT * FROM fact.VW_tbVentasQuiosco WHERE vent_ID = @vent_ID
+END
+GO
+
 --*************** CREATE DE VENTAS QUIOSCO ******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuiosco_Insert
 	@quio_ID					INT, 
@@ -3116,8 +3186,8 @@ BEGIN
 		BEGIN TRANSACTION
 			INSERT INTO fact.tbVentasQuiosco(quio_ID, clie_ID, pago_ID, vent_UsuarioCreador)
 			VALUES (@quio_ID, @clie_ID, @pago_ID, @vent_UsuarioCreador)
-			
-			SELECT 200 AS codeStatus, 'Factura creada con �xito' AS messageStatus
+			DECLARE @CurrentID INT = (SELECT SCOPE_IDENTITY())
+			SELECT 200 AS codeStatus, @CurrentID AS messageStatus
 		COMMIT
 	END TRY
 
@@ -3127,8 +3197,6 @@ BEGIN
 	END CATCH
 END
 GO
-
-
 
 
 ------------------------------------------------------- //// PROCS PARA tbVentasQuioscoDetalle -- ///// ----------------------------------------------------
@@ -3172,6 +3240,22 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE fact.UDP_VW_VentasQuioscoDetalle_DetalleByVenta
+	@vent_ID INT
+AS
+BEGIN 
+	SELECT * FROM fact.VW_tbVentasQuioscoDetalle WHERE vent_ID = @vent_ID
+END
+GO
+
+SELECT * FROM fact.tbVentasQuiosco
+
+SELECT * FROM fact.VW_tbVentasQuiosco WHERE vent_ID = 5
+SELECT * FROM FACT.VW_tbVentasQuioscoDetalle WHERE vent_ID = 5
+
+SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = 1
+GO
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
 @vent_ID					INT,
@@ -3182,10 +3266,24 @@ AS
 BEGIN
 	BEGIN TRY 
 		BEGIN TRANSACTION
-			INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
-			VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+			IF EXISTS (SELECT * FROM fact.tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID )
+				BEGIN
+					UPDATE fact.tbVentasQuioscoDetalle 
+					SET deta_Cantidad += @deta_Cantidad
+					WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
 
-			SELECT 200 AS codeStatus, 'Detalle a�adido con �xito' AS messageStatus			
+					DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
+
+					SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+
+				END
+			ELSE
+				BEGIN
+					INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+					VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+
+					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus			
+				END
 		COMMIT
 	END TRY
 
@@ -3197,5 +3295,11 @@ END
 GO
 
 
+
+
+
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
 EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
+
+
+

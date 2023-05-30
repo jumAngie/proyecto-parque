@@ -107,6 +107,7 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_InsumosQuiosco_Insert = "parq.UDP_tbInsumosQuiosco_Insert";
         //public static string UDP_InsumosQuiosco_Update = "";
         public static string UDP_InsumosQuiosco_Delete = "parq.UDP_tbInsumosQuiosco_Delete";
+        public static string UDP_InsumosQuiosco_InsumosByQuiosco = "parq.UDP_VW_tbInsumosQuiosco_SelectGolosinasByQuiosco";
 
         #endregion
 
@@ -118,12 +119,13 @@ namespace ParqueDiversion.DataAccess
         #region Ventas Quiosco
         public static string UDP_VentasQuiosco_List = "fact.UDP_VW_tbVentasQuiosco_Select";
         public static string UDP_VentasQuiosco_Insert = "fact.UDP_tbVentasQuiosco_Insert";
-
+        public static string UDP_VentasQuiosco_Find = "fact.UDP_VW_tbVentasQuiosco_Find";
         #endregion
 
         #region Ventas Quiosco Detalles
         public static string UDP_VentasQuioscoDetalle_List = "fact.UDP_VW_tbVentasQuioscoDetalle_Select";
         public static string UDP_VentasQuioscoDetalle_Insert = "fact.UDP_tbVentasQuioscoDetalle_Insert";
+        public static string UDP_VentasQuioscoDetalle_DetalleByVenta = "fact.UDP_VW_VentasQuioscoDetalle_DetalleByVenta";
         #endregion
 
         #region LOGIN
@@ -185,7 +187,7 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Métodos de Pago 
-        public static string INDEX_METODOS = "fact.UDP_tbMetodosPagos_INDEX";
+        public static string INDEX_METODOS = "gral.UDP_tbMetodosPago_List";
         public static string FIND_METODOS = "fact.UDP_tbMetodosPagos_FIND";
         public static string INSERT_METODOS = "fact.UDP_tbMetodosPagos_INSERT";
         public static string UPDATE_METODOS = "fact.UDP_tbMetodosPagos_UPDATE";

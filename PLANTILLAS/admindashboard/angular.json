@@ -23,11 +23,14 @@
               "src/assets"
             ],
             "styles": [
-              
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+              "node_modules/ag-grid-community/styles/ag-theme-material.css",              
+              "node_modules/ag-grid-community/styles/ag-theme-balham.css",                            
               "src/styles.css"
             ],
             "scripts": [
-              
+              "node_modules/jquery/dist/jquery.min.js",              
               "src/assets/js/main.js"
             ]            
           },
@@ -94,9 +97,16 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ag-grid-community/styles/ag-grid.css",
+              "node_modules/ag-grid-community/styles/ag-theme-material.css",               
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+              "node_modules/ag-grid-community/styles/ag-theme-balham.css",              
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
+            
           }
         }
       }

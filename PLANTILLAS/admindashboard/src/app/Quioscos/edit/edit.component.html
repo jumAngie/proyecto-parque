@@ -1,0 +1,161 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Quioscos</h1>
+        <nav>
+           <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/quioscos-listado">Listado</a></li>              
+              <li class="breadcrumb-item active"> <a routerLink="/quioscos-editar">Editar quiosco</a></li>
+           </ol>
+        </nav>
+     </div>
+
+     <div class="card">
+        <div class="card-header" style="padding: 0;">
+            <div class="banner" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU');border-top-left-radius:10px;border-top-right-radius:10px; background-size: cover; background-position: center;">
+               <div class="overlay"></div>
+               <div class="text-center" style="padding: 2rem;">
+                  <h3 style="font-size: 2rem; font-weight: bold; color: white;">Quioscos</h3>
+                  <p style="font-size: 1rem; color: white;">Administración de Quioscos</p>                        
+               </div>
+            </div>
+         </div>
+
+         <div class="card-body">
+            <div class="row g-3 mt-2">
+               <div class="col-7">
+                  <div class="card">
+
+                     <div class="card-header text-center text-dark ">                              
+                        <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
+                     </div>
+                     
+                     <div class="card-body">
+                        <div class="row g-3">
+                           <div class="col-md-6">
+
+                              <div class="row g-3 mt-1">
+
+                                 <div class="col-md-12">
+                                    <div class="mt-3"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
+                                    <div class="input-group" style="height: 3rem;">                                        
+                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="quiosco.quio_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre" (input)="clearNombreError()"> 
+                                    </div>
+                                 </div>   
+
+                                 <div class="col-md-12">    
+                                    <div class="mt-1"></div>
+                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>                                 
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>                                
+                                    <div class="input-group" style="height: 3rem;">                                       
+                                       <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
+                                       <input [(ngModel)]="quiosco.quio_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12 mt-4"> 
+                                    <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="RegionRequerido"></i>
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Región:</label>
+                                    <div class="input-group" style="height: 3rem;">
+                                       <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                       <select [(ngModel)]="quiosco.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
+                                          <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
+                                       </select>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12 mt-4"> 
+                                    <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="EmpleadoRequerido"></i>
+                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Empleado:</label>
+                                    <div class="input-group" style="height: 3rem;">
+                                       <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                       <select [(ngModel)]="quiosco.empl_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearEmpleadoError()">
+                                          <option *ngFor="let option of empleados" [value]="option.empl_ID">{{ option.empl_Nombres }}</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+
+                           </div>
+                           <div class="col-md-6">
+                              <div class="row g-3 mt-1">
+                                 <div class="col-md-12">
+                                    <div class="card mt-1">
+                                       <div class="card-header text-center">                                          
+                                          <div class="form-group">
+                                             <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
+                                             <label for="imagen" class="ms-1 form-label text-dark">Imagen:</label>
+                                             <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
+                                          </div>
+                                       </div>
+                                       <div class="card-body text-center mt-3">
+                                          <div class="my-image-container">
+                                            <div class="my-circular-container">
+                                             <div class="card-body" *ngIf="selectedImage">
+                                                <img #imageInput [src]="selectedImage">
+                                             </div>
+                                            </div>
+                                          </div>
+                                        </div>                                        
+                                       <div class="card-footer text-center">
+                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-1" style="height: 2.4rem; margin-left: 0;">
+                                             <i class="bi bi-trash-fill"></i>
+                                             Quitar Imagen
+                                          </button>                                          
+                                       </div>
+                                    </div>
+                                 </div>                                 
+                              </div>                                 
+                           </div>
+
+                        </div>
+                     </div>   
+                  </div>
+               </div>
+
+               <div class="col-5">
+                  <div class="card">
+                     
+                     <div class="card-header text-center text-dark ">                                
+                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: orange;"></i>Ubicación</h4>
+                     </div>
+
+                     <div class="card-body">
+                        <div class="row mt-2">
+                           <div class="card-title text-center mb-0">
+                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="AreaRequerido"></i>
+                              Elige la zona donde estará ubicada esta atracción:
+                           </div>
+                           <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
+                              <div class="card my-card p-0 m-0 mb-4" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
+                                 <img src="https://th.bing.com/th/id/OIP.2Z4PDxLVFR-nSemDRqPMEgHaFj?w=237&h=180&c=7&r=0&o=5&pid=1.7" class="img-thumbnail-space">
+                                 <div class="card-img-overlay-mod">
+                                    <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
+                                 </div>
+                                 <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="card-footer">
+            <div class="d-flex justify-content-end">
+               <button (click)="Guardar()" class="ov-btn-grow-primary col-2" style="height: 3rem;">
+                  <i class="fas fa-plus-circle mr-1"></i>
+                  Agregar
+                </button>            
+                <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 3rem;">
+                  <i class="bi bi-reply-fill mr-1"></i>
+                  Volver
+                </button>
+            </div>
+         </div>
+      </div>
+</main>                                          

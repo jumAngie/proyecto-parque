@@ -24,16 +24,33 @@ namespace ParqueDiversion.BusinessLogic.Services
         }
 
         #region Ventas Quiosco
-        public IEnumerable<VW_tbVentasQuiosco> ListadoVenta()
+        public ServiceResult ListadoVenta()
         {
+            var result = new ServiceResult();
+
             try
             {
-                return _ventasQuioscoRepository.List();
+                var list = _ventasQuioscoRepository.List();
+                return result.Ok(list);
             }
             catch (Exception ex)
             {
-                _ = ex.Message;
-                return Enumerable.Empty<VW_tbVentasQuiosco>();
+                return result.Error(ex.Message);
+            }
+        }        
+        
+        public ServiceResult ListadoVentaFind(int id)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _ventasQuioscoRepository.FindVenta(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
             }
         }
 
@@ -61,20 +78,50 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+
+        public ServiceResult PagosList()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ventasQuioscoRepository.PagosList();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
 
 
         #region Ventas Quiosco Detalle
-        public IEnumerable<VW_tbVentasQuioscoDetalle> ListadoVentaDetalle()
+        public ServiceResult ListadoVentaDetalle()
         {
+            var result = new ServiceResult();
             try
             {
-                return _ventasQuioscoDetalleRepository.List();
+                var list = _ventasQuioscoDetalleRepository.List();
+                return result.Ok(list);
             }
             catch (Exception ex)
             {
-                _ = ex.Message;
-                return Enumerable.Empty<VW_tbVentasQuioscoDetalle>();
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult DetallesByVenta(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ventasQuioscoDetalleRepository.DetallesByVenta(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
             }
         }
 

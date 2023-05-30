@@ -75,7 +75,7 @@
                                        <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas" (input)="clearLimitePersonasError()">                                                                               
                                     </div>                                                                        
                                  </div>
-                                 
+
                                  <div class="col-md-12">  
                                     <div class="mt-1"></div>
                                     <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DuracionRondaRequerido"></i>                                 
@@ -152,7 +152,7 @@
                               <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="RegionRequerido"></i>
                               <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Región:</label>
                               <div class="input-group" style="height: 3rem;">
-                                 <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
+                                 <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
                                  <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
                                     <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
                                  </select>

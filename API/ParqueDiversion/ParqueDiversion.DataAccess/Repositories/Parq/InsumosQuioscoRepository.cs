@@ -27,6 +27,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+
         public RequestStatus Insert(tbInsumosQuiosco item)
         {
 
@@ -46,6 +47,16 @@ namespace ParqueDiversion.DataAccess.Repositories
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
             return db.Query<VW_tbInsumosQuiosco>(ScriptsDatabase.UDP_InsumosQuiosco_List, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<VW_tbInsumosQuiosco> InsumosByQuiosco(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@quio_ID", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbInsumosQuiosco>(ScriptsDatabase.UDP_InsumosQuiosco_InsumosByQuiosco, parametros, commandType: CommandType.StoredProcedure);
         }
 
         public RequestStatus Update(tbInsumosQuiosco item)

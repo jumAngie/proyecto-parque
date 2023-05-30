@@ -30,8 +30,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@quio_ID", item.quio_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@clie_ID", item.clie_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@pago_ID", item.pago_ID, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@vent_UsuarioCreador", item.vent_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
-            
+            parametros.Add("@vent_UsuarioCreador", item.vent_UsuarioCreador, DbType.Int32, ParameterDirection.Input);            
             var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_VentasQuiosco_Insert, parametros, commandType: CommandType.StoredProcedure);
             return result;
         }
@@ -43,9 +42,26 @@ namespace ParqueDiversion.DataAccess.Repositories
             return db.Query<VW_tbVentasQuiosco>(ScriptsDatabase.UDP_VentasQuiosco_List, parametros, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbVentasQuiosco> FindVenta(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@vent_ID", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbVentasQuiosco>(ScriptsDatabase.UDP_VentasQuiosco_Find, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public RequestStatus Update(tbVentasQuiosco item)
         {
             throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<tbMetodosPago> PagosList()
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);            
+            return db.Query<tbMetodosPago>(ScriptsDatabase.INDEX_METODOS, null, commandType: CommandType.StoredProcedure);
         }
     }
 }

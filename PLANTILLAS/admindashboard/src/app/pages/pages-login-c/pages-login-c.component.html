@@ -1,0 +1,106 @@
+<main style="position: relative;position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-repeat: no-repeat; background-image: url('../../../assets/img/fondo.png');">
+    <div class="gradiente "></div>
+    <div class="container">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4 align-items-center">
+        <div class="container">
+          <div class="row justify-content-center text-light">
+            <div class="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-center">
+              <div class="d-flex justify-content-center py-4">
+                <a routerLink="/" class="logo d-flex align-items-center w-auto">
+                  <img src="" alt="">
+                  <span class="d-none d-lg-block"></span>
+                </a>
+              </div>
+              <div class="card mb-3 _card _fondo pt-3 pb-3 rounded-5" style="max-width: 700px; background-color: rgba(0, 0, 0, 0.582);">
+                <div class="row g-0">
+                  <div class="col-md-5 d-flex align-items-center">
+                    <img src="../../../assets/img/Tooniverse (1).png" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body">
+                      <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center mb-4 pb-0 fs-4 h5 text-light">Inicie sesión en su cuenta</h5>
+                        <p class="text-center small h5">Ingrese su nombre de usuario y contraseña para iniciar sesión</p>
+                      </div>
+                      <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-12">
+                          <div class="input-group has-validation">
+                            <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);height: 40px;"><i class="fas fa-solid fa-at"></i></span>
+                            <input type="text" name="username" [(ngModel)]="username" class="col-11 custom-input" id="yourUsername" required placeholder="Usuario" style="text-indent: 10px;">
+                            <div class="invalid-feedback">Por favor, ingrese su usuario</div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="input-group has-validation">
+                            <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);height: 40px"><i class="fas fa-lock"></i></span>
+                            <input type="password" name="password" [(ngModel)]="password" class="col-11 custom-input" id="yourPassword" required placeholder="Contraseña" style="text-indent: 10px;">
+                            <div class="invalid-feedback">Por favor, ingrese su contraseña</div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button class="raise col-11  p-1 " style="max-width: 360px;" type="submit" (click)="Login()">Iniciar Sesión</button>
+                        </div>
+                        <div class="col-12">
+                          <button class="small mb-0 btn btn-sm col-5 pulse" type="button" style="font-size: 11px;" routerLink="/pages-register">Registrate</button>
+                          <button class="small mb-0 btn btn-sm col-6 pulse" type="button" style="font-size: 11px;" data-bs-toggle="modal" data-bs-target="#pass">Olvidaste tu contraseña?</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+
+  
+  <!--Modal Pass-->
+  <div class="modal fade" id="pass" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-dark">
+          <h5 class="modal-title text-light">Cambio de Contraseña</h5>
+        </div>
+        <div class="modal-body border-dark">
+            <div class="row col-12">
+              <div class="col-6">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                  <div class="carousel-inner" style="height: 240px;"> <!-- Establece la altura fija deseada para la columna -->
+                    <div class="carousel-item active">
+                      <img src="assets/img/undraw_authentication_fsn5.svg" class="d-block img-fluid mx-auto" style="width: 75%;" alt="..."> <!-- Agrega las clases mx-auto y width al estilo inline -->
+                    </div>
+                    <div class="carousel-item">
+                      <img src="assets/img/undraw_personal_data_29co.svg" class="d-block img-fluid mx-auto" style="width: 75%;" alt="..."> <!-- Agrega las clases mx-auto y width al estilo inline -->
+                    </div>
+                    <div class="carousel-item">
+                      <img src="assets/img/undraw_fingerprint_swrc.svg" class="d-block img-fluid mx-auto" style="width: 75%;" alt="..."> <!-- Agrega las clases mx-auto y width al estilo inline -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group mt-5 mb-5">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <input type="text" class="form-control" id="update_role_Nombre" placeholder="Usuario" aria-label="Username">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <input type="text" class="form-control" id="update_role_Nombre" placeholder="Nueva Contraseña" aria-label="Password">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        <div class="modal-footer border-dark">
+          <button type="button" class="btn pulse2" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn pulse3">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--/Modal Pass-->
