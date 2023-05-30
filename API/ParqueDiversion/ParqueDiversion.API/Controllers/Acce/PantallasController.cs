@@ -50,6 +50,15 @@ namespace ParqueDiversion.API.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost("PantallasEliminado")]
+        public IActionResult PantallasElim(int pr)
+        {
+
+            var result = _accessService.PantallasEliminado(pr);
+            return Ok(result);
+        }
+
         [HttpPost("PantallasPorRol_Checked")]
         public IActionResult PantallasPorRol_Checked([FromBody] RolesXPantallaViewModel pr)
         {

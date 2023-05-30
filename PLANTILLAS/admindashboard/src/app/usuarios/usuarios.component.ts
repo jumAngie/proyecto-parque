@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { Usuarios } from '../Models/Usuarios';
 import { AcceService } from '../Service/acce.service';
-import {ParqServicesService} from '../ParqServices/parq-services.service'
+import { ParqServicesService } from '../ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Roles } from '../Models/Roles';
 import { Empleados } from '../Models/Empleados';
@@ -13,37 +13,76 @@ import { Empleados } from '../Models/Empleados';
 })
 export class UsuariosComponent {
   usuario: Usuarios[] = [];
+  usuariosFiltrados: Usuarios[] = []; // Nuevo arreglo para almacenar los usuarios filtrados
   openDropdownIds: number[] = [];
   InsertUsu: Usuarios = new Usuarios();
   selectedUsu: Usuarios = new Usuarios();
   ddlRol: Roles[] = [];
   ddlEmpleado: Empleados[] = [];
+  filtro: string = '';
+  p: number = 1;
 
-  
+  paginacionConfig: any = {
+    itemsPerPage: 10, // Cantidad de elementos por página
+    currentPage: 1, // Página actual
+    totalItems: 0 // Total de elementos en la tabla (se actualizará en la carga de datos)
+  };
 
-  constructor(private service: AcceService, private router: Router, private elementRef: ElementRef,private PService:ParqServicesService) {}  
+  constructor(
+    private service: AcceService,
+    private router: Router,
+    private elementRef: ElementRef,
+    private PService: ParqServicesService
+  ) {}
 
   ngOnInit(): void {
     this.service.getUsuarios().subscribe((data) => {
       this.usuario = data;
-      console.log(data)
+      this.usuariosFiltrados = data; // Inicialmente, los usuarios filtrados serán los mismos que los usuarios totales
+      this.paginacionConfig.totalItems = this.usuario.length; // Actualiza el total de elementos en la tabla
+    });
+
+    this.service.getUsuarios().subscribe((data) => {
+      this.usuariosFiltrados = data;
+      this.paginacionConfig.totalItems = this.usuariosFiltrados.length;
     });
 
     this.service.getRoles().subscribe((data) => {
       this.ddlRol = data;
-      console.log(this.ddlRol )
-      
     });
 
-    this.PService.getEmpleados().subscribe((data) => {
-      this.ddlEmpleado = data;
-      console.log(this.ddlEmpleado )
-      
+    this.PService.getEmpleados().subscribe((response: any) => {
+      if (response.success) {
+        this.ddlEmpleado = response.data;
+      }
     });
   }
 
-   // acciones
-   toggleDropdown(usua_ID: number) {
+
+  paginarUsuarios(data: Usuarios[]): Usuarios[] {
+    const startIndex = (this.paginacionConfig.currentPage - 1) * this.paginacionConfig.itemsPerPage;
+    return data.slice(startIndex, startIndex + this.paginacionConfig.itemsPerPage);
+  }
+
+  filtrarUsuarios() {
+    this.usuariosFiltrados = this.usuario.filter((usuario) => {
+      return (
+        usuario.usua_Usuario.toLowerCase().includes(this.filtro.toLowerCase()) ||
+        usuario.nombreEmpleado.toLowerCase().includes(this.filtro.toLowerCase()) ||
+        usuario.usua_ID.toString().toLowerCase().includes(this.filtro.toLowerCase()) ||
+        usuario.role_Descripcion.toLowerCase().includes(this.filtro.toLowerCase())
+      );
+    });
+
+    this.paginacionConfig.totalItems = this.usuariosFiltrados.length; // Actualiza el total de elementos en la tabla filtrada
+
+    this.paginacionConfig.totalItems = this.usuariosFiltrados.length;
+    this.paginacionConfig.currentPage = 1; // Reiniciar la página a 1 después de filtrar
+    this.usuariosFiltrados = this.paginarUsuarios(this.usuariosFiltrados); // Obtener usuarios paginados
+  }
+
+  // acciones
+  toggleDropdown(usua_ID: number) {
     if (this.isDropdownOpen(usua_ID)) {
       this.closeDropdown(usua_ID);
     } else {
@@ -73,68 +112,66 @@ export class UsuariosComponent {
   closeAllDropdowns(): void {
     this.openDropdownIds = [];
   }
-  //!acciones
+  // !acciones
 
-  
   // cargar datos al modal
   selectUsuario(usu: Usuarios) {
-    usu.usua_Clave="";
+    usu.usua_Clave = '';
     this.selectedUsu = { ...usu };
   }
 
   selectUsuarioID(usu: Usuarios) {
-    
     this.selectedUsu = { ...usu };
   }
-  //!cargar datos al modal
+  // !cargar datos al modal
 
-  //CRUD
-   Insert(){
+  // CRUD
+  Insert() {
     this.service.InsertUsuario(this.InsertUsu).subscribe(
       (response: any) => {
         console.log(response);
-
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
       }
-      );
-   }
+    );
+  }
 
-   Update(){
+  Update() {
     this.service.UpdateUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
-
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
       }
-      );
-   }
+    );
+  }
 
-   Delete(){
+  Delete() {
     this.service.DeleteUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
-
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
       }
-      );
-   }
+    );
+  }
 
-   Pass(){
+  Pass() {
     this.service.PassUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
-
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
       }
-      );
-   }
-  //!CRUD
+    );
+  }
+  // !CRUD
+
+  cambiarItemsPerPage(cantidad: number) {
+    this.paginacionConfig.itemsPerPage = cantidad;
+  }
 }

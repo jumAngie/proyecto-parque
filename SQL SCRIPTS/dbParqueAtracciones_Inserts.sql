@@ -9,7 +9,7 @@ VALUES	('Soltero(a)'),
 		('Viudo(a)'),
 		('Union Libre')
 GO
-
+SELECT * FROM fact.tbVentasQuiosco
 INSERT INTO gral.tbDepartamentos(dept_Codigo, dept_Nombre)
 VALUES	('01','Atlántida'),
 		('02','Colón'),
