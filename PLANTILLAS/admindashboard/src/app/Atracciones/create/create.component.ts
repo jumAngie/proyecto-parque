@@ -40,6 +40,8 @@ export class CreateAtraccionesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.atracciones.regi_ID = 0;
+
     this.service.getAreas()
     .subscribe((response: any) =>{
       if(response.success){

@@ -54,9 +54,11 @@ export class VentasCrearComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-
+    
     this.quioscoID = 1;
     this.venta.clie_ID = 1;
+    this.venta.pago_ID = 0;
+    this.detalle.insu_ID = 0;
 
     this.loadTable();
 
@@ -101,7 +103,7 @@ export class VentasCrearComponent implements OnInit{
         {headerName: 'Valor', field: 'valorFinalPorInsumo'},
         {
           headerName: 'Acciones',
-          width: 100,
+          width: 200,
           sortable: false,
           filter: false,
           cellRenderer: 'actionsRenderer',
@@ -352,9 +354,6 @@ export class VentasCrearComponent implements OnInit{
     this.closeModal();
   }
   
-  
-
-
   Volver(){
     this.router.navigate(['ventasquiosco-listado']);
   };

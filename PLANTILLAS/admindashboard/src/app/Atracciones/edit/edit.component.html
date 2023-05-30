@@ -154,6 +154,7 @@
                               <div class="input-group" style="height: 3rem;">
                                  <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
                                  <select [(ngModel)]="atracciones.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
+                                    <option value="0">Selecciona una opción...</option>
                                     <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
                                  </select>
                               </div>
@@ -174,7 +175,7 @@
                 </button>            
                 <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 3rem;">
                   <i class="bi bi-reply-fill mr-1"></i>
-                  Volver
+                  Cancelar
                 </button>
             </div>
          </div>

@@ -29,10 +29,11 @@ export class ListarquioscosComponent implements OnInit{
       columnDefs: [
         {headerName: 'ID', field: 'quio_ID', width: 75, autoHeight: true, autoHeaderHeight: true},
         {headerName: 'Quiosco', field: 'quio_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Dirección', field: 'quio_ReferenciaUbicacion', width: 300, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Dirección', field: 'quio_ReferenciaUbicacion', width: 240, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Zona', field: 'area_Nombre', width: 200, autoHeight: true, autoHeaderHeight: true},
         {
           headerName: 'Acciones',
-          width: 350, 
+          width: 290, 
           sortable: false,
           filter: false,
           cellRenderer: 'actionsRenderer',
