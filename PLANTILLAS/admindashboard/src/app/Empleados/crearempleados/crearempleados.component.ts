@@ -79,7 +79,7 @@ export class CrearempleadosComponent implements OnInit {
       })
     }
     else{
-      ToastUtils.showWarningToast('Campos vacíos. Llene todos los campos obligatorios.')
+      ToastUtils.showWarningToast('Hay campos vacios!');
     }
   }
 
