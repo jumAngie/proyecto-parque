@@ -30,7 +30,7 @@ export class AcceService {
   UrlUpdateUsuario      =  "Usuarios/Actualizar"
   UrlDeleteUsuario      =  "Usuarios/Eliminar?id="
   UrlPassUsuario        =  "Usuarios/Pass"
-
+  Menu                  =  "Usuarios/Menu?id="
   
 
   getRoles(){
@@ -100,5 +100,10 @@ export class AcceService {
   DeleteUsuario(usuario:Usuarios){
     const url = `${this.apiService.apiUrl}${this.UrlDeleteUsuario}${usuario.usua_ID}`;
     return this.http.put(url, null);
+  }
+
+  MenuID(id:number){
+    const url = `${this.apiService.apiUrl}${this.Menu}${id}`;
+    return this.http.get(url);
   }
 }
