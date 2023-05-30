@@ -1,80 +1,91 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Usuarios</h1>
-      <nav>
-         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
-            <li class="breadcrumb-item">Usuarios</li>
-            <li class="breadcrumb-item active">Listado</li>
-         </ol>
-      </nav>
-   </div>
-    <div class="card">
-        <div class="card-header" style="padding: 0;">
-            <div class="banner" style="background-image: url(../../assets/img/BANNERS/BANNER-USUARIOS-FINAL.png); border-top-left-radius: 10px; border-top-right-radius: 10px; background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #45c048;">
-              <div class="overlay"></div>
-              <div class="text-center" style="padding: 6rem;">
-              </div>
-            </div>
-          </div>
-          
-      
-        
-      <div class="card-body">
-            
-        <div class="row ms-5 col-11">
-          <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;"  data-bs-toggle="modal" data-bs-target="#crear" onclick="limpiarCampos()">
-            <i class="fas fa-plus-circle mr-1"></i>
-            Agregar
-          </button>
-        </div>
-        <table class="table mt-4">
-            <thead>
-               <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Usuario</th>
-                  <th scope="col">Empleado</th>
-                  <th scope="col">Admin</th>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Acciones</th>
-               </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let usuario of usuario">
-                  <td scope="row">{{usuario.usua_ID}}</td>
-                  <td scope="row">{{usuario.usua_Usuario}}</td>
-                  <td scope="row">{{usuario.nombreEmpleado}}</td>
-                  <td scope="row">{{usuario.esAdmin}}</td>
-                  <td scope="row">{{usuario.role_Descripcion}}</td>
-                  <td> 
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" [id]="'dropdownMenuButton' + usuario.usua_ID" (click)="toggleDropdown(usuario.usua_ID)" aria-haspopup="true" aria-expanded="false">
-                          Acciones
-                        </button>
-                        <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + usuario.usua_ID" [class.show]="isDropdownOpen(usuario.usua_ID)">
-                          <a class="dropdown-item btn ov-btn-grow-u p-3 "  style="border: none;"  data-bs-toggle="modal" data-bs-target="#update" (click)="selectUsuario(usuario)">
-                            <i class="fas fa-edit"></i>
-                            Editar
-                          </a>
-                          <a class="dropdown-item btn ov-btn-grow-info p-3"  style="border: none;"  >
-                            <i class=" fas fa-info-circle ml-1"></i>
-                            Detalles
-                          </a>
-                          <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;" data-bs-toggle="modal" data-bs-target="#pass" (click)="selectUsuario(usuario)">
-                            <i class="fas fa-key ml-1"></i>
-                            Cambio Contraseña
-                          </a>                                   
-                          <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar" (click)="selectUsuarioID(usuario)">
-                            <i class=" fas fa-trash-alt ml-1"></i>
-                            Eliminar
-                          </a>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-            </tbody>
-         </table>    
+  <div class="pagetitle">
+    <h1>Usuarios</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+        <li class="breadcrumb-item">Usuarios</li>
+        <li class="breadcrumb-item active">Index</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="card">
+    <div class="card-header" style="padding: 0;">
+      <div class="banner"
+        style="background-image: url(../../assets/img/BANNERS/BANNER-USUARIOS-FINAL.png); border-top-left-radius: 10px; border-top-right-radius: 10px; background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #45c048;">
+        <div class="overlay"></div>
+        <div class="text-center" style="padding: 6rem;"></div>
+      </div>
     </div>
+
+    <div class="card-body">
+      <div class="row ms-5 col-11">
+        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal"
+          data-bs-target="#crear" onclick="limpiarCampos()">
+          <i class="fas fa-plus-circle mr-1"></i>
+          Agregar
+        </button>
+        <div class="search-bar mt-3 col-10">
+          <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro"
+            (keyup)="filtrarUsuarios()">
+        </div>
+      </div>
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Empleado</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosFiltrados">
+            <td scope="row">{{usuario.usua_ID}}</td>
+            <td scope="row">{{usuario.usua_Usuario}}</td>
+            <td scope="row">{{usuario.nombreEmpleado}}</td>
+            <td scope="row">{{usuario.esAdmin}}</td>
+            <td scope="row">{{usuario.role_Descripcion}}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                  [id]="'dropdownMenuButton' + usuario.usua_ID" (click)="toggleDropdown(usuario.usua_ID)"
+                  aria-haspopup="true" aria-expanded="false">
+                  Acciones
+                </button>
+                <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + usuario.usua_ID"
+                  [class.show]="isDropdownOpen(usuario.usua_ID)">
+                  <a class="dropdown-item btn ov-btn-grow-u p-3" style="border: none;" data-bs-toggle="modal"
+                    data-bs-target="#update" (click)="selectUsuario(usuario)">
+                    <i class="fas fa-edit"></i>
+                    Editar
+                  </a>
+                  <a class="dropdown-item btn ov-btn-grow-info p-3" style="border: none;">
+                    <i class="fas fa-info-circle ml-1"></i>
+                    Detalles
+                  </a>
+                  <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;" data-bs-toggle="modal"
+                    data-bs-target="#pass" (click)="selectUsuario(usuario)">
+                    <i class="fas fa-key ml-1"></i>
+                    Cambio Contraseña
+                  </a>
+                  <a class="dropdown-item btn ov-btn-grow-d p-3" style="border: none;" data-bs-toggle="modal"
+                    data-bs-target="#eliminar" (click)="selectUsuarioID(usuario)">
+                    <i class="fas fa-trash-alt ml-1"></i>
+                    Eliminar
+                  </a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
 
     
 <!--Modal Insert-->
@@ -190,7 +201,7 @@
             </div>
         <div class="modal-footer">
           <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2"  (click)="Update()" >Guardar</button>
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" data-bs-dismiss="modal" (click)="Update()" >Guardar</button>
         </div>
       </div>
     </div>
@@ -226,7 +237,7 @@
           </div>
           <div class="modal-footer"> 
             <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="Pass()" >Guardar</button></div>
+            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" data-bs-dismiss="modal" (click)="Pass()" >Guardar</button></div>
   
        </div>
     </div>
@@ -249,7 +260,7 @@
             <div class="row justify-content-center">
             <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
             <div class="col-lg-1"></div> 
-            <button type="button" class="ov-btn-grow-d col-lg-5"  (click)="Delete()" >Aceptar</button></div>
+            <button type="button" class="ov-btn-grow-d col-lg-5" data-bs-dismiss="modal" (click)="Delete()" >Aceptar</button></div>
           </div>
           </div>
           <div class="modal-footer"> 

@@ -346,6 +346,28 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
+
+
+        public ServiceResult PantallasEliminado(int role_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallasRepository.Update(role_Id);
+                if (list.CodeStatus == 200)
+                    return result.SetMessage(list.MessageStatus, ServiceResultType.Success);
+                else
+                    return result.Error(list.MessageStatus);
+
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
         public IEnumerable<VW_Pantallas> PantallasPorRol_Checked(int role_Id)
         {
             var result = new ServiceResult();

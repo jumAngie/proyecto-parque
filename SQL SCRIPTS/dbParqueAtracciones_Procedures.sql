@@ -414,22 +414,35 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
-@role_ID INT,
-@pant_ID INT,
-@ropa_UsuarioCreador INT
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE_TOTAL
+@role_ID INT
 AS
 BEGIN
 DELETE FROM  [acce].tbRolesXPantallas
-WHERE role_ID=@role_ID AND pant_ID = @pant_ID
+WHERE role_ID = @role_ID 
+	SELECT 200 AS codeStatus, 'Acceso Eliminado con �xito' AS messageStatus
+
+END
+
+GO
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
+@role_ID INT,
+@pant_ID INT,
+@ropa_UsuarioModificador INT
+AS
+BEGIN
+BEGIN TRY
 
 INSERT INTO [acce].tbRolesXPantallas
 	(role_ID, pant_ID, ropa_UsuarioCreador)
 	VALUES
-	(@role_ID,@pant_ID,@ropa_UsuarioCreador)
+	(@role_ID,@pant_ID,@ropa_UsuarioModificador)
 
 	SELECT 200 AS codeStatus, 'Acceso Editado con �xito' AS messageStatus
-
+	END TRY
+	BEGIN CATCH
+	SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
 END
 GO
 

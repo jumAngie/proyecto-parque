@@ -31,6 +31,8 @@ export class AcceService {
   UrlDeleteUsuario      =  "Usuarios/Eliminar?id="
   UrlPassUsuario        =  "Usuarios/Pass"
   Menu                  =  "Usuarios/Menu?id="
+  DeletePantallas       =  "Pantallas/PantallasEliminado?pr="
+
   
 
   getRoles(){
@@ -63,6 +65,13 @@ export class AcceService {
   
   RolPantPantallasElim(pantalla: Pantallas) {
     return this.http.post(`${this.apiService.apiUrl}${this.PantallasElim}`, pantalla);
+  }
+
+  
+  RolPantPantallasEliminado(rol: number) {
+    const url = `${this.apiService.apiUrl}${this.DeletePantallas}${rol}`;
+    console.log(url)
+    return this.http.post(url, null);
   }
 
   RolPantCK(rol: Roles) {

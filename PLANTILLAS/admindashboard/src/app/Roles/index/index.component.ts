@@ -21,6 +21,7 @@ export class IndexComponent implements OnInit {
   rolinsert: Roles = new Roles();
   selectedRol: Roles = new Roles();
   p: number = 1;
+  
   filtro: string = '';
   openDropdownIds: number[] = [];
 	active = 1;
@@ -63,8 +64,16 @@ saveUpdatePantallas(): void {
     };
   });
 
-  console.log(this.pantallasenvio);
-
+    this.service.RolPantPantallasEliminado( this.rolEnvio).subscribe(
+      (response: any) => {
+        console.log(response)
+      },
+      (error: any) => {
+        console.error('Error del servicio:', error);
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    );
+ 
   this.pantallasenvio.forEach((pantalla) => {
     this.service.RolPantPantallasElim(pantalla).subscribe(
       (response: any) => {

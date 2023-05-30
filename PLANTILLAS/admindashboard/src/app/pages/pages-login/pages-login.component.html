@@ -25,12 +25,10 @@
                      <div class="input-group has-validation">
                        <span class="input-group-text text-light" id="inputGroupPrepend" style="border: 2px solid white;background-color: rgba(0, 255, 255, 0);">@</span>
                        <input type="text" name="username" [(ngModel)]="username" class="col-11 custom-input" id="yourUsername" required placeholder="Usuario" style="text-indent: 10px;">
-                       <div class="invalid-feedback">Por favor, ingrese su usuario</div>
                      </div>
                      <div class="input-group has-validation mt-3">
                        <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="border: 2px solid white;background-color: rgba(0, 255, 255, 0);"><i class="fas fa-lock"></i></span>
                        <input type="password" name="password" [(ngModel)]="password" class="col-11 custom-input" id="yourPassword" required placeholder="Contraseña" style="text-indent: 10px;">
-                       <div class="invalid-feedback">Por favor, ingrese su contraseña</div>
                      </div>
                      <div class="col-12 mt-3 d-flex justify-content-center">
                        <button class="pulse btn btn-sm col-8 " style="max-width: 240px;" type="submit" (click)="Login()">Iniciar Sesión</button>
