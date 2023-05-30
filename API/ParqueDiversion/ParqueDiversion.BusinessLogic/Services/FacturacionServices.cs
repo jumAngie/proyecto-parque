@@ -125,6 +125,8 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
+
+
         public ServiceResult InsertVentaDetalle(tbVentasQuioscoDetalle item)
         {
             var result = new ServiceResult();
@@ -142,6 +144,31 @@ namespace ParqueDiversion.BusinessLogic.Services
                 else
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult DeleteInsumo(tbVentasQuioscoDetalle item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var ans = _ventasQuioscoDetalleRepository.DeleteInsumo(item);
+                if (ans.CodeStatus == 200)
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Success);
+                }
+                else if(ans.CodeStatus == 409)
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Error);
                 }
             }
             catch (Exception ex)

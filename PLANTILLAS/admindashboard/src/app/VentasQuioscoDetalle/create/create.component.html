@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-end">
-                                       <button id="btnSendHeader" (click)="Volver()" class="ov-btn-grow-d col-6 " style="height: 3rem;">
+                                       <button id="btnCreateHeader" (click)="Volver()" class="ov-btn-grow-d col-6 " style="height: 3rem;">
                                           <i class="bi bi-reply-fill mr-1"></i>
                                           Volver
                                        </button>
@@ -90,10 +90,16 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
+                                 <div class="d-flex justify-content-end">
                                     <button (click)="GuardarDetalles()" id="btnSendDetails" class="ov-btn-grow-primary col-4" style="height: 3rem;">
                                        <i class="fas fa-plus-circle mr-1"></i>
                                        Agregar insumo
-                                    </button>   
+                                    </button>
+                                    <button (click)="Volver()" id="btnCloseReceipt" class="ov-btn-grow-d col-4 ms-3" style="height: 3rem;" data-bs-toggle="modal" data-bs-target="#modalConfirmClose">
+                                       <i class="fas fa-plus-circle mr-1"></i>
+                                       Finalizar factura
+                                    </button>
+                                 </div>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +126,8 @@
                                           <table class=" table table-striped table-hover table-bordered table-light">
                                              <tbody>
                                                    <tr>
-                                                   <th > <label class="d-flex justify-content-left">Subtotal: </label></th>
-                                                   <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_Subtotal}}</label></th>
+                                                      <th > <label class="d-flex justify-content-left">Subtotal: </label></th>
+                                                      <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_Subtotal}}</label></th>
                                                    </tr>
                                                    <tr>
                                                       <th> <label class="d-flex justify-content-left">ISV:</label> </th>
@@ -145,3 +151,48 @@
        </div>
     </section>
  </main>
+ <div class="modal fade" #modalElement tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+         <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light">Eliminar</h5>               
+         </div>
+         <div class="modal-body text-center text-dark"> 
+            <div class="d-flex justify-content-center mt-1">
+               <label for="">¿Está seguro que desea eliminar este insumo?</label>               
+            </div>
+         </div>
+         <div class="modal-footer"> 
+            <button (click)="closeModal()" type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-reply-fill"></i>Cancelar
+            </button> 
+            <button (click)="confirmDeleteDetail()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-check-circle-fill "></i>Eliminar
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="modalConfirmClose" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+         <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light">Confirmar cerrado de factura</h5>               
+         </div>
+         <div class="modal-body text-center text-dark"> 
+            <div class="d-flex justify-content-center mt-1">
+               <label for="">¿Está seguro que desea cerrar esta factura?</label>               
+            </div>
+         </div>
+         <div class="modal-footer"> 
+            <button  type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-reply-fill"></i>Cancelar
+            </button> 
+            <button (click)="Volver()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-check-circle-fill "></i>Confirmar
+            </button>
+         </div>
+      </div>
+   </div>
+</div>

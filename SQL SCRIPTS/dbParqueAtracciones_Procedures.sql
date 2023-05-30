@@ -3256,8 +3256,10 @@ SELECT * FROM FACT.VW_tbVentasQuioscoDetalle WHERE vent_ID = 5
 
 SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = 1
 GO
+
+
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
-CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert 
 @vent_ID					INT,
 @insu_ID					INT,
 @deta_Cantidad				INT,
@@ -3266,23 +3268,48 @@ AS
 BEGIN
 	BEGIN TRY 
 		BEGIN TRANSACTION
+			DECLARE @quio_ID INT = (SELECT quio_ID FROM fact.tbVentasQuiosco WHERE vent_ID = @vent_ID)
+			DECLARE @StockInsumoActual INT = (SELECT insu_Stock FROM parq.tbInsumosQuiosco WHERE quio_ID = @quio_ID AND insu_ID = @insu_ID)
+					
+
 			IF EXISTS (SELECT * FROM fact.tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID )
 				BEGIN
-					UPDATE fact.tbVentasQuioscoDetalle 
-					SET deta_Cantidad += @deta_Cantidad
-					WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
+					IF @deta_Cantidad > @StockInsumoActual
+						BEGIN
+							SELECT 409 AS codeStatus, CONCAT('Cantidad excede el stock disponible. Stock actual:', ' ', @StockInsumoActual) AS messageStatus						
+						END
+					ELSE 
+						BEGIN
+							UPDATE fact.tbVentasQuioscoDetalle 
+							SET deta_Cantidad += @deta_Cantidad
+							WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
 
-					DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
+							UPDATE parq.tbInsumosQuiosco
+							SET insu_Stock -= @deta_Cantidad 
+							WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
 
-					SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+							DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
 
+							SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+						END
 				END
 			ELSE
 				BEGIN
-					INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
-					VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+					IF @deta_Cantidad > @StockInsumoActual
+						BEGIN
+							SELECT 409 AS codeStatus, CONCAT('Cantidad excede el stock disponible. Stock actual:', ' ', @StockInsumoActual) AS messageStatus										
+						END
+					ELSE
+						BEGIN
+							INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+							VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus			
+							UPDATE parq.tbInsumosQuiosco
+							SET insu_Stock -= @deta_Cantidad 
+							WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
+
+							SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus
+						END				
 				END
 		COMMIT
 	END TRY
@@ -3296,6 +3323,36 @@ GO
 
 
 
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_DeleteInsumo
+	@vent_ID INT,
+	@deta_ID INT,
+	@deta_Cantidad INT,
+	@insu_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			DECLARE @quio_ID INT = (SELECT quio_ID FROM fact.tbVentasQuiosco WHERE vent_ID = @vent_ID) 
+			DECLARE @StockInsumoActual INT = (SELECT insu_Stock FROM parq.tbInsumosQuiosco WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID)
+
+			UPDATE parq.tbInsumosQuiosco
+			SET insu_Stock += @deta_Cantidad
+			WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
+
+			DELETE FROM fact.tbVentasQuioscoDetalle
+			WHERE deta_ID = @deta_ID
+
+			SELECT 200 AS codeStatus, 'Insumo eliminado exitosamente' AS messageStatus						
+
+		COMMIT
+	END TRY
+	BEGIN CATCH 
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus						 
+	END CATCH 
+END
+GO
+
 
 
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
@@ -3303,3 +3360,4 @@ EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
 
 
 
+SELECT * FROM parq.tbInsumosQuiosco WHERE quio_ID = 1

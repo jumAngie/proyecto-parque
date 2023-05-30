@@ -46,5 +46,13 @@ namespace ParqueDiversion.API.Controllers
             var respuesta = _facturacionServices.InsertVentaDetalle(item);
             return Ok(respuesta);
         }
+
+        [HttpPost("EliminarInsumo")]
+        public IActionResult DeleteInsumo([FromBody] VentasQuioscoDetalleViewModel data)
+        {
+            var item = _mapper.Map<tbVentasQuioscoDetalle>(data);
+            var respuesta = _facturacionServices.DeleteInsumo(item);
+            return Ok(respuesta);
+        }
     }
 }

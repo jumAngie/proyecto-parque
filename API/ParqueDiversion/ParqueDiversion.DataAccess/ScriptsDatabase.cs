@@ -126,6 +126,7 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_VentasQuioscoDetalle_List = "fact.UDP_VW_tbVentasQuioscoDetalle_Select";
         public static string UDP_VentasQuioscoDetalle_Insert = "fact.UDP_tbVentasQuioscoDetalle_Insert";
         public static string UDP_VentasQuioscoDetalle_DetalleByVenta = "fact.UDP_VW_VentasQuioscoDetalle_DetalleByVenta";
+        public static string UDP_VentasQuioscoDetalle_DeleteInsumo = "fact.UDP_tbVentasQuioscoDetalle_DeleteInsumo";
         #endregion
 
         #region LOGIN

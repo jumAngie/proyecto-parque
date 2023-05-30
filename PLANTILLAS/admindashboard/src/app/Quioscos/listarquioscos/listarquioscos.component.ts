@@ -115,7 +115,6 @@ export class ListarquioscosComponent implements OnInit{
     const modalElement = this.elementRef.nativeElement.querySelector('.modal');
     this.renderer2.removeClass(modalElement, 'show');
     this.renderer2.setStyle(modalElement, 'display', 'none');
-    
   }
 
   confirmDelete(){
