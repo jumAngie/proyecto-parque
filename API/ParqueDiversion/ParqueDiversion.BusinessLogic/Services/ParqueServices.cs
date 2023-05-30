@@ -502,6 +502,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             try
             {
                 var list = _atraccionesRepository.List();
+
                 return result.Ok(list);
             }
             catch (Exception e)
@@ -513,55 +514,103 @@ namespace ParqueDiversion.BusinessLogic.Services
         public ServiceResult InsertarAtracciones(tbAtracciones item)
         {
             var result = new ServiceResult();
+            try
+            {
+                var map = _atraccionesRepository.Insert(item);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
 
-            var map = _atraccionesRepository.Insert(item);
-            return result.Ok(map);
         }
-        public VW_tbAtracciones FindAtracciones(int id)
+        public ServiceResult FindAtracciones(int id)
         {
+            var result = new ServiceResult();
             try
             {
-                return _atraccionesRepository.Find(id);
+                var list = _atraccionesRepository.FindAtraccion(id);
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
-            }
-        }
-        public RequestStatus BorrarAtracciones(int id)
-        {
-            try
-            {
-                return _atraccionesRepository.Delete(id);
-            }
-            catch (Exception)
-            {
-                return null;
+                return result.Error(e.Message);
             }
         }
-        public RequestStatus UpdateAtracciones(tbAtracciones tabla)
+        public ServiceResult BorrarAtracciones(int id)
         {
+            var result = new ServiceResult();
             try
             {
-                return _atraccionesRepository.Update(tabla);
+                var map = _atraccionesRepository.Delete(id);
+                if(map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if(map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
+        }
+        public ServiceResult UpdateAtracciones(tbAtracciones item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _atraccionesRepository.Update(item);
+                if (map.CodeStatus ==  200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
         #endregion
 
         #region Empleados
-        public IEnumerable<VW_tbEmpleados> ListadoEmpleados()
+        public ServiceResult ListadoEmpleados()
         {
+            var result = new ServiceResult();
             try
             {
-                return _empleadosRepository.List();
+                var list = _empleadosRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbEmpleados>();
+                return result.Error(ex.Message);
             }
         }
 
@@ -652,15 +701,16 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region Quioscos
-        public IEnumerable<VW_tbQuioscos> ListadoQuiosco()
+        public ServiceResult ListadoQuiosco()
         {
+            var result = new ServiceResult();
             try
-            {
-                return _quioscosRepository.List();
+            {   var list =_quioscosRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbQuioscos>();
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
 
@@ -689,6 +739,20 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
+        public ServiceResult FindQuiosco (int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _quioscosRepository.FindQuiosco(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
+        }
+
         public ServiceResult UpdateQuiosco(tbQuioscos item)
         {
             var result = new ServiceResult();
@@ -714,12 +778,12 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
-        public ServiceResult DeleteQuiosco(tbQuioscos item)
+        public ServiceResult DeleteQuiosco(int item)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _quioscosRepository.Delete(item.quio_ID);
+                var map = _quioscosRepository.Delete(item);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
@@ -742,15 +806,17 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region Golosinas
-        public IEnumerable<VW_tbGolosinas> ListadoGolosina()
+        public ServiceResult ListadoGolosina()
         {
+            var result = new ServiceResult();
             try
             {
-                return _golosinasRepository.List();
+                var list = _golosinasRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbGolosinas>();
+                return result.Error(ex.Message);
             }
         }
 
@@ -832,15 +898,31 @@ namespace ParqueDiversion.BusinessLogic.Services
         #endregion
 
         #region InsumosQuiosco
-        public IEnumerable<VW_tbInsumosQuiosco> ListadoInsumo()
+        public ServiceResult ListadoInsumo()
         {
+            var result = new ServiceResult();
             try
             {
-                return _insumosQuioscoRepository.List();
+                var list = _insumosQuioscoRepository.List();
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Enumerable.Empty<VW_tbInsumosQuiosco>();
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
+        }
+
+        public ServiceResult InsumosByQuiosco(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _insumosQuioscoRepository.InsumosByQuiosco(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
             }
         }
 

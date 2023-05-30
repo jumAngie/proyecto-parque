@@ -1,0 +1,132 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Quioscos</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item" ><a routerLink="/quioscos-listado"> Listado</a></li>             
+             <li class="breadcrumb-item active"> <a routerLink="/quioscos-detalle">Detalle</a> </li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section">
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="card bg-light">
+                <div class="card-header text-center">
+                   <label class="card-title mb-0 mt-0" style="font-size: x-large;">Detalle</label>
+               </div>
+                <div class="card-body">
+                  <div class="row mt-3">
+                     <div class="col-6">
+                        <div class="card h-100 " style="border-radius: 20px;">
+                           <div class="card-header text-center">
+                              <div class="card-title mb-0 mt-0">
+                                 Información del Quiosco
+                              </div>
+                           </div>
+                           <div class="card-body text-center">
+                              <div class="row g-2">
+                                 <label class="col-12 card-text">Nombre: {{quiosco.quio_Nombre}}</label>
+                                 <label class="col-12 ">Zona: {{quiosco.area_Nombre}}</label>
+                                 <label class="col-12 ">Región: {{quiosco.regi_Nombre}}</label>
+                                 <label class="col-12 ">Dirección: {{quiosco.quio_ReferenciaUbicacion}}</label>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                     <div class="col-6">
+                        <div class="card h-100 " style="border-radius: 20px;">
+                           <div class="card-header text-center">
+                              <div class="card-title mb-0">
+                                 Empleado encargado
+                              </div>
+                           </div>
+                           <div class="card-body text-center">
+                              <div class="row g-2">
+                                 <label class="col-12 ">ID de Empleado: {{quiosco.empl_ID}}</label>
+                                 <label class="col-12 ">Nombres: {{quiosco.empl_Nombres}}</label>
+                                 <label class="col-12 ">Apellidos: {{quiosco.empl_Apellidos}}</label>
+                                 <label class="col-12 ">Cargo: {{quiosco.carg_Nombre}}</label>
+                              </div>                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row"></div>
+                  <div class="row mt-3 mb-0">
+                     <div class="col-12">
+                        <div class="card">
+                           <div class="card-header text-center">
+                              <div class="card-title mb-0">
+                                 Insumos
+                              </div>
+                           </div>
+                           <div class="card-body text-center">
+                              <div class="d-flex justify-content-end">
+                                 <button (click)="openModal()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;">
+                                    <i class="fas fa-plus-circle "></i> <label class="ms-2">Añadir insumos</label>
+                                 </button>                                 
+                                 <button (click)="Volver()" class="ov-btn-grow-primary ms-2 mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+                                 <i class="bi bi-reply-fill"></i>
+                                 <label class="ms-2">Volver</label>
+                                 </button>
+                              </div>
+                              <ag-grid-angular
+                                 style="width: 100%; height: 300px;"
+                                 class="mt-2 ag-theme-alpine table table-striped table-hoover table-responsive"
+                                 [gridOptions]="gridOptions"
+                              ></ag-grid-angular>   
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+ </main>
+ <div class="modal" #modalElement tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light">Añadir insumos</h5>               
+         </div>
+         <div class="modal-body text-center text-dark"> 
+            <div class="d-flex justify-content-center mt-1">
+               <div class="col-md-10"> 
+                  <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="GolosinaRequerida"></i>
+                  <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Golosina:</label>
+                  <div class="input-group">
+                     <span class="input-group-text"><i class="bi bi-hypnotize" style="color: blueviolet;"></i></span>
+                     <select id="golo_ID" [(ngModel)]="sendInsumos.golo_ID" class="form-select" (change)="clearGolosinaError()">                        
+                        <option *ngFor="let option of golosinas" [value]="option.golo_ID">{{ option.golo_Nombre }}</option>
+                     </select>
+                  </div>
+               </div>
+               
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+               <div class="col-md-6">
+                  <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="StockRequerido"></i>
+                  <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cantidad:</label>
+                  <div class="input-group">
+                     <span class="input-group-text"><i class="bi bi-basket3-fill" style="color: blueviolet;"></i></span>
+                     <input id="insu_Stock" [(ngModel)]="sendInsumos.insu_Stock" type="number" class="form-control" ((input))="clearStockError()">
+                  </div>               
+               </div>
+            </div>
+
+         </div>
+         <div class="modal-footer"> 
+            <button type="button" (click)="closeModal()" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-reply-fill"></i>Cancelar
+            </button> 
+            <button (click)="Guardar()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-check-circle-fill "></i>Agregar
+            </button>
+         </div>
+      </div>
+   </div>
+</div>

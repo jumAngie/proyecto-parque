@@ -24,7 +24,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? regi_ID { get; set; }
         public string atra_ReferenciaUbicacion { get; set; }
         public int? atra_LimitePersonas { get; set; }
-        public string atra_DuracionRonda { get; set; }
+        public TimeSpan? atra_DuracionRonda { get; set; }
         public string atra_Imagen { get; set; }
         public int? atra_Habilitado { get; set; }
         public int? atra_Estado { get; set; }

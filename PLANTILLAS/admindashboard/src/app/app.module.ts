@@ -38,16 +38,16 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
-import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
 import { ListAtraccionesComponent } from './Atracciones/list/list.component';
 import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
 import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
-import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
+
 
 import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
-import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
 
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
@@ -57,16 +57,36 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
 import { TabsComponent } from '../app/tabs/tabs.component';
 import { ParqServicesService } from './ParqServices/parq-services.service';
+import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
+import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+  
 
 import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
-
 import { LoginComponent } from './login/login.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
 
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
+
+import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
+import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
+import { CreateQuioscoComponent } from './Quioscos/create/create.component';
+
+import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
+
+import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
+
+
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
 import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
+import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 
 
 @NgModule({
@@ -114,7 +134,7 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
     ListAtraccionesComponent,
     ListClientesRegistradosComponent,
     ListInsumosQuioscoComponent,
-    ListVentasQuioscoDetalleComponent,
+
     ListempleadosComponent,
     CreatecargosComponent,
     EditarcargosComponent,
@@ -122,9 +142,23 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
     LoginComponent,
     UsuariosComponent,
     CrearempleadosComponent,
+    EditAtraccionesComponent,
+    LoginComponent,
     EditarempleadosComponent,
+    ListarquioscosComponent,
+    DetalleQuioscoComponent,
+    EditQuioscoComponent,
+    CreateQuioscoComponent,
+    VentasListComponent,
+    VentasCrearComponent,
+    VentasDetalleComponent,
+
     DetallesempleadosComponent,
-    PagesLoginCComponent
+    PagesLoginCComponent,
+    ListticketsComponent,
+    CreateticketsComponent,
+    ListticketsclienteComponent,
+    CreateticketsclienteComponent
   ],
   imports: [
     BrowserModule,
@@ -136,7 +170,8 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
     NgbNavModule,
     NgIf,
     NgbAlertModule,
-    NgSelectModule
+    NgSelectModule,
+    AgGridModule,
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

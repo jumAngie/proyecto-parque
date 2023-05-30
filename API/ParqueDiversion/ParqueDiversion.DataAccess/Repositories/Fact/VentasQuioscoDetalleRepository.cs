@@ -43,6 +43,30 @@ namespace ParqueDiversion.DataAccess.Repositories
             return db.Query<VW_tbVentasQuioscoDetalle>(ScriptsDatabase.UDP_VentasQuioscoDetalle_List, parametros, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbVentasQuioscoDetalle> DetallesByVenta(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@vent_ID", id , DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbVentasQuioscoDetalle>(ScriptsDatabase.UDP_VentasQuioscoDetalle_DetalleByVenta, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+        public RequestStatus DeleteInsumo(tbVentasQuioscoDetalle item)
+        {
+            
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@vent_ID", item.vent_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@deta_ID", item.deta_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@deta_Cantidad", item.deta_Cantidad, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@insu_ID", item.insu_ID, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_VentasQuioscoDetalle_DeleteInsumo, parametros, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+
+
         public RequestStatus Update(tbVentasQuioscoDetalle item)
         {
             throw new NotImplementedException();

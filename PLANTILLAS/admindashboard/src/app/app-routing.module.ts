@@ -36,28 +36,58 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
 
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+
+
+//Cargos
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
-import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
-
-import { ListAtraccionesComponent } from './Atracciones/list/list.component';
-import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
-
-
-import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
-import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
-import { ListVentasQuioscoDetalleComponent } from './VentasQuioscoDetalle/list/list.component';
-
-import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CreatecargosComponent } from './Cargos/createcargos/createcargos.component';
 import { EditarcargosComponent } from './Cargos/editarcargos/editarcargos.component';
 
+//Golosinas
+import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
 
-import { IndexComponent } from './Roles/index/index.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
+//Quioscos
+import { ListarquioscosComponent } from './Quioscos/listarquioscos/listarquioscos.component';
+import { DetalleQuioscoComponent } from './Quioscos/detalle/detalle.component';
+import { EditQuioscoComponent } from './Quioscos/edit/edit.component';
+import { CreateQuioscoComponent } from './Quioscos/create/create.component';
 
-import {LoginComponent} from '../app/login/login.component' 
+//Atracciones
+import { ListAtraccionesComponent } from './Atracciones/list/list.component';
+import { CreateAtraccionesComponent } from './Atracciones/create/create.component';
+import { EditAtraccionesComponent } from './Atracciones/edit/edit.component';
+
+//Insumos
+import { ListInsumosQuioscoComponent } from './InsumosQuiosco/list/list.component';
+
+//Clientes
+import { ListClientesRegistradosComponent } from './ClientesRegistrados/list/list.component';
+
+// Ventas quiosco
+import { VentasListComponent } from './VentasQuioscoDetalle/list/list.component';
+import { VentasCrearComponent } from './VentasQuioscoDetalle/create/create.component';
+import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
+
+
+//Empleados
+import { ListempleadosComponent } from './Empleados/listempleados/listempleados.component';
 import { CrearempleadosComponent } from './Empleados/crearempleados/crearempleados.component';
 import { EditarempleadosComponent } from './Empleados/editarempleados/editarempleados.component';
+
+//Roles
+import { IndexComponent } from './Roles/index/index.component';
+
+//Login
+import {LoginComponent} from '../app/login/login.component'
+
+
+import { UsuariosComponent } from './usuarios/usuarios.component';
+
+import { CreateticketsclienteComponent } from './TicketsCliente/createticketscliente/createticketscliente.component';
+import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente/listticketscliente.component';
+
+import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
+import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -98,22 +128,50 @@ const routes: Routes = [
   { path: '', redirectTo: 'pages-login', pathMatch: 'full' },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+
+  //Cargos
   { path: 'listcargos', component: ListcargosComponent},
+  {path: 'createcargos', component: CreatecargosComponent},
+  {path: 'editarcargos', component: EditarcargosComponent},
+
+  //Golosinas
   { path: 'listgolosinas', component: ListgolosinasComponent},
   
+  //Atracciones
   { path: 'atracciones-listado', component: ListAtraccionesComponent},
-  { path: 'crearatracciones', component: CreateAtraccionesComponent},
-  
+  { path: 'atracciones-crear', component: CreateAtraccionesComponent},
+  { path: 'atracciones-editar', component: EditAtraccionesComponent},
+
+  //Insumos
   { path: 'listinsumosquiosco', component: ListInsumosQuioscoComponent},
+
+  //Clientes
   { path: 'listclientesregistrados', component: ListClientesRegistradosComponent},
-  { path: 'listventasquioscodetalle', component: ListVentasQuioscoDetalleComponent},
-  
+
+  //Ventas quiosco detalle
+  {path: 'ventasquiosco-listado', component: VentasListComponent},
+  {path: 'ventasquiosco-crear', component: VentasCrearComponent},
+  {path: 'ventasquiosco-detalle', component: VentasDetalleComponent},
+
+  //Empleados
   {path: 'listempleados', component: ListempleadosComponent},
   {path: 'crearempleados', component: CrearempleadosComponent},
   {path: 'editarempleados', component: EditarempleadosComponent},
   
+  //Quioscos
+  {path: 'quioscos-listado', component: ListarquioscosComponent},
+  {path: 'quioscos-detalle', component: DetalleQuioscoComponent},
+  {path: 'quioscos-crear', component: CreateQuioscoComponent},
+  {path: 'quioscos-editar', component: EditQuioscoComponent},
+
   {path: 'createcargos', component: CreatecargosComponent},
-  {path: 'editarcargos', component: EditarcargosComponent}
+  {path: 'editarcargos', component: EditarcargosComponent},
+
+  {path: 'listticketsclientes', component: ListticketsclienteComponent},
+  {path: 'createticketsclientes', component:CreateticketsclienteComponent},
+
+  {path: 'listtitckets', component:ListticketsComponent},
+  {path: 'createtickets', component:CreateticketsComponent}
 ];
 
 @NgModule({

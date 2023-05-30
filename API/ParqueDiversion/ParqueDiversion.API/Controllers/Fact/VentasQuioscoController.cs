@@ -30,6 +30,13 @@ namespace ParqueDiversion.API.Controllers
             var listado = _facturacionServices.ListadoVenta();
             return Ok(listado);
         }
+        
+        [HttpPost("Find/{id}")]
+        public IActionResult Find(int id)
+        {
+            var listado = _facturacionServices.ListadoVentaFind(id);
+            return Ok(listado);
+        }
 
         [HttpPost("Insertar")]
         public IActionResult Insert([FromBody] VentasQuioscoViewModel data)
@@ -37,6 +44,13 @@ namespace ParqueDiversion.API.Controllers
             var item = _mapper.Map<tbVentasQuiosco>(data);
             var respuesta = _facturacionServices.InsertVenta(item);
             return Ok(respuesta);
+        }
+
+        [HttpGet("ListadoMetodosPago")]
+        public IActionResult PagosList()
+        {
+            var listado = _facturacionServices.PagosList();
+            return Ok(listado);
         }
 
     }

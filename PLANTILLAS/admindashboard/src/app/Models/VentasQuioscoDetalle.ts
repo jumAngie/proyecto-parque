@@ -8,11 +8,12 @@ export class VentasQuioscoDetalle{
     deta_Habilitado!: number;
     deta_Estado!: number;
     empl_crea!: String;
-    empl_modifica!: null;
+    empl_modifica!: String;
     deta_UsuarioCreador!: number;
     deta_UsuarioCreador_Nombre!: String;
     deta_FechaCreacion!: String;
     deta_UsuarioModificador!: number;
     deta_UsuarioModificador_Nombre!: String;
-    deta_FechaModificacion!: String
+    deta_FechaModificacion!: String; 
+    valorFinalPorInsumo: any;
 }

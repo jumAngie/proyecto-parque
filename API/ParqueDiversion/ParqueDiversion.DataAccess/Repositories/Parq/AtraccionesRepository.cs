@@ -32,6 +32,16 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
 
         }
 
+        public IEnumerable<VW_tbAtracciones> FindAtraccion(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@atra_ID", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbAtracciones>(ScriptsDatabase.UDP_Atracciones_Find, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+
         public RequestStatus Insert(tbAtracciones item)
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
@@ -67,7 +77,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             parametros.Add("@area_ID", item.area_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_Nombre", item.atra_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_Descripcion", item.atra_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@regi_ID", item.area_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@regi_ID", item.regi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_ReferenciaUbicacion", item.atra_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_LimitePersonas", item.atra_LimitePersonas, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_DuracionRonda", item.atra_DuracionRonda, DbType.Time, ParameterDirection.Input);

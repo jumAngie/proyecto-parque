@@ -325,6 +325,8 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
+                entity.Property(e => e.atra_DuracionRonda).HasMaxLength(300);
+
                 entity.Property(e => e.atra_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.atra_FechaModificacion).HasColumnType("datetime");
@@ -572,10 +574,6 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.ToView("VW_tbInsumosQuiosco", "parq");
 
-                entity.Property(e => e.area_Nombre)
-                    .HasMaxLength(300)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.empl_crea)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -602,6 +600,18 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.Property(e => e.quio_ReferenciaUbicacion)
                     .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.quio_area_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.quio_empl_NombreCompleto)
+                    .HasMaxLength(1203)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.quio_regi_Nombre)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
             });
 
