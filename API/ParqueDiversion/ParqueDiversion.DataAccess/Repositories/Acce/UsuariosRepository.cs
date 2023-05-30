@@ -101,7 +101,7 @@ namespace ParqueDiversion.DataAccess.Repositories
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@user_Id", id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_ID", id, DbType.String, ParameterDirection.Input);
 
             var result = db.Query<VW_Pantallas>(ScriptsDatabase.UDP_Usuarios_MENU, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
