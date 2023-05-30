@@ -23,13 +23,10 @@ export class ListempleadosComponent implements OnInit {
 
   empleadosList(){
     this.service.getEmpleados()
-    .subscribe(data => {
-      this.empleados = data;
-
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.src = "../assets/js/main.js";
-      this.elementRef.nativeElement.appendChild(s);
+    .subscribe((response: any) => {
+      if (response.success) {
+        this.empleados = response.data;
+      }
     });
   }
 
