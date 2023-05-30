@@ -64,6 +64,7 @@ export class ParqServicesService {
   findAtracciones(atracciones: Atracciones){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Find', atracciones);
   }
+  
   editAtracciones(atracciones: Atracciones){
     return this.http.put<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Update', atracciones);
   }
