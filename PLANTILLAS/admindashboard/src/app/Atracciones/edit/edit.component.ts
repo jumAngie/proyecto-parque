@@ -15,7 +15,8 @@ export class EditAtraccionesComponent implements OnInit {
   atracciones: Atracciones = new Atracciones();
   areas!: Areas[];
   regiones!: Regiones[];
-  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
+  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
+
   selectedImage: any;
 
   //VALIRABLES PARA VALIDACIÓN DE S
@@ -62,7 +63,8 @@ export class EditAtraccionesComponent implements OnInit {
         this.areasForStyle = this.areas.map(item => ({
           area_ID: item.area_ID.toString(),
           isSelected: item.area_ID === this.atracciones.area_ID,
-          area_Nombre: item.area_Nombre
+          area_Nombre: item.area_Nombre,
+          area_Imagen: item.area_Imagen
         }));
   
         this.selectCard();

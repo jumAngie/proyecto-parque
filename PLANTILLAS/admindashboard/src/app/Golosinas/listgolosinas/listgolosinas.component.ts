@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { data } from 'jquery';
 import { Golosinas } from 'src/app/Models/Golosinas';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 
@@ -17,8 +18,11 @@ export class ListgolosinasComponent implements OnInit {
   ngOnInit(): void {
   
     this.service.getGolosinas()
-    .subscribe(data=>{
-      this.golosinas = data;
+    .subscribe((response: any) =>{
+      console.log(response);
+      if (response.success) {
+          this.golosinas = response.data;
+      }
     })
   }
 
