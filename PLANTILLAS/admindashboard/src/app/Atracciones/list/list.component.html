@@ -3,7 +3,7 @@
       <h1>Atracciones</h1>
       <nav>
          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
+            <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
             <li class="breadcrumb-item">Atracciones</li>
             <li class="breadcrumb-item active">Listado</li>
          </ol>
@@ -25,7 +25,7 @@
          <div class="row col-lg-12 ms-1">
             <button (click)="AgregarAtraccion()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
               <i class="fas fa-plus-circle mr-1"></i>
-              Agregar
+              Nuevo
             </button>
 
             <div class="search-bar mt-3 col-10">
@@ -43,8 +43,12 @@
                <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
             </div>
             <div class="card-footer" style="text-align: center;">
-               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d"data-bs-toggle="modal" data-bs-target="#disablebackdrop"><i class="bi bi-trash-fill" ></i></button>
-               <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
+                  <i class="bi bi-trash-fill" ></i> <label class="ms-1  ">Eliminar</label>
+               </button>
+               <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px">
+                  <i class="bi bi-pen-fill"></i> <label class="ms-1">Editar</label> 
+               </button>
              </div>
          </div>
       </div>
@@ -73,7 +77,7 @@
                   <i class="bi bi-reply-fill"></i>Cancelar
                </button> 
                <button (click)="EliminarAtraccion()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-                  <i class="bi bi-check-circle-fill "></i>Eliminar
+                  <i class="bi bi-check-circle-fill "></i>Confirmar
                </button>
             </div>
          </div>

@@ -40,7 +40,8 @@ SELECT	pant_Id,
 		pant_Descripcion, 
 		pant_Identificador, 
 		pant_URL, 
-		pant_Estado, 
+		pant_Estado,
+		pant_Icono,
 		pant_UsuarioCreador,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = pant_UsuarioCreador),
 		pant_FechaCreacion, 
@@ -197,7 +198,7 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU
 @usua_ID INT
 AS
 BEGIN
@@ -3256,8 +3257,10 @@ SELECT * FROM FACT.VW_tbVentasQuioscoDetalle WHERE vent_ID = 5
 
 SELECT * FROM parq.VW_tbInsumosQuiosco WHERE quio_ID = 1
 GO
+
+
 --*************** CREATE DE VENTAS QUIOSCO DETALLE******************--
-CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_Insert 
 @vent_ID					INT,
 @insu_ID					INT,
 @deta_Cantidad				INT,
@@ -3266,23 +3269,48 @@ AS
 BEGIN
 	BEGIN TRY 
 		BEGIN TRANSACTION
+			DECLARE @quio_ID INT = (SELECT quio_ID FROM fact.tbVentasQuiosco WHERE vent_ID = @vent_ID)
+			DECLARE @StockInsumoActual INT = (SELECT insu_Stock FROM parq.tbInsumosQuiosco WHERE quio_ID = @quio_ID AND insu_ID = @insu_ID)
+					
+
 			IF EXISTS (SELECT * FROM fact.tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID )
 				BEGIN
-					UPDATE fact.tbVentasQuioscoDetalle 
-					SET deta_Cantidad += @deta_Cantidad
-					WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
+					IF @deta_Cantidad > @StockInsumoActual
+						BEGIN
+							SELECT 409 AS codeStatus, CONCAT('Cantidad excede el stock disponible. Stock actual:', ' ', @StockInsumoActual) AS messageStatus						
+						END
+					ELSE 
+						BEGIN
+							UPDATE fact.tbVentasQuioscoDetalle 
+							SET deta_Cantidad += @deta_Cantidad
+							WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID
 
-					DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
+							UPDATE parq.tbInsumosQuiosco
+							SET insu_Stock -= @deta_Cantidad 
+							WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
 
-					SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+							DECLARE @insu_Nombre VARCHAR(100) = (SELECT golo_Nombre FROM fact.VW_tbVentasQuioscoDetalle WHERE insu_ID = @insu_ID AND vent_ID = @vent_ID)
 
+							SELECT 200 AS codeStatus, CONCAT('Cantidad añadida exitosamente al insumo:', ' ', @insu_Nombre) AS messageStatus	
+						END
 				END
 			ELSE
 				BEGIN
-					INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
-					VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
+					IF @deta_Cantidad > @StockInsumoActual
+						BEGIN
+							SELECT 409 AS codeStatus, CONCAT('Cantidad excede el stock disponible. Stock actual:', ' ', @StockInsumoActual) AS messageStatus										
+						END
+					ELSE
+						BEGIN
+							INSERT INTO fact.tbVentasQuioscoDetalle(vent_ID, insu_ID, deta_Cantidad, deta_UsuarioCreador)
+							VALUES (@vent_ID, @insu_ID, @deta_Cantidad, @deta_UsuarioCreador)
 
-					SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus			
+							UPDATE parq.tbInsumosQuiosco
+							SET insu_Stock -= @deta_Cantidad 
+							WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
+
+							SELECT 200 AS codeStatus, 'Insumo añadido con éxito' AS messageStatus
+						END				
 				END
 		COMMIT
 	END TRY
@@ -3296,6 +3324,36 @@ GO
 
 
 
+CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_DeleteInsumo
+	@vent_ID INT,
+	@deta_ID INT,
+	@deta_Cantidad INT,
+	@insu_ID INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			DECLARE @quio_ID INT = (SELECT quio_ID FROM fact.tbVentasQuiosco WHERE vent_ID = @vent_ID) 
+			DECLARE @StockInsumoActual INT = (SELECT insu_Stock FROM parq.tbInsumosQuiosco WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID)
+
+			UPDATE parq.tbInsumosQuiosco
+			SET insu_Stock += @deta_Cantidad
+			WHERE insu_ID = @insu_ID AND quio_ID = @quio_ID
+
+			DELETE FROM fact.tbVentasQuioscoDetalle
+			WHERE deta_ID = @deta_ID
+
+			SELECT 200 AS codeStatus, 'Insumo eliminado exitosamente' AS messageStatus						
+
+		COMMIT
+	END TRY
+	BEGIN CATCH 
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus						 
+	END CATCH 
+END
+GO
+
 
 
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
@@ -3303,3 +3361,23 @@ EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
 
 
 
+SET IDENTITY_INSERT [acce].[tbPantallas] ON 
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (1, N'Usuarios', N'/usuarios', N'', N'', N'ACCE', N'bi bi-circle', 1, 1, CAST(N'2023-05-24T15:14:37.347' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (2, N'Roles', N'/roles', NULL, NULL, N'ACCE', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T08:16:45.200' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (3, N'Golosinas', N'/listgolosinas', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T08:21:30.043' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (4, N'Quioscos', N'/quioscos-listado', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:10:30.873' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (5, N'Facturación Quiosco', N'/ventasquiosco-listado', NULL, NULL, N'QUIO', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:28:15.537' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (6, N'Atracciones', N'/atracciones-listado', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:31:21.063' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (7, N'Empleados', N'/listempleados', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:34:48.790' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (8, N'Clientes', N'/clientes', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
+GO
+SET IDENTITY_INSERT [acce].[tbPantallas] OFF
+GO

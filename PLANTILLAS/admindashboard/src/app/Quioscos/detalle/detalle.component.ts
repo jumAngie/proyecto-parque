@@ -13,6 +13,7 @@ import { ToastUtils } from 'src/app/Utilities/ToastUtils';
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.css'],
 })
+
 export class DetalleQuioscoComponent implements OnInit{
   quiosco: Quioscos = new Quioscos();
   insumos!: InsumosQuiosco[];  
@@ -23,10 +24,9 @@ export class DetalleQuioscoComponent implements OnInit{
 
   GolosinaRequerida = false;
   StockRequerido = false;
-
-
-
   id: any;
+
+
   constructor(
     private service: ParqServicesService,
     private router: Router,
@@ -42,7 +42,6 @@ export class DetalleQuioscoComponent implements OnInit{
         {headerName: 'Golosina', field: 'golo_Nombre', autoHeight: true, autoHeaderHeight: true},
         {headerName: 'Precio unitario', field: 'golo_Precio', autoHeight: true, autoHeaderHeight: true},
         {headerName: 'Stock', field: 'insu_Stock',  autoHeight: true, autoHeaderHeight: true},
-
       ],
       rowData: this.insumos,
       pagination: true,

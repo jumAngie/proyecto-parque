@@ -19,11 +19,16 @@ export class PagesLoginComponent implements OnInit {
   }
 
   Login() {
-    console.log(this.username , this.password);
     this.service.login(this.username, this.password).subscribe(
       (response: any) => {
         console.log(response);
         if (response.usua_ID!=0) {
+          localStorage.setItem("usua_ID",response.usua_ID);
+          localStorage.setItem("usua_Usuario",response.usua_Usuario);
+          localStorage.setItem("nombreEmpleado",response.nombreEmpleado);
+
+
+          console.log(localStorage.getItem("usua_ID"));
           this.router.navigate(['/dashboard']);
         }
 

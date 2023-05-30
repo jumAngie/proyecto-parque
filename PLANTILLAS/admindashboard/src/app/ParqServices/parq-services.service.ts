@@ -134,7 +134,13 @@ export class ParqServicesService {
     return this.http.post<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/Insertar', detalle);
   }
 
+  deleteInsumo(detalle: VentasQuioscoDetalle){
+    return this.http.post<VentasQuioscoDetalle[]>(this.apiService.apiUrl + 'VentasQuioscoDetalle/EliminarInsumo', detalle);
+  }
 
+  closeReceipt(id: number){
+    return this.http.post<VentasQuiosco[]>(this.apiService.apiUrl + ''+id, id);
+  }
 
   // Servicio de Pagos
   getPagos(){

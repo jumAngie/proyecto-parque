@@ -3,9 +3,9 @@
     <h1>Roles</h1>
     <nav>
        <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
           <li class="breadcrumb-item">Roles</li>
-          <li class="breadcrumb-item active">Index</li>
+          <li class="breadcrumb-item active">Listado</li>
        </ol>
     </nav>
  </div>
@@ -24,7 +24,7 @@
       <div class="row ms-5 col-11">
         <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" (click)="goToNextTab()" data-bs-toggle="modal" data-bs-target="#crear" onclick="limpiarCampos()">
           <i class="fas fa-plus-circle mr-1"></i>
-          Agregar
+          Nuevo
         </button>
         
         <div class="search-bar mt-3 col-10">
@@ -133,9 +133,9 @@
               </p>
 
               <div class="row">
-                <button type="button" class="btn ov-btn-grow-primary col-4" data-bs-dismiss="modal" style="margin-left: 5px;" (click)="assignLater()">Asignar Luego</button>
+                <button type="button" class="btn ov-btn-grow-primary col-4" data-bs-dismiss="modal" style="margin-left: 5px;" (click)="assignLater()">Asignar más tarde</button>
                 <div class="col-3"></div>
-                <button type="button" class="btn ov-btn-grow-in col-4" style="margin-right: 5px; margin-left: 6%;" data-bs-dismiss="modal" (click)="save()">Guardar</button>
+                <button type="button" class="btn ov-btn-grow-in col-4" style="margin-right: 5px; margin-left: 6%;" data-bs-dismiss="modal" (click)="save()">Agregar</button>
               </div>
             </ng-template>
           </li>

@@ -3,9 +3,9 @@
       <h1>Usuarios</h1>
       <nav>
          <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
             <li class="breadcrumb-item">Usuarios</li>
-            <li class="breadcrumb-item active">Index</li>
+            <li class="breadcrumb-item active">Listado</li>
          </ol>
       </nav>
    </div>
@@ -25,7 +25,7 @@
         <div class="row ms-5 col-11">
           <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;"  data-bs-toggle="modal" data-bs-target="#crear" onclick="limpiarCampos()">
             <i class="fas fa-plus-circle mr-1"></i>
-            Agregar
+            Nuevo
           </button>
         </div>
         <table class="table mt-4">
@@ -62,7 +62,7 @@
                           </a>
                           <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;" data-bs-toggle="modal" data-bs-target="#pass" (click)="selectUsuario(usuario)">
                             <i class="fas fa-key ml-1"></i>
-                            Cambio Contraseña
+                            Cambiar Contraseña
                           </a>                                   
                           <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar" (click)="selectUsuarioID(usuario)">
                             <i class=" fas fa-trash-alt ml-1"></i>
@@ -131,7 +131,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success btn ov-btn-grow-primary" data-bs-dismiss="modal" (click)="Insert()">Guardar</button>
+          <button type="button" class="btn btn-success btn ov-btn-grow-primary" data-bs-dismiss="modal" (click)="Insert()">Agregar</button>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@
             </div>
         <div class="modal-footer">
           <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2"  (click)="Update()" >Guardar</button>
+          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2"  (click)="Update()" >Actualizar</button>
         </div>
       </div>
     </div>
@@ -226,7 +226,7 @@
           </div>
           <div class="modal-footer"> 
             <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="Pass()" >Guardar</button></div>
+            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="Pass()" >Actualizar</button></div>
   
        </div>
     </div>
@@ -249,7 +249,7 @@
             <div class="row justify-content-center">
             <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
             <div class="col-lg-1"></div> 
-            <button type="button" class="ov-btn-grow-d col-lg-5"  (click)="Delete()" >Aceptar</button></div>
+            <button type="button" class="ov-btn-grow-d col-lg-5"  (click)="Delete()" >Confirmar</button></div>
           </div>
           </div>
           <div class="modal-footer"> 

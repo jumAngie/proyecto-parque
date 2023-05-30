@@ -407,7 +407,7 @@ CREATE TABLE parq.tbInsumosQuiosco(
 	CONSTRAINT PK_parq_tbInsumosQuiosco_insu_ID PRIMARY KEY (insu_ID),
 	CONSTRAINT FK_parq_tbInsumosQuioscos_tbQuioscos_quio_ID FOREIGN KEY (quio_ID) REFERENCES parq.tbQuioscos (quio_ID),
 	CONSTRAINT FK_parq_tbInsumosQuiosco_tbGolosinas_golo_ID FOREIGN KEY (golo_ID) REFERENCES parq.tbGolosinas(golo_ID),
-	CONSTRAINT CK_parq_tbInsumosQuioscos_insu_Stock CHECK (insu_Stock > 0),
+	CONSTRAINT CK_parq_tbInsumosQuioscos_insu_Stock CHECK (insu_Stock >= 0),
 )
 GO
 

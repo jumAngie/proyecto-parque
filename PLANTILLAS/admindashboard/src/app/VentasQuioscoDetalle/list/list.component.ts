@@ -1,11 +1,10 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
 import { GridOptions, GridApi, ColumnApi } from 'ag-grid-community';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
-import { QuioscoActionsRenderer } from 'src/app/Quioscos/listarquioscos/QuioscoActionsRenderer.component';
-
+import { VetasActionsRenderer } from './VentasActionsRenderer';
 
 @Component({
   selector: 'app-list',
@@ -38,8 +37,8 @@ export class VentasListComponent implements OnInit {
           cellRenderer: 'actionsRenderer',
           cellRendererParams: {
             onDetail: this.onDetail.bind(this),
-            // onEdit: this.onEdit.bind(this),
-            // onDelete: this.onDelete.bind(this),
+            onEdit: this.onEdit.bind(this),
+            onDelete: this.onDelete.bind(this),
           }
         },
       ],      
@@ -55,7 +54,7 @@ export class VentasListComponent implements OnInit {
         wrapText: true,
       },
       frameworkComponents: {
-        actionsRenderer: QuioscoActionsRenderer,
+        actionsRenderer: VetasActionsRenderer,
       },
       localeText: {
         // Encabezados de columna
@@ -100,4 +99,11 @@ export class VentasListComponent implements OnInit {
     this.router.navigate(['ventasquiosco-detalle']);
   }
 
+  onEdit(rowData: any): void {
+     ToastUtils.showErrorToast('Esta factura ya ha sido finalizada, imposible editar.')
+  }
+  
+  onDelete(rowData: any): void {
+    ToastUtils.showErrorToast('Esta factura ya ha sido finalizada, imposible eliminar')
+  }
 }
