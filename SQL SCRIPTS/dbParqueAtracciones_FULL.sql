@@ -1984,7 +1984,9 @@ BEGIN
 			 BEGIN
 				INSERT INTO parq.tbClientes([clie_Nombres], [clie_Apellidos],[clie_DNI],[clie_Sexo], [clie_Telefono], [clie_UsuarioCreador])
 				VALUES						(@clie_Nombres, @clie_Apellidos, @clie_DNI, @clie_Sexo, @clie_Telefono, @clie_UsuarioCreador)
+
 				SELECT 200 AS codeStatus, 'Cliente registrado con �xito' AS messageStatus
+
 			 END
 		COMMIT
 	END TRY
@@ -2128,7 +2130,6 @@ GO
 
 --*************** INSERT DE CLIENTES REGISTRADOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_INSERT
-	@clie_ID				INT,
 	@clre_Usuario			VARCHAR(300), 
 	@clre_Email				NVARCHAR(300), 
 	@clre_Clave				NVARCHAR(300), 
@@ -2140,6 +2141,7 @@ BEGIN
 			DECLARE @UsuarioOcupado INT = 0
 			DECLARE @EmailOcupado	INT = 0
 			DECLARE @MessageStatus VARCHAR(20)
+			DECLARE @clie_ID INT= (SELECT CAST(IDENT_CURRENT('parq.tbClientes')AS INT))
 
 			IF EXISTS (SELECT * FROM parq.tbClientesRegistrados WHERE clre_Usuario = @clre_Usuario)
 			 BEGIN

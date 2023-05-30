@@ -1,5 +1,5 @@
-<main style="position: relative;position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-repeat: no-repeat; background-image: url('../../../assets/img/fondo2.png');">
-    <div class="gradiente"></div>
+<main style="position: relative;position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-repeat: no-repeat; background-image: url('../../../assets/img/fondo.png');">
+    <div class="gradiente "></div>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4 align-items-center">
         <div class="container">
@@ -25,25 +25,24 @@
                       <form class="row g-3 needs-validation" novalidate>
                         <div class="col-12">
                           <div class="input-group has-validation">
-                            <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);">@</span>
+                            <span class="input-group-text text-light" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);height: 40px;"><i class="fas fa-solid fa-at"></i></span>
                             <input type="text" name="username" [(ngModel)]="username" class="col-11 custom-input" id="yourUsername" required placeholder="Usuario" style="text-indent: 10px;">
                             <div class="invalid-feedback">Por favor, ingrese su usuario</div>
                           </div>
                         </div>
                         <div class="col-12">
                           <div class="input-group has-validation">
-                            <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);"><i class="fas fa-lock"></i></span>
+                            <span class="input-group-text text-light pt-2 pb-2" id="inputGroupPrepend" style="background-color: rgba(0, 255, 255, 0);height: 40px"><i class="fas fa-lock"></i></span>
                             <input type="password" name="password" [(ngModel)]="password" class="col-11 custom-input" id="yourPassword" required placeholder="Contraseña" style="text-indent: 10px;">
                             <div class="invalid-feedback">Por favor, ingrese su contraseña</div>
                           </div>
                         </div>
-                        <div class="col-12"></div>
                         <div class="col-12">
                           <button class="raise col-11  p-1 " style="max-width: 360px;" type="submit" (click)="Login()">Iniciar Sesión</button>
                         </div>
                         <div class="col-12">
-                          <p class="small mb-0 col-6 text-sm"><a routerLink="/pages-register">Cliente</a></p>
-                          <p class="small mb-0 btn pulse text-light col-6" data-bs-toggle="modal" data-bs-target="#pass"><a >Olvidaste tu contraseña?</a></p>
+                          <button class="small mb-0 btn btn-sm col-5 pulse" type="button" style="font-size: 11px;" routerLink="/pages-register">Registrate</button>
+                          <button class="small mb-0 btn btn-sm col-6 pulse" type="button" style="font-size: 11px;" data-bs-toggle="modal" data-bs-target="#pass">Olvidaste tu contraseña?</button>
                         </div>
                       </form>
                     </div>
