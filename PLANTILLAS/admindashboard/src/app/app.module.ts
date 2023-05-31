@@ -39,6 +39,7 @@ import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ListcargosComponent } from './Cargos/listcargos/listcargos.component';
 import { ListgolosinasComponent } from './Golosinas/listgolosinas/listgolosinas.component';
@@ -88,6 +89,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
 import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
+import { GraficaComponent } from './grafica/grafica.component';
 
 
 @NgModule({
@@ -160,7 +162,8 @@ import { AtraccionesDetailComponent } from './Atracciones/detail/detail.componen
     CreateticketsComponent,
     ListticketsclienteComponent,
     CreateticketsclienteComponent,
-    AtraccionesDetailComponent
+    AtraccionesDetailComponent,
+    GraficaComponent,    
   ],
   imports: [
     BrowserModule,
@@ -174,6 +177,7 @@ import { AtraccionesDetailComponent } from './Atracciones/detail/detail.componen
     NgbAlertModule,
     NgSelectModule,
     AgGridModule,
+    NgxChartsModule,
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

@@ -12,7 +12,6 @@ namespace ParqueDiversion.Entities.Entities
         {
             tbFilasPosiciones = new HashSet<tbFilasPosiciones>();
             tbHistorialFilasPosiciones = new HashSet<tbHistorialFilasPosiciones>();
-            tbHistorialVisitantesAtraccion = new HashSet<tbHistorialVisitantesAtraccion>();
             tbTemporizadores = new HashSet<tbTemporizadores>();
             tbVisitantesAtraccion = new HashSet<tbVisitantesAtraccion>();
         }
@@ -34,7 +33,6 @@ namespace ParqueDiversion.Entities.Entities
         public virtual tbTickets tckt { get; set; }
         public virtual ICollection<tbFilasPosiciones> tbFilasPosiciones { get; set; }
         public virtual ICollection<tbHistorialFilasPosiciones> tbHistorialFilasPosiciones { get; set; }
-        public virtual ICollection<tbHistorialVisitantesAtraccion> tbHistorialVisitantesAtraccion { get; set; }
         public virtual ICollection<tbTemporizadores> tbTemporizadores { get; set; }
         public virtual ICollection<tbVisitantesAtraccion> tbVisitantesAtraccion { get; set; }
     }

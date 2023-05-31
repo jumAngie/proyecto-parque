@@ -20,7 +20,7 @@ namespace ParqueDiversion.API.Models
         public string atra_regi_Nombre { get; set; }
         public string atra_ReferenciaUbicacion { get; set; }
         public int? atra_LimitePersonas { get; set; }
-        public TimeSpan? atra_DuracionRonda { get; set; }
+        public int? atra_DuracionRonda { get; set; }
         public string atra_Imagen { get; set; }
         public int? atra_Habilitado { get; set; }
         public int? atra_Estado { get; set; }

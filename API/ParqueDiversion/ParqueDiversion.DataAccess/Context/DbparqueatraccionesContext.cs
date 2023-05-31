@@ -33,6 +33,7 @@ namespace ParqueDiversion.DataAccess.Context
         public virtual DbSet<VW_tbClientesRegistrados> VW_tbClientesRegistrados { get; set; }
         public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
         public virtual DbSet<VW_tbGolosinas> VW_tbGolosinas { get; set; }
+        public virtual DbSet<VW_tbHistorialVisitantesAtraccion> VW_tbHistorialVisitantesAtraccion { get; set; }
         public virtual DbSet<VW_tbInsumosQuiosco> VW_tbInsumosQuiosco { get; set; }
         public virtual DbSet<VW_tbQuioscos> VW_tbQuioscos { get; set; }
         public virtual DbSet<VW_tbRegiones> VW_tbRegiones { get; set; }
@@ -73,7 +74,7 @@ namespace ParqueDiversion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<VW_Departamentos>(entity =>
             {
@@ -580,6 +581,23 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.golo_UsuarioModificador_Nombre).HasMaxLength(100);
             });
 
+            modelBuilder.Entity<VW_tbHistorialVisitantesAtraccion>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbHistorialVisitantesAtraccion", "fila");
+
+                entity.Property(e => e.atra_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.hiat_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.hiat_FechaFiltro).HasColumnType("date");
+
+                entity.Property(e => e.hiat_FechaModificacion).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<VW_tbInsumosQuiosco>(entity =>
             {
                 entity.HasNoKey();
@@ -734,13 +752,13 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ticl_FechaCompra).HasColumnType("datetime");
+                entity.Property(e => e.ticl_FechaCompra).HasColumnType("date");
 
                 entity.Property(e => e.ticl_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.ticl_FechaModificacion).HasColumnType("datetime");
 
-                entity.Property(e => e.ticl_FechaUso).HasColumnType("datetime");
+                entity.Property(e => e.ticl_FechaUso).HasColumnType("date");
 
                 entity.Property(e => e.usu_Crea).HasMaxLength(100);
 
@@ -1293,19 +1311,11 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.hiat_FechaFiltro).HasColumnType("date");
+
                 entity.Property(e => e.hiat_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.hiat_Habilitado).HasDefaultValueSql("((1))");
-
-                entity.HasOne(d => d.atra)
-                    .WithMany(p => p.tbHistorialVisitantesAtraccion)
-                    .HasForeignKey(d => d.atra_ID)
-                    .HasConstraintName("FK_fila_tbHistorialVisitantesAtraccion_parq_tbAtracciones_atra_ID");
-
-                entity.HasOne(d => d.ticl)
-                    .WithMany(p => p.tbHistorialVisitantesAtraccion)
-                    .HasForeignKey(d => d.ticl_ID)
-                    .HasConstraintName("FK_fila_tbHistorialVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID");
             });
 
             modelBuilder.Entity<tbInsumosQuiosco>(entity =>
@@ -1642,7 +1652,7 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.ticl_Estado).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.ticl_FechaCompra)
-                    .HasColumnType("datetime")
+                    .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ticl_FechaCreacion)
@@ -1651,7 +1661,7 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.Property(e => e.ticl_FechaModificacion).HasColumnType("datetime");
 
-                entity.Property(e => e.ticl_FechaUso).HasColumnType("datetime");
+                entity.Property(e => e.ticl_FechaUso).HasColumnType("date");
 
                 entity.Property(e => e.ticl_Habilitado).HasDefaultValueSql("((1))");
 

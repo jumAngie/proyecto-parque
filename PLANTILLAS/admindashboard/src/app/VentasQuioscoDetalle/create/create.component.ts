@@ -24,6 +24,7 @@ export class VentasCrearComponent implements OnInit{
   showDetalles!: VentasQuioscoDetalle[];
   insumos!: InsumosQuiosco[];
   totalRow: any = {};
+  regex = /^[0-9]+(\.[0-9]{1,2})?$/;
 
   venta: VentasQuiosco = new VentasQuiosco();
   detalle: VentasQuioscoDetalle = new VentasQuioscoDetalle();
@@ -415,7 +416,12 @@ export class VentasCrearComponent implements OnInit{
     if (!this.detalle.deta_Cantidad) {
       this.CantidadRequerido = true;
       return true;
-    }else{
+    }else if(!this.regex.test(this.detalle.deta_Cantidad.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
+      this.CantidadRequerido = true;
+      return true;
+    }
+    else{
       this.CantidadRequerido = false;
       return false;
     }
