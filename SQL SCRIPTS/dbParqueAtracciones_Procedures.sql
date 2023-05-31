@@ -2233,94 +2233,57 @@ GO
 --*************** VISTA DE ATRACCIONES ******************--
 CREATE OR ALTER VIEW parq.VW_tbAtracciones
 AS
-SELECT TOP (1000) [atra_ID]
-      ,atracc.area_ID
-	  , are.area_Descripcion
-      ,[atra_Nombre]
-      ,[atra_Descripcion]
-      ,atracc.regi_ID
-	  ,regi.regi_Nombre
-      ,[atra_ReferenciaUbicacion]
-      ,[atra_LimitePersonas]
-      ,CONVERT(NVARCHAR(300), [atra_DuracionRonda]) AS [atra_DuracionRonda]
-      ,[atra_Imagen]
-      ,[atra_Habilitado]
-      ,[atra_Estado]
-      ,[atra_UsuarioCreador]
-	  ,usu1.usua_Usuario AS usu_Crea
-      ,[atra_FechaCreacion]
-      ,[atra_UsuarioModificador]
-	  ,usu2.usua_Usuario AS usu_Modifica
-      ,[atra_FechaModificacion]
-	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
-	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
-    FROM [parq].[tbAtracciones] atracc
-  INNER JOIN acce.tbUsuarios usu1
-  ON	usu1.usua_ID = atracc.atra_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
-  ON	usu2.usua_ID = atracc.atra_UsuarioModificador
-  INNER JOIN parq.tbRegiones regi ON atracc.regi_ID = regi.regi_ID
-  INNER JOIN parq.tbAreas are ON atracc.area_ID = are.area_ID
+	SELECT	atra.area_ID, 
+			area_Nombre, 
+			area_Descripcion, 
+			(SELECT regi_Nombre FROM parq.tbRegiones WHERE regi_ID = area.regi_ID) AS area_regi_Nombre,
+			area_UbicaionReferencia, 
+			area_Imagen,
+
+			atra_ID, 
+			atra_Nombre, 
+			atra_Descripcion, 
+			atra.regi_ID,
+			(SELECT regi_Nombre FROM parq.tbRegiones WHERE regi_ID = atra.regi_ID) AS atra_regi_Nombre,
+			atra_ReferenciaUbicacion, 
+			atra_LimitePersonas, 
+			atra_DuracionRonda, 
+			atra_Imagen, 
+			atra_Habilitado, 
+			atra_Estado, 
+
+			atra_UsuarioCreador, 
+			empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador),
+			(SELECT usua_Usuario FROM acce.tbUsuarios WHERE usua_ID = atra.atra_UsuarioCreador) AS atra_UsuarioCreador_Nombre,
+			atra_FechaCreacion, 
+			
+			atra_UsuarioModificador, 
+			empl_modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador),
+			(SELECT usua_Usuario FROM acce.tbUsuarios WHERE usua_ID = atra.atra_UsuarioModificador) AS atra_UsuarioModificador_Nombre,
+			atra_FechaModificacion	
+	
+	FROM [parq].[tbAtracciones] AS atra 
+	INNER JOIN parq.tbAreas AS area ON atra.area_ID = area.area_ID
+GO
+
+
 
 --*************** SELECT DE ATRACCIONES ******************-
-GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_SELECT
 AS
 BEGIN
-	SELECT [atra_ID]
-      ,area_ID
-	  ,area_Descripcion
-      ,[atra_Nombre]
-      ,[atra_Descripcion]
-      ,regi_ID
-	  ,regi_Nombre
-      ,[atra_ReferenciaUbicacion]
-      ,[atra_LimitePersonas]
-      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
-      ,[atra_Imagen]
-      ,[atra_Habilitado]
-      ,[atra_Estado]
-      ,[atra_UsuarioCreador]
-	  , usu_Crea
-      ,[atra_FechaCreacion]
-      ,[atra_UsuarioModificador]
-	  ,usu_Modifica
-      ,[atra_FechaModificacion]
-	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
-	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
-	FROM [parq].VW_tbAtracciones
-	WHERE atra_Estado = 1  AND atra_Habilitado = 1
+	SELECT * FROM parq.VW_tbAtracciones WHERE atra_Estado = 1
 END
+GO
 
 --*************** FIND DE ATRACCIONES ******************-
-GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
 	@atra_ID INT
 AS
 BEGIN
-	SELECT [atra_ID]
-      ,area_ID
-	  ,area_Descripcion
-      ,[atra_Nombre]
-      ,[atra_Descripcion]
-      ,regi_ID
-	  ,regi_Nombre
-      ,[atra_ReferenciaUbicacion]
-      ,[atra_LimitePersonas]
-      ,CONVERT(NVARCHAR(300), atra_DuracionRonda) AS atra_DuracionRonda 
-      ,[atra_Imagen]
-      ,[atra_Habilitado]
-      ,[atra_Estado]
-      ,[atra_UsuarioCreador]
-	  , usu_Crea
-      ,[atra_FechaCreacion]
-      ,[atra_UsuarioModificador]
-	  ,usu_Modifica
-      ,[atra_FechaModificacion]
-	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioCreador)
-	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = atra_UsuarioModificador)
-	FROM	[parq].VW_tbAtracciones
-	WHERE	atra_Estado = 1  
-	AND		atra_ID = @atra_ID
+	SELECT *
+	FROM [parq].VW_tbAtracciones
+	WHERE atra_Estado = 1 AND atra_ID = @atra_ID
 END
 GO
 
@@ -2356,8 +2319,9 @@ BEGIN
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 	END CATCH
 END
---*************** UPDATE DE ATRACCIONES ******************-
 GO
+
+--*************** UPDATE DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@atra_ID					INT,
 	@area_ID					INT, 
@@ -2401,7 +2365,6 @@ BEGIN
 END
 GO
 
-
 --*************** DELETE DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_DELETE
 	@atra_ID INT
@@ -2433,7 +2396,6 @@ BEGIN
 	END CATCH
 END
 GO
-
 
 
 

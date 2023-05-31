@@ -10,7 +10,7 @@ import { Atracciones } from 'src/app/Models/Atracciones';
   styleUrls: ['./detail.component.css']
 })
 export class AtraccionesDetailComponent implements OnInit{
-  atracciones!: Atracciones[];
+  atracciones: Atracciones = new Atracciones();
   requestData: Atracciones = new Atracciones();
 
   constructor(
@@ -29,7 +29,7 @@ export class AtraccionesDetailComponent implements OnInit{
     this.service.findAtracciones(this.requestData).subscribe((response : any) =>{
       console.log(response);
       if (response.success) {
-        this.atracciones = response.data;
+        this.atracciones = response.data[0];
       }
     })
   };

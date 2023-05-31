@@ -34,7 +34,7 @@ export class EditAtraccionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
+    //this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
   }
 
   
@@ -239,7 +239,7 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   clearDuracionRondaError(){
-    if(this.atracciones.atra_DuracionRonda.trim() !== ''){
+    if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = false;
     }
   }

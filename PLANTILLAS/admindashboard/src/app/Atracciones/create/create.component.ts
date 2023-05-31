@@ -81,8 +81,8 @@ export class CreateAtraccionesComponent implements OnInit {
 
     if(errors == 0){
       this.atracciones.atra_UsuarioCreador = 1;
-      this.service.insertAtracciones(this.atracciones)
-      .subscribe((response: any) =>{
+      console.log(this.atracciones);
+      this.service.insertAtracciones(this.atracciones).subscribe((response: any) =>{
         console.log(response)
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);          
@@ -201,7 +201,7 @@ export class CreateAtraccionesComponent implements OnInit {
   }
 
   clearDuracionRondaError(){
-    if(this.atracciones.atra_DuracionRonda.trim() !== ''){
+    if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = false;
     }
   }
