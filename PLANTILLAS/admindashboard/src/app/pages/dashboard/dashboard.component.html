@@ -3,7 +3,9 @@
     <h1>Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/dashboard">Principal</a></li>
+        <li class="breadcrumb-item">
+          <a routerLink="/dashboard">Principal</a>
+        </li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
@@ -30,13 +32,18 @@
               style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
             ></div>
           </div>
-          <div class="card-body" style="margin-top: 20px;">
+          <div class="card-body" style="margin-top: 20px">
             <div class="d-flex flex-wrap blue-border">
               <div class="col-md-6" *ngFor="let item of areas; let i = index">
                 <img
                   [src]="'assets/img/MAPA/' + item.area_Imagen"
                   class="img-thumbnail-space img-fluid"
                 />
+                <div class="badges-container">
+                  <span class="badge" *ngFor="let atraccion of atracciones">
+                    {{ atraccion.atra_Nombre }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

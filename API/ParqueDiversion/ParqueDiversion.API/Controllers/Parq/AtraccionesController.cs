@@ -46,7 +46,7 @@ namespace ParqueDiversion.API.Controllers
             return Ok(listado);
         }
 
-        [HttpPost("FindArea/{AreaId}")]
+        [HttpGet("FindArea/{AreaId}")]
         public IActionResult FindAtraccionPorAreaId(int AreaId)
         {
             var listado = _parqueServices.FindAtraccionesPorArea(AreaId);

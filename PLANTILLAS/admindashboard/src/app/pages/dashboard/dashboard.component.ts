@@ -28,9 +28,26 @@ export class DashboardComponent implements OnInit {
     this.service.getAreas().subscribe((response: any) => {
       if (response.success) {
         this.areas = response.data;
+        this.areas.forEach((area) => {
+          this.cargarAtracciones(area.area_ID);
+        });
       }
     });
   }
+  
+  cargarAtracciones(AreaId: number) {
+    this.service.getAtraccionesPorId(AreaId)
+      .subscribe((response: any) => {
+        if (response.success) {
+          const area = this.areas.find((item) => item.area_ID === AreaId);
+          if (area) {
+            this.atracciones = response.data;
+          }
+        }
+      });
+  }
+  
+  
    
   checkZoomLevel() {
     var zoomLevel = Math.round(window.devicePixelRatio * 100);
@@ -41,13 +58,4 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  cargarAtracciones(AreaId: number){
-    this.service.getAtraccionesPorId(AreaId)
-    .subscribe((response: any) => {
-      if (response.success) {
-        console.log(response.data);
-        this.atracciones = response.data;
-      }
-    });
-  }
 }

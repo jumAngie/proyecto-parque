@@ -73,7 +73,7 @@ export class ParqServicesService {
   }
   
   getAtraccionesPorId(AreaId: number){
-    return this.http.get<Atracciones[]>(this.apiService.apiUrl + '/Atracciones/FindArea/'+ AreaId)
+    return this.http.get<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/FindArea/'+ AreaId)
   }
 
 
