@@ -1,65 +1,47 @@
 <main id="main" class="main">
-   <div class="pagetitle">
-     <h1>Dashboard</h1>
-     <nav>
-       <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a routerLink="/dashboard">Principal</a></li>
-         <li class="breadcrumb-item active">Dashboard</li>
-       </ol>
-     </nav>
-   </div>
-   <section class="section dashboard">
-     <div class="row">
-       <div class="col-12">
-         <div class="card">
-           <div class="card-header" style="padding: 0; position: relative">
-             <div
-               class="banner"
-               style="
-                 background-image: url('/assets/img/BANNERS-VR-FINAL/MAPA.png');
-                 border-top-left-radius: 10px;
-                 border-top-right-radius: 10px;
-                 background-size: contain;
-                 background-position: center;
-                 height: 0;
-                 padding-bottom: 25%; /* Ajusta este valor según la relación de aspecto de tu imagen */
-               "
-             ></div>
-             <div
-               class="overlay"
-               style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
-             ></div>
-           </div>
-           <div class="card-body" style="margin-top: 20px;">
-             <div class="d-flex flex-wrap blue-border">
-               <div class="col-md-6" *ngFor="let item of areas; let i = index">
-                 <img
-                   [src]="'assets/img/MAPA/' + item.area_Imagen"
-                   class="img-thumbnail-space img-fluid"
-                   style="max-width: 100%; height: auto;"
-                 />
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </section>
- </main>
- <script>
- // Función para verificar el nivel de escala de zoom
- function checkZoomLevel() {
-   var zoomLevel = Math.round(window.devicePixelRatio * 100);
-   
-   if (zoomLevel < 90) {
-     // Mostrar advertencia o realizar alguna acción específica
-     alert("El nivel de zoom actual es inferior al 90%.");
-   }
- }
-
- // Escuchar el evento 'resize' del navegador
- window.addEventListener('resize', checkZoomLevel);
-
- // Verificar el nivel de escala de zoom inicialmente
- checkZoomLevel();
-</script>
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/dashboard">Principal</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section dashboard">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header" style="padding: 0; position: relative">
+            <div
+              class="banner"
+              style="
+                background-image: url('/assets/img/BANNERS-VR-FINAL/MAPA.png');
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-size: contain;
+                background-position: center;
+                height: 0;
+                padding-bottom: 25%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+              "
+            ></div>
+            <div
+              class="overlay"
+              style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+            ></div>
+          </div>
+          <div class="card-body" style="margin-top: 20px;">
+            <div class="d-flex flex-wrap blue-border">
+              <div class="col-md-6" *ngFor="let item of areas; let i = index">
+                <img
+                  [src]="'assets/img/MAPA/' + item.area_Imagen"
+                  class="img-thumbnail-space img-fluid"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
