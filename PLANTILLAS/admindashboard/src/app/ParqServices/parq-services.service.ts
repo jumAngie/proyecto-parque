@@ -52,15 +52,7 @@ export class ParqServicesService {
   getGolosinas(){
     return this.http.get<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Listado');
   }
-  createGolosina(golosina: Golosinas){
-    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Insertar', golosina);
-  }
-  updateGolosina(golosina: Golosinas){
-    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Actualizar', golosina);
-  }
-  deleteGolosina(id: number){
-    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Delete/'+id, id);
-  }
+
 
   // servicios de atracciones//
   getAtracciones(){

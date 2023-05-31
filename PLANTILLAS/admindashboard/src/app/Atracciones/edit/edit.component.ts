@@ -16,7 +16,6 @@ export class EditAtraccionesComponent implements OnInit {
   areas!: Areas[];
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
-  regex = /^[0-9]+(\.[0-9]{1,2})?$/;
 
   selectedImage: any;
 
@@ -179,12 +178,7 @@ export class EditAtraccionesComponent implements OnInit {
     if(!this.atracciones.atra_LimitePersonas){
       this.LimitePersonasRequerido = true;
       return true;
-    }else if(!this.regex.test(this.atracciones.atra_LimitePersonas.toString())){
-      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
-      this.LimitePersonasRequerido = true;
-      return true;
-    }    
-    else{
+    }else{
       this.LimitePersonasRequerido = false;
       return false;
     }
@@ -192,14 +186,9 @@ export class EditAtraccionesComponent implements OnInit {
 
   validarTiempoDuracion(){
     if(!this.atracciones.atra_DuracionRonda){
-      this.DuracionRondaRequerido = true;      
-      return true;
-    }else if(!this.regex.test(this.atracciones.atra_DuracionRonda.toString())){
-      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
       this.DuracionRondaRequerido = true;
-      return true;      
-    }
-    else{
+      return true;
+    }else{
       this.DuracionRondaRequerido = false;
       return false;
     }
