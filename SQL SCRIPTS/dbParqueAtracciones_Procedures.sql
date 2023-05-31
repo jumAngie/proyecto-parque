@@ -2276,6 +2276,15 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROC parq.UDP_tbAtracciones_AtraccionesPorAreaId
+	@area_ID		INT
+AS
+BEGIN
+		SELECT * FROM parq.VW_tbAtracciones
+		WHERE	 area_ID = @area_ID
+END
+GO
+
 --*************** FIND DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
 	@atra_ID INT
