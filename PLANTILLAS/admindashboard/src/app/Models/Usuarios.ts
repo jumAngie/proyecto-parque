@@ -13,5 +13,6 @@ export class Usuarios{
     empl_Crea!:string;
     usua_UsuarioModificador!:1;
     empl_Modifica!:string;
-    usua_FechaModificacion!:Date
+    usua_FechaModificacion!:Date;
+    usua_Img!:string;
 }

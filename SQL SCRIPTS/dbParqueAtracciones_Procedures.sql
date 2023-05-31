@@ -10,6 +10,7 @@ SELECT	usua_ID,
 		usua_Usuario,
 		usua_Clave,
 		T1.empl_Id,
+		usua_Img,
 		nombreEmpleado = CONVERT(VARCHAR,T2.empl_PrimerNombre+' '+T2.empl_PrimerApellido),
 		usua_Admin,
 		CASE WHEN usua_Admin  = 1 THEN 'SI'
@@ -74,6 +75,7 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INSERT
 @usua_Clave					NVARCHAR(150),
 @usua_Admin					BIT,
 @role_ID					INT,
+@usua_Img					NVARCHAR(MAX),
 @usua_UsuarioCreador		INT
 AS
 BEGIN
@@ -90,8 +92,8 @@ BEGIN
 			DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 
 
-			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
-			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
+			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_Img,usua_UsuarioCreador)
+			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_Img,@usua_UsuarioCreador)
 
 			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
 		END

@@ -1,10 +1,11 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Usuarios } from '../Models/Usuarios';
 import { AcceService } from '../Service/acce.service';
 import { ParqServicesService } from '../ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Roles } from '../Models/Roles';
 import { Empleados } from '../Models/Empleados';
+import { ImgbbService } from '../Service_IMG/imgbb-service.service'
 
 @Component({
   selector: 'app-usuarios',
@@ -21,7 +22,8 @@ export class UsuariosComponent {
   ddlEmpleado: Empleados[] = [];
   filtro: string = '';
   p: number = 1;
-
+  imageUrl: string = ''; 
+  itemsPerPage: number = 6;
   paginacionConfig: any = {
     itemsPerPage: 10, // Cantidad de elementos por página
     currentPage: 1, // Página actual
@@ -32,14 +34,15 @@ export class UsuariosComponent {
     private service: AcceService,
     private router: Router,
     private elementRef: ElementRef,
-    private PService: ParqServicesService
+    private PService: ParqServicesService,
+    private imgbbService: ImgbbService
   ) {}
 
   ngOnInit(): void {
     this.service.getUsuarios().subscribe((data) => {
       this.usuario = data;
-      this.usuariosFiltrados = data; // Inicialmente, los usuarios filtrados serán los mismos que los usuarios totales
-      this.paginacionConfig.totalItems = this.usuario.length; // Actualiza el total de elementos en la tabla
+      this.usuariosFiltrados = data; 
+      this.paginacionConfig.totalItems = this.usuario.length; 
     });
 
     this.service.getUsuarios().subscribe((data) => {
@@ -64,6 +67,18 @@ export class UsuariosComponent {
     return data.slice(startIndex, startIndex + this.paginacionConfig.itemsPerPage);
   }
 
+  onChangeItemsPerPage(event: Event) {
+    const selectedValue = (event.target as HTMLInputElement)?.value;
+    if (selectedValue !== null) {
+      const itemsPerPage = parseInt(selectedValue, 10);
+      // Resto del código aquí
+    }
+  }
+  
+  
+  
+
+
   filtrarUsuarios() {
     this.usuariosFiltrados = this.usuario.filter((usuario) => {
       return (
@@ -72,6 +87,7 @@ export class UsuariosComponent {
         usuario.usua_ID.toString().toLowerCase().includes(this.filtro.toLowerCase()) ||
         usuario.role_Descripcion.toLowerCase().includes(this.filtro.toLowerCase())
       );
+
     });
 
     this.paginacionConfig.totalItems = this.usuariosFiltrados.length; // Actualiza el total de elementos en la tabla filtrada
@@ -127,6 +143,11 @@ export class UsuariosComponent {
 
   // CRUD
   Insert() {
+    if (this.InsertUsu.usua_Img=="" || this.InsertUsu.usua_Img==null ||this.InsertUsu.usua_Img==undefined ) {
+     this.InsertUsu.usua_Img="../../assets/img/usuario.png";
+    }
+    console.log(this.InsertUsu.usua_Img);
+
     this.service.InsertUsuario(this.InsertUsu).subscribe(
       (response: any) => {
         console.log(response);
@@ -169,9 +190,39 @@ export class UsuariosComponent {
       }
     );
   }
+
+  handleImageUpload(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+
+        this.uploadImageToServer(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  uploadImageToServer(file: File) {
+    this.imgbbService.Upload_IMG(file)
+      .subscribe(
+        response => {
+
+          this.imageUrl = response.data.url;
+          this.InsertUsu.usua_Img = (this.imageUrl)
+        },
+        error => {
+          // Manejar errores en la carga de la imagen
+          console.error(error);
+        }
+      );
+  }
+  deleteImage() {
+    this.imageUrl = "";
+    this.InsertUsu.usua_Img="";
+  }
+  
   // !CRUD
 
-  cambiarItemsPerPage(cantidad: number) {
-    this.paginacionConfig.itemsPerPage = cantidad;
-  }
 }
