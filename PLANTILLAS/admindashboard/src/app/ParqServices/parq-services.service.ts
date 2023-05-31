@@ -71,6 +71,10 @@ export class ParqServicesService {
   deleteAtracciones(id: number){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Delete/'+id, id);
   }
+  
+  getAtraccionesPorId(AreaId: number){
+    return this.http.get<Atracciones[]>(this.apiService.apiUrl + '/Atracciones/FindArea/'+ AreaId)
+  }
 
 
   // servicios de quioscos// 

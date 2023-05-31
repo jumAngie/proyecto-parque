@@ -549,6 +549,20 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(e.Message);
             }
         }
+
+        public ServiceResult FindAtraccionesPorArea(int AreaiD)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _atraccionesRepository.FindAtraccionPorIdArea(AreaiD);
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         public ServiceResult BorrarAtracciones(int id)
         {
             var result = new ServiceResult();

@@ -41,6 +41,14 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             return db.Query<VW_tbAtracciones>(ScriptsDatabase.UDP_Atracciones_Find, parametros, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbAtracciones> FindAtraccionPorIdArea(int AreaId)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@area_ID", AreaId, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbAtracciones>(ScriptsDatabase.UDP_Atracciones_AtraccionPorId, parametros, commandType: CommandType.StoredProcedure);
+        }
 
         public RequestStatus Insert(tbAtracciones item)
         {

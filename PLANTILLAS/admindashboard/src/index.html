@@ -128,5 +128,22 @@ setTimeout(function() {
     }, 1000);
   }, 2000); // Mostrar después de 2 segundos
   </script>
+  <script>
+    // Función para verificar el nivel de escala de zoom
+    function checkZoomLevel() {
+      var zoomLevel = Math.round(window.devicePixelRatio * 100);
+      
+      if (zoomLevel > 90) {
+        // Mostrar advertencia o realizar alguna acción específica
+        alert("El nivel de zoom actual es inferior al 90%.");
+      }
+    }
+   
+    // Escuchar el evento 'resize' del navegador
+    window.addEventListener('resize', checkZoomLevel);
+   
+    // Verificar el nivel de escala de zoom inicialmente
+    checkZoomLevel();
+   </script>
 </body>
 </html>

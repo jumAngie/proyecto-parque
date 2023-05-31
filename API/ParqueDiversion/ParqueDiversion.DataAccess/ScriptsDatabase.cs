@@ -72,9 +72,10 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_Atracciones_Find = "parq.UDP_tbAtracciones_FIND";
         public static string UDP_Atracciones_Update = "parq.UDP_tbAtracciones_UPDATE";
         public static string UDP_Atracciones_Delete = "parq.UDP_tbAtracciones_DELETE";
+        public static string UDP_Atracciones_AtraccionPorId = "parq.UDP_tbAtracciones_AtraccionesPorAreaId";
         #endregion
 
-        
+
         #region Empleados
         public static string UDP_Empleados_List = "parq.UDP_VW_tbEmpleados_Select";
         public static string UDP_Empleados_Insert = "parq.UDP_tbEmpleados_Insert";

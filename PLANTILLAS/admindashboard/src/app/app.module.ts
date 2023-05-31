@@ -88,7 +88,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.component';
 import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
-import { DibujadomapaComponent } from './Mapa/dibujadomapa/dibujadomapa.component';
 
 
 @NgModule({
@@ -162,7 +161,6 @@ import { DibujadomapaComponent } from './Mapa/dibujadomapa/dibujadomapa.componen
     ListticketsclienteComponent,
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
-    DibujadomapaComponent
   ],
   imports: [
     BrowserModule,
