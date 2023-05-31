@@ -109,18 +109,20 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_UPDATE
 @empl_ID					INT,
 @usua_Admin					BIT,
 @role_ID					INT,
-@usua_UsuarioModificador			INT
+@usua_Img					NVARCHAR(MAX),
+@usua_UsuarioModificador	INT
 AS
 BEGIN
 	BEGIN TRY
 
 			UPDATE acce.tbUsuarios
 			SET
-				empl_ID				=	@empl_ID,
-				usua_Admin			=	@usua_Admin,
-				role_ID				=	@role_ID,
+				empl_ID					=	@empl_ID,
+				usua_Admin				=	@usua_Admin,
+				role_ID					=	@role_ID,
+				usua_Img				=	@usua_Img,
 				usua_UsuarioModificador	=	@usua_UsuarioModificador
-				WHERE [usua_ID]		=	@usua_ID
+				WHERE [usua_ID]			=	@usua_ID
 
 			SELECT 200 AS codeStatus, 'Usuario Modificado con éxito' AS messageStatus
 

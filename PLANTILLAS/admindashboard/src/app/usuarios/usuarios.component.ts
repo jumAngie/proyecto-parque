@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Roles } from '../Models/Roles';
 import { Empleados } from '../Models/Empleados';
 import { ImgbbService } from '../Service_IMG/imgbb-service.service'
+import { ToastUtils } from '../Utilities/ToastUtils';
 
 @Component({
   selector: 'app-usuarios',
@@ -143,10 +144,35 @@ export class UsuariosComponent {
 
   // CRUD
   Insert() {
-    if (this.InsertUsu.usua_Img=="" || this.InsertUsu.usua_Img==null ||this.InsertUsu.usua_Img==undefined ) {
-     this.InsertUsu.usua_Img="../../assets/img/usuario.png";
+    if (!this.InsertUsu.usua_Img || this.InsertUsu.usua_Img.trim() === "") {
+      this.InsertUsu.usua_Img = "../../assets/img/usuario.png";
     }
-    console.log(this.InsertUsu.usua_Img);
+  
+    if (!this.InsertUsu.usua_Usuario || this.InsertUsu.usua_Usuario.trim() === "") {
+      return;
+    }
+  
+    if (!this.InsertUsu.empl_Id || this.InsertUsu.empl_Id === 0) {
+      return;
+    }
+  
+    if (!this.InsertUsu.usua_Clave || this.InsertUsu.usua_Clave.trim() === "") {
+      return;
+    }
+  
+    if (!this.InsertUsu.usua_Admin && (!this.InsertUsu.role_ID || this.InsertUsu.role_ID === 0)) {
+      return;
+    }
+  
+    if (!this.InsertUsu.usua_Img?.trim() ||
+    !this.InsertUsu.usua_Usuario?.trim() ||
+    !this.InsertUsu.empl_Id ||
+    !this.InsertUsu.usua_Clave?.trim() ||
+    (!this.InsertUsu.usua_Admin && !this.InsertUsu.role_ID)) {
+  
+  ToastUtils.showWarningToast("Hay Campos Vacios");
+  
+}
 
     this.service.InsertUsuario(this.InsertUsu).subscribe(
       (response: any) => {
@@ -157,8 +183,13 @@ export class UsuariosComponent {
       }
     );
   }
+  
+  
 
   Update() {
+    if (this.selectedUsu.usua_Img=="" || this.selectedUsu.usua_Img==null ||this.selectedUsu.usua_Img==undefined ) {
+      this.selectedUsu.usua_Img="../../assets/img/usuario.png";
+     }
     this.service.UpdateUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
@@ -211,6 +242,7 @@ export class UsuariosComponent {
 
           this.imageUrl = response.data.url;
           this.InsertUsu.usua_Img = (this.imageUrl)
+          this.selectedUsu.usua_Img=(this.imageUrl)
         },
         error => {
           // Manejar errores en la carga de la imagen
@@ -221,6 +253,7 @@ export class UsuariosComponent {
   deleteImage() {
     this.imageUrl = "";
     this.InsertUsu.usua_Img="";
+    this.selectedUsu.usua_Img="";
   }
   
   // !CRUD

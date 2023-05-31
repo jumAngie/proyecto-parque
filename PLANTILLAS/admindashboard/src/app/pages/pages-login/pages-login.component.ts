@@ -34,6 +34,7 @@ export class PagesLoginComponent implements OnInit {
           localStorage.setItem("usua_ID",response.usua_ID);
           localStorage.setItem("usua_Usuario",response.usua_Usuario);
           localStorage.setItem("nombreEmpleado",response.nombreEmpleado);
+          localStorage.setItem("usua_Img",response.usua_Img);
 
 
           console.log(localStorage.getItem("usua_ID"));

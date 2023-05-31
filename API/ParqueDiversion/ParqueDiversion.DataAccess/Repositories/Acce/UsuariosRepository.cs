@@ -68,6 +68,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             parametros.Add("@empl_ID", item.empl_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@role_ID", item.role_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_Admin", item.usua_Admin, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@usua_Img", item.usua_Img, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_UsuarioModificador", item.usua_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Usuarios_UPDATE, parametros, commandType: System.Data.CommandType.StoredProcedure);
