@@ -15,7 +15,8 @@ export class EditAtraccionesComponent implements OnInit {
   atracciones: Atracciones = new Atracciones();
   areas!: Areas[];
   regiones!: Regiones[];
-  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String}[] = [];
+  areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
+
   selectedImage: any;
 
   //VALIRABLES PARA VALIDACIÓN DE S
@@ -33,7 +34,7 @@ export class EditAtraccionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
+    //this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
   }
 
   
@@ -62,7 +63,8 @@ export class EditAtraccionesComponent implements OnInit {
         this.areasForStyle = this.areas.map(item => ({
           area_ID: item.area_ID.toString(),
           isSelected: item.area_ID === this.atracciones.area_ID,
-          area_Nombre: item.area_Nombre
+          area_Nombre: item.area_Nombre,
+          area_Imagen: item.area_Imagen
         }));
   
         this.selectCard();
@@ -145,7 +147,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarNombre() {
     if(!this.atracciones.atra_Nombre){
       this.NombreRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Nombre" requerido');
       return true;
     }else{
       this.NombreRequerido = false;
@@ -156,7 +157,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarDescripcion(){
     if(!this.atracciones.atra_Descripcion){
       this.DescripcionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Descripción" requerido');
       return true;
     }else{
       this.DescripcionRequerido = false;
@@ -167,7 +167,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarUbicacionReferencia(){      
     if(!this.atracciones.atra_ReferenciaUbicacion){
       this.UbicacionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Ubicación Referencia" requerido');
       return true;
     }else{
       this.UbicacionRequerido = false;
@@ -178,7 +177,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarLimitePersonas(){
     if(!this.atracciones.atra_LimitePersonas){
       this.LimitePersonasRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Límite personas" requerido');
       return true;
     }else{
       this.LimitePersonasRequerido = false;
@@ -189,7 +187,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarTiempoDuracion(){
     if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Duración ronda" requerido');
       return true;
     }else{
       this.DuracionRondaRequerido = false;
@@ -198,9 +195,8 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarRegion(){
-    if(!this.atracciones.regi_ID){
-      this.RegionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Región" requerido');
+    if(this.atracciones.regi_ID.toString().trim() == '' || this.atracciones.regi_ID == 0){
+      this.RegionRequerido = true;    
       return true;
     }else{
       this.RegionRequerido = false;
@@ -211,7 +207,6 @@ export class EditAtraccionesComponent implements OnInit {
   validarArea(){
     if(!this.atracciones.area_ID){
       this.AreaRequerido = true;
-      //ToastUtils.showWarningToast('Debes seleccionar una Zona')
       return true;
     }else{
       this.AreaRequerido = false;
@@ -244,7 +239,7 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   clearDuracionRondaError(){
-    if(this.atracciones.atra_DuracionRonda.trim() !== ''){
+    if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = false;
     }
   }

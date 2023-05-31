@@ -26,6 +26,11 @@ export class CrearempleadosComponent implements OnInit {
   EstCivilRequerido = false;
   CargoRequerido = false;
 
+   // VALIDACIÒN PARA FORMATOS //
+   FormatoValidoTelefono = false;
+   FormatoValidoDNI = false;
+   FormatoValidoCorreo = false;
+
   constructor(
     private service: ParqServicesService,
     private elementRef: ElementRef,
@@ -56,6 +61,21 @@ export class CrearempleadosComponent implements OnInit {
     errorsArray[6] = this.validarEstadoCivil();
     errorsArray[7] = this.validarSexo();
 
+    var formatosinvalidos = 0;
+    const formatosArray: boolean[] = [];
+    formatosArray[0] = this.FormatoValidoTelefono;
+    formatosArray[1] = this.FormatoValidoDNI;
+    formatosArray[2] = this.FormatoValidoCorreo;
+
+    for (let i=0; i < formatosArray.length; i++) {
+      if(formatosArray[i] == true){
+        formatosinvalidos++;
+      }
+      else{
+        formatosinvalidos;
+      }
+    }
+
     for (let i = 0; i < errorsArray.length; i++) {
       if(errorsArray[i] == true){
         errors++;
@@ -65,21 +85,27 @@ export class CrearempleadosComponent implements OnInit {
       }  
     }
 
-    if(errors == 0){
+    if(errors == 0 && formatosinvalidos == 0){      
       this.empleados.empl_UsuarioCreador = 1;
       this.service.insertEmpleados(this.empleados)
       .subscribe((response: any) =>{
         console.log(response)
         if(response.code == 200){
-          ToastUtils.showSuccessToast(response.messageStatus);          
+          ToastUtils.showSuccessToast(response.message);          
           this.router.navigate(['listempleados']);
         }else{
-          ToastUtils.showErrorToast(response.messageStatus);
+          ToastUtils.showErrorToast(response.message);
         }
       })
     }
+    else if(errors != 0){
+      ToastUtils.showWarningToast('¡Hay campos vacíos!')
+    }
+    else if (errors == 0 && formatosinvalidos != 0){
+
+    }
     else{
-      ToastUtils.showWarningToast('Campos vacíos. Llene todos los campos obligatorios.')
+      ToastUtils.showWarningToast('Entro al else final. Investigar POR QUE')
     }
   }
 
@@ -110,11 +136,12 @@ export class CrearempleadosComponent implements OnInit {
       this.DNIRequerido = true;
       return true;
     } else if (!dniPattern.test(this.empleados.empl_DNI)) {
-      this.DNIRequerido = false;
+      this.FormatoValidoDNI = true;
       ToastUtils.showWarningToast('Formato de DNI inválido. El formato debe ser XXXX-XXXX-XXXXX');
-      return true;
+      return false;
     } else {
       this.DNIRequerido = false;
+      this.FormatoValidoDNI = false;
       return false;
     }
   }
@@ -126,11 +153,12 @@ export class CrearempleadosComponent implements OnInit {
     this.EmailRequerido = true;
     return true;
   } else if (!emailPattern.test(this.empleados.empl_Email)) {
-    this.EmailRequerido = false;
+    this.FormatoValidoCorreo = true;
     ToastUtils.showWarningToast('Correo Electrónico inválido. Por favor, ingrese un correo válido.');
-    return true;
+    return false;
   } else {
     this.EmailRequerido = false;
+    this.FormatoValidoCorreo = false;
     return false;
   }
 }
@@ -154,12 +182,13 @@ export class CrearempleadosComponent implements OnInit {
       this.TelefonoRequerido = true;
       return true;
     }else if (!telefonitoPattern.test(this.empleados.empl_Telefono)) {
-      this.TelefonoRequerido = false;
+      this.FormatoValidoTelefono = true;
       ToastUtils.showWarningToast('Formato de Telefono inválido. El formato debe ser XXXX-XXXX');
       return false;
     }
       else{
       this.TelefonoRequerido = false;
+      this.FormatoValidoTelefono = false;
       return false;
     }
   }

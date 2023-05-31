@@ -1,23 +1,43 @@
+
+
 export class Atracciones{
-    atra_ID!: number;
-    area_ID!: number;
-    area_Descripcion!: String;
-    atra_Nombre!: String;
-    atra_Descripcion!:String;
-    regi_ID!: number;
-    regi_Nombre!:String;
-    atra_ReferenciaUbicacion!:String;
-    atra_LimitePersonas!: number;
-    atra_DuracionRonda!:String;
-    atra_Imagen!:String;
-    atra_Habilitado!: number;
-    atra_Estado!: number;
-    atra_UsuarioCreador!: number;
-    usu_Crea!: String;
-    atra_FechaCreacion!: String;
-    atra_UsuarioModificador!: number;
-    usu_Modifica!: String;
-    atra_FechaModificacion!: String;
-    empl_crea!: String;
-    empl_Modifica!: String;
+        area_ID!: number;
+        area_Nombre!: String;
+        area_Descripcion!: String;
+        area_regi_Nombre!: String;
+        area_UbicaionReferencia!: String;
+        area_Imagen!: String;
+        atra_ID!: number;
+        atra_Nombre!: String;
+        atra_Descripcion!: String;
+        regi_ID!: number;
+        atra_regi_Nombre!: String;
+        atra_ReferenciaUbicacion!: String;
+        atra_LimitePersonas!: number;
+        atra_DuracionRonda!: String;
+        
+        // {
+        //         days:0
+        //         hours:0
+        //         milliseconds:0
+        //         minutes:15
+        //         seconds:0
+        //         ticks: 9000000000
+        //         totalDays: 0.010416666666666666
+        //         totalHours: 0.25
+        //         totalMilliseconds:900000
+        //         totalMinutes:15
+        //         totalSeconds:900
+        // }
+        atra_Imagen!: String;
+        atra_Habilitado!: number;
+        atra_Estado!: number;
+        atra_UsuarioCreador!: number;
+        empl_crea!: String;
+        atra_UsuarioCreador_Nombre!: String;
+        atra_FechaCreacion!: String;
+        atra_UsuarioModificador!: number;
+        empl_modifica!: String;
+        atra_UsuarioModificador_Nombre!: String;
+        atra_FechaModificacion!: String
 }

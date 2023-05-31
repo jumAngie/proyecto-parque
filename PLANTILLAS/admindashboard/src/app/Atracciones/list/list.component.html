@@ -11,21 +11,29 @@
    </div>
 
    <div class="card">
-      <div class="card-header" style="padding: 0;">
-         <div class="banner" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU');border-top-left-radius:10px;border-top-right-radius:10px; background-size: cover; background-position: center;">
-            <div class="overlay"></div>
-            <div class="text-center" style="padding: 2rem;">
-               <h3 style="font-size: 2rem; font-weight: bold; color: white;">Atracciones</h3>
-               <p style="font-size: 1rem; color: white;">Administración de Atracciones</p>                        
-            </div>
-         </div>
-      </div>
-
+      <div class="card-header" style="padding: 0; position: relative">
+         <div
+           class="banner"
+           style="
+             background-image: url('/assets/img/BANNERS-VR-FINAL/ATRACCIONES.png');
+             border-top-left-radius: 10px;
+             border-top-right-radius: 10px;
+             background-size:contain;
+             background-position: center;
+             height: 0;
+             padding-bottom: 23%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+           "
+         ></div>
+         <div
+           class="overlay"
+           style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+         ></div>
+       </div>
       <div class="card-body">
          <div class="row col-lg-12 ms-1">
             <button (click)="AgregarAtraccion()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
               <i class="fas fa-plus-circle mr-1"></i>
-              Agregar
+              Nuevo
             </button>
 
             <div class="search-bar mt-3 col-10">
@@ -43,8 +51,16 @@
                <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
             </div>
             <div class="card-footer" style="text-align: center;">
-               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d" data-bs-toggle="modal" data-bs-target="#disablebackdrop"><i class="bi bi-trash-fill" ></i></button>
-               <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px"><i class="bi bi-pen-fill"></i></button>
+
+               <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px">
+                  <i class="bi bi-pen-fill"></i> <label class="ms-1">Editar</label> 
+               </button>
+               <button (click)="detailAtraccion(atraccion)" class="ov-btn-grow-primary" style="margin-left: 10px">
+                  <i class="bi bi-eye-fill"></i><label class="ms-1">Detalle</label> 
+               </button>
+               <button (click)="getDeleteData(atraccion.atra_ID)" class="ov-btn-grow-d ms-2" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
+                  <i class="bi bi-trash-fill" ></i> <label class="ms-1">Eliminar</label>
+               </button>
              </div>
          </div>
       </div>
@@ -68,13 +84,14 @@
                <h5 class="modal-title text-light">Confirmar Eliminación</h5>               
             </div>
             <div class="modal-body text-center text-dark"> ¿Está seguro que desea eliminar esta atracción?</div>
+            
             <div class="modal-footer"> 
-               <button type="button" class="ov-btn-grow-d mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <button (click)="EliminarAtraccion()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+                  <i class="bi bi-check-circle-fill "></i>Confirmar
+               </button>
+               <button type="button" class="ov-btn-grow-d mb-2 mt-3 col-3 ms-1" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
                   <i class="bi bi-reply-fill"></i>Cancelar
                </button> 
-               <button (click)="EliminarAtraccion()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-                  <i class="bi bi-check-circle-fill "></i>Eliminar
-               </button>
             </div>
          </div>
       </div>

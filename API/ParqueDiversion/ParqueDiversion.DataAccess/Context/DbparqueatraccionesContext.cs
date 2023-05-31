@@ -73,7 +73,7 @@ namespace ParqueDiversion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<VW_Departamentos>(entity =>
             {
@@ -206,6 +206,8 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.Property(e => e.pant_FechaModificacion).HasColumnType("datetime");
 
+                entity.Property(e => e.pant_Icono).HasMaxLength(100);
+
                 entity.Property(e => e.pant_Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.pant_Identificador).HasMaxLength(100);
@@ -321,11 +323,21 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.atra_Descripcion)
+                entity.Property(e => e.area_Nombre)
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.atra_DuracionRonda).HasMaxLength(300);
+                entity.Property(e => e.area_UbicaionReferencia)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.area_regi_Nombre)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.atra_Descripcion)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.atra_FechaCreacion).HasColumnType("datetime");
 
@@ -339,21 +351,21 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.empl_Modifica)
-                    .HasMaxLength(30)
+                entity.Property(e => e.atra_UsuarioCreador_Nombre).HasMaxLength(100);
+
+                entity.Property(e => e.atra_UsuarioModificador_Nombre).HasMaxLength(100);
+
+                entity.Property(e => e.atra_regi_Nombre)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.empl_crea)
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.regi_Nombre)
-                    .HasMaxLength(200)
+                entity.Property(e => e.empl_modifica)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
-
-                entity.Property(e => e.usu_Crea).HasMaxLength(100);
-
-                entity.Property(e => e.usu_Modifica).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbCargos>(entity =>
@@ -707,7 +719,7 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.ToView("VW_tbTicketClientes", "parq");
 
                 entity.Property(e => e.clie_Nombres)
-                    .HasMaxLength(600)
+                    .HasMaxLength(601)
                     .IsUnicode(false);
 
                 entity.Property(e => e.empl_Modifica)

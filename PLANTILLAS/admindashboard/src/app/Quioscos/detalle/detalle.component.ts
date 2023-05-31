@@ -39,9 +39,9 @@ export class DetalleQuioscoComponent implements OnInit{
     this.gridOptions = {
       columnDefs: [
         {headerName: 'ID', field: 'golo_ID', width: 150, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Golosina', field: 'golo_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Precio unitario', field: 'golo_Precio', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Stock', field: 'insu_Stock',  autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Golosina', field: 'golo_Nombre', width: 310, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Precio unitario', field: 'golo_Precio', width: 250, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Stock', field: 'insu_Stock', width: 250, autoHeight: true, autoHeaderHeight: true},
       ],
       rowData: this.insumos,
       pagination: true,

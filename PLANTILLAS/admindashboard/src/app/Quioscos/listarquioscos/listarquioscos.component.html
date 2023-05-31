@@ -11,10 +11,27 @@
        <div class="row">
           <div class="col-lg-12">
              <div class="card">
+                <div class="card-header" style="padding: 0; position: relative">
+                   <div
+                     class="banner"
+                     style="
+                       background-image: url('/assets/img/BANNERS-VR-FINAL/QUIOSCOS.png');
+                       border-top-left-radius: 10px;
+                       border-top-right-radius: 10px;
+                       background-size: contain;
+                       background-position: center;
+                       height: 0;
+                       padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+                     "
+                   ></div>
+                   <div
+                     class="overlay"
+                     style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+                   ></div>
+                </div>
                 <div class="card-body">
-                   <h5 class="card-title">Listado de Quioscos</h5>
-                   <button (click)="Agregar()" class="ov-btn-grow-in mb-2 mt-3 col-3" style="height: 2.4rem; margin-left: 0;">
-                     <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Agregar</label>
+                   <button (click)="Agregar()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+                     <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Nuevo</label>
                   </button>
                    <ag-grid-angular
                    style="width: 100%; height: 350px;"
@@ -36,17 +53,16 @@
          </div>
          <div class="modal-body text-center text-dark"> 
             <div class="d-flex justify-content-center mt-1">
-               <label for="">¿Está seguro que desea eliminar este registro?</label>
-               
+               <label for="">¿Está seguro que desea eliminar este registro?</label>               
             </div>
          </div>
          <div class="modal-footer"> 
-            <button (click)="closeModal()" type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+            <button (click)="confirmDelete()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-check-circle-fill "></i>Confirmar
+            </button>
+            <button (click)="closeModal()" type="button" class="ov-btn-grow-d col-3 ms-2" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
                <i class="bi bi-reply-fill"></i>Cancelar
             </button> 
-            <button (click)="confirmDelete()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-               <i class="bi bi-check-circle-fill "></i>Eliminar
-            </button>
          </div>
       </div>
    </div>

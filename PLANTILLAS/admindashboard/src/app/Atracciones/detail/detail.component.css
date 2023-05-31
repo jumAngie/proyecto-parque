@@ -1,0 +1,148 @@
+/* primary button */
+.ov-btn-grow-primary {
+    background: #fff; /* color de fondo */
+    color: #4741d7; /* color de fuente */
+    border: 2px solid #4741d7; /* tamaño y color de borde */
+    border-radius: 3px; /* redondear bordes */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .ov-btn-grow-primary:hover {
+    color: #fff; /* color de fuente hover */
+  }
+  
+  .ov-btn-grow-primary::after {
+    content: "";
+    background: #4741d7; /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 0; /* ajusta el padding a 0 */
+    display: block;
+    left: -50%;
+    right: -50%;
+    top: -50%; /* ajusta el valor para aumentar la altura */
+    bottom: -50%; /* ajusta el valor para aumentar la altura */
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .ov-btn-grow-primary:hover::after {
+    transition: all 0.3s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+  }
+  
+  
+  /* insert button */
+  .ov-btn-grow-in {
+    background: #fff; /* color de fondo */
+    color: #3cda49; /* color de fuente */
+    border: 2px solid #3cda49; /* tamaño y color de borde */
+    border-radius: 3px; /* redondear bordes */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .ov-btn-grow-in:hover {
+    color: #fff; /* color de fuente hover */
+  }
+  
+  .ov-btn-grow-in::after {
+    content: "";
+    background: #3cda49; /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 0; /* ajusta el padding a 0 */
+    display: block;
+    left: -50%;
+    right: -50%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .ov-btn-grow-in:hover::after {
+    transition: all 0.3s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+  }
+  
+  
+  /* edit button */
+  .ov-btn-grow-u {
+    background: #fff; /* color de fondo */
+    color: #e0de55; /* color de fuente */
+    border: 2px solid #e0de55; /* tamaño y color de borde */
+    border-radius: 3px; /* redondear bordes */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .ov-btn-grow-u:hover {
+    color: #fff; /* color de fuente hover */
+  }
+  
+  .ov-btn-grow-u::after {
+    content: "";
+    background: #e0de55; /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 0; /* ajusta el padding a 0 */
+    display: block;
+    left: -50%;
+    right: -50%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .ov-btn-grow-u:hover::after {
+    transition: all 0.3s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+  }
+  
+  
+  /* delete button */
+  .ov-btn-grow-d {
+    background: #fff; /* color de fondo */
+    color: #da5c3c; /* color de fuente */
+    border: 2px solid #da5c3c; /* tamaño y color de borde */
+    border-radius: 3px; /* redondear bordes */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .ov-btn-grow-d:hover {
+    color: #fff; /* color de fuente hover */
+  }
+  
+  .ov-btn-grow-d::after {
+    content: "";
+    background: #da5c3c; /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 0; /* ajusta el padding a 0 */
+    display: block;
+    left: -50%;
+    right: -50%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .ov-btn-grow-d:hover::after {
+    transition: all 0.3s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+  }
+  
+  

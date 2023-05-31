@@ -50,7 +50,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             parametros.Add("@area_ID", item.area_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_Nombre", item.atra_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_Descripcion", item.atra_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@regi_ID", item.area_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@regi_ID", item.regi_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_ReferenciaUbicacion", item.atra_ReferenciaUbicacion, DbType.String, ParameterDirection.Input);
             parametros.Add("@atra_LimitePersonas", item.atra_LimitePersonas, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@atra_DuracionRonda", item.atra_DuracionRonda, DbType.String, ParameterDirection.Input);

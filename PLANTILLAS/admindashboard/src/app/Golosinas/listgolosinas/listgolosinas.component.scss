@@ -41,13 +41,13 @@
   .btn-pink:hover {
     background-color: #c960ac;
   }
-  
-  
-  //primary button
+
+
+  /* primary button */
 .ov-btn-grow-primary {
   background: #fff; /* color de fondo */
-  color: #d77d41; /* color de fuente */
-  border: 2px solid #d79141; /* tamaño y color de borde */
+  color: #4741d7; /* color de fuente */
+  border: 2px solid #4741d7; /* tamaño y color de borde */
   border-radius: 3px; /* redondear bordes */
   position: relative;
   z-index: 1;
@@ -61,7 +61,7 @@
 
 .ov-btn-grow-primary::after {
   content: "";
-  background: #d79141; /* color de fondo hover */
+  background: #4741d7; /* color de fondo hover */
   position: absolute;
   z-index: -1;
   padding: 0; /* ajusta el padding a 0 */
@@ -80,7 +80,7 @@
 }
 
 
-//insert button
+/* insert button */
 .ov-btn-grow-in {
   background: #fff; /* color de fondo */
   color: #3cda49; /* color de fuente */
@@ -117,11 +117,11 @@
 }
 
 
-//edit button
+/* edit button */
 .ov-btn-grow-u {
   background: #fff; /* color de fondo */
-  color: #e0de55; /* color de fuente */
-  border: 2px solid #e0de55; /* tamaño y color de borde */
+  color: #d77d41; /* color de fuente */
+  border: 2px solid #d77d41; /* tamaño y color de borde */
   border-radius: 3px; /* redondear bordes */
   position: relative;
   z-index: 1;
@@ -135,7 +135,7 @@
 
 .ov-btn-grow-u::after {
   content: "";
-  background: #e0de55; /* color de fondo hover */
+  background: #d77d41; /* color de fondo hover */
   position: absolute;
   z-index: -1;
   padding: 0; /* ajusta el padding a 0 */
@@ -154,11 +154,11 @@
 }
 
 
-//delete button
+/* delete button */
 .ov-btn-grow-d {
   background: #fff; /* color de fondo */
-  color: #da5c3c; /* color de fuente */
-  border: 2px solid #da5c3c; /* tamaño y color de borde */
+  color: #e43030; /* color de fuente */
+  border: 2px solid #e43030; /* tamaño y color de borde */
   border-radius: 3px; /* redondear bordes */
   position: relative;
   z-index: 1;
@@ -172,7 +172,7 @@
 
 .ov-btn-grow-d::after {
   content: "";
-  background: #da5c3c; /* color de fondo hover */
+  background: #e43030; /* color de fondo hover */
   position: absolute;
   z-index: -1;
   padding: 0; /* ajusta el padding a 0 */

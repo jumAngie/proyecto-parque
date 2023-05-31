@@ -18,13 +18,13 @@
             <div
               class="banner"
               style="
-                background-image: url('/assets/img/BANNERS/BANNER-EMPLEADOS-FINAL.png');
+                background-image: url('/assets/img/BANNERS-VR-FINAL/EMPLEADOS.png');
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
                 height: 0;
-                padding-bottom: 22%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+                padding-bottom: 23%; /* Ajusta este valor según la relación de aspecto de tu imagen */
               "
             ></div>
             <div
@@ -40,7 +40,7 @@
                 routerLink="/crearempleados"
               >
                 <i class="fas fa-plus-circle mr-1"></i>
-                Agregar
+                Nuevo
               </button>
 
               <div class="search-bar mt-3 col-10">
@@ -62,8 +62,6 @@
                   <th scope="col">Nombre Completo</th>
                   <th scope="col">DNI</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col">Estado Civil</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
@@ -78,22 +76,25 @@
                   <td>{{ item.empl_NombreCompleto }}</td>
                   <td>{{ item.empl_DNI }}</td>
                   <td>{{ item.empl_Email }}</td>
-                  <td>{{ item.empl_Telefono }}</td>
-                  <td>{{ item.civi_Descripcion }}</td>
+
                   <td>
-                    <button class="btn btn-outline-warning" (click)="Editar(item)">
+                    <button
+                      class="ov-btn-grow-u"
+                      (click)="Editar(item)"
+                      style="margin-left: 10px; height: 2.5rem;"
+                    >
                       <i class="bi bi-pen-fill"></i> Editar
                     </button>
                     <button
-                      class="btn btn-outline-danger"
-                      style="margin-left: 10px"
+                      class="ov-btn-grow-d"
+                      style="margin-left: 10px; height: 2.5rem;"
                       data-bs-toggle="modal"
                       data-bs-target="#verticalycentered"
                       (click)="GuardarId(item)"
                     >
                       <i class="bi bi-trash-fill"></i> Eliminar
                     </button>
-                    <button class="btn btn-info" style="margin-left: 10px">
+                    <button class="ov-btn-grow-primary" style="margin-left: 10px; height: 2.5rem;">
                       <i class="bi bi-newspaper"></i> Detalles
                     </button>
                   </td>
@@ -120,16 +121,46 @@
     <div class="modal fade" id="verticalycentered" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-body" style="text-align: center;">
-            <h5 style="text-align: center; margin-top: 20px;"><b>¿Desea eliminar este registro?</b></h5>
-            <img src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s" style="width: 100px; height: 100px; margin-right: 30px; text-align: center;" alt="Warning Sign">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light"><b>Confirmar</b></h5>               
+         </div>
+          <div class="modal-body" style="text-align: center">
+            <h5 style="text-align: center; margin-top: 20px">
+              <b>¿Desea eliminar este registro?</b>
+            </h5>
+            <img
+              src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s"
+              style="
+                width: 100px;
+                height: 100px;
+                margin-right: 30px;
+                text-align: center;
+              "
+              alt="Warning Sign"
+            />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="Eliminar()">Confirmar</button>
-            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="Cerrar()">Cerrar</button>
+            <button
+              type="button"
+              class="ov-btn-grow-in"
+              data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem;"
+              (click)="Eliminar()"
+            >
+            <i class="bi bi-check-circle-fill "></i> Confirmar
+            </button>
+            <button
+              type="button"
+              class="ov-btn-grow-d"
+              data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem;"
+              (click)="Cerrar()"
+            > <i class="bi bi-reply-fill"></i>
+               Cancelar 
+            </button>
           </div>
         </div>
       </div>
-    </div>    
+    </div>
   </section>
 </main>

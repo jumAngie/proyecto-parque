@@ -50,6 +50,11 @@ export class ListAtraccionesComponent implements OnInit {
     this.router.navigate(['atracciones-editar']);
   }
 
+  detailAtraccion(atracciones: Atracciones){
+    localStorage.setItem('atra_Detail_ID', atracciones.atra_ID?.toString());
+    this.router.navigate(['atracciones-detalle']);
+  }
+
   getDeleteData(id: number): void{    
     this.deleteID = id;
     console.log(this.deleteID);
