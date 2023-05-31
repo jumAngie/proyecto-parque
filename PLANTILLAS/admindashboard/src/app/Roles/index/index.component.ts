@@ -30,7 +30,12 @@ export class IndexComponent implements OnInit {
   people: any[] = [];
   selectedPeople = [];
   selectedPantallas = [];
-
+  itemsPerPage: number = 6;
+  paginacionConfig: any = {
+    itemsPerPage: 10, // Cantidad de elementos por página
+    currentPage: 1, // Página actual
+    totalItems: 0 // Total de elementos en la tabla (se actualizará en la carga de datos)
+  };
 isTabEnabled(tabNumber: number): boolean {
   return this.tabEnabledStatus[tabNumber - 1];
 }
@@ -252,5 +257,16 @@ save(): void {
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
+
+
+  
+  onChangeItemsPerPage(event: Event) {
+    const selectedValue = (event.target as HTMLInputElement)?.value;
+    if (selectedValue !== null) {
+      const itemsPerPage = parseInt(selectedValue, 10);
+      // Resto del código aquí
+    }
+  }
+  
 }
   

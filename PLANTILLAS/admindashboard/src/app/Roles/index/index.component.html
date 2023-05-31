@@ -31,18 +31,28 @@
     <div class="card-body">
           
       <div class="row ms-5 col-11">
-        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" (click)="goToNextTab()" data-bs-toggle="modal" data-bs-target="#crear" onclick="limpiarCampos()">
+        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" (click)="goToNextTab()" data-bs-toggle="modal" data-bs-target="#crear">
           <i class="fas fa-plus-circle mr-1"></i>
           Nuevo
         </button>
         
-        <div class="search-bar mt-3 col-10">
+        <div class="search-bar mt-3 col-8">
           <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+        </div>
+
+        <div class="mt-3 col-sm-2">
+          <select id="itemsPerPageSelect" class="form-select" [(ngModel)]="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+            <option value="6">6</option>
+            <option value="12">12</option>
+            <option value="24">24</option>
+            <option value="48">48</option>
+          </select>
         </div>
       </div>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-4 mt-4">
-        <div *ngFor="let rol of filtrarRoles() | paginate: { itemsPerPage: 6, currentPage: p }" class="card border shadow rounded-md p-4 d-flex flex-column">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4">
+        <div *ngFor="let rol of filtrarRoles() | paginate: { itemsPerPage: itemsPerPage, currentPage: p }" class="card border shadow rounded-md p-4 d-flex flex-column">
+         
           <div class="card-body">
             <h4 class="text-xl font-semibold mt-5 text-center">{{ rol.role_Nombre }}</h4>
             <span class="badge position-absolute top-0 badge-custom" title="Usuarios con este Rol" [ngClass]="{'ov-btn-grow-primary': rol.role_Cantidad_Usuarios == 0}" style="padding: 6px 12px; border-bottom-left-radius: 9999px; border-bottom-right-radius: 9999px; white-space: nowrap;background-color: #4741d7;color: aliceblue;">Usuarios con este rol: {{ rol.role_Cantidad_Usuarios }}</span>
@@ -56,19 +66,19 @@
               </button>
               <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + rol.role_Id" [class.show]="isDropdownOpen(rol.role_Id)">
                 <a class="dropdown-item btn ov-btn-grow-u p-3 "  style="border: none;"  data-bs-toggle="modal" data-bs-target="#update" (click)="selectRol(rol)">
-                  <i class="fas fa-edit"></i>
+                  <i class="bi bi-pen-fill"></i>
                   Editar
                 </a>
                 <a class="dropdown-item btn ov-btn-grow-info p-3"  style="border: none;"  >
-                  <i class=" fas fa-info-circle ml-1"></i>
+                  <i class="bi bi-eye-fill ml-1"></i>
                   Detalles
                 </a>
                 <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;"  data-bs-toggle="modal" data-bs-target="#pantallas" (click)="selectRolFP(rol)">
-                  <i class="  fas fa-desktop ml-1"></i>
+                  <i class="fas fa-desktop ml-1"></i>
                   Pantallas
                 </a>                
                 <a class="dropdown-item btn ov-btn-grow-d p-3"  style="border: none;"   data-bs-toggle="modal" data-bs-target="#eliminar" (click)="selectRolID(rol)">
-                  <i class=" fas fa-trash-alt ml-1"></i>
+                  <i class="bi bi-trash-fill ml-1"></i>
                   Eliminar
                 </a>
               </div>
