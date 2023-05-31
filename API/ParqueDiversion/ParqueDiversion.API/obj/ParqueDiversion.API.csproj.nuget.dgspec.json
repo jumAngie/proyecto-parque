@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj": {}
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
         "projectName": "ParqueDiversion.API",
-        "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
-        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\ParqueDiversion.API.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj"
+              "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj"
               },
-              "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
+              "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
               }
             }
           }
@@ -92,21 +92,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
         "projectName": "ParqueDiversion.BusinessLogic",
-        "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\ParqueDiversion.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -120,8 +120,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
+              "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj"
               }
             }
           }
@@ -150,21 +150,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
         "projectName": "ParqueDiversion.DataAccess",
-        "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\ParqueDiversion.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -178,8 +178,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
-                "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj"
+              "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj"
               }
             }
           }
@@ -234,21 +234,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
+    "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
         "projectName": "ParqueDiversion.Entities",
-        "projectPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
-        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAB01\\Desktop\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\ParqueDiversion.Entities.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\proyecto-parque\\API\\ParqueDiversion\\ParqueDiversion.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -288,7 +288,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     }
