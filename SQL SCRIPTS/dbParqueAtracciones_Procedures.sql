@@ -3330,6 +3330,11 @@ END
 GO
 
 
+SELECT * FROM parq.tbAtracciones
+SELECT * FROM parq.tbTicketsCliente
+
+SELECT * FROM fila.tbVisitantesAtraccion
+
 
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
 EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
@@ -3356,3 +3361,4 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO
+

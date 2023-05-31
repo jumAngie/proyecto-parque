@@ -467,7 +467,7 @@ VALUES	(1, 'Quiosco La Delicia', 1, 1, 'A la par del letrero de baños', 1),
 		(3, 'Quiosco Snack Paradise', 6, 3, 'Cerca de la atracción principal', 1)
 GO
 
-
+SELECT * FROM parq.tbGolosinas
 INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
 VALUES	('ChocoDelight', 5, 1),
 		('Rainbow Drops', 3, 1),
