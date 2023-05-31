@@ -32,7 +32,7 @@ export class CreateAtraccionesComponent implements OnInit {
   DuracionRondaRequerido = false;
   RegionRequerido = false;
   AreaRequerido = false;
-
+  regex = /^[0-9]+(\.[0-9]{1,2})?$/;
   
   constructor(
     private service: ParqServicesService,
@@ -101,8 +101,7 @@ export class CreateAtraccionesComponent implements OnInit {
 
   validarNombre() {
     if(!this.atracciones.atra_Nombre){
-      this.NombreRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Nombre" requerido');
+      this.NombreRequerido = true;      
       return true;
     }else{
       this.NombreRequerido = false;
@@ -113,7 +112,6 @@ export class CreateAtraccionesComponent implements OnInit {
   validarDescripcion(){
     if(!this.atracciones.atra_Descripcion){
       this.DescripcionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Descripción" requerido');
       return true;
     }else{
       this.DescripcionRequerido = false;
@@ -124,7 +122,6 @@ export class CreateAtraccionesComponent implements OnInit {
   validarUbicacionReferencia(){      
     if(!this.atracciones.atra_ReferenciaUbicacion){
       this.UbicacionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Ubicación Referencia" requerido');
       return true;
     }else{
       this.UbicacionRequerido = false;
@@ -135,9 +132,13 @@ export class CreateAtraccionesComponent implements OnInit {
   validarLimitePersonas(){
     if(!this.atracciones.atra_LimitePersonas){
       this.LimitePersonasRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Límite personas" requerido');
       return true;
-    }else{
+    }else if(!this.regex.test(this.atracciones.atra_LimitePersonas.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
+      this.LimitePersonasRequerido = true;
+      return true;
+    }    
+    else{
       this.LimitePersonasRequerido = false;
       return false;
     }
@@ -145,10 +146,14 @@ export class CreateAtraccionesComponent implements OnInit {
 
   validarTiempoDuracion(){
     if(!this.atracciones.atra_DuracionRonda){
-      this.DuracionRondaRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Duración ronda" requerido');
+      this.DuracionRondaRequerido = true;      
       return true;
-    }else{
+    }else if(!this.regex.test(this.atracciones.atra_DuracionRonda.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
+      this.DuracionRondaRequerido = true;
+      return true;      
+    }
+    else{
       this.DuracionRondaRequerido = false;
       return false;
     }
@@ -156,8 +161,7 @@ export class CreateAtraccionesComponent implements OnInit {
 
   validarRegion(){
     if(!this.atracciones.regi_ID){
-      this.RegionRequerido = true;
-      //ToastUtils.showWarningToast('Campo "Región" requerido');
+      this.RegionRequerido = true;      
       return true;
     }else{
       this.RegionRequerido = false;
@@ -168,7 +172,6 @@ export class CreateAtraccionesComponent implements OnInit {
   validarArea(){
     if(!this.atracciones.area_ID){
       this.AreaRequerido = true;
-      //ToastUtils.showWarningToast('Debes seleccionar una Zona')
       return true;
     }else{
       this.AreaRequerido = false;

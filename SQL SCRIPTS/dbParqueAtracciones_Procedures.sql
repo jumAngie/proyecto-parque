@@ -2304,7 +2304,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME(7), 
+	@atra_DuracionRonda			INT, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioCreador		INT
  AS
@@ -2339,7 +2339,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME, 
+	@atra_DuracionRonda			INT, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioModificador	INT
  AS
@@ -3338,10 +3338,61 @@ BEGIN
 END
 GO
 
+SELECT * FROM fila.tbHistorialVisitantesAtraccion
+GO
+
+CREATE OR ALTER VIEW fila.VW_tbHistorialVisitantesAtraccion
+AS
+SELECT	hiat_ID, 
+		hist.atra_ID, 
+		atra.atra_Nombre,
+		ticl_ID, 
+		viat_HoraEntrada, 
+		hiat_FechaFiltro, 
+		hiat_Habilitado, 
+		hiat_Estado, 
+		hiat_UsuarioCreador, 
+		hiat_FechaCreacion, 
+		hiat_UsuarioModificador, 
+		hiat_FechaModificacion 
+
+FROM fila.tbHistorialVisitantesAtraccion AS hist
+INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
+GO
+
+CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData
+	@hist_FechaFiltro DATE
+AS
+	BEGIN
+		IF @hist_FechaFiltro IS NULL OR @hist_FechaFiltro = ''
+			BEGIN
+				SELECT TOP(5) atra_ID , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion
+				GROUP BY atra_ID
+				ORDER BY ticl_ID DESC				
+			END
+		ELSE 
+			BEGIN
+				SELECT TOP(5) atra_ID , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hist_FechaFiltro
+				GROUP BY atra_ID
+				ORDER BY ticl_ID DESC
+			END
+	END
+GO
+
+
+
+
+
+
+
+
+
+
 
 
 EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
 EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
+
 
 
 
@@ -3365,3 +3416,4 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO
+

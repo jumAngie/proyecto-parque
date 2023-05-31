@@ -884,12 +884,12 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
-        public ServiceResult DeleteGolosina(tbGolosinas item)
+        public ServiceResult DeleteGolosina(int id)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _golosinasRepository.Delete(item.golo_ID);
+                var map = _golosinasRepository.Delete(id);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);

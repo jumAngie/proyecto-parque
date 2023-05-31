@@ -47,11 +47,10 @@ namespace ParqueDiversion.API.Controllers
             return Ok(respuesta);
         }
 
-        [HttpPost("Delete")]
-        public IActionResult Delete([FromBody] GolosinasViewModel data)
+        [HttpPost("Delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            var item = _mapper.Map<tbGolosinas>(data);
-            var respuesta = _parqueServices.DeleteGolosina(item);
+            var respuesta = _parqueServices.DeleteGolosina(id);
             return Ok(respuesta);
         }
     }

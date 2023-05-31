@@ -284,8 +284,8 @@ CREATE TABLE parq.tbTicketsCliente(
 	tckt_ID						INT,
 	clie_ID						INT,	
 	ticl_Cantidad				INT,
-	ticl_FechaCompra			DATETIME DEFAULT GETDATE(),
-	ticl_FechaUso				DATETIME,
+	ticl_FechaCompra			DATE DEFAULT GETDATE(),
+	ticl_FechaUso				DATE,
 	ticl_Habilitado				INT DEFAULT 1,
 	ticl_Estado					INT DEFAULT 1,
 	ticl_UsuarioCreador			INT,
@@ -309,7 +309,7 @@ CREATE TABLE parq.tbAtracciones(
 	regi_ID						INT,
 	atra_ReferenciaUbicacion	VARCHAR(300),
 	atra_LimitePersonas			INT,
-	atra_DuracionRonda			TIME,
+	atra_DuracionRonda			INT,
 	atra_Imagen					NVARCHAR(MAX),
 	atra_Habilitado				INT DEFAULT 1,
 	atra_Estado					INT DEFAULT 1,
@@ -531,10 +531,13 @@ CREATE TABLE fila.tbVisitantesAtraccion(
 )
 GO
 
+
 CREATE TABLE fila.tbHistorialVisitantesAtraccion(
 	hiat_ID						INT IDENTITY(1,1),
 	atra_ID						INT,
 	ticl_ID						INT,
+	viat_HoraEntrada			TIME,
+	hiat_FechaFiltro			DATE,
 	hiat_Habilitado				INT DEFAULT 1,
 	hiat_Estado					INT DEFAULT 1,
 	hiat_UsuarioCreador			INT,
@@ -543,12 +546,11 @@ CREATE TABLE fila.tbHistorialVisitantesAtraccion(
 	hiat_FechaModificacion		DATETIME,
 
 	CONSTRAINT PK_fila_tbHistorialVisitantesAtraccion_hiat_ID PRIMARY KEY (hiat_ID),
-	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
-	CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID),
+	--CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbAtracciones_atra_ID FOREIGN KEY (atra_ID) REFERENCES parq.tbAtracciones (atra_ID),
+	--CONSTRAINT FK_fila_tbHistorialVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID),
 
 )
 GO
-
 
 
 /*TABLAS ESQUEMA FACT*/

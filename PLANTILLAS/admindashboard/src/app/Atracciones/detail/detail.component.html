@@ -57,10 +57,20 @@
                               </div>
                            </div>
                            <div class="card-body text-center">
-                              <div class="row g-2">
-                                 <label class="col-12 ">Zona: {{atracciones.area_Nombre}}</label>
-                                 <label class="col-12 ">Región: {{atracciones.area_regi_Nombre}}</label>
-                                 <label class="col-12 ">Ubicación: {{atracciones.atra_ReferenciaUbicacion}}</label>                                 
+                              <div class="row g-2"></div>
+                              <div class="row mt-3">
+                                 <div class="col-12 d-flex justify-content-left">
+                                    <label class="">Zona: </label>
+                                    <label class="col-6">{{atracciones.area_Nombre}}</label>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <label class="col-6">Región:</label>
+                                 <label class="col-6 ">{{atracciones.area_regi_Nombre}}</label>
+                              </div>
+                              <div class="row">
+                                 <label class="col-6 ">Ubicación:</label>                                 
+                                 <label class="col-6 ">{{atracciones.atra_ReferenciaUbicacion}}</label>                                                                  
                               </div>
                               <div class="row mt-2">
                                  <img [src]="'assets/img/MAPA/'+atracciones.area_Imagen" style="border-radius: 10%; border: 3rem; border-color: black;">
@@ -75,7 +85,7 @@
                         <div class="card">
                            <div class="card-header text-center">
                               <div class="card-title mb-0">
-                                 Auditoria
+                                 Auditoría
                               </div>
                            </div>
                            <div class="card-body text-center">
