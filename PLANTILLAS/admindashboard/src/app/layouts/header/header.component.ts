@@ -21,4 +21,9 @@ export class HeaderComponent implements OnInit {
     //toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
   }
+
+  Log_Out(){
+    localStorage.clear()
+    window.location.href = '/'; 
+  }
 }
