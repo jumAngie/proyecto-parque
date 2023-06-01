@@ -270,7 +270,7 @@ CREATE OR ALTER VIEW acce.VW_Roles
 AS
 SELECT	role_Id, 
 		role_Nombre, 
-		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios T2 WHERE T2.role_ID = T1.role_Id),
+		role_Cantidad_Usuarios = (SELECT COUNT(*) FROM acce.tbUsuarios T2 WHERE T2.role_ID = T1.role_Id AND T2.usua_Estado = 1),
 		role_Estado, 
 		role_UsuarioCreador,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = role_UsuarioCreador), 
@@ -3439,7 +3439,9 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (7, N'Empleados', N'/listempleados', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:34:48.790' AS DateTime), NULL, NULL)
 GO
-INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (8, N'Clientes', N'/clientes', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (8, N'Clientes', N'/listclientesregistrados', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (9, N'Venta de Tickets', N'/listticketsclientes', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO

@@ -38,16 +38,15 @@
             <div class="d-flex flex-wrap blue-border">
               <div class="col-md-6" *ngFor="let item of areas; let i = index">
                 <div class="card-img-overlay-mod" style="position: relative;">
-                  <img [src]="'assets/img/MAPA/' + item.area_Imagen" class="img-thumbnail-space img-fluid" />
-                  <div class="badges-container">
+                  <img [src]="'assets/img/MAPA/' + item.area_Imagen" class="img-thumbnail-space img-fluid" [style.zIndex]="1" />
+                  <div class="badges-container" style="position: absolute; top: 0; left: 0;">
                     <span class="badge"
                           *ngFor="let atraccion of atraccionesPorArea[item.area_ID]"
                           (click)="detailAtraccion(atraccion)"
-                          [style.position]="'absolute'"
-                          [style.top.px]="0"
-                          [style.left.px]="0"
                           [style.backgroundColor]="'beige'"
                           [style.color]="'black'"
+                          [style.position]="'relative'"
+                          [style.zIndex]="2"
                           >
                       {{ atraccion.atra_Nombre }} 
                     </span> 
@@ -55,7 +54,7 @@
                 </div> 
               </div>
             </div>
-          </div>                         
+          </div>                                 
         </div>
       </div>
     </div>
