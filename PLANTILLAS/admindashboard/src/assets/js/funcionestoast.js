@@ -15,7 +15,7 @@ function ErrorToast(message){
         text: message,
         type: 'error',
         icon: 'assets/img/TOAST-ICONS/ERROR.png',
-        timeout: 5000
+        timeout: 5000,
       });
 }
 
@@ -24,8 +24,9 @@ function InfoToast(message){
         title: 'Información',
         text: message,
         type: 'info',
-        icon: 'assets/img/TOAST-ICONS/Info.png',
-        timeout: 5000
+        position: 'topCenter',
+        icon: 'assets/img/TOAST-ICONS/INFO.png',
+        timeout: 5000,
       });
 }
 

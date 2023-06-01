@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Tooniverse</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9">
   <link href="assets/img/Tooniverse (1).png" rel="icon" ype="image/x-icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -35,10 +35,7 @@
   <script src="assets/js/vanillatoasts.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
   <script>
-    function limpiarCampos() {
-      document.getElementById("nombreRolInput").value = "";
-      // Agrega líneas similares para otros campos de entrada que deseas vaciar
-    }
+
 
     var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
@@ -128,5 +125,24 @@ setTimeout(function() {
     }, 1000);
   }, 2000); // Mostrar después de 2 segundos
   </script>
+<!-- <script>
+  // Función para verificar el nivel de escala de zoom
+  function checkZoomLevel() {
+    var zoomLevel = Math.round(window.devicePixelRatio * 100);
+    
+    if (zoomLevel < 90) {
+      // Mostrar advertencia o realizar alguna acción específica
+      alert("Recomendación: Para un uso óptimo de los recursos de la aplicación mantenga el zoom en 90%.");
+      
+    }
+  }
+ 
+  // Escuchar el evento 'resize' del navegador
+  window.addEventListener('resize', checkZoomLevel);
+ 
+  // Verificar el nivel de escala de zoom inicialmente
+  checkZoomLevel();
+ </script>-->
 </body>
+
 </html>

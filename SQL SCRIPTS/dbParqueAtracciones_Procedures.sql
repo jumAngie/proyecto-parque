@@ -10,6 +10,7 @@ SELECT	usua_ID,
 		usua_Usuario,
 		usua_Clave,
 		T1.empl_Id,
+		usua_Img,
 		nombreEmpleado = CONVERT(VARCHAR,T2.empl_PrimerNombre+' '+T2.empl_PrimerApellido),
 		usua_Admin,
 		CASE WHEN usua_Admin  = 1 THEN 'SI'
@@ -74,6 +75,7 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INSERT
 @usua_Clave					NVARCHAR(150),
 @usua_Admin					BIT,
 @role_ID					INT,
+@usua_Img					NVARCHAR(MAX),
 @usua_UsuarioCreador		INT
 AS
 BEGIN
@@ -90,8 +92,8 @@ BEGIN
 			DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 
 
-			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
-			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
+			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_Img,usua_UsuarioCreador)
+			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_Img,@usua_UsuarioCreador)
 
 			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
 		END
@@ -107,18 +109,20 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_UPDATE
 @empl_ID					INT,
 @usua_Admin					BIT,
 @role_ID					INT,
-@usua_UsuarioModificador			INT
+@usua_Img					NVARCHAR(MAX),
+@usua_UsuarioModificador	INT
 AS
 BEGIN
 	BEGIN TRY
 
 			UPDATE acce.tbUsuarios
 			SET
-				empl_ID				=	@empl_ID,
-				usua_Admin			=	@usua_Admin,
-				role_ID				=	@role_ID,
+				empl_ID					=	@empl_ID,
+				usua_Admin				=	@usua_Admin,
+				role_ID					=	@role_ID,
+				usua_Img				=	@usua_Img,
 				usua_UsuarioModificador	=	@usua_UsuarioModificador
-				WHERE [usua_ID]		=	@usua_ID
+				WHERE [usua_ID]			=	@usua_ID
 
 			SELECT 200 AS codeStatus, 'Usuario Modificado con éxito' AS messageStatus
 
@@ -2276,6 +2280,15 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROC parq.UDP_tbAtracciones_AtraccionesPorAreaId
+	@area_ID		INT
+AS
+BEGIN
+		SELECT * FROM parq.VW_tbAtracciones
+		WHERE	 area_ID = @area_ID
+END
+GO
+
 --*************** FIND DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
 	@atra_ID INT
@@ -2295,7 +2308,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			INT, 
+	@atra_DuracionRonda			TIME(7), 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioCreador		INT
  AS
@@ -2330,7 +2343,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			INT, 
+	@atra_DuracionRonda			TIME, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioModificador	INT
  AS
@@ -3387,7 +3400,6 @@ EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
 
 
 
-
 SET IDENTITY_INSERT [acce].[tbPantallas] ON 
 GO
 INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (1, N'Usuarios', N'/usuarios', N'', N'', N'ACCE', N'bi bi-circle', 1, 1, CAST(N'2023-05-24T15:14:37.347' AS DateTime), NULL, NULL)
@@ -3408,4 +3420,3 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO
-

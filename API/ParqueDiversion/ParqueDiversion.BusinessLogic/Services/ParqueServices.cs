@@ -549,6 +549,20 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return result.Error(e.Message);
             }
         }
+
+        public ServiceResult FindAtraccionesPorArea(int AreaiD)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _atraccionesRepository.FindAtraccionPorIdArea(AreaiD);
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         public ServiceResult BorrarAtracciones(int id)
         {
             var result = new ServiceResult();
@@ -870,12 +884,12 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
-        public ServiceResult DeleteGolosina(int id)
+        public ServiceResult DeleteGolosina(tbGolosinas item)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _golosinasRepository.Delete(id);
+                var map = _golosinasRepository.Delete(item.golo_ID);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);

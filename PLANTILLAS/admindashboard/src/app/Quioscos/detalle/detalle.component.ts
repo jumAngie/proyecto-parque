@@ -21,7 +21,6 @@ export class DetalleQuioscoComponent implements OnInit{
   sendInsumos: InsumosQuiosco = new InsumosQuiosco();
 
   gridOptions: GridOptions = {};
-  regex = /^[0-9]+(\.[0-9]{1,2})?$/;
 
   GolosinaRequerida = false;
   StockRequerido = false;
@@ -184,12 +183,7 @@ export class DetalleQuioscoComponent implements OnInit{
     if(!this.sendInsumos.insu_Stock){
       this.StockRequerido = true;
       return true;
-    }else if(!this.regex.test(this.sendInsumos.insu_Stock)){
-      this.StockRequerido = true;
-      ToastUtils.showWarningToast('Solo se aceptan valores numéricos');
-      return true;
-    }
-    else{
+    }else{
       this.StockRequerido = false;
       return false;
     }
