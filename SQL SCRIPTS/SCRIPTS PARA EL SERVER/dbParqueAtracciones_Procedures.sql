@@ -1,6 +1,3 @@
-USE dbParqueAtracciones
-GO
-
 
 
 --*************************************************************Tabla Usuarios******************************************************************--
@@ -162,7 +159,7 @@ AS
 BEGIN
 	BEGIN TRY
 			DECLARE @THELASTOFADMIN INT = (SELECT COUNT(*) FROM acce.VW_Usuarios WHERE usua_Estado = 1 AND usua_Admin = 1)
-			DECLARE @ELMEROADMIN BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID AND @usua_ID)
+			DECLARE @ELMEROADMIN BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID)
 		
 			IF @THELASTOFADMIN > 1
 			BEGIN
@@ -236,6 +233,7 @@ DECLARE @role_ID BIT = (	SELECT role_ID FROM acce.tbUsuarios
 	WHERE role_ID = @role_ID
 END
 END
+GO
 
 /*
 CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 

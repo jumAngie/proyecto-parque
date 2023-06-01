@@ -8,14 +8,14 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
     <_PublishTargetUrl>ftp://ParqueAtracciones.somee.com/www.ParqueAtracciones.somee.com</_PublishTargetUrl>
-    <History>True|2023-06-01T16:01:31.4810374Z;True|2023-05-31T16:44:58.1075609-06:00;</History>
+    <History>True|2023-06-01T18:42:32.9336140Z;False|2023-06-01T12:41:14.3228031-06:00;True|2023-06-01T10:01:31.4810374-06:00;True|2023-05-31T16:44:58.1075609-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
       <publishTime>05/16/2023 14:05:29</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>06/01/2023 10:00:03</publishTime>
+      <publishTime>01/06/2023 12:30:43</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>05/01/2022 09:27:54</publishTime>
@@ -78,37 +78,37 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/20/2017 14:03:18</publishTime>
     </File>
     <File Include="ParqueDiversion.API.deps.json">
-      <publishTime>06/01/2023 10:00:30</publishTime>
+      <publishTime>06/01/2023 12:41:36</publishTime>
     </File>
     <File Include="ParqueDiversion.API.dll">
-      <publishTime>06/01/2023 10:00:29</publishTime>
+      <publishTime>06/01/2023 12:41:36</publishTime>
     </File>
     <File Include="ParqueDiversion.API.exe">
-      <publishTime>06/01/2023 10:00:29</publishTime>
+      <publishTime>06/01/2023 12:41:36</publishTime>
     </File>
     <File Include="ParqueDiversion.API.pdb">
-      <publishTime>06/01/2023 10:00:29</publishTime>
+      <publishTime>06/01/2023 12:41:36</publishTime>
     </File>
     <File Include="ParqueDiversion.API.runtimeconfig.json">
-      <publishTime>05/31/2023 16:43:34</publishTime>
+      <publishTime>01/06/2023 12:30:52</publishTime>
     </File>
     <File Include="ParqueDiversion.BusinessLogic.dll">
-      <publishTime>05/31/2023 16:43:33</publishTime>
+      <publishTime>06/01/2023 12:30:51</publishTime>
     </File>
     <File Include="ParqueDiversion.BusinessLogic.pdb">
-      <publishTime>05/31/2023 16:43:33</publishTime>
+      <publishTime>01/06/2023 12:30:51</publishTime>
     </File>
     <File Include="ParqueDiversion.DataAccess.dll">
-      <publishTime>05/31/2023 16:43:32</publishTime>
+      <publishTime>06/01/2023 12:30:51</publishTime>
     </File>
     <File Include="ParqueDiversion.DataAccess.pdb">
-      <publishTime>05/31/2023 16:43:32</publishTime>
+      <publishTime>01/06/2023 12:30:51</publishTime>
     </File>
     <File Include="ParqueDiversion.Entities.dll">
-      <publishTime>05/31/2023 16:43:31</publishTime>
+      <publishTime>06/01/2023 12:30:50</publishTime>
     </File>
     <File Include="ParqueDiversion.Entities.pdb">
-      <publishTime>05/31/2023 16:43:31</publishTime>
+      <publishTime>01/06/2023 12:30:50</publishTime>
     </File>
     <File Include="runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll">
       <publishTime>08/25/2020 17:25:12</publishTime>
@@ -171,7 +171,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/15/2019 02:37:42</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/01/2023 10:00:30</publishTime>
+      <publishTime>06/01/2023 12:41:36</publishTime>
     </File>
   </ItemGroup>
 </Project>
