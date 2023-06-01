@@ -16,12 +16,12 @@
         style="
           background-image: url('../../assets/img/BANNERS-VR-FINAL/USUARIOS.png');
           border-top-left-radius: 10px;
-     border-top-right-radius: 10px;
-     background-size:contain;
-     background-position: center;
-     height: 0;
-     padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
-   "
+          border-top-right-radius: 10px;
+          background-size: contain;
+          background-position: center;
+          height: 0;
+          padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+        "
       ></div>
       <div
         class="overlay"
@@ -30,15 +30,32 @@
     </div>
     <div class="card-body">
       <div class="row ms-5 col-11">
-        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal" data-bs-target="#crear" (click)="abririnsert()">
+        <button
+          class="ov-btn-grow-primary mt-3 col-2"
+          style="height: 2.4rem; margin-left: 0"
+          data-bs-toggle="modal"
+          data-bs-target="#crear"
+          (click)="abririnsert()"
+        >
           <i class="fas fa-plus-circle mr-1"></i>
           Nuevo
         </button>
         <div class="search-bar mt-3 col-8">
-          <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro" (keyup)="filtrarUsuarios()">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar..."
+            [(ngModel)]="filtro"
+            (keyup)="filtrarUsuarios()"
+          />
         </div>
         <div class="mt-3 col-sm-2">
-          <select id="itemsPerPageSelect" class="form-select" [(ngModel)]="itemsPerPage" (change)="onChangeItemsPerPage($event)">
+          <select
+            id="itemsPerPageSelect"
+            class="form-select"
+            [(ngModel)]="itemsPerPage"
+            (change)="onChangeItemsPerPage($event)"
+          >
             <option value="6">6</option>
             <option value="12">12</option>
             <option value="24">24</option>
@@ -46,78 +63,154 @@
           </select>
         </div>
       </div>
-      
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4">
-        <div *ngFor="let usuario of usuariosFiltrados | paginate: { itemsPerPage: itemsPerPage, currentPage: p }" class="col card border shadow rounded-md p-4 d-flex flex-column">
-        <div class="card-body">
+
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4"
+      >
+        <div
+          *ngFor="
+            let usuario of usuariosFiltrados
+              | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
+          "
+          class="col card border shadow rounded-md p-4 d-flex flex-column"
+        >
+          <div class="card-body">
             <div class="text-center">
-              <img *ngIf="usuario.usua_Img" [src]="usuario.usua_Img" alt="Foto de Perfil" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
-              <span *ngIf="!usuario.usua_Img" class="mt-4 text-center d-flex align-items-center justify-content-center">Foto de Perfil</span>
+              <img
+                *ngIf="usuario.usua_Img"
+                [src]="usuario.usua_Img"
+                alt="Foto de Perfil"
+                class="img-fluid rounded-circle"
+                style="width: 100px; height: 100px"
+              />
+              <span
+                *ngIf="!usuario.usua_Img"
+                class="mt-4 text-center d-flex align-items-center justify-content-center"
+                >Foto de Perfil</span
+              >
             </div>
-            <img title="Admin" *ngIf="usuario.esAdmin == 'SI'" src="../../assets/img/administracion.png" alt="Administración" class="img-fluid  position-absolute top-0 start-0 mt-2 ms-2" style="width: 40px;">
-            <h5 class="text-xl font-semibold mt-5 text-center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" [title]="usuario.usua_Usuario">{{ usuario.usua_Usuario }}</h5>
-            <p class="text-center" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;font-size: 14px;; margin-bottom: -5;" title="Empleado">{{ usuario.nombreEmpleado }}</p>
-            <p class="text-center " style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;font-size: 12px; margin-top: -5;">Rol: {{ usuario.role_Descripcion }}</p>
+            <img
+              title="Admin"
+              *ngIf="usuario.esAdmin == 'SI'"
+              src="../../assets/img/administracion.png"
+              alt="Administración"
+              class="img-fluid position-absolute top-0 start-0 mt-2 ms-2"
+              style="width: 40px"
+            />
+            <h5
+              class="text-xl font-semibold mt-5 text-center"
+              style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              "
+              [title]="usuario.usua_Usuario"
+            >
+              {{ usuario.usua_Usuario }}
+            </h5>
+            <p
+              class="text-center"
+              style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 14px;
+                margin-bottom: -5;
+              "
+              title="Empleado"
+            >
+              {{ usuario.nombreEmpleado }}
+            </p>
+            <p
+              class="text-center"
+              style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 12px;
+                margin-top: -5;
+              "
+            >
+              Rol: {{ usuario.role_Descripcion }}
+            </p>
           </div>
-      
+
           <div class="mt-auto d-flex justify-content-center">
             <div class="dropdown">
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                [id]="'dropdownMenuButton' + usuario.usua_ID" (click)="toggleDropdown(usuario.usua_ID)"
-                aria-haspopup="true" aria-expanded="false">
+              <button
+                class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                type="button"
+                [id]="'dropdownMenuButton' + usuario.usua_ID"
+                (click)="toggleDropdown(usuario.usua_ID)"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Acciones
               </button>
-              <div class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + usuario.usua_ID"
-                [class.show]="isDropdownOpen(usuario.usua_ID)">
-                <a class="dropdown-item btn ov-btn-grow-u p-3" style="border: none;" data-bs-toggle="modal"
-                  data-bs-target="#update" (click)="selectUsuario(usuario)">
+              <div
+                class="dropdown-menu"
+                [attr.aria-labelledby]="'dropdownMenuButton' + usuario.usua_ID"
+                [class.show]="isDropdownOpen(usuario.usua_ID)"
+              >
+                <a
+                  class="dropdown-item btn ov-btn-grow-u p-3"
+                  style="border: none"
+                  data-bs-toggle="modal"
+                  data-bs-target="#update"
+                  (click)="selectUsuario(usuario)"
+                >
                   <i class="bi bi-pen-fill"></i>
                   Editar
                 </a>
-                <a class="dropdown-item btn ov-btn-grow-info p-3" style="border: none;">
+                <a
+                  class="dropdown-item btn ov-btn-grow-info p-3"
+                  style="border: none"
+                >
                   <i class="bi bi-eye-fill ml-1"></i>
                   Detalles
                 </a>
-                <a class="dropdown-item btn ov-btn-grow-dark p-3" style="border: none;" data-bs-toggle="modal"
-                  data-bs-target="#pass" (click)="selectUsuario(usuario)">
+                <a
+                  class="dropdown-item btn ov-btn-grow-dark p-3"
+                  style="border: none"
+                  data-bs-toggle="modal"
+                  data-bs-target="#pass"
+                  (click)="selectUsuario(usuario)"
+                >
                   <i class="fas fa-key ml-1"></i>
                   Cambio Contraseña
                 </a>
-                <a class="dropdown-item btn ov-btn-grow-d p-3" style="border: none;" data-bs-toggle="modal"
-                  data-bs-target="#eliminar" (click)="selectUsuarioID(usuario)">
+                <a
+                  class="dropdown-item btn ov-btn-grow-d p-3"
+                  style="border: none"
+                  data-bs-toggle="modal"
+                  data-bs-target="#eliminar"
+                  (click)="selectUsuarioID(usuario)"
+                >
                   <i class="bi bi-trash-fill ml-1"></i>
                   Eliminar
                 </a>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <div class="pagination d-flex justify-content-center mt-4">
-        <pagination-controls (pageChange)="p = $event"
-                             previousLabel="Anterior"
-                             nextLabel="Siguiente"
-                             firstLabel="Primera"
-                             lastLabel="Última"
-                             screenReaderPaginationLabel="Paginación"
-                             screenReaderPageLabel="Página"
-                             screenReaderCurrentLabel="Página actual">
+        <pagination-controls
+          (pageChange)="p = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+          firstLabel="Primera"
+          lastLabel="Última"
+          screenReaderPaginationLabel="Paginación"
+          screenReaderPageLabel="Página"
+          screenReaderCurrentLabel="Página actual"
+        >
         </pagination-controls>
       </div>
-      
-      
-
     </div>
   </div>
 </main>
-
-
-
-
-
-
 
 <!--Modal Insert-->
 <div class="modal fade" id="crear" tabindex="-1">
@@ -130,27 +223,65 @@
         <div class="row">
           <div class="col-md-6">
             <div class="d-flex justify-content-center align-items-center">
-              <input id="uploadBtn" type="file" style="display: none;" accept="image/*" (change)="handleImageUpload($event)">
+              <input
+                id="uploadBtn"
+                type="file"
+                style="display: none"
+                accept="image/*"
+                (change)="handleImageUpload($event)"
+              />
               <div class="position-relative">
-                <label for="uploadBtn" class="img-circle-medium" [style.background-image]="'url(' + imageUrl + ')'">
-                  <span *ngIf="!imageUrl" class="mt-5 text-center d-flex align-items-center justify-content-center">
-                    <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4" alt=""></i>
+                <label
+                  for="uploadBtn"
+                  class="img-circle-medium"
+                  [style.background-image]="'url(' + imageUrl + ')'"
+                >
+                  <span
+                    *ngIf="!imageUrl"
+                    class="mt-5 text-center d-flex align-items-center justify-content-center"
+                  >
+                    <i>
+                      <img
+                        src="../../assets/img/foto.png"
+                        width="60px"
+                        class="mt-4"
+                        alt=""
+                    /></i>
                   </span>
-                  <span *ngIf="!imageUrl" class="text-center d-flex align-items-center justify-content-center">
+                  <span
+                    *ngIf="!imageUrl"
+                    class="text-center d-flex align-items-center justify-content-center"
+                  >
                     Añadir Foto de Perfil
                   </span>
                 </label>
               </div>
             </div>
             <div class="text-center mt-2">
-              <img *ngIf="imageUrl" src="../../assets/img/fotoeliminar.png" width="40px" alt="" class="point" (click)="deleteImage()">
+              <img
+                *ngIf="imageUrl"
+                src="../../assets/img/fotoeliminar.png"
+                width="40px"
+                alt=""
+                class="point"
+                (click)="deleteImage()"
+              />
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" [(ngModel)]="InsertUsu.usua_Usuario" id="update_role_Nombre" placeholder="Usuario" aria-label="Username">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="InsertUsu.usua_Usuario"
+                  id="update_role_Nombre"
+                  placeholder="Usuario"
+                  aria-label="Username"
+                />
                 <i
                   class="bi bi-exclamation-circle-fill"
                   style="color: orange; margin-left: 10px"
@@ -161,7 +292,14 @@
             <div class="input-group mb-3">
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
-                <input type="text" class="form-control" [(ngModel)]="InsertUsu.usua_Clave" id="update_role_Nombre" placeholder="Contraseña" aria-label="Password">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="InsertUsu.usua_Clave"
+                  id="update_role_Nombre"
+                  placeholder="Contraseña"
+                  aria-label="Password"
+                />
                 <i
                   class="bi bi-exclamation-circle-fill"
                   style="color: orange; margin-left: 10px"
@@ -171,10 +309,22 @@
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <select name="" id="" class="form-select" [(ngModel)]="InsertUsu.empl_Id">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <select
+                  name=""
+                  id=""
+                  class="form-select"
+                  [(ngModel)]="InsertUsu.empl_Id"
+                >
                   <option value="undefined">Escoge un Empleado</option>
-                  <option *ngFor="let empl of ddlEmpleado" [value]="empl.empl_ID">{{ empl.empl_NombreCompleto }}</option>
+                  <option
+                    *ngFor="let empl of ddlEmpleado"
+                    [value]="empl.empl_ID"
+                  >
+                    {{ empl.empl_NombreCompleto }}
+                  </option>
                 </select>
                 <i
                   class="bi bi-exclamation-circle-fill"
@@ -185,10 +335,19 @@
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text" style="width: 42px;"><i class="fas fa-users"></i></span>
-                <select name="" id="" class="form-select" [(ngModel)]="InsertUsu.role_ID">
+                <span class="input-group-text" style="width: 42px"
+                  ><i class="fas fa-users"></i
+                ></span>
+                <select
+                  name=""
+                  id=""
+                  class="form-select"
+                  [(ngModel)]="InsertUsu.role_ID"
+                >
                   <option value="undefined">Escoge un Rol</option>
-                  <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">{{ rol.role_Nombre }}</option>
+                  <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">
+                    {{ rol.role_Nombre }}
+                  </option>
                 </select>
                 <i
                   class="bi bi-exclamation-circle-fill"
@@ -199,7 +358,13 @@
             </div>
             <div class="input-group mb-3">
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="adminSwitch" [checked]="false" [(ngModel)]="InsertUsu.usua_Admin">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="adminSwitch"
+                  [checked]="false"
+                  [(ngModel)]="InsertUsu.usua_Admin"
+                />
                 <label class="form-check-label" for="adminSwitch">Admin</label>
               </div>
             </div>
@@ -207,17 +372,23 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn ov-btn-grow-primary" (click)="Insert()">Guardar</button>
+        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn ov-btn-grow-primary"
+          (click)="Insert()"
+        >
+          Guardar
+        </button>
       </div>
     </div>
   </div>
 </div>
 <!--/Modal Insert-->
 
-  
-  
-  <!-- Modal Update -->
+<!-- Modal Update -->
 <div class="modal fade" id="update" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -228,66 +399,133 @@
         <div class="row">
           <div class="col-md-6">
             <div class="d-flex justify-content-center align-items-center point">
-              <input id="uploadBtn" type="file" class="point" style="display: none;" accept="image/*" (change)="handleImageUpload($event)">
+              <input
+                id="uploadBtn"
+                type="file"
+                class="point"
+                style="display: none"
+                accept="image/*"
+                (change)="handleImageUpload($event)"
+              />
               <div class="position-relative">
-                <label for="uploadBtn" class="img-circle-medium point" [style.background-image]="'url(' + selectedUsu.usua_Img + ')'">
-                  <span *ngIf="!selectedUsu.usua_Img" class="mt-5 text-center d-flex align-items-center justify-content-center">
-                    <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4 point" alt=""></i>
+                <label
+                  for="uploadBtn"
+                  class="img-circle-medium point"
+                  [style.background-image]="'url(' + selectedUsu.usua_Img + ')'"
+                >
+                  <span
+                    *ngIf="!selectedUsu.usua_Img"
+                    class="mt-5 text-center d-flex align-items-center justify-content-center"
+                  >
+                    <i>
+                      <img
+                        src="../../assets/img/foto.png"
+                        width="60px"
+                        class="mt-4 point"
+                        alt=""
+                    /></i>
                   </span>
-                  <span *ngIf="!selectedUsu.usua_Img" class="text-center d-flex align-items-center justify-content-center">
+                  <span
+                    *ngIf="!selectedUsu.usua_Img"
+                    class="text-center d-flex align-items-center justify-content-center"
+                  >
                     Añadir Foto de Perfil
                   </span>
                 </label>
               </div>
             </div>
             <div class="d-flex justify-content-center align-items-center mt-2">
-              <i *ngIf="selectedUsu.usua_Img" class="point" (click)="deleteImage()"> 
-                <img src="../../assets/img/fotoeliminar.png" width="40px" alt="">
+              <i
+                *ngIf="selectedUsu.usua_Img"
+                class="point"
+                (click)="deleteImage()"
+              >
+                <img
+                  src="../../assets/img/fotoeliminar.png"
+                  width="40px"
+                  alt=""
+                />
               </i>
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" [(ngModel)]="selectedUsu.usua_Usuario" id="update_role_Nombre" disabled placeholder="Usuario" aria-label="Username">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="selectedUsu.usua_Usuario"
+                  id="update_role_Nombre"
+                  disabled
+                  placeholder="Usuario"
+                  aria-label="Username"
+                />
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <select name="" id="" class="form-select" [(ngModel)]="selectedUsu.empl_Id">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <select
+                  name=""
+                  id=""
+                  class="form-select"
+                  [(ngModel)]="selectedUsu.empl_Id"
+                >
                   <option value="">Escoge un Empleado</option>
-                  <option *ngFor="let empl of ddlEmpleado" [value]="empl.empl_ID">{{ empl.empl_NombreCompleto }}</option>
+                  <option
+                    *ngFor="let empl of ddlEmpleado"
+                    [value]="empl.empl_ID"
+                  >
+                    {{ empl.empl_NombreCompleto }}
+                  </option>
                 </select>
                 <i
                   class="bi bi-exclamation-circle-fill"
                   style="color: orange; margin-left: 10px"
                   *ngIf="emplr"
-                 
                 ></i>
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-users"></i></span>
-                <select name="" id="" class="form-select" [(ngModel)]="selectedUsu.role_ID">
+                <span class="input-group-text"
+                  ><i class="fas fa-users"></i
+                ></span>
+                <select
+                  name=""
+                  id=""
+                  class="form-select"
+                  [(ngModel)]="selectedUsu.role_ID"
+                >
                   <option value="null">Escoge un Rol</option>
-                  <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">{{ rol.role_Nombre }}</option>
+                  <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">
+                    {{ rol.role_Nombre }}
+                  </option>
                 </select>
                 <i
                   class="bi bi-exclamation-circle-fill"
                   style="color: orange; margin-left: 10px"
                   *ngIf="rolr"
-                 
                 ></i>
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="adminSwitch" [(ngModel)]="selectedUsu.usua_Admin">
-                  <label class="form-check-label" for="adminSwitch">Admin</label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="adminSwitch"
+                    [(ngModel)]="selectedUsu.usua_Admin"
+                  />
+                  <label class="form-check-label" for="adminSwitch"
+                    >Admin</label
+                  >
                 </div>
               </div>
             </div>
@@ -295,77 +533,130 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="Update()">Guardar</button>
+        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn ov-btn-grow-u p-2"
+          (click)="Update()"
+        >
+          Guardar
+        </button>
       </div>
     </div>
   </div>
 </div>
 <!-- /Modal Update -->
 
-  
-  
-  <!--Modal Pass-->
-  <div class="modal fade" id="pass" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title">Cambio de Contraseña</h5>
-          </div>
-          <div class="modal-body">
-            <div class="input-group mb-3 mt-5">
-                <div class="row col-12">
+<!--Modal Pass-->
+<div class="modal fade" id="pass" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cambio de Contraseña</h5>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3 mt-5">
+          <div class="row col-12">
             <div class="col-6">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control" [(ngModel)]="selectedUsu.usua_Usuario" disabled id="update_role_Nombre" placeholder="Usuario" aria-label="Username">
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    <input type="text" class="form-control" [(ngModel)]="selectedUsu.usua_Clave" id="update_role_Nombre" placeholder="Nueva Contraseña" aria-label="Password">
-                    <i
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="selectedUsu.usua_Usuario"
+                  disabled
+                  id="update_role_Nombre"
+                  placeholder="Usuario"
+                  aria-label="Username"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="selectedUsu.usua_Clave"
+                  id="update_role_Nombre"
+                  placeholder="Nueva Contraseña"
+                  aria-label="Password"
+                />
+                <i
                   class="bi bi-exclamation-circle-fill"
                   style="color: orange; margin-left: 10px"
                   *ngIf="claver"
                 ></i>
-                  </div>
-                </div>
-                </div>
+              </div>
             </div>
           </div>
-          <div class="modal-footer"> 
-            <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2"  (click)="Pass()" >Guardar</button></div>
-  
-       </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn ov-btn-grow-u"
+          (click)="Pass()"
+        >
+          Guardar
+        </button>
+      </div>
     </div>
   </div>
-  <!--/Modal Pass-->
-  
-  <!--Modal Eliminar-->
-  <div class="modal fade" id="eliminar" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-       <div class="modal-content">
-          <div class="modal-header">
-            <div class="row justify-content-center">
-             <h5 class="modal-title col-12">Esta seguro que desea eliminar este registro?</h5>
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="row justify-content-center mb-2">
-            <img src="https://img2.freepng.es/20180320/vuw/kisspng-symbol-font-trash-2-5ab0cac77f1e88.8245172715215356875207.jpg" alt="Not Found" class="w-50" srcset="">
-            </div>
-            <div class="row justify-content-center">
-            <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
-            <div class="col-lg-1"></div> 
-            <button type="button" class="ov-btn-grow-d col-lg-5"  (click)="Delete()" >Aceptar</button></div>
-          </div>
-          </div>
-          <div class="modal-footer"> 
-       </div>
+</div>
+<!--/Modal Pass-->
+
+<!--Modal Eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-light"><b>Confirmar</b></h5>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <h5 style="text-align: center; margin-top: 20px">
+          <b>¿Desea eliminar este registro?</b>
+        </h5>
+        <img
+          src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s"
+          style="
+            width: 100px;
+            height: 100px;
+            margin-right: 30px;
+            text-align: center;
+          "
+          alt="Warning Sign"
+        />
+      </div>
+      <div class="modal-footer">
+       
+          <button
+            type="button"
+            class="ov-btn-grow-in "
+            data-bs-dismiss="modal"
+            style="margin-left: 10px; height: 2.5rem"
+            (click)="Delete()"
+          >
+            <i class="bi bi-check-circle-fill"></i> Confirmar
+          </button>
+          <button
+            type="button"
+            class="ov-btn-grow-d"
+            data-bs-dismiss="modal"
+            style="margin-left: 10px; height: 2.5rem"
+          >
+            <i class="bi bi-reply-fill"></i>
+            Cancelar
+          </button>
+      </div>
     </div>
   </div>
-  <!--/Modal Eliminar-->
-  
+</div>
+<!--/Modal Eliminar-->
