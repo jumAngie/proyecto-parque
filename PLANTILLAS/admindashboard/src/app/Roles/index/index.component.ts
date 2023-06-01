@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { AcceService } from 'src/app/Service/acce.service';
 import { Router } from '@angular/router';
 import { Roles } from 'src/app/Models/Roles';
@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pantallas } from 'src/app/Models/Pantallas';
 import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 @Component({
   selector: 'app-index',
@@ -21,7 +22,6 @@ export class IndexComponent implements OnInit {
   rolinsert: Roles = new Roles();
   selectedRol: Roles = new Roles();
   p: number = 1;
-  
   filtro: string = '';
   openDropdownIds: number[] = [];
 	active = 1;
@@ -31,11 +31,11 @@ export class IndexComponent implements OnInit {
   selectedPeople = [];
   selectedPantallas = [];
   itemsPerPage: number = 6;
-  paginacionConfig: any = {
-    itemsPerPage: 10, // Cantidad de elementos por página
-    currentPage: 1, // Página actual
-    totalItems: 0 // Total de elementos en la tabla (se actualizará en la carga de datos)
-  };
+
+  
+  NombreRolRequerido = false;
+  NombreRolRequeridoUP=false;
+
 isTabEnabled(tabNumber: number): boolean {
   return this.tabEnabledStatus[tabNumber - 1];
 }
@@ -44,8 +44,10 @@ goToNextTab(): void {
 this.tabEnabledStatus[this.active - 1] = false;
 this.active=1;
 this.tabEnabledStatus[this.active - 1] = true;
-
+this.NombreRolRequerido = false;
+this.rolinsert.role_Nombre="";
 }
+
 
 
 onNavChange(changeEvent: NgbNavChangeEvent) {
@@ -55,7 +57,7 @@ onNavChange(changeEvent: NgbNavChangeEvent) {
 }
 
 assignLater(): void {
-  // Lógica para asignar luego en la segunda pestaña
+  
 }
 
 saveUpdatePantallas(): void {
@@ -103,6 +105,7 @@ save(): void {
       role_ID: this.rolEnvio,
       ropa_UsuarioCreador: 1
     };
+    
   });
 
   console.log(this.pantallasenvio);
@@ -125,7 +128,9 @@ save(): void {
 
 
 
-  constructor(private service: AcceService, private router: Router, private elementRef: ElementRef) {}  
+  constructor(private service: AcceService, private router: Router, private elementRef: ElementRef,
+    private renderer2: Renderer2,
+    ) {}  
 
   // acciones
   toggleDropdown(roleId: number) {
@@ -163,6 +168,7 @@ save(): void {
 
   // cargar datos al modal
   selectRol(rol: Roles) {
+    this.NombreRolRequeridoUP = false;
     this.selectedRol = { ...rol };
   }
 
@@ -204,40 +210,80 @@ save(): void {
   
   filtrarRoles(): Roles[] {
     return this.rol.filter((rol) => {
-      return rol.role_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
+      return rol.role_Nombre.toLowerCase().includes(this.filtro.toLowerCase())||
+              rol.role_Id.toString().toLowerCase().includes(this.filtro.toLowerCase());
+
     });
   }
 
-
+  recarga(){ 
+      this.service.getRoles().subscribe((data) => {
+        this.rol = data;
+      });
+  }
   
   
   
   InsertRol() {
-    this.tabEnabledStatus[this.active - 1] = false;
-    this.active++;
-    this.tabEnabledStatus[this.active - 1] = true;
     
-    this.service.InsertRoles(this.rolinsert).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.rolEnvio = response[1].codeStatus
-        console.log(this.rolEnvio);
-      },
-      (error: any) => {
-        console.error('Error al guardar el rol', error);
-      }
-      );
+    if(this.rolinsert.role_Nombre=="" || this.rolinsert.role_Nombre==null || this.rolinsert.role_Nombre==undefined){
+      ToastUtils.showWarningToast("Hay Campos Vacios");   
+      this.NombreRolRequerido=true;
+    }
+    else{
+      
+      
+      this.service.InsertRoles(this.rolinsert).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.rolEnvio = response[1].codeStatus
+          console.log(this.rolEnvio);
+          if ( response[0].codeStatus==200) {
+            ToastUtils.showSuccessToast( response[0].messageStatus);
+            this.tabEnabledStatus[this.active - 1] = false;
+            this.active++;
+            this.tabEnabledStatus[this.active - 1] = true;
+            this.recarga();
+          }
+          if ( response[0].codeStatus==409) {
+            ToastUtils.showWarningToast( response[0].messageStatus);   
+          }
+          if ( response[0].codeStatus==500) {
+            ToastUtils.showErrorToast( response[0].messageStatus);   
+          }
+        },
+        (error: any) => {
+          console.error('Error al guardar el rol', error);
+        }
+        );
+    }
     }
     
       EditarRol() {
+        if (this.selectedRol.role_Nombre=="") {
+          ToastUtils.showWarningToast("Hay Campos Vacios");   
+          this.NombreRolRequeridoUP=true;
+        }
+        else{
         this.service.EditarRol(this.selectedRol).subscribe(
           (response: any) => {
             console.log(response.code);
+            this.NombreRolRequeridoUP=false;
+            if ( response.code==200) {
+              ToastUtils.showSuccessToast( response.message);
+            }
+            if ( response.code==409) {
+              ToastUtils.showWarningToast( response.message);   
+            }
+            if ( response.code==500) {
+              ToastUtils.showErrorToast( response.message);   
+            }
           },
           (error: any) => {
             console.error('Error al guardar el rol', error);
           }
         );
+      }
       }
 
       DeleteRol() {
@@ -245,19 +291,22 @@ save(): void {
         this.service.DeleteRol(this.selectedRol).subscribe(
           (response: any) => {
             console.log(response.code);
+            if ( response.code==200) {
+              ToastUtils.showSuccessToast( response.message);
+            }
+            if ( response.code==409) {
+              ToastUtils.showWarningToast( response.message);   
+            }
+            if ( response.code==500) {
+              ToastUtils.showErrorToast( response.message);   
+            }
           },
           (error: any) => {
             console.error('Error al guardar el rol', error);
           }
         );
       }
-  @Input() tabs: string[] = [];
-  activeTab: string = '';
-
-  setActiveTab(tab: string) {
-    this.activeTab = tab;
-  }
-
+      
 
   
   onChangeItemsPerPage(event: Event) {

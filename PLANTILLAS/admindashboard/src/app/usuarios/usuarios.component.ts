@@ -31,6 +31,11 @@ export class UsuariosComponent {
     totalItems: 0 // Total de elementos en la tabla (se actualizará en la carga de datos)
   };
 
+  usuarior=false;
+  claver=false;
+  emplr=false;
+  rolr=false;
+
   constructor(
     private service: AcceService,
     private router: Router,
@@ -75,10 +80,6 @@ export class UsuariosComponent {
       // Resto del código aquí
     }
   }
-  
-  
-  
-
 
   filtrarUsuarios() {
     this.usuariosFiltrados = this.usuario.filter((usuario) => {
@@ -132,8 +133,20 @@ export class UsuariosComponent {
   // !acciones
 
   // cargar datos al modal
+
+  abririnsert(){
+    this.usuarior=false;
+    this.claver=false;
+    this.emplr=false;
+    this.rolr=false;
+  }
+
   selectUsuario(usu: Usuarios) {
     usu.usua_Clave = '';
+    this.usuarior=false;
+    this.claver=false;
+    this.emplr=false;
+    this.rolr=false;
     this.selectedUsu = { ...usu };
   }
 
@@ -144,39 +157,39 @@ export class UsuariosComponent {
 
   // CRUD
   Insert() {
-    if (!this.InsertUsu.usua_Img || this.InsertUsu.usua_Img.trim() === "") {
-      this.InsertUsu.usua_Img = "../../assets/img/usuario.png";
+    var campos = 0;
+
+    if (!this.InsertUsu.usua_Img || this.InsertUsu.usua_Img.trim() === "") {this.InsertUsu.usua_Img = "../../assets/img/usuario.png";}
+  
+    if (!this.InsertUsu.usua_Usuario || this.InsertUsu.usua_Usuario.trim() === "") {this.usuarior=true;campos=+1}
+    else{this.usuarior=false;}
+  
+    if (!this.InsertUsu.empl_Id || this.InsertUsu.empl_Id === 0) {this.emplr=true;campos=+1;}
+    else{this.emplr=false;}
+  
+    if (!this.InsertUsu.usua_Clave || this.InsertUsu.usua_Clave.trim() === "") {this.claver=true;campos=+1}
+    else{this.claver=false}
+  
+    if (!this.InsertUsu.usua_Admin && (!this.InsertUsu.role_ID || this.InsertUsu.role_ID === 0)) {this.rolr=true;campos=+1}
+    else{this.rolr=false;}
+  
+    if (campos>0) {
+    ToastUtils.showWarningToast("Hay Campos Vacios");
+    return
     }
-  
-    if (!this.InsertUsu.usua_Usuario || this.InsertUsu.usua_Usuario.trim() === "") {
-      return;
-    }
-  
-    if (!this.InsertUsu.empl_Id || this.InsertUsu.empl_Id === 0) {
-      return;
-    }
-  
-    if (!this.InsertUsu.usua_Clave || this.InsertUsu.usua_Clave.trim() === "") {
-      return;
-    }
-  
-    if (!this.InsertUsu.usua_Admin && (!this.InsertUsu.role_ID || this.InsertUsu.role_ID === 0)) {
-      return;
-    }
-  
-    if (!this.InsertUsu.usua_Img?.trim() ||
-    !this.InsertUsu.usua_Usuario?.trim() ||
-    !this.InsertUsu.empl_Id ||
-    !this.InsertUsu.usua_Clave?.trim() ||
-    (!this.InsertUsu.usua_Admin && !this.InsertUsu.role_ID)) {
-  
-  ToastUtils.showWarningToast("Hay Campos Vacios");
-  
-}
 
     this.service.InsertUsuario(this.InsertUsu).subscribe(
       (response: any) => {
         console.log(response);
+        if ( response.code==200) {
+          ToastUtils.showSuccessToast( response.message);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast("Ha ocurrido un error inesperado");   
+        }
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -187,12 +200,35 @@ export class UsuariosComponent {
   
 
   Update() {
+    var campos = 0;
+
     if (this.selectedUsu.usua_Img=="" || this.selectedUsu.usua_Img==null ||this.selectedUsu.usua_Img==undefined ) {
       this.selectedUsu.usua_Img="../../assets/img/usuario.png";
      }
+     
+    if (!this.selectedUsu.empl_Id || this.selectedUsu.empl_Id === 0) {this.emplr=true;campos=+1;}
+    else{this.emplr=false;}
+
+    if (!this.selectedUsu.usua_Admin && (!this.selectedUsu.role_ID|| this.selectedUsu.role_ID.toString()=="null" || this.selectedUsu.role_ID === 0)) {this.rolr=true;campos=+1; console.log("a")}
+    else{this.rolr=false;}
+
+     if (campos>0) {
+      ToastUtils.showWarningToast("Hay Campos Vacios");
+      return
+      }
+  
     this.service.UpdateUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
+        if ( response.code==200) {
+          ToastUtils.showSuccessToast( response.message);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -204,6 +240,15 @@ export class UsuariosComponent {
     this.service.DeleteUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
+        if ( response.code==200) {
+          ToastUtils.showSuccessToast( response.message);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -212,9 +257,26 @@ export class UsuariosComponent {
   }
 
   Pass() {
+    var campos = 0;
+    if (!this.InsertUsu.usua_Clave || this.InsertUsu.usua_Clave.trim() === "") {this.claver=true;campos=+1;}
+    else{this.claver=false}
+
+    if (campos>0) {
+      ToastUtils.showWarningToast("Hay Campos Vacios");
+      return
+      }
+
     this.service.PassUsuario(this.selectedUsu).subscribe(
       (response: any) => {
-        console.log(response);
+        if ( response.code==200) {
+          ToastUtils.showSuccessToast( response.message);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);

@@ -30,7 +30,7 @@
     </div>
     <div class="card-body">
       <div class="row ms-5 col-11">
-        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal" data-bs-target="#crear">
+        <button class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0;" data-bs-toggle="modal" data-bs-target="#crear" (click)="abririnsert()">
           <i class="fas fa-plus-circle mr-1"></i>
           Nuevo
         </button>
@@ -151,12 +151,22 @@
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                 <input type="text" class="form-control" [(ngModel)]="InsertUsu.usua_Usuario" id="update_role_Nombre" placeholder="Usuario" aria-label="Username">
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="usuarior"
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                 <input type="text" class="form-control" [(ngModel)]="InsertUsu.usua_Clave" id="update_role_Nombre" placeholder="Contraseña" aria-label="Password">
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="claver"
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
@@ -166,6 +176,11 @@
                   <option value="undefined">Escoge un Empleado</option>
                   <option *ngFor="let empl of ddlEmpleado" [value]="empl.empl_ID">{{ empl.empl_NombreCompleto }}</option>
                 </select>
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="emplr"
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
@@ -175,6 +190,11 @@
                   <option value="undefined">Escoge un Rol</option>
                   <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">{{ rol.role_Nombre }}</option>
                 </select>
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="rolr"
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
@@ -188,7 +208,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn ov-btn-grow-primary" data-bs-dismiss="modal" (click)="Insert()">Guardar</button>
+        <button type="button" class="btn btn-success btn ov-btn-grow-primary" (click)="Insert()">Guardar</button>
       </div>
     </div>
   </div>
@@ -240,6 +260,12 @@
                   <option value="">Escoge un Empleado</option>
                   <option *ngFor="let empl of ddlEmpleado" [value]="empl.empl_ID">{{ empl.empl_NombreCompleto }}</option>
                 </select>
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="emplr"
+                 
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
@@ -249,6 +275,12 @@
                   <option value="null">Escoge un Rol</option>
                   <option *ngFor="let rol of ddlRol" [value]="rol.role_Id">{{ rol.role_Nombre }}</option>
                 </select>
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="rolr"
+                 
+                ></i>
               </div>
             </div>
             <div class="input-group mb-3">
@@ -264,7 +296,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" data-bs-dismiss="modal" (click)="Update()">Guardar</button>
+        <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="Update()">Guardar</button>
       </div>
     </div>
   </div>
@@ -293,6 +325,11 @@
                   <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                     <input type="text" class="form-control" [(ngModel)]="selectedUsu.usua_Clave" id="update_role_Nombre" placeholder="Nueva Contraseña" aria-label="Password">
+                    <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-right: 10px"
+                  *ngIf="claver"
+                ></i>
                   </div>
                 </div>
                 </div>
@@ -300,7 +337,7 @@
           </div>
           <div class="modal-footer"> 
             <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" data-bs-dismiss="modal" (click)="Pass()" >Guardar</button></div>
+            <button type="button" class="btn btn-success btn ov-btn-grow-u p-2"  (click)="Pass()" >Guardar</button></div>
   
        </div>
     </div>
@@ -323,7 +360,7 @@
             <div class="row justify-content-center">
             <button type="button" class="btn btn-light col-lg-5" data-bs-dismiss="modal">Cancelar</button> 
             <div class="col-lg-1"></div> 
-            <button type="button" class="ov-btn-grow-d col-lg-5" data-bs-dismiss="modal" (click)="Delete()" >Aceptar</button></div>
+            <button type="button" class="ov-btn-grow-d col-lg-5"  (click)="Delete()" >Aceptar</button></div>
           </div>
           </div>
           <div class="modal-footer"> 

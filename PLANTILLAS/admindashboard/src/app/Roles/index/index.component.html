@@ -16,12 +16,12 @@
         style="
           background-image: url('/assets/img/BANNERS-VR-FINAL/ROLES.png');
           border-top-left-radius: 10px;
-     border-top-right-radius: 10px;
-     background-size:contain;
-     background-position: center;
-     height: 0;
-     padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
-   "
+          border-top-right-radius: 10px;
+          background-size:contain;
+          background-position: center;
+          height: 0;
+          padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+          "
       ></div>
       <div
         class="overlay"
@@ -121,8 +121,13 @@
                   <i class="fas fa-edit"></i>
                 </span> 
                 <input type="text" class="form-control" [(ngModel)]="rolinsert.role_Nombre" id="nombreRolInput" [disabled]="!isTabEnabled(1)" placeholder="Nombre del Rol" aria-label="Username" aria-describedby="basic-addon1" id="nombreRolInput">
+                <i
+                  class="bi bi-exclamation-circle-fill"
+                  style="color: orange; margin-left: 10px"
+                  *ngIf="NombreRolRequerido"
+                ></i>
               </div>
-              <button type="button" class="btn ov-btn-grow-in" style="margin-left: 80%;"  [disabled]="!isTabEnabled(1)" (click)="InsertRol()">Siguiente</button>
+              <button type="button" class="btn ov-btn-grow-primary" style="margin-left: 80%;"  [disabled]="!isTabEnabled(1)" (click)="InsertRol()">Siguiente</button>
             </ng-template>
           </li>
           <li [ngbNavItem]="2" >
@@ -175,7 +180,7 @@
 
 
  <!-- Modal Update -->
-<div class="modal fade" id="update" tabindex="-1">
+<div class="modal fade update" id="update" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -183,15 +188,20 @@
       </div>
       <div class="modal-body">
         <div class="input-group mb-3 mt-5">
-        <span class="input-group-text" id="basic-addon1">
-          <i class="fas fa-edit"></i>
-        </span> 
-        <input type="text" class="form-control"  [(ngModel)]="selectedRol.role_Nombre" id="update_role_Nombre"  placeholder="Nombre del Rol" aria-label="Username" aria-describedby="basic-addon1" >
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fas fa-edit"></i>
+          </span> 
+          <input type="text" class="form-control"  [(ngModel)]="selectedRol.role_Nombre" id="update_role_Nombre"  placeholder="Nombre del Rol" aria-label="Username" aria-describedby="basic-addon1" >
+          <i
+            class="bi bi-exclamation-circle-fill"
+            style="color: orange; margin-left: 10px"
+            *ngIf="NombreRolRequeridoUP"
+          ></i>
       </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="EditarRol()">Actualizar</button>
+        <button type="button" class="btn btn-success btn ov-btn-grow-u " (click)="EditarRol()">Actualizar</button>
       </div>
     </div>
   </div>
@@ -227,7 +237,7 @@
         </div>
         <div class="modal-footer"> 
           <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">Cancelar</button> 
-          <button type="button" class="btn btn-success btn ov-btn-grow-u p-2" (click)="saveUpdatePantallas()">Agregar</button></div>
+          <button type="button" class="btn btn-success btn ov-btn-grow-u " (click)="saveUpdatePantallas()">Agregar</button></div>
 
      </div>
   </div>
