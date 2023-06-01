@@ -16,6 +16,8 @@ export class VentasDetalleComponent implements OnInit{
   detalle!: VentasQuioscoDetalle[];
   gridOptions: GridOptions = {};
   totalRow: any = {};
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 30]; // Opciones de tamaño de página
 
   constructor(
     private service: ParqServicesService,
@@ -26,16 +28,19 @@ export class VentasDetalleComponent implements OnInit{
   ngOnInit(): void {
     this.gridOptions = {
       columnDefs: [        
-        {headerName: 'Golosina', field: 'golo_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Precio unitario', field: 'golo_Precio', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Cantidad', field: 'deta_Cantidad',  autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Valor', field: 'valorFinalPorInsumo'},
+        {headerName: 'Golosina', field: 'golo_Nombre', width: 220,autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Precio unitario', field: 'golo_Precio', width: 140, autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Cantidad', field: 'deta_Cantidad', width: 140 , autoHeight: true, autoHeaderHeight: true},
+        {headerName: 'Valor', field: 'valorFinalPorInsumo', width: 140},
       ],
       columnHoverHighlight: true,    
         
       rowData: this.detalle,
       pagination: true,
-      paginationPageSize: 7,   
+      paginationPageSize: this.selectedPageSize,
+      context: {
+        pageSizeOptions: this.pageSizeOptions
+      }, 
       defaultColDef: {
         sortable: true,
         filter: true,
@@ -68,9 +73,12 @@ export class VentasDetalleComponent implements OnInit{
     console.log(this.venta);
 
     this.getDetalles();
+    this.onPageSizeChanged();
   }
 
-
+  onPageSizeChanged(): void {
+    this.gridOptions.api?.paginationSetPageSize(this.selectedPageSize);
+  }
 
   getDetalles(){
     this.service.getDetallesByVenta(this.venta.vent_ID).subscribe((response : any) =>{

@@ -361,6 +361,11 @@ export class VentasCrearComponent implements OnInit{
     this.router.navigate(['ventasquiosco-listado']);
   };
 
+  closeReceipt(){
+    ToastUtils.showSuccessToast('Venta finalizada exitosamente!');
+    this.router.navigate(['ventasquiosco-listado']);
+  }
+
 //#endregion
 
 
