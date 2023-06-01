@@ -258,9 +258,6 @@ export class UsuariosComponent {
         console.log(response);
         if ( response.code==200) {
           ToastUtils.showSuccessToast( response.message);
-          setTimeout(() => {
-            window.location.href = '/usuarios'
-          }, 800);
           this.cargarTodosLosDatos();
         }
         if ( response.code==409) {
