@@ -191,6 +191,9 @@ export class UsuariosComponent {
         console.log(response);
         if ( response.code==200) {
           ToastUtils.showSuccessToast( response.message);
+          setTimeout(() => {
+            window.location.href = '/usuarios'
+          }, 800);
           this.cargarTodosLosDatos();
         }
         if ( response.code==409) {
@@ -231,6 +234,9 @@ export class UsuariosComponent {
         console.log(response);
         if ( response.code==200) {
           ToastUtils.showSuccessToast( response.message);
+          setTimeout(() => {
+            window.location.href = '/usuarios'
+          }, 800);
           this.cargarTodosLosDatos();
         }
         if ( response.code==409) {
@@ -252,6 +258,9 @@ export class UsuariosComponent {
         console.log(response);
         if ( response.code==200) {
           ToastUtils.showSuccessToast( response.message);
+          setTimeout(() => {
+            window.location.href = '/usuarios'
+          }, 800);
           this.cargarTodosLosDatos();
         }
         if ( response.code==409) {
@@ -269,7 +278,7 @@ export class UsuariosComponent {
 
   Pass() {
     var campos = 0;
-    if (!this.InsertUsu.usua_Clave || this.InsertUsu.usua_Clave.trim() === "") {this.claver=true;campos=+1;}
+    if (!this.selectedUsu.usua_Clave || this.selectedUsu.usua_Clave.trim() === "") {this.claver=true;campos=+1;}
     else{this.claver=false}
 
     if (campos>0) {
@@ -279,8 +288,10 @@ export class UsuariosComponent {
 
     this.service.PassUsuario(this.selectedUsu).subscribe(
       (response: any) => {
-        if ( response.code==200) {
-          ToastUtils.showSuccessToast( response.message);
+        ToastUtils.showSuccessToast( response.message);
+        if ( response.code==200) {setTimeout(() => {
+          window.location.href = '/usuarios'
+        }, 800);
         }
         if ( response.code==409) {
           ToastUtils.showWarningToast( response.message);   
