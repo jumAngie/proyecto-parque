@@ -5,6 +5,7 @@ import { Areas } from 'src/app/Models/Areas';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { Regiones } from 'src/app/Models/Regiones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 @Component({
   selector: 'app-edit',
@@ -16,6 +17,7 @@ export class EditAtraccionesComponent implements OnInit {
   areas!: Areas[];
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
+  imageUrl: string = ''; 
 
   selectedImage: any;
 
@@ -27,9 +29,12 @@ export class EditAtraccionesComponent implements OnInit {
   DuracionRondaRequerido = false;
   RegionRequerido = false;
   AreaRequerido = false;
+  ImagenRequerido = false;
+
   constructor(
     private service: ParqServicesService,
     private router: Router,
+    private imgbbService: ImgbbService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +52,7 @@ export class EditAtraccionesComponent implements OnInit {
     this.service.findAtracciones(this.atracciones).subscribe((response: any) => {
       this.atracciones = response.data[0];
       this.loadAreas();
+      console.log(this.atracciones)
     });
 
     this.service.getRegiones().subscribe((response: any) => {
@@ -274,19 +280,37 @@ export class EditAtraccionesComponent implements OnInit {
   }
    
   
-  handleImageChange(event: any) {
+  handleImageUpload(event: any) {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = (e: any) => {
-      this.selectedImage = e.target.result;
-    };
-    
-    reader.readAsDataURL(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+
+        this.uploadImageToServer(file);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
-  removeImage(){
-    this.selectedImage = '';
+  uploadImageToServer(file: File) {
+    this.imgbbService.Upload_IMG(file)
+      .subscribe(
+        response => {
+
+          this.imageUrl = response.data.url;
+          this.atracciones.atra_Imagen = (this.imageUrl)
+        },
+        error => {
+          // Manejar errores en la carga de la imagen
+          console.error(error);
+        }
+      );
   }
+  deleteImage() {
+    this.imageUrl = "";
+    this.atracciones.atra_Imagen="";
+  }
+
 
 }

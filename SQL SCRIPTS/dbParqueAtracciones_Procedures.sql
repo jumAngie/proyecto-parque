@@ -161,13 +161,22 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_DELETE
 AS
 BEGIN
 	BEGIN TRY
+			DECLARE @THELASTOFADMIN INT = (SELECT COUNT(*) FROM acce.VW_Usuarios WHERE usua_Estado = 1 AND usua_Admin = 1)
+			DECLARE @ELMEROADMIN BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID AND @usua_ID)
+		
+			IF @THELASTOFADMIN > 1
+			BEGIN
 			UPDATE acce.tbUsuarios
 			SET
 				usua_Estado		=	0
 				WHERE [usua_ID]	=	@usua_ID
 
 			SELECT 200 AS codeStatus, 'Usuario Eliminado con éxito' AS messageStatus
-
+			END
+			IF @THELASTOFADMIN = 1 OR @ELMEROADMIN = 1 
+			BEGIN
+			SELECT 409 AS codeStatus, 'No puede Eliminar a este Admin' AS messageStatus
+			END
 	END TRY
 	BEGIN CATCH
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
@@ -228,8 +237,25 @@ DECLARE @role_ID BIT = (	SELECT role_ID FROM acce.tbUsuarios
 END
 END
 
+/*
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+@usua_ID INT 
+AS 
+BEGIN 
+			DECLARE @Admin BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID)  
+		IF @Admin = 1 BEGIN     
+			SELECT * FROM acce.VW_Pantallas     
+			WHERE pant_Estado = 1 
+		END 
+		ELSE IF @Admin = 0 
+		BEGIN       
+			DECLARE @role_ID BIT = (SELECT role_ID FROM acce.tbUsuarios WHERE usua_ID = @usua_ID)          
+			SELECT * FROM acce.tbRolesXPantallas T1     
+			INNER JOIN acce.tbPantallas T2     
+			ON T1.pant_ID = T2.pant_ID     
+			WHERE role_ID = @role_ID END END
 GO
-
+*/
 
 
 
@@ -3389,13 +3415,9 @@ GO
 
 
 
-
-
-
-
-
-EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1,1
-EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
+EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1,null, 'https://i.ibb.co/5BC2KcD/mio-kun.jpg', 1
+EXECUTE acce.UDP_tbUsuarios_INSERT 'ElMeroJafet', 1, 'ZZZ', 1,null, 'https://i.ibb.co/5BC2KcD/mio-kun.jpg', 1
+EXECUTE acce.UDP_tbUsuarios_LOGIN 'ElMeroJafet', 'ZZZ'
 
 INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada,ticl_ID, hiat_FechaFiltro, hiat_UsuarioCreador)
 VALUES(5, GETDATE() ,1, '2023-05-30', 1)

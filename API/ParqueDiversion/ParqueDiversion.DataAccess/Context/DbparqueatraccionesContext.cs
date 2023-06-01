@@ -71,6 +71,14 @@ namespace ParqueDiversion.DataAccess.Context
         public virtual DbSet<tbVentasQuiosco> tbVentasQuiosco { get; set; }
         public virtual DbSet<tbVentasQuioscoDetalle> tbVentasQuioscoDetalle { get; set; }
         public virtual DbSet<tbVisitantesAtraccion> tbVisitantesAtraccion { get; set; }
+        public virtual DbSet<tblCiudades> tblCiudades { get; set; }
+        public virtual DbSet<tblDeporte> tblDeporte { get; set; }
+        public virtual DbSet<tblDepto> tblDepto { get; set; }
+        public virtual DbSet<tblEmpleado> tblEmpleado { get; set; }
+        public virtual DbSet<tblEstado> tblEstado { get; set; }
+        public virtual DbSet<tblEvento> tblEvento { get; set; }
+        public virtual DbSet<tblParticipante> tblParticipante { get; set; }
+        public virtual DbSet<tblUsuarios> tblUsuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1799,6 +1807,268 @@ namespace ParqueDiversion.DataAccess.Context
                     .WithMany(p => p.tbVisitantesAtraccion)
                     .HasForeignKey(d => d.ticl_ID)
                     .HasConstraintName("FK_fila_tbVisitantesAtraccion_parq_tbTicketsCliente_ticl_ID");
+            });
+
+            modelBuilder.Entity<tblCiudades>(entity =>
+            {
+                entity.HasKey(e => e.CiudadId)
+                    .HasName("PK_Ciudades");
+
+                entity.Property(e => e.CiudadCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.CiudadDescripcion)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.CiudadModificacion).HasMaxLength(100);
+
+                entity.Property(e => e.CiudadUsuFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.CiudadUsuFechaModificacion).HasColumnType("date");
+
+                entity.HasOne(d => d.Depto)
+                    .WithMany(p => p.tblCiudades)
+                    .HasForeignKey(d => d.DeptoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ciudad_Depto");
+            });
+
+            modelBuilder.Entity<tblDeporte>(entity =>
+            {
+                entity.HasKey(e => e.DeporteId)
+                    .HasName("PK_Deportes");
+
+                entity.Property(e => e.DeporteCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.DeporteDescripcion)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DeporteFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.DeporteFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.DeporteModificacion).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<tblDepto>(entity =>
+            {
+                entity.HasKey(e => e.DeptoId)
+                    .HasName("PK_Deptos");
+
+                entity.Property(e => e.DeptoCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.DeptoDescricpion)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.DeptoFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.DeptoFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.DeptoModificacion).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<tblEmpleado>(entity =>
+            {
+                entity.HasKey(e => e.EmpleadoId)
+                    .HasName("PK_Empleados");
+
+                entity.HasIndex(e => e.EmpleadoIdentidad, "UK_Empleado")
+                    .IsUnique();
+
+                entity.Property(e => e.EmpleadoApellido)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.EmpleadoCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.EmpleadoDireccion)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.EmpleadoEstado).HasMaxLength(100);
+
+                entity.Property(e => e.EmpleadoFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.EmpleadoFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.EmpleadoFechaNac).HasColumnType("date");
+
+                entity.Property(e => e.EmpleadoIdentidad)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EmpleadoModificacion).HasMaxLength(100);
+
+                entity.Property(e => e.EmpleadoNombre)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.EmpleadoSexo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.EmpleadoTelefono)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.EmpleadoEstadoCivilNavigation)
+                    .WithMany(p => p.tblEmpleado)
+                    .HasForeignKey(d => d.EmpleadoEstadoCivil)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Empleado_EstadoCivil");
+            });
+
+            modelBuilder.Entity<tblEstado>(entity =>
+            {
+                entity.HasKey(e => e.EstId)
+                    .HasName("PK_Estados");
+
+                entity.Property(e => e.EstCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.EstDescripcion)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EstFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.EstFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.EstModificacion).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<tblEvento>(entity =>
+            {
+                entity.HasKey(e => e.EventoId)
+                    .HasName("PK_Eventos");
+
+                entity.Property(e => e.EvenentoEstado).HasMaxLength(100);
+
+                entity.Property(e => e.EventoCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.EventoDuracion)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EventoFecha).HasColumnType("date");
+
+                entity.Property(e => e.EventoFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.EventoFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.EventoModificacion).HasMaxLength(100);
+
+                entity.HasOne(d => d.EventoCiudadNavigation)
+                    .WithMany(p => p.tblEvento)
+                    .HasForeignKey(d => d.EventoCiudad)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Evento_Ciudad");
+
+                entity.HasOne(d => d.EventoDeporteNavigation)
+                    .WithMany(p => p.tblEvento)
+                    .HasForeignKey(d => d.EventoDeporte)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Eventos_Deporte");
+
+                entity.HasOne(d => d.EventoJuezNavigation)
+                    .WithMany(p => p.tblEventoEventoJuezNavigation)
+                    .HasForeignKey(d => d.EventoJuez)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Eventos_Juez");
+
+                entity.HasOne(d => d.EventoObservadorNavigation)
+                    .WithMany(p => p.tblEventoEventoObservadorNavigation)
+                    .HasForeignKey(d => d.EventoObservador)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Eventos_Observador");
+            });
+
+            modelBuilder.Entity<tblParticipante>(entity =>
+            {
+                entity.HasKey(e => e.ParticiÍd)
+                    .HasName("PK_Participantes");
+
+                entity.HasIndex(e => e.ParticiIdentidad, "UK_Participantes_Identidad")
+                    .IsUnique();
+
+                entity.Property(e => e.ParicitCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.ParticiApellido)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.ParticiDireccion)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.ParticiEstado).HasMaxLength(100);
+
+                entity.Property(e => e.ParticiFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.ParticiFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.ParticiFechaNac).HasColumnType("date");
+
+                entity.Property(e => e.ParticiIdentidad)
+                    .IsRequired()
+                    .HasMaxLength(14)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParticiModificacion).HasMaxLength(100);
+
+                entity.Property(e => e.ParticiNombre)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.ParticiSexo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.ParticiTelefono)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.ParticiEstadoCivilNavigation)
+                    .WithMany(p => p.tblParticipante)
+                    .HasForeignKey(d => d.ParticiEstadoCivil)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Participantes_Estado");
+            });
+
+            modelBuilder.Entity<tblUsuarios>(entity =>
+            {
+                entity.HasKey(e => e.UsuId)
+                    .HasName("PK_Usuarios");
+
+                entity.HasIndex(e => e.UsuNombre, "UK_Usuarios_Usuario")
+                    .IsUnique();
+
+                entity.Property(e => e.UsuClave).IsRequired();
+
+                entity.Property(e => e.UsuCreacion).HasMaxLength(100);
+
+                entity.Property(e => e.UsuFechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.UsuFechaModificacion).HasColumnType("date");
+
+                entity.Property(e => e.UsuModificacion).HasMaxLength(100);
+
+                entity.Property(e => e.UsuNombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.UsuUsuario)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);
