@@ -7,6 +7,7 @@ import { Color, colorSets } from '@swimlane/ngx-charts';
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
+  styleUrls: ['./grafica.component.css'],
   template: `
 <ngx-charts-bar-vertical
   [view]="view"
@@ -24,9 +25,7 @@ import { Color, colorSets } from '@swimlane/ngx-charts';
   [animations]="animations"
   [showDataLabel]="showDataLabel"
   [roundDomains]="roundDomains"
-  [dataLabelFormatting]="valueFormatting"
-  [wrapTicks]="wrapTicks"
-  [barPadding]="barPadding"  
+  [dataLabelFormatting]="valueFormatting"  
   >
 </ngx-charts-bar-vertical>
 `,
@@ -94,6 +93,7 @@ export class GraficaComponent implements OnInit{
   getChartData(){
     this.sendParams.hiat_FechaFiltro = this.date;
     this.service.getChartData(this.sendParams).subscribe((response : any) =>{
+      console.log(response)
       if (response.success) {
         this.chartData = response.data;
         this.data = this.chartData.map(item => ({

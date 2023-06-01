@@ -89,6 +89,7 @@ import { PagesLoginCComponent } from './pages/pages-login-c/pages-login-c.compon
 import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.component';
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
 import { GraficaComponent } from './grafica/grafica.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { GraficaComponent } from './grafica/grafica.component';
     NgbAlertModule,
     NgSelectModule,
     AgGridModule,
+    NgxChartsModule
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

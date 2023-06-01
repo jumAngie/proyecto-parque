@@ -207,7 +207,7 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Historial Visitantes Atraccion
-        public static string UDP_GetChartData = "HistorialVisitantesAtraccionViewModel";
+        public static string UDP_GetChartData = "fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData ";
         #endregion
 
     }
