@@ -1,4 +1,4 @@
-/* primary button */
+
 .ov-btn-grow-primary {
   background: #fff; /* color de fondo */
   color: #4741d7; /* color de fuente */
@@ -35,7 +35,43 @@
 }
 
 
-/* insert button */
+.ov-btn-grow-info {
+  background: #fff; /* color de fondo */
+  color: #77bcdb; /* color de fuente */
+  border: 2px solid #77bcdb; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-info:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-info::after {
+  content: "";
+  background: #77bcdb; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -50%; /* ajusta el valor para aumentar la altura */
+  bottom: -50%; /* ajusta el valor para aumentar la altura */
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-info:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+
+
 .ov-btn-grow-in {
   background: #fff; /* color de fondo */
   color: #3cda49; /* color de fuente */
@@ -72,7 +108,7 @@
 }
 
 
-/* edit button */
+
 .ov-btn-grow-u {
   background: #fff; /* color de fondo */
   color: #e0de55; /* color de fuente */
@@ -109,7 +145,7 @@
 }
 
 
-/* delete button */
+
 .ov-btn-grow-d {
   background: #fff; /* color de fondo */
   color: #da5c3c; /* color de fuente */
@@ -145,8 +181,67 @@
   transform: skewX(-45deg) scale(1, 1);
 }
 
-.image-resize {
-  max-width: 100%;
-  max-height: 200px; /* Ajusta el valor según tus necesidades */
-  object-fit: contain; /* Ajusta el valor según tus necesidades */
+
+
+.ov-btn-grow-dark {
+  background: #fff; /* color de fondo */
+  color: #000000; /* color de fuente */
+  border: 2px solid #000000; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-dark:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-dark::after {
+  content: "";
+  background: #000000; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -50%; /* ajusta el valor para aumentar la altura */
+  bottom: -50%; /* ajusta el valor para aumentar la altura */
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-dark:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+.badge-custom {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 6px 9px;
+  font-size: 11px;
+}
+
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+
+.img-circle-medium {
+  width: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
+  height: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 2px #00000060;
+}
+
+.point:hover {
+  cursor: pointer;
 }

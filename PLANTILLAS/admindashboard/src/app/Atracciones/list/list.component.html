@@ -44,13 +44,11 @@
 
       <div class="row row-cols-1 row-cols-sm-1 row-cols-sm-3 justify-content-center align-items-stretch gap-4 mt-2">
          <div *ngFor="let atraccion of filtrarAtracciones() | paginate: { itemsPerPage: 2, currentPage: p }" class="card border shadow rounded-md p-2 d-flex flex-column">
-
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcA3PYCthnwH8QcByxYcI1MB314iPksl6Nqw&usqp=CAU" alt="" class="card-img-top">
-         
-            <div class="card-body">             
-               <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
-            </div>
-            <div class="card-footer" style="text-align: center;">
+           <img [src]="atraccion.atra_Imagen" alt="" class="card-img-top img-fluid image-resize">
+           <div class="card-body">
+             <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
+           </div>
+           <div class="card-footer" style="text-align: center;">
 
                <button (click)="EditarAtraccion(atraccion)" class="ov-btn-grow-u" style="margin-left: 10px">
                   <i class="bi bi-pen-fill"></i> <label class="ms-1">Editar</label> 

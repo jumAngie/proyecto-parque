@@ -23,7 +23,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string | null = localStorage.getItem("usua_ID");
-    console.log(id);
+    if (id==null) {
+      this.router.navigate(['/']);
+    }
 
     // Convertir id a número o usar 0 si es nulo
     const parsedId: number = id !== null ? parseInt(id) : 0;
