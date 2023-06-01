@@ -38,8 +38,7 @@ export class EditAtraccionesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getData();
-    //this.atracciones.atra_DuracionRonda = this.convertirStringATime(this.atracciones.atra_DuracionRonda.toString());
+    this.getData();    
   }
 
   
@@ -77,22 +76,7 @@ export class EditAtraccionesComponent implements OnInit {
       }
     });
   }
-   convertirStringATime(string: any) {
-    const tiempo = string.split('.'); // Separar el string en partes: horas, minutos y segundos
-    const temp = tiempo[0];
-    console.log(temp);
-    const tempSplited = temp.split(':');
-    // Crear un objeto Date con los valores obtenidos del string
-    const date = new Date();
-    date.setHours(parseInt(tempSplited[0]));
-    date.setMinutes(parseInt(tempSplited[1]));
-    date.setSeconds(parseInt(tempSplited[2]));
-  
-    // Formatear el objeto Date en formato aceptado por el input de tipo time
-    const formatoTime = date.toISOString().substr(11, 8);
-  
-    return formatoTime;
-  }
+
   
   
 
@@ -181,7 +165,7 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarLimitePersonas(){
-    if(!this.atracciones.atra_LimitePersonas){
+    if(this.atracciones.atra_LimitePersonas.toString().trim() == '' || this.atracciones.atra_LimitePersonas == 0){
       this.LimitePersonasRequerido = true;
       return true;
     }else{
@@ -191,7 +175,7 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarTiempoDuracion(){
-    if(!this.atracciones.atra_DuracionRonda){
+    if(this.atracciones.atra_DuracionRonda.toString().trim() == '' || this.atracciones.atra_DuracionRonda == 0){
       this.DuracionRondaRequerido = true;
       return true;
     }else{

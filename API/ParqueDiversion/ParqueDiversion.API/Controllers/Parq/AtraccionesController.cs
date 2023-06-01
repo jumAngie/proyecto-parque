@@ -31,7 +31,7 @@ namespace ParqueDiversion.API.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(AtraccionesViewModel item)
+        public IActionResult Insert([FromBody] AtraccionesViewModel item)
         {
             var listado = _mapper.Map<tbAtracciones>(item);
             var result = _parqueServices.InsertarAtracciones(listado);

@@ -14,7 +14,7 @@ export class Atracciones{
         atra_regi_Nombre!: String;
         atra_ReferenciaUbicacion!: String;
         atra_LimitePersonas!: number;
-        atra_DuracionRonda!: String;
+        atra_DuracionRonda!: number;
         
         // {
         //         days:0
