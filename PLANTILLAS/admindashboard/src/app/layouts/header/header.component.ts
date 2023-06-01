@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common'
+import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   nombreEmpleado = localStorage.getItem("nombreEmpleado");
   usua_Img = localStorage.getItem("usua_Img");
   
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,10 @@ export class HeaderComponent implements OnInit {
 
     //toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
+  }
+
+  DashBoard(){
+    this.router.navigate(['dashboard'])
   }
 
   Log_Out(){
