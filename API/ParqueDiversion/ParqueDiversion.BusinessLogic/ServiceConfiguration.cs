@@ -3,6 +3,8 @@ using ParqueDiversion.BusinessLogic.Services;
 using ParqueDiversion.DataAccess;
 using ParqueDiversion.DataAccess.Repositories;
 using ParqueDiversion.DataAccess.Repositories.Parq;
+using ParqueDiversion.DataAccess.Repositories.Fila;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,8 +52,11 @@ namespace ParqueDiversion.BusinessLogic
             services.AddScoped<VentasQuioscoDetalleRepository>();
             #endregion
 
+            #region Fila
+            services.AddScoped<HistorialVisitantesAtraccionRepository>();
+            #endregion
 
-            
+
             ParqueDiversionContext.BuildConnectionString(connectionString);
         }
 

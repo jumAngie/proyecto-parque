@@ -3,7 +3,7 @@ import { Router, RouterEvent, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
-
+import { GraficaComponent } from 'src/app/grafica/grafica.component';
 
 @Component({
   selector: 'app-list',

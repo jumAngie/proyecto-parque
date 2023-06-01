@@ -91,7 +91,6 @@ import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.c
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
 import { GraficaComponent } from './grafica/grafica.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,7 +162,7 @@ import { GraficaComponent } from './grafica/grafica.component';
     ListticketsclienteComponent,
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
-    GraficaComponent,    
+    GraficaComponent
   ],
   imports: [
     BrowserModule,

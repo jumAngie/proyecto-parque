@@ -3351,27 +3351,28 @@ FROM fila.tbHistorialVisitantesAtraccion AS hist
 INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
 
-CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData
+CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData 
 	@hist_FechaFiltro DATE
 AS
 	BEGIN
 		IF @hist_FechaFiltro IS NULL OR @hist_FechaFiltro = ''
 			BEGIN
-				SELECT TOP(5) atra_ID , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion
-				GROUP BY atra_ID
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC				
 			END
 		ELSE 
 			BEGIN
-				SELECT TOP(5) atra_ID , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hist_FechaFiltro
-				GROUP BY atra_ID
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hist_FechaFiltro
+				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC
 			END
 	END
 GO
 
 
-
+INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada,ticl_ID, hiat_FechaFiltro, hiat_UsuarioCreador)
+VALUES(5, GETDATE() ,1, '2023-05-30', 1)
 
 
 

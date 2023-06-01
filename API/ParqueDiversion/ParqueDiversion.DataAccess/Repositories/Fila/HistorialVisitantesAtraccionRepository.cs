@@ -42,7 +42,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Fila
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@hiat_FechaFiltro", item.hiat_FechaFiltro, DbType.Date, ParameterDirection.Input);
+            parametros.Add("@hist_FechaFiltro", item.hiat_FechaFiltro, DbType.Date, ParameterDirection.Input);
 
             return db.Query<VW_tbHistorialVisitantesAtraccion>(ScriptsDatabase.UDP_GetChartData, parametros, commandType: CommandType.StoredProcedure);
         }
