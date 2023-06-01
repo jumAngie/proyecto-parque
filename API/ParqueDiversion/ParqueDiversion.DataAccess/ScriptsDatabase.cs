@@ -206,7 +206,9 @@ namespace ParqueDiversion.DataAccess
         public static string FILTRAR_MUNICIPIOS = "gral.UDP_tbMunicipios_FILTER";
         #endregion
 
-
+        #region Historial Visitantes Atraccion
+        public static string UDP_GetChartData = "HistorialVisitantesAtraccionViewModel";
+        #endregion
 
     }
 }

@@ -11,7 +11,6 @@ namespace ParqueDiversion.Entities.Entities
         public tbAtracciones()
         {
             tbFilasAtraccion = new HashSet<tbFilasAtraccion>();
-            tbHistorialVisitantesAtraccion = new HashSet<tbHistorialVisitantesAtraccion>();
             tbRatings = new HashSet<tbRatings>();
             tbTemporizadores = new HashSet<tbTemporizadores>();
             tbVisitantesAtraccion = new HashSet<tbVisitantesAtraccion>();
@@ -24,7 +23,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? regi_ID { get; set; }
         public string atra_ReferenciaUbicacion { get; set; }
         public int? atra_LimitePersonas { get; set; }
-        public TimeSpan? atra_DuracionRonda { get; set; }
+        public int? atra_DuracionRonda { get; set; }
         public string atra_Imagen { get; set; }
         public int? atra_Habilitado { get; set; }
         public int? atra_Estado { get; set; }
@@ -36,7 +35,6 @@ namespace ParqueDiversion.Entities.Entities
         public virtual tbAreas area { get; set; }
         public virtual tbRegiones regi { get; set; }
         public virtual ICollection<tbFilasAtraccion> tbFilasAtraccion { get; set; }
-        public virtual ICollection<tbHistorialVisitantesAtraccion> tbHistorialVisitantesAtraccion { get; set; }
         public virtual ICollection<tbRatings> tbRatings { get; set; }
         public virtual ICollection<tbTemporizadores> tbTemporizadores { get; set; }
         public virtual ICollection<tbVisitantesAtraccion> tbVisitantesAtraccion { get; set; }

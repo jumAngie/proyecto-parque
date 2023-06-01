@@ -154,6 +154,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[fila].[VW_tbHistorialVisitantesAtraccion]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[gral].[VW_Departamentos]",
          "ObjectType": 3
       },
@@ -218,7 +222,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-115L2GI\\SQLEXPRESS.dbParqueAtracciones",
+   "UiHint": "DESKTOP-J5O0M9U\\SQLEXPRESS.dbParqueAtracciones",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

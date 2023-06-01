@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 namespace ParqueDiversion.Entities.Entities
 {
-    public partial class tbHistorialVisitantesAtraccion
+    public partial class VW_tbHistorialVisitantesAtraccion
     {
         public int hiat_ID { get; set; }
         public int? atra_ID { get; set; }
+        public string atra_Nombre { get; set; }
         public int? ticl_ID { get; set; }
         public TimeSpan? viat_HoraEntrada { get; set; }
         public DateTime? hiat_FechaFiltro { get; set; }

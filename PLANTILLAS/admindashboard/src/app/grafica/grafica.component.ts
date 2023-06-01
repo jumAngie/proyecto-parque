@@ -7,7 +7,6 @@ import { Color, colorSets } from '@swimlane/ngx-charts';
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
-  styleUrls: ['./grafica.component.css'],
   template: `
 <ngx-charts-bar-vertical
   [view]="view"
@@ -25,7 +24,9 @@ import { Color, colorSets } from '@swimlane/ngx-charts';
   [animations]="animations"
   [showDataLabel]="showDataLabel"
   [roundDomains]="roundDomains"
-  [dataLabelFormatting]="valueFormatting"  
+  [dataLabelFormatting]="valueFormatting"
+  [wrapTicks]="wrapTicks"
+  [barPadding]="barPadding"  
   >
 </ngx-charts-bar-vertical>
 `,

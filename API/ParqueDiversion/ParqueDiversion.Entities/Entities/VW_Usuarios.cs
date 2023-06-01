@@ -12,10 +12,10 @@ namespace ParqueDiversion.Entities.Entities
         public string usua_Usuario { get; set; }
         public string usua_Clave { get; set; }
         public int? empl_Id { get; set; }
+        public string usua_Img { get; set; }
         public string nombreEmpleado { get; set; }
         public bool? usua_Admin { get; set; }
         public string EsAdmin { get; set; }
-        public string usua_Img { get; set; }
         public int? role_ID { get; set; }
         public string role_Descripcion { get; set; }
         public int? usua_Estado { get; set; }
