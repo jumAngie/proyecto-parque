@@ -186,6 +186,10 @@ save(): void {
   
   //!cargar datos al modal
   ngOnInit(): void {
+    this.cargarLosDatos();
+  }
+
+  cargarLosDatos(){
     this.service.getRoles().subscribe((data) => {
       this.rol = data;
       
@@ -222,6 +226,7 @@ save(): void {
         console.log(response);
         this.rolEnvio = response[1].codeStatus
         console.log(this.rolEnvio);
+        this.cargarLosDatos();
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -233,6 +238,7 @@ save(): void {
         this.service.EditarRol(this.selectedRol).subscribe(
           (response: any) => {
             console.log(response.code);
+            this.cargarLosDatos();
           },
           (error: any) => {
             console.error('Error al guardar el rol', error);
@@ -245,6 +251,7 @@ save(): void {
         this.service.DeleteRol(this.selectedRol).subscribe(
           (response: any) => {
             console.log(response.code);
+            this.cargarLosDatos();
           },
           (error: any) => {
             console.error('Error al guardar el rol', error);

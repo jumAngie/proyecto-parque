@@ -40,11 +40,18 @@ export class UsuariosComponent {
   ) {}
 
   ngOnInit(): void {
+    this.cargarTodosLosDatos();
+  }
+  
+  
+  cargarTodosLosDatos(){
     this.service.getUsuarios().subscribe((data) => {
       this.usuario = data;
       this.usuariosFiltrados = data; 
       this.paginacionConfig.totalItems = this.usuario.length; 
     });
+
+    
 
     this.service.getUsuarios().subscribe((data) => {
       this.usuariosFiltrados = data;
@@ -75,9 +82,6 @@ export class UsuariosComponent {
       // Resto del código aquí
     }
   }
-  
-  
-  
 
 
   filtrarUsuarios() {
@@ -177,6 +181,7 @@ export class UsuariosComponent {
     this.service.InsertUsuario(this.InsertUsu).subscribe(
       (response: any) => {
         console.log(response);
+        this.cargarTodosLosDatos();
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -193,6 +198,7 @@ export class UsuariosComponent {
     this.service.UpdateUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
+        this.cargarTodosLosDatos();
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);
@@ -204,6 +210,7 @@ export class UsuariosComponent {
     this.service.DeleteUsuario(this.selectedUsu).subscribe(
       (response: any) => {
         console.log(response);
+        this.cargarTodosLosDatos();
       },
       (error: any) => {
         console.error('Error al guardar el rol', error);

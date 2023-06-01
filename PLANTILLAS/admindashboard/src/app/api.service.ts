@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
-  apiUrl = 'https://localhost:44322/api/'; 
+  apiUrl = 'http://www.parqueatracciones.somee.com/api/'; 
 
   constructor() { }
 }

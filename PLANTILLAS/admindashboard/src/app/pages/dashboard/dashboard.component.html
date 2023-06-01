@@ -14,6 +14,7 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
+          <!--header-->
           <div class="card-header" style="padding: 0; position: relative">
             <div
               class="banner"
@@ -32,21 +33,29 @@
               style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
             ></div>
           </div>
+          <!--body-->
           <div class="card-body" style="margin-top: 20px">
             <div class="d-flex flex-wrap blue-border">
               <div class="col-md-6" *ngFor="let item of areas; let i = index">
-                <img
-                  [src]="'assets/img/MAPA/' + item.area_Imagen"
-                  class="img-thumbnail-space img-fluid"
-                />
-                <div class="badges-container">
-                  <span class="badge" *ngFor="let atraccion of atracciones">
-                    {{ atraccion.atra_Nombre }}
-                  </span>
-                </div>
+                <div class="card-img-overlay-mod" style="position: relative;">
+                  <img [src]="'assets/img/MAPA/' + item.area_Imagen" class="img-thumbnail-space img-fluid" />
+                  <div class="badges-container">
+                    <span class="badge"
+                          *ngFor="let atraccion of atraccionesPorArea[item.area_ID]"
+                          (click)="detailAtraccion(atraccion)"
+                          [style.position]="'absolute'"
+                          [style.top.px]="0"
+                          [style.left.px]="0"
+                          [style.backgroundColor]="'beige'"
+                          [style.color]="'black'"
+                          >
+                      {{ atraccion.atra_Nombre }} 
+                    </span> 
+                  </div>
+                </div> 
               </div>
             </div>
-          </div>
+          </div>                         
         </div>
       </div>
     </div>

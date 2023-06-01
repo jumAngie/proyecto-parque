@@ -149,9 +149,9 @@
                            <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
                               <div class="card my-card p-0 m-0 mb-4" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
                                  <img [src]="'assets/img/MAPA/'+item.area_Imagen" class="img-thumbnail-space">
-                                 <!-- <div class="card-img-overlay-mod">
+                                  <div class="card-img-overlay-mod">
                                     <h5 class="card-title bottom-0">{{item.area_Nombre}}</h5>                                       
-                                 </div> -->
+                                 </div> 
                                  <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
                               </div>
                            </div>

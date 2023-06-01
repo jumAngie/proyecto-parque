@@ -208,6 +208,7 @@ AS
 BEGIN
 DECLARE @Admin BIT = (	SELECT usua_Admin FROM acce.tbUsuarios 
 						WHERE usua_ID = @usua_ID)
+
 IF @Admin = 1
 BEGIN
 	SELECT * FROM acce.VW_Pantallas
@@ -215,13 +216,15 @@ BEGIN
 END
 ELSE IF @Admin = 0
 BEGIN
-	SELECT DISTINCT (pant_Descripcion),pant_IDentificador,pant_URL
-	FROM acce.tbRolesXPantallas T1
+
+	
+DECLARE @role_ID BIT = (	SELECT role_ID FROM acce.tbUsuarios 
+						WHERE usua_ID = @usua_ID)
+	
+	SELECT * FROM acce.tbRolesXPantallas T1
 	INNER JOIN acce.tbPantallas T2
 	ON T1.pant_ID = T2.pant_ID
-	WHERE role_ID = ( SELECT role_ID FROM acce.tbUsuarios 
-						WHERE usua_ID = @usua_ID)
-						AND pant_Estado = 1
+	WHERE role_ID = @role_ID
 END
 END
 
