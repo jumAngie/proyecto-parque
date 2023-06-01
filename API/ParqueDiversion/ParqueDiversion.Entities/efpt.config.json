@@ -30,6 +30,38 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[tblCiudades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblDeporte]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblDepto]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblEmpleado]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblEstado]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblEvento]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblParticipante]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tblUsuarios]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[fact].[tbVentasQuiosco]",
          "ObjectType": 0
       },
@@ -154,6 +186,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[fila].[VW_tbHistorialVisitantesAtraccion]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[gral].[VW_Departamentos]",
          "ObjectType": 3
       },
@@ -218,7 +254,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-115L2GI\\SQLEXPRESS.dbParqueAtracciones",
+   "UiHint": "DESKTOP-9N0AU71\\SERVIDORLOCAL.dbParqueAtracciones",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

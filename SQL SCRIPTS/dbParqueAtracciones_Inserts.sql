@@ -441,11 +441,10 @@ GO
 
 
 INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_UsuarioCreador)
-VALUES	(1, 'Montaña Rusa', 'Solo para valientes', 1, 'A 10 metros de la entrada al area', 20, '00:05:00:00', 1),
-		(2, 'La casa de los mil y un espejos', 'No te pierdas en el camino a la salida!', 2, 'Gira a la derecha despues de pasar el quiosco', 20, '00:15:00:00', 1),
-		(3, 'El tren infinito', 'No te vallas a marear!', 3, 'Dirigete al este del area', 20, '00:07:00:00', 1),
-		(4, 'AirSoft', 'Solo puede quedar uno en pie!', 4, 'De la entrada al area dirígete a la izquierda y verás la entrada a la atracción', 20, '00:30:00:00', 1)
-GO       
+VALUES	(1, 'Montaña Rusa', 'Solo para valientes', 1, 'A 10 metros de la entrada al area', 20, 5, 1),
+		(2, 'La casa de los mil y un espejos', 'No te pierdas en el camino a la salida!', 2, 'Gira a la derecha despues de pasar el quiosco', 20, 20, 1),
+		(3, 'El tren infinito', 'No te vallas a marear!', 3, 'Dirigete al este del area', 20, 5, 1),
+		(4, 'AirSoft', 'Solo puede quedar uno en pie!', 4, 'De la entrada al area dirígete a la izquierda y verás la entrada a la atracción', 20, 20, 1)      
 
 
 INSERT INTO parq.tbEmpleados(empl_PrimerNombre, empl_SegundoNombre, empl_PrimerApellido, empl_SegundoApellido, empl_DNI, empl_Email, empl_Telefono, empl_Sexo, civi_ID, carg_ID, empl_UsuarioCreador)
@@ -542,6 +541,147 @@ GO
 
 
 
+
+INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada ,ticl_ID, hiat_FechaFiltro,hiat_UsuarioCreador)
+VALUES	(1, GETDATE(), 1, '2023-05-31'	, 1),
+		(1, GETDATE(), 2, '2023-05-31'	, 1),
+		(1, GETDATE(), 3, '2023-05-31'	, 1),
+		(1, GETDATE(), 4, '2023-05-31'	, 1),
+		(1, GETDATE(), 5, '2023-05-31'	, 1),
+		(1, GETDATE(), 6, '2023-05-31'	, 1),
+		(1, GETDATE(), 7, '2023-05-31'	, 1),
+		(1, GETDATE(), 8, '2023-05-31'	, 1),
+		(1, GETDATE(), 9, '2023-05-31'	, 1),
+		(1, GETDATE(), 10, '2023-05-31'	, 1),
+
+		(2, GETDATE(), 11, '2023-05-31'	, 1),
+		(2, GETDATE(), 12, '2023-05-31'	, 1),
+		(2, GETDATE(), 13, '2023-05-31'	, 1),
+		(2, GETDATE(), 14, '2023-05-31'	, 1),
+		(2, GETDATE(), 15, '2023-05-31'	, 1),
+		(2, GETDATE(), 16, '2023-05-31'	, 1),
+		(2, GETDATE(), 17, '2023-05-31'	, 1),
+		(2, GETDATE(), 18, '2023-05-31'	, 1),
+		(2, GETDATE(), 19, '2023-05-31'	, 1),
+						 
+		(3, GETDATE(), 20, '2023-05-31'	, 1),
+		(3, GETDATE(), 21, '2023-05-31'	, 1),
+		(3, GETDATE(), 22, '2023-05-31'	, 1),
+		(3, GETDATE(), 23, '2023-05-31'	, 1),
+		(3, GETDATE(), 24, '2023-05-31'	, 1),
+		(3, GETDATE(), 25, '2023-05-31'	, 1),
+		(3, GETDATE(), 26, '2023-05-31'	, 1),
+		(3, GETDATE(), 27, '2023-05-31'	, 1),
+		(3, GETDATE(), 28, '2023-05-31'	, 1),
+		(3, GETDATE(), 29, '2023-05-31'	, 1),
+						 
+		(4, GETDATE(), 30, '2023-05-31'	, 1),
+		(4, GETDATE(), 31, '2023-05-31'	, 1),
+		(4, GETDATE(), 32, '2023-05-31'	, 1),
+		(4, GETDATE(), 33, '2023-05-31'	, 1),
+		(4, GETDATE(), 34, '2023-05-31'	, 1),
+		(4, GETDATE(), 35, '2023-05-31'	, 1),
+		(4, GETDATE(), 36, '2023-05-31'	, 1),
+		(4, GETDATE(), 37, '2023-05-31'	, 1),
+		(4, GETDATE(), 38, '2023-05-31'	, 1)
+GO
+
+
+INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada, ticl_ID, hiat_FechaFiltro ,hiat_UsuarioCreador)
+VALUES	(1, GETDATE(), 1, '2023-05-30'	, 1),
+		(1, GETDATE(), 2, '2023-05-30'	, 1),
+		(1, GETDATE(), 3, '2023-05-30'	, 1),
+		(1, GETDATE(), 4, '2023-05-30'	, 1),
+		(1, GETDATE(), 5, '2023-05-30'	, 1),
+		(1, GETDATE(), 6, '2023-05-30'	, 1),
+		(1, GETDATE(), 7, '2023-05-30'	, 1),
+		(1, GETDATE(), 8, '2023-05-30'	, 1),
+		(1, GETDATE(), 9, '2023-05-30'	, 1),
+		(1, GETDATE(), 10, '2023-05-30'	, 1),
+		(1, GETDATE(), 39, '2023-05-30'	, 1),
+		(1, GETDATE(), 40, '2023-05-30'	, 1),
+		(1, GETDATE(), 41, '2023-05-30'	, 1),
+		(1, GETDATE(), 42, '2023-05-30'	, 1),
+		(1, GETDATE(), 43, '2023-05-30'	, 1),
+											 
+		(2, GETDATE(), 11, '2023-05-30'	, 1),
+		(2, GETDATE(), 12, '2023-05-30'	, 1),
+		(2, GETDATE(), 13, '2023-05-30'	, 1),
+		(2, GETDATE(), 14, '2023-05-30'	, 1),
+		(2, GETDATE(), 15, '2023-05-30'	, 1),
+		(2, GETDATE(), 16, '2023-05-30'	, 1),
+		(2, GETDATE(), 17, '2023-05-30'	, 1),
+		(2, GETDATE(), 18, '2023-05-30'	, 1),
+		(2, GETDATE(), 19, '2023-05-30'	, 1),
+								 			 
+		(3, GETDATE(), 20, '2023-05-30'	, 1),
+		(3, GETDATE(), 21, '2023-05-30'	, 1),
+		(3, GETDATE(), 22, '2023-05-30'	, 1),
+		(3, GETDATE(), 23, '2023-05-30'	, 1),
+		(3, GETDATE(), 24, '2023-05-30'	, 1),
+		(3, GETDATE(), 25, '2023-05-30'	, 1),
+		(3, GETDATE(), 26, '2023-05-30'	, 1),
+		(3, GETDATE(), 27, '2023-05-30'	, 1),
+		(3, GETDATE(), 28, '2023-05-30'	, 1),
+		(3, GETDATE(), 29, '2023-05-30'	, 1),
+						 			 
+		(4, GETDATE(), 30, '2023-05-30'	, 1),
+		(4, GETDATE(), 31, '2023-05-30'	, 1),
+		(4, GETDATE(), 32, '2023-05-30'	, 1),
+		(4, GETDATE(), 33, '2023-05-30'	, 1),
+		(4, GETDATE(), 34, '2023-05-30'	, 1),
+		(4, GETDATE(), 35, '2023-05-30'	, 1),
+		(4, GETDATE(), 36, '2023-05-30'	, 1),
+		(4, GETDATE(), 37, '2023-05-30'	, 1),
+		(4, GETDATE(), 38, '2023-05-30'	, 1)
+GO
+
+INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada, ticl_ID, hiat_FechaFiltro, hiat_UsuarioCreador)
+VALUES	(1, GETDATE(), 1, '2023-05-29'	, 1),
+		(1, GETDATE(), 2, '2023-05-29'	, 1),
+		(1, GETDATE(), 3, '2023-05-29'	, 1),
+		(1, GETDATE(), 4, '2023-05-29'	, 1),
+		(1, GETDATE(), 5, '2023-05-29'	, 1),
+		(1, GETDATE(), 6, '2023-05-29'	, 1),
+		(1, GETDATE(), 7, '2023-05-29'	, 1),
+
+									
+		(2, GETDATE(), 11, '2023-05-29'	, 1),
+		(2, GETDATE(), 12, '2023-05-29'	, 1),
+		(2, GETDATE(), 13, '2023-05-29'	, 1),
+		(2, GETDATE(), 14, '2023-05-29'	, 1),
+		(2, GETDATE(), 15, '2023-05-29'	, 1),
+		(2, GETDATE(), 16, '2023-05-29'	, 1),
+		(2, GETDATE(), 17, '2023-05-29'	, 1),
+		(2, GETDATE(), 18, '2023-05-29'	, 1),
+						 			
+		(3, GETDATE(), 20, '2023-05-29'	, 1),
+		(3, GETDATE(), 21, '2023-05-29'	, 1),
+		(3, GETDATE(), 22, '2023-05-29'	, 1),
+		(3, GETDATE(), 23, '2023-05-29'	, 1),
+		(3, GETDATE(), 24, '2023-05-29'	, 1),
+		(3, GETDATE(), 25, '2023-05-29'	, 1),
+		(3, GETDATE(), 26, '2023-05-29'	, 1),
+		(3, GETDATE(), 27, '2023-05-29'	, 1),
+		(3, GETDATE(), 28, '2023-05-29'	, 1),
+		(3, GETDATE(), 29, '2023-05-29'	, 1),
+						 			
+		(4, GETDATE(), 30, '2023-05-29'	, 1),
+		(4, GETDATE(), 31, '2023-05-29'	, 1),
+		(4, GETDATE(), 32, '2023-05-29'	, 1),
+		(4, GETDATE(), 33, '2023-05-29'	, 1),
+		(4, GETDATE(), 34, '2023-05-29'	, 1),
+		(4, GETDATE(), 35, '2023-05-29'	, 1),
+		(4, GETDATE(), 36, '2023-05-29'	, 1),
+		(4, GETDATE(), 37, '2023-05-29'	, 1),
+		(4, GETDATE(), 38, '2023-05-29'	, 1),
+		(4, GETDATE(), 39, '2023-05-29'	, 1),
+		(4, GETDATE(), 40, '2023-05-29'	, 1),
+		(4, GETDATE(), 41, '2023-05-29'	, 1),
+		(4, GETDATE(), 42, '2023-05-29'	, 1),
+		(4, GETDATE(), 43, '2023-05-29'	, 1),
+		(4, GETDATE(), 44, '2023-05-29'	, 1)
+GO
 
 
 --ALTER TABLE gral.tbEstadosCiviles

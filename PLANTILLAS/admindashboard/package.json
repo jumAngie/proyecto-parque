@@ -24,6 +24,7 @@
     "@mui/material": "^5.13.2",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@ng-select/ng-select": "^10.0.4",
+    "@swimlane/ngx-charts": "^20.3.1",
     "ag-grid-angular": "^29.3.5",
     "ag-grid-community": "^29.3.5",
     "angular-bootstrap-md": "^15.0.0",

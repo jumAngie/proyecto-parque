@@ -34,104 +34,107 @@
             <div class="row g-3 mt-2">
                <div class="col-7">
                   <div class="card">
-
-                     <div class="card-header text-center text-dark ">                              
-                        <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
-                     </div>
-                     
-                     <div class="card-body">
-                        <div class="row g-3">
-                           <div class="col-md-6">
-
-                              <div class="row g-3 mt-1">
-
-                                 <div class="col-md-12">
-                                    <div class="mt-3"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
-                                    <div class="input-group" style="height: 3rem;">                                        
-                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre" (input)="clearNombreError()"> 
-                                    </div>
-                                 </div>   
-
-                                 <div class="col-md-12">
-                                    <div class="mt-1"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DescripcionRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Descripción:</label>
-                                    <div class="input-group" style="height: 3rem;">                                                                           
-                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción" id="atra_Descripcion" (input)="clearDescripcionError()">                                                                               
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12">    
-                                    <div class="mt-1"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>                                
-                                    <div class="input-group" style="height: 3rem;">                                       
-                                       <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">                                                                                                               
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12">
-                                    <div class="mt-1"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="LimitePersonasRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Límite personas:</label>
-                                    <div class="input-group" style="height: 3rem;">                                       
-                                       <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control" id="atra_LimitePersonas" placeholder="Límite de personas" (input)="clearLimitePersonasError()">                                                                               
-                                    </div>                                                                        
-                                 </div>
-
-                                 <div class="col-md-12">  
-                                    <div class="mt-1"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DuracionRondaRequerido"></i>                                 
-                                    <label for="atra_DuracionRonda" class="ms-1 form-label text-dark">Duración Ronda:</label>  
-                                    <div class="input-group" style="height: 3rem;">                                       
-                                       <span class="input-group-text"><i class="bi bi-stopwatch-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="atracciones.atra_DuracionRonda" type="time" class="form-control" id="atra_DuracionRonda" placeholder="Duración por ronda" (input)="clearDuracionRondaError()">                                                                                                                   
-                                    </div>
-                                 </div>
+                    <div class="card-header text-center text-dark">
+                      <h4 style="font-size: xx-large;">
+                        <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información
+                      </h4>
+                    </div>
+                
+                    <div class="card-body">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <div class="row g-3 mt-1">
+                
+                            <div class="col-md-12">
+                              <div class="mt-3"></div>
+                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>
+                              <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
+                              <div class="input-group" style="height: 3rem;">
+                                <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                <input [(ngModel)]="atracciones.atra_Nombre" type="text" class="form-control" id="atra_Nombre"
+                                  placeholder="Nombre" (input)="clearNombreError()">
                               </div>
-
-                           </div>
-                           <div class="col-md-6">
-                              <div class="row g-3 mt-1">
-                                 <div class="col-md-12">
-                                    <div class="card mt-1">
-                                       <div class="card-header text-center">                                          
-                                          <div class="form-group">
-                                             <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
-                                             <label for="imagen" class="ms-1 form-label text-dark">Imagen:</label>
-                                             <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
-                                          </div>
-                                       </div>
-                                       <div class="card-body text-center mt-3">
-                                          <div class="my-image-container">
-                                            <div class="my-circular-container">
-                                             <div class="card-body" *ngIf="selectedImage">
-                                                <img #imageInput [src]="selectedImage">
-                                             </div>
-                                            </div>
-                                          </div>
-                                        </div>                                        
-                                       <div class="card-footer text-center">
-                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-1" style="height: 2.4rem; margin-left: 0;">
-                                             <i class="bi bi-trash-fill"></i>
-                                             Quitar Imagen
-                                          </button>                                          
-                                       </div>
-                                    </div>
-                                 </div>                                 
-                              </div>                                 
-                           </div>
-
+                            </div>
+                
+                            <div class="col-md-12">
+                              <div class="mt-1"></div>
+                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DescripcionRequerido"></i>
+                              <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Descripción:</label>
+                              <div class="input-group" style="height: 3rem;">
+                                <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                <input [(ngModel)]="atracciones.atra_Descripcion" class="form-control" placeholder="Descripción"
+                                  id="atra_Descripcion" (input)="clearDescripcionError()">
+                              </div>
+                            </div>
+                
+                            <div class="col-md-12">
+                              <div class="mt-1"></div>
+                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>
+                              <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>
+                              <div class="input-group" style="height: 3rem;">
+                                <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
+                                <input [(ngModel)]="atracciones.atra_ReferenciaUbicacion" class="form-control"
+                                  placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                     </div>   
+                        <div class="col-md-6">
+                          <div class="d-flex justify-content-center align-items-center point">
+                            <input id="uploadBtn" type="file" class="point" style="display: none;" accept="image/*"
+                              (change)="handleImageUpload($event)">
+                            <div class="position-relative">
+                              <label for="uploadBtn" class="img-circle-medium point"
+                                [style.background-image]="'url(' + atracciones.atra_Imagen + ')'">
+                                <span *ngIf="!atracciones.atra_Imagen"
+                                  class="mt-5 text-center d-flex align-items-center justify-content-center">
+                                  <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4 point" alt=""></i>
+                                </span>
+                                <span *ngIf="!atracciones.atra_Imagen "
+                                  class="text-center d-flex align-items-center justify-content-center">
+                                  Añadir Foto de Atracción
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-center align-items-center mt-2">
+                            <i *ngIf="atracciones.atra_Imagen" class="point" (click)="deleteImage()">
+                              <img src="../../assets/img/fotoeliminar.png" width="40px" alt="">
+                            </i>
+                           </div>
+                          <div class="d-flex justify-content-center align-items-center mt-2">
+                           <i  *ngIf="ImagenRequerido">
+                             <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
+                           </i>
+                          </div>
+                        </div>
+                
+                        <div class="col-md-6">
+                          <div class="mt-1"></div>
+                          <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="LimitePersonasRequerido"></i>
+                          <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Límite personas:</label>
+                          <div class="input-group" style="height: 3rem;">
+                            <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
+                            <input [(ngModel)]="atracciones.atra_LimitePersonas" type="text" class="form-control"
+                              id="atra_LimitePersonas" placeholder="Límite de personas" (input)="clearLimitePersonasError()">
+                          </div>
+                        </div>
+                
+                        <div class="col-md-6" style="margin-bottom: 2.2rem;">
+                          <div class="mt-1"></div>
+                          <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="DuracionRondaRequerido"></i>
+                          <label for="atra_DuracionRonda" class="ms-1 form-label text-dark">Duración Ronda:</label>
+                          <div class="input-group" style="height: 3rem;">
+                            <span class="input-group-text"><i class="bi bi-stopwatch-fill" style="color: blueviolet;"></i></span>
+                            <input [(ngModel)]="atracciones.atra_DuracionRonda" type="text" class="form-control"
+                              id="atra_DuracionRonda" placeholder="Duración por ronda" (input)="clearDuracionRondaError()">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
+                </div>
+                
 
                <div class="col-5">
                   <div class="card">

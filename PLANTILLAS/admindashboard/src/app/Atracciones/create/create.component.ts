@@ -5,6 +5,7 @@ import { Areas } from 'src/app/Models/Areas';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { Regiones } from 'src/app/Models/Regiones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 
 
@@ -20,6 +21,7 @@ export class CreateAtraccionesComponent implements OnInit {
   regiones!: Regiones[];
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
   selectedImage: any;
+  imageUrl: string = ''; 
   
   @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
 
@@ -32,11 +34,13 @@ export class CreateAtraccionesComponent implements OnInit {
   DuracionRondaRequerido = false;
   RegionRequerido = false;
   AreaRequerido = false;
-
+  ImagenRequerido = false;
+  
   
   constructor(
     private service: ParqServicesService,
     private router: Router,
+    private imgbbService: ImgbbService
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +73,7 @@ export class CreateAtraccionesComponent implements OnInit {
     errorsArray[4] = this.validarTiempoDuracion();
     errorsArray[5] = this.validarRegion();
     errorsArray[6] = this.validarArea();
+    errorsArray[7] = this.validarImagen();
 
     for (let i = 0; i < errorsArray.length; i++) {
       if(errorsArray[i] == true){
@@ -106,6 +111,17 @@ export class CreateAtraccionesComponent implements OnInit {
       return true;
     }else{
       this.NombreRequerido = false;
+      return false;
+    }
+  }
+
+  validarImagen() {
+    if(!this.atracciones.atra_Imagen){
+      this.ImagenRequerido = true;
+      //ToastUtils.showWarningToast('Campo "Nombre" requerido');
+      return true;
+    }else{
+      this.ImagenRequerido = false;
       return false;
     }
   }
@@ -233,22 +249,37 @@ export class CreateAtraccionesComponent implements OnInit {
     });
   }  
   
-  handleImageChange(event: any) {
+  handleImageUpload(event: any) {
     const file = event.target.files[0];
-    const reader = new FileReader();
 
-    reader.onload = (e: any) => {
-      this.selectedImage = e.target.result;
-    };
-    
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+
+        this.uploadImageToServer(file);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
-  removeImage(){
-    this.selectedImage = '';
-    this.imageInput.nativeElement.value = '';
-  }
+  uploadImageToServer(file: File) {
+    this.imgbbService.Upload_IMG(file)
+      .subscribe(
+        response => {
 
+          this.imageUrl = response.data.url;
+          this.atracciones.atra_Imagen = (this.imageUrl)
+        },
+        error => {
+          // Manejar errores en la carga de la imagen
+          console.error(error);
+        }
+      );
+  }
+  deleteImage() {
+    this.imageUrl = "";
+    this.atracciones.atra_Imagen="";
+  }
 
 
 }

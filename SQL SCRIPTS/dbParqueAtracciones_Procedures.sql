@@ -10,6 +10,7 @@ SELECT	usua_ID,
 		usua_Usuario,
 		usua_Clave,
 		T1.empl_Id,
+		usua_Img,
 		nombreEmpleado = CONVERT(VARCHAR,T2.empl_PrimerNombre+' '+T2.empl_PrimerApellido),
 		usua_Admin,
 		CASE WHEN usua_Admin  = 1 THEN 'SI'
@@ -74,6 +75,7 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INSERT
 @usua_Clave					NVARCHAR(150),
 @usua_Admin					BIT,
 @role_ID					INT,
+@usua_Img					NVARCHAR(MAX),
 @usua_UsuarioCreador		INT
 AS
 BEGIN
@@ -90,8 +92,8 @@ BEGIN
 			DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 
 
-			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_UsuarioCreador)
-			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_UsuarioCreador)
+			INSERT INTO acce.tbUsuarios (usua_Usuario,empl_ID, usua_Clave, usua_Admin,role_ID,usua_Img,usua_UsuarioCreador)
+			VALUES (@usua_Usuario,@empl_ID,@Encrypt,@usua_Admin,@role_ID,@usua_Img,@usua_UsuarioCreador)
 
 			SELECT 200 AS codeStatus, 'Usuario Creado con éxito' AS messageStatus
 		END
@@ -107,18 +109,20 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_UPDATE
 @empl_ID					INT,
 @usua_Admin					BIT,
 @role_ID					INT,
-@usua_UsuarioModificador			INT
+@usua_Img					NVARCHAR(MAX),
+@usua_UsuarioModificador	INT
 AS
 BEGIN
 	BEGIN TRY
 
 			UPDATE acce.tbUsuarios
 			SET
-				empl_ID				=	@empl_ID,
-				usua_Admin			=	@usua_Admin,
-				role_ID				=	@role_ID,
+				empl_ID					=	@empl_ID,
+				usua_Admin				=	@usua_Admin,
+				role_ID					=	@role_ID,
+				usua_Img				=	@usua_Img,
 				usua_UsuarioModificador	=	@usua_UsuarioModificador
-				WHERE [usua_ID]		=	@usua_ID
+				WHERE [usua_ID]			=	@usua_ID
 
 			SELECT 200 AS codeStatus, 'Usuario Modificado con éxito' AS messageStatus
 
@@ -157,13 +161,22 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_DELETE
 AS
 BEGIN
 	BEGIN TRY
+			DECLARE @THELASTOFADMIN INT = (SELECT COUNT(*) FROM acce.VW_Usuarios WHERE usua_Estado = 1 AND usua_Admin = 1)
+			DECLARE @ELMEROADMIN BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID AND @usua_ID)
+		
+			IF @THELASTOFADMIN > 1
+			BEGIN
 			UPDATE acce.tbUsuarios
 			SET
 				usua_Estado		=	0
 				WHERE [usua_ID]	=	@usua_ID
 
 			SELECT 200 AS codeStatus, 'Usuario Eliminado con éxito' AS messageStatus
-
+			END
+			IF @THELASTOFADMIN = 1 OR @ELMEROADMIN = 1 
+			BEGIN
+			SELECT 409 AS codeStatus, 'No puede Eliminar a este Admin' AS messageStatus
+			END
 	END TRY
 	BEGIN CATCH
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
@@ -197,30 +210,22 @@ DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@usua_Clave))
 END
 GO
 
-
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU
-@usua_ID INT
-AS
-BEGIN
-DECLARE @Admin BIT = (	SELECT usua_Admin FROM acce.tbUsuarios 
-						WHERE usua_ID = @usua_ID)
-IF @Admin = 1
-BEGIN
-	SELECT * FROM acce.VW_Pantallas
-	WHERE pant_Estado = 1
-END
-ELSE IF @Admin = 0
-BEGIN
-	SELECT DISTINCT (pant_Descripcion),pant_IDentificador,pant_URL
-	FROM acce.tbRolesXPantallas T1
-	INNER JOIN acce.tbPantallas T2
-	ON T1.pant_ID = T2.pant_ID
-	WHERE role_ID = ( SELECT role_ID FROM acce.tbUsuarios 
-						WHERE usua_ID = @usua_ID)
-						AND pant_Estado = 1
-END
-END
-
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+@usua_ID INT 
+AS 
+BEGIN 
+			DECLARE @Admin BIT = (SELECT usua_Admin FROM acce.tbUsuarios WHERE usua_ID = @usua_ID)  
+		IF @Admin = 1 BEGIN     
+			SELECT * FROM acce.VW_Pantallas     
+			WHERE pant_Estado = 1 
+		END 
+		ELSE IF @Admin = 0 
+		BEGIN       
+			DECLARE @role_ID BIT = (SELECT role_ID FROM acce.tbUsuarios WHERE usua_ID = @usua_ID)          
+			SELECT * FROM acce.tbRolesXPantallas T1     
+			INNER JOIN acce.tbPantallas T2     
+			ON T1.pant_ID = T2.pant_ID     
+			WHERE role_ID = @role_ID END END
 GO
 
 
@@ -2276,6 +2281,15 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROC parq.UDP_tbAtracciones_AtraccionesPorAreaId
+	@area_ID		INT
+AS
+BEGIN
+		SELECT * FROM parq.VW_tbAtracciones
+		WHERE	 area_ID = @area_ID
+END
+GO
+
 --*************** FIND DE ATRACCIONES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
 	@atra_ID INT
@@ -3352,10 +3366,10 @@ INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
 
 CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData 
-	@hist_FechaFiltro DATE
+	@hiat_FechaFiltro DATE
 AS
 	BEGIN
-		IF @hist_FechaFiltro IS NULL OR @hist_FechaFiltro = ''
+		IF @hiat_FechaFiltro IS NULL OR @hiat_FechaFiltro = ''
 			BEGIN
 				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
 				GROUP BY atra_ID, atra_Nombre
@@ -3363,7 +3377,7 @@ AS
 			END
 		ELSE 
 			BEGIN
-				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hist_FechaFiltro
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hiat_FechaFiltro
 				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC
 			END
@@ -3371,22 +3385,17 @@ AS
 GO
 
 
+
+
+
+
+
+EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1,null, 'https://i.ibb.co/5BC2KcD/mio-kun.jpg', 1
+EXECUTE acce.UDP_tbUsuarios_INSERT 'ElMeroJafet', 1, 'ZZZ', 1,null, 'https://i.ibb.co/5BC2KcD/mio-kun.jpg', 1
+EXECUTE acce.UDP_tbUsuarios_LOGIN 'ElMeroJafet', 'ZZZ'
+
 INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada,ticl_ID, hiat_FechaFiltro, hiat_UsuarioCreador)
 VALUES(5, GETDATE() ,1, '2023-05-30', 1)
-
-
-
-
-
-
-
-
-
-EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
-EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
-
-
-
 
 SET IDENTITY_INSERT [acce].[tbPantallas] ON 
 GO
@@ -3408,4 +3417,3 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO
-
