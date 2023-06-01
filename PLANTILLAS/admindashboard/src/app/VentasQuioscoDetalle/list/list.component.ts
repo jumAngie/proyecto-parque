@@ -16,7 +16,8 @@ export class VentasListComponent implements OnInit {
   ventasQuioscoDetalle!: VentasQuioscoDetalle[];
   deleteID: any;
   gridOptions: GridOptions = {};
-
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 30]; // Opciones de tamaño de página
 
   constructor(
     private service: ParqServicesService, 
@@ -41,12 +42,16 @@ export class VentasListComponent implements OnInit {
             onDelete: this.onDelete.bind(this),
           }
         },
-      ],      
+      ],            
       rowData: this.ventasQuioscoDetalle,
       pagination: true,
-      paginationPageSize: 7,            
+      paginationPageSize: this.selectedPageSize,
+      context: {
+        pageSizeOptions: this.pageSizeOptions
+      },
       defaultColDef: {
         sortable: true,
+        lockVisible: true,
         filter: true,
         resizable: true,
         unSortIcon: true,
@@ -77,7 +82,13 @@ export class VentasListComponent implements OnInit {
     }
 
     this.getVentas();
+    this.onPageSizeChanged();
   }
+
+  onPageSizeChanged(): void {
+    this.gridOptions.api?.paginationSetPageSize(this.selectedPageSize);
+  }
+  
 
   getVentas(){
     this.service.getVentas()

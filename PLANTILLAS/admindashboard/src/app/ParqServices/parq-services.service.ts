@@ -17,6 +17,7 @@ import { VentasQuiosco } from '../Models/VentasQuiosco';
 import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
+import { HistorialVisitantesAtraccion } from '../Models/HistorialVisitantesAtraccion';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,15 @@ export class ParqServicesService {
   // servicios de golosinas //
   getGolosinas(){
     return this.http.get<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Listado');
+  }
+  createGolosina(golosina: Golosinas){
+    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Insertar', golosina);
+  }
+  updateGolosina(golosina: Golosinas){
+    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Actualizar', golosina);
+  }
+  deleteGolosina(id: number){
+    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Delete/'+id, id);
   }
 
 
@@ -190,5 +200,10 @@ export class ParqServicesService {
   // servicios de tickets cliente //
   getTicketsCliente(){
     return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
+  }
+
+  //Gráfica
+  getChartData(item: HistorialVisitantesAtraccion){
+    return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
   }
 }

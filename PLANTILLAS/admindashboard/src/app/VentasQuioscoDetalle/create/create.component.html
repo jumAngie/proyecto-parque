@@ -12,9 +12,24 @@
        <div class="row">
           <div class="col-lg-12">
              <div class="card bg-light">
-                <div class="card-header text-center">
-                   <label class="cart-text mb-0 mt-0 text-dark" style="font-size: x-large;">Nueva venta</label>
-                </div>
+               <div class="card-header" style="padding: 0; position: relative">
+                  <div
+                    class="banner"
+                    style="
+                      background-image: url('/assets/img/BANNERS-VR-FINAL/VENTAS-QUIOSCOS.png');
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;
+                      background-size: contain;
+                      background-position: center;
+                      height: 0;
+                      padding-bottom: 23%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+                    "
+                  ></div>
+                  <div
+                    class="overlay"
+                    style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+                  ></div>
+               </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-4">
@@ -25,11 +40,11 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                     <div class="col-md-12 mt-4"> 
+                                     <div class="col-md-12 mt-4">                                        
                                         <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="ClienteRequerido"></i>
                                         <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cliente:</label>
                                         <div class="input-group" style="height: 3rem;">
-                                           <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                           <span class="input-group-text"><i class="bi bi-person-fill" style="color: blueviolet;"></i></span>
                                            <select [(ngModel)]="venta.clie_ID" class="form-select" id="clie_ID" aria-label="Regiones" (change)="clearClienteError()">
                                               <option *ngFor="let option of clientes" [value]="option.clie_ID">{{ option.clie_Nombres + ' ' +option.clie_Apellidos}}</option>
                                            </select>
@@ -39,7 +54,7 @@
                                         <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="PagoRequerido"></i>
                                         <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Método de págo:</label>
                                         <div class="input-group" style="height: 3rem;">
-                                           <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                           <span class="input-group-text"><i class="bi bi-wallet" style="color: blueviolet;"></i></span>
                                            <select [(ngModel)]="venta.pago_ID" class="form-select" id="pago_ID" aria-label="Regiones" (change)="clearPagoError()">
                                              <option value="0">Selecciona una opción...</option> 
                                              <option *ngFor="let option of pagos" [value]="option.pago_ID">{{ option.pago_Nombre }}</option>
@@ -74,7 +89,7 @@
                                         <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="InsumoRequerido"></i>
                                         <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Insumo:</label>
                                         <div class="input-group" style="height: 3rem;">
-                                           <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                           <span class="input-group-text"><i class="bi bi-basket3-fill" style="color: blueviolet;"></i></span>
                                            <select [(ngModel)]="detalle.insu_ID" class="form-select" id="insu_ID" aria-label="Regiones" (change)="clearInsumoError()">
                                              <option value="0">Selecciona un insumo...</option> 
                                              <option *ngFor="let option of insumos" [value]="option.insu_ID">{{ option.golo_Nombre }}</option>
@@ -86,7 +101,7 @@
                                         <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="CantidadRequerido"></i>                                 
                                         <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cantidad:</label>
                                         <div class="input-group" style="height: 3rem;">                                       
-                                           <span class="input-group-text"><i class="bi bi-people-fill" style="color: blueviolet;"></i></span>
+                                           <span class="input-group-text"><i class="bi bi-boxes" style="color: blueviolet;"></i></span>
                                            <input [(ngModel)]="detalle.deta_Cantidad" type="text" class="form-control" id="deta_Cantidad" placeholder="Cantidad" (input)="clearCantidadError()">                                                                               
                                         </div>                                                                        
                                     </div>
@@ -191,7 +206,7 @@
             <button  type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
                <i class="bi bi-reply-fill"></i>Cancelar
             </button> 
-            <button (click)="Volver()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+            <button (click)="closeReceipt()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
                <i class="bi bi-check-circle-fill "></i>Confirmar
             </button>
          </div>

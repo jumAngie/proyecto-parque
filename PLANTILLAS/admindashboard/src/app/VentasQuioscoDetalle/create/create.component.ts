@@ -240,6 +240,9 @@ export class VentasCrearComponent implements OnInit{
 
     const Cantidad = this.elementRef.nativeElement.querySelector('#deta_Cantidad');
     this.renderer2.setProperty(Cantidad, 'value', '');
+
+    this.detalle.insu_ID = 0;
+    this.detalle.deta_Cantidad = 0;
   };
 
   closeModal(){
@@ -358,6 +361,11 @@ export class VentasCrearComponent implements OnInit{
     this.router.navigate(['ventasquiosco-listado']);
   };
 
+  closeReceipt(){
+    ToastUtils.showSuccessToast('Venta finalizada exitosamente!');
+    this.router.navigate(['ventasquiosco-listado']);
+  }
+
 //#endregion
 
 
@@ -402,7 +410,7 @@ export class VentasCrearComponent implements OnInit{
 //#region VALIDACIONES DEL CONTENIDO DE LA FACTURA
 
   validarInsumo(){
-    if (!this.detalle.insu_ID) {
+    if (!this.detalle.insu_ID || this.detalle.insu_ID.toString().trim() == '' || this.detalle.insu_ID == 0) {
       this.InsumoRequerido = true
       return true;
     }else{
@@ -412,7 +420,7 @@ export class VentasCrearComponent implements OnInit{
   };
 
   validarCantidad(){
-    if (!this.detalle.deta_Cantidad) {
+    if (!this.detalle.deta_Cantidad || this.detalle.deta_Cantidad.toString().trim() == '' || this.detalle.deta_Cantidad == 0) {
       this.CantidadRequerido = true;
       return true;
     }else{

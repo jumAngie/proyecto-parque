@@ -2311,7 +2311,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME(7), 
+	@atra_DuracionRonda			INT, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioCreador		INT
  AS
@@ -2346,7 +2346,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_UPDATE
 	@regi_ID					INT, 
 	@atra_ReferenciaUbicacion	VARCHAR(300), 
 	@atra_LimitePersonas		INT, 
-	@atra_DuracionRonda			TIME, 
+	@atra_DuracionRonda			INT, 
 	@atra_Imagen				NVARCHAR(MAX),
 	@atra_UsuarioModificador	INT
  AS
@@ -3345,12 +3345,60 @@ BEGIN
 END
 GO
 
+SELECT * FROM fila.tbHistorialVisitantesAtraccion
+GO
+
+CREATE OR ALTER VIEW fila.VW_tbHistorialVisitantesAtraccion
+AS
+SELECT	hiat_ID, 
+		hist.atra_ID, 
+		atra.atra_Nombre,
+		ticl_ID, 
+		viat_HoraEntrada, 
+		hiat_FechaFiltro, 
+		hiat_Habilitado, 
+		hiat_Estado, 
+		hiat_UsuarioCreador, 
+		hiat_FechaCreacion, 
+		hiat_UsuarioModificador, 
+		hiat_FechaModificacion 
+
+FROM fila.tbHistorialVisitantesAtraccion AS hist
+INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
+GO
+
+CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData 
+	@hiat_FechaFiltro DATE
+AS
+	BEGIN
+		IF @hiat_FechaFiltro IS NULL OR @hiat_FechaFiltro = ''
+			BEGIN
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				GROUP BY atra_ID, atra_Nombre
+				ORDER BY ticl_ID DESC				
+			END
+		ELSE 
+			BEGIN
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hiat_FechaFiltro
+				GROUP BY atra_ID, atra_Nombre
+				ORDER BY ticl_ID DESC
+			END
+	END
+GO
 
 
-EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1
+
+
+
+
+
+
+
+EXECUTE acce.UDP_tbUsuarios_INSERT 'Admin', 1, 'Admin123', 1, NULL, 1,1
 EXECUTE acce.UDP_tbUsuarios_LOGIN 'Admin', 'Admin123'
 
-
+INSERT INTO fila.tbHistorialVisitantesAtraccion(atra_ID, viat_HoraEntrada,ticl_ID, hiat_FechaFiltro, hiat_UsuarioCreador)
+VALUES(5, GETDATE() ,1, '2023-05-30', 1)
 
 SET IDENTITY_INSERT [acce].[tbPantallas] ON 
 GO
