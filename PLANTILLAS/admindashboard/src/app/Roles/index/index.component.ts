@@ -46,6 +46,8 @@ this.active=1;
 this.tabEnabledStatus[this.active - 1] = true;
 this.NombreRolRequerido = false;
 this.rolinsert.role_Nombre="";
+this.selectedPeople = [];
+this.selectedPantallas = [];
 }
 
 
