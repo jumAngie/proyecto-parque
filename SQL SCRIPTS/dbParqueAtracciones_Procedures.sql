@@ -3394,7 +3394,7 @@ FROM fila.tbHistorialVisitantesAtraccion AS hist
 INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
 
-CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData 
+CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData
 	@hiat_FechaFiltro DATE
 AS
 	BEGIN

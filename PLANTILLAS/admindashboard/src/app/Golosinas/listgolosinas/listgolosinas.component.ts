@@ -13,6 +13,7 @@ export class ListgolosinasComponent implements OnInit {
   golosinas!: Golosinas[];
   updateGolosina: Golosinas = new Golosinas(); 
   createGolosina: Golosinas = new Golosinas();
+  deleteGolosina: Golosinas = new Golosinas();
   golo_ID: any;
 
   p: number = 1;
@@ -176,7 +177,7 @@ confirmCreate(){
 
 //#region MODAL DELETE 
   onDelete(id: number){
-    this.golo_ID = id;
+    this.deleteGolosina.golo_ID = id;
     this.openDeleteModal();
   }
 
@@ -193,7 +194,7 @@ confirmCreate(){
   }
 
   confirmDelete(){
-    this.service.deleteGolosina(this.golo_ID).subscribe((response : any) =>{
+    this.service.deleteGolosina(this.deleteGolosina).subscribe((response : any) =>{
       if (response.code == 200) {
         ToastUtils.showSuccessToast(response.message);
         this.getGolosinas();

@@ -59,8 +59,8 @@ export class ParqServicesService {
   updateGolosina(golosina: Golosinas){
     return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Actualizar', golosina);
   }
-  deleteGolosina(id: number){
-    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Delete/'+id, id);
+  deleteGolosina(data: Golosinas){
+    return this.http.post<Golosinas[]>(this.apiService.apiUrl + 'Golosinas/Delete/', data);
   }
 
 
@@ -71,6 +71,7 @@ export class ParqServicesService {
   insertAtracciones(atracciones: Atracciones){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Insert', atracciones);
   }
+  
   findAtracciones(atracciones: Atracciones){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Find', atracciones);
   }
@@ -78,6 +79,7 @@ export class ParqServicesService {
   editAtracciones(atracciones: Atracciones){
     return this.http.put<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Update', atracciones);
   }
+
   deleteAtracciones(id: number){
     return this.http.post<Atracciones[]>(this.apiService.apiUrl + 'Atracciones/Delete/'+id, id);
   }
