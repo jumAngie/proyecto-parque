@@ -146,6 +146,7 @@ export class UsuariosComponent {
     this.claver=false;
     this.emplr=false;
     this.rolr=false;
+    this.InsertUsu = new Usuarios();
   }
 
   selectUsuario(usu: Usuarios) {
