@@ -81,6 +81,8 @@ import { IndexComponent } from './Roles/index/index.component';
 //Login
 import {LoginComponent} from '../app/login/login.component'
 
+//Grafica
+import { GraficaComponent } from './grafica/grafica.component';
 
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
@@ -173,7 +175,9 @@ const routes: Routes = [
   {path: 'createticketsclientes', component:CreateticketsclienteComponent},
 
   {path: 'listtitckets', component:ListticketsComponent},
-  {path: 'createtickets', component:CreateticketsComponent}
+  {path: 'createtickets', component:CreateticketsComponent},
+
+  {path: 'grafica', component: GraficaComponent},
 ];
 
 @NgModule({

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Paqueteria.BusinessLogic;
+using ParqueDiversion.DataAccess.Repositories.Fila;
+using ParqueDiversion.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +11,30 @@ namespace ParqueDiversion.BusinessLogic.Services
 {
     public class FilaServices
     {
+        private readonly HistorialVisitantesAtraccionRepository _historialVisitantesAtraccionRepository;
+
+        public FilaServices(
+            HistorialVisitantesAtraccionRepository historialVisitantesAtraccionRepository
+        )
+        {
+            _historialVisitantesAtraccionRepository = historialVisitantesAtraccionRepository;
+        }
+
+        #region Historial Visitantes Atracción
+        public ServiceResult GetChartData(tbHistorialVisitantesAtraccion item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _historialVisitantesAtraccionRepository.GraphicData(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
     }
 }

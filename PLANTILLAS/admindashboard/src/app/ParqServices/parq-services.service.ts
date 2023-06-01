@@ -17,6 +17,7 @@ import { VentasQuiosco } from '../Models/VentasQuiosco';
 import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
+import { HistorialVisitantesAtraccion } from '../Models/HistorialVisitantesAtraccion';
 
 @Injectable({
   providedIn: 'root'
@@ -190,5 +191,10 @@ export class ParqServicesService {
   // servicios de tickets cliente //
   getTicketsCliente(){
     return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
+  }
+
+  //Gráfica
+  getChartData(item: HistorialVisitantesAtraccion){
+    return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
   }
 }

@@ -21,11 +21,6 @@
     <ProjectReference Include="..\ParqueDiversion.DataAccess\ParqueDiversion.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Fila\" />
-    <Folder Include="Models\Fila\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

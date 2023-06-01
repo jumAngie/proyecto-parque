@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ParqueDiversion.API.Models;
+using ParqueDiversion.API.Models.Fila;
 using ParqueDiversion.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace ParqueDiversion.API.Extensions
             #endregion
 
             #region Filas
-
+            CreateMap<HistorialVisitantesAtraccionViewModel, tbHistorialVisitantesAtraccion>().ReverseMap();
             #endregion
         }
     }
