@@ -10,6 +10,12 @@
   display: inline-block;
 }
 
+.blue-border {
+  border: 6px solid #185390;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .ov-btn-grow-primary:hover {
   color: #fff; /* color de fuente hover */
 }
