@@ -212,3 +212,39 @@
   transition: all 0.3s ease-out;
   transform: skewX(-45deg) scale(1, 1);
 }
+
+/* delete button */
+.ov-btn-grow-d {
+  background: #fff; /* color de fondo */
+  color: #da5c3c; /* color de fuente */
+  border: 2px solid #da5c3c; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-d:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-d::after {
+  content: "";
+  background: #da5c3c; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-d:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
