@@ -2884,7 +2884,6 @@ GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_ID						INT, 
 @golo_Nombre					VARCHAR(300),
-@golo_Img						NVARCHAR(MAX),
 @golo_Precio					INT, 
 @golo_Img						NVARCHAR(MAX),
 
