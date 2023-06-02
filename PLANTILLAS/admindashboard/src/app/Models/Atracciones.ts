@@ -15,20 +15,6 @@ export class Atracciones{
         atra_ReferenciaUbicacion!: String;
         atra_LimitePersonas!: number;
         atra_DuracionRonda!: number;
-        
-        // {
-        //         days:0
-        //         hours:0
-        //         milliseconds:0
-        //         minutes:15
-        //         seconds:0
-        //         ticks: 9000000000
-        //         totalDays: 0.010416666666666666
-        //         totalHours: 0.25
-        //         totalMilliseconds:900000
-        //         totalMinutes:15
-        //         totalSeconds:900
-        // }
         atra_Imagen!: String;
         atra_Habilitado!: number;
         atra_Estado!: number;
@@ -39,5 +25,5 @@ export class Atracciones{
         atra_UsuarioModificador!: number;
         empl_modifica!: String;
         atra_UsuarioModificador_Nombre!: String;
-        atra_FechaModificacion!: String
+        atra_FechaModificacion!: String;
 }

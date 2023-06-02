@@ -71,12 +71,11 @@
   transform: skewX(-45deg) scale(1, 1);
 }
 
-
 /* edit button */
 .ov-btn-grow-u {
   background: #fff; /* color de fondo */
-  color: #e0de55; /* color de fuente */
-  border: 2px solid #e0de55; /* tamaño y color de borde */
+  color: #d77d41; /* color de fuente */
+  border: 2px solid #d77d41; /* tamaño y color de borde */
   border-radius: 3px; /* redondear bordes */
   position: relative;
   z-index: 1;
@@ -90,7 +89,7 @@
 
 .ov-btn-grow-u::after {
   content: "";
-  background: #e0de55; /* color de fondo hover */
+  background: #d77d41; /* color de fondo hover */
   position: absolute;
   z-index: -1;
   padding: 0; /* ajusta el padding a 0 */

@@ -17,3 +17,4 @@ export class Areas{
     empl_crea!: String;
     empl_Modifica!: String
 }
+
