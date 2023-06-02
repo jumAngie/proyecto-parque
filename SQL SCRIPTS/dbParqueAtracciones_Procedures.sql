@@ -3372,8 +3372,6 @@ BEGIN
 END
 GO
 
-SELECT * FROM fila.tbHistorialVisitantesAtraccion
-GO
 
 CREATE OR ALTER VIEW fila.VW_tbHistorialVisitantesAtraccion
 AS
@@ -3394,25 +3392,33 @@ FROM fila.tbHistorialVisitantesAtraccion AS hist
 INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
 
-CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData
-	@hiat_FechaFiltro DATE
+							SELECT COUNT(*) FROM fila.tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = '2023-05-29'
+							GO
+CREATE OR ALTER PROCEDURE	fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData --'2023-05-28', '2023-05-30'
+	@fechaInicial DATE,
+	@fechaFinal DATE
+
 AS
 	BEGIN
-		IF @hiat_FechaFiltro IS NULL OR @hiat_FechaFiltro = ''
+		IF (@fechaInicial IS NULL AND @fechaFinal IS NULL) OR (@fechaInicial = '' AND @fechaFinal = '')
 			BEGIN
-				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				DECLARE @tempDate DATE = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion
 				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC				
 			END
 		ELSE 
 			BEGIN
-				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hiat_FechaFiltro
+				SELECT TOP(5)	atra_ID, 
+								atra_Nombre, 
+								COUNT(ticl_ID) AS ticl_ID 
+				FROM fila.VW_tbHistorialVisitantesAtraccion 
+				WHERE (hiat_FechaFiltro BETWEEN @fechaInicial AND @fechaFinal) OR (hiat_FechaFiltro BETWEEN @fechaFinal AND @fechaInicial)
 				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC
 			END
 	END
 GO
-
 
 
 
