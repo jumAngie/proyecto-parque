@@ -33,6 +33,6 @@ export class DetallesempleadosComponent {
   };
 
   Volver(){
-    this.router.navigate(['detailEmpleados']);
+    this.router.navigate(['listempleados']);
   }
 }

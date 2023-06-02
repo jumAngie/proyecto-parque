@@ -19,7 +19,7 @@ export class Empleados{
     empl_crea!: string;
     empl_modifica!: number;
     empl_Estado!: number;
-    empl_UsuarioCreador!: 1;
+    empl_UsuarioCreador!: number;
     empl_UsuarioCreador_Nombre!: string;
     empl_FechaCreacion!: Date;
     empl_UsuarioModificador!: number;
