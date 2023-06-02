@@ -27,33 +27,61 @@
     <div class="card-body">
       <div class="grid-container" style="margin-top: 20px">
         <div class="grid-item">
-            <img src="assets/img/TICKETS-TIPOS/TICKET-CLASICO.png" alt="Ticket Clásico" class="ticket-image" (click)="showImagePreview('assets/img/TICKETS-TIPOS/TICKET-CLASICO.png')">
-            <div class="info">
-                <div class="row">
-                  <div class="col">
-                    <b>✦ TIPO: </b><span>Ticket {{ ticket[0].tckt_Nombre }}</span>
-                  </div>
-                  <div class="col">
-                    <b>✦ PRECIO: </b><span>$ {{ ticket[0].tckt_Precio }}</span>
-                  </div>
-                </div>
+          <img
+            src="assets/img/TICKETS-TIPOS/TICKET-CLASICO.png"
+            alt="Ticket Clásico"
+            class="ticket-image"
+            (click)="
+              showImagePreview('assets/img/TICKETS-TIPOS/TICKET-CLASICO.png')
+            "
+          />
+          <div class="info">
+            <div class="row">
+              <div class="col">
+                <b>✦ TIPO: </b><span>Ticket {{ ticket[0].tckt_Nombre }}</span>
               </div>
-              <button class="ov-btn-grow-in mb-2 mt-3 col-4" style="margin-top: 10px;"><b><i class="bi bi-currency-dollar"></i>Cambiar Precio</b></button>              
+              <div class="col">
+                <b>✦ PRECIO: </b><span>$ {{ ticket[0].tckt_Precio }}</span>
+              </div>
+            </div>
           </div>
-          <div class="grid-item">
-            <img src="assets/img/TICKETS-TIPOS/TICKET-VIP.png" alt="Ticket VIP" class="ticket-image" (click)="showImagePreview('assets/img/TICKETS-TIPOS/TICKET-VIP.png')">
-            <div class="info">
-                <div class="row">
-                  <div class="col">
-                    <b>✦ TIPO: </b><span>Ticket {{ ticket[1].tckt_Nombre }}</span>
-                  </div>
-                  <div class="col">
-                    <b>✦ PRECIO: </b><span>$ {{ ticket[1].tckt_Precio }}</span>
-                  </div>
-                </div>
+          <button
+            class="ov-btn-grow-in mb-2 mt-3 col-4"
+            data-bs-toggle="modal"
+            data-bs-target="#update"
+            style="margin-top: 10px"
+          >
+            <b><i class="bi bi-currency-dollar"></i>Cambiar Precio</b>
+          </button>
+        </div>
+        <div class="grid-item">
+          <img
+            src="assets/img/TICKETS-TIPOS/TICKET-VIP.png"
+            alt="Ticket VIP"
+            class="ticket-image"
+            (click)="
+              showImagePreview('assets/img/TICKETS-TIPOS/TICKET-VIP.png')
+            "
+          />
+          <div class="info">
+            <div class="row">
+              <div class="col">
+                <b>✦ TIPO: </b><span>Ticket {{ ticket[1].tckt_Nombre }}</span>
               </div>
-              <button class="ov-btn-grow-in mb-2 mt-3 col-4" style="margin-top: 10px;"><b><i class="bi bi-currency-dollar"></i> Cambiar Precio</b></button>              
-          </div>          
+              <div class="col">
+                <b>✦ PRECIO: </b><span>$ {{ ticket[1].tckt_Precio }}</span>
+              </div>
+            </div>
+          </div>
+          <button
+            class="ov-btn-grow-in mb-2 mt-3 col-4"
+            data-bs-toggle="modal"
+            data-bs-target="#update"
+            style="margin-top: 10px"
+          >
+            <b><i class="bi bi-currency-dollar"></i> Cambiar Precio</b>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -61,12 +89,51 @@
 
 <!-- Modal para la previsualización de la imagen ampliada -->
 <div id="imagePreviewModal" class="modal">
+  <div class="modal-content">
+    <span class="close" style="color: black" (click)="closeImagePreview()"
+      ><i class="bi bi-x-square-fill" style="color: rgb(138, 1, 1)">
+        Cerrar</i
+      ></span
+    >
+    <div class="image-container">
+      <img id="previewImage" src="" alt="Image Preview" />
+    </div>
+  </div>
+</div>
+
+<div class="modal fade update" id="update" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <span class="close" style="color: black;"  (click)="closeImagePreview()"><i class="bi bi-x-square-fill" style="color:rgb(138, 1, 1)"> Cerrar</i></span>
-      <div class="image-container">
-        <img id="previewImage" src="" alt="Image Preview">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Precio</h5>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex">
+          <label>Nombre:</label>
+          <div class="input-group mb-3 mt-5 flex-grow-1">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fas fa-edit" style="margin-right: 9px;"></i>
+            </span>
+            <input type="text" class="form-control">
+          </div>
+          <label>Precio:</label>
+          <div class="input-group mb-3 mt-5" style="margin-right: 9px;">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="bi bi-currency-dollar"></i>
+            </span>
+            <input type="text" class="form-control" style="margin-left: 10px;">
+          </div>
+        </div>
+      </div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn ov-btn-grow-u">
+          Actualizar
+        </button>
+        <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">
+          <i class="bi bi-reply-fill"></i>
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
-  
-  
+</div>
