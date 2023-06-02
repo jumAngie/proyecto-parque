@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Quioscos } from 'src/app/Models/Quioscos';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 @Component({
   selector: 'app-listarquioscos',
@@ -19,17 +20,23 @@ export class ListarquioscosComponent implements OnInit{
   selectedPageSize = 5;
   pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
 
+  showModalD=false;
+  
 
   constructor(
     private service: ParqServicesService,
     private router: Router,
+    private elementRef: ElementRef,
+    private renderer2: Renderer2,
+    private imgbbService: ImgbbService,
   ){};
 
   ngOnInit(): void{
 
     this.getQuioscos();
+    this.showModalD=false;
   };
- 
+
 
   getQuioscos(){
     this.service.getQuioscos().subscribe((response: any) =>{
@@ -68,8 +75,27 @@ export class ListarquioscosComponent implements OnInit{
   
   onDelete(rowData: any): void {
     this.deleteID = rowData.quio_ID;
+    this.openDeleteModal();
+
   }
 
+  openDeleteModal() {
+    const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
+    this.renderer2.setStyle(modalDelete, 'display', 'block');
+    setTimeout(() => {
+      this.renderer2.addClass(modalDelete, 'show');
+      this.showModalD = true;
+    }, 0);
+  }
+
+  closeDeleteModal() {
+    const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
+    this.renderer2.removeClass(modalDelete, 'show');
+    setTimeout(() => {
+      this.renderer2.setStyle(modalDelete, 'display', 'none');
+      this.showModalD = false;
+    }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
+  }
 
   confirmDelete(){
     this.service.deleteQuiosco(this.deleteID).subscribe((response : any) =>{
@@ -81,6 +107,7 @@ export class ListarquioscosComponent implements OnInit{
       }else{
         ToastUtils.showErrorToast(response.message);
       }
+      this.closeDeleteModal();
     })
   }
 

@@ -481,7 +481,6 @@ INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCrea
 VALUES	(1, 1, 200, 1),
 		(1, 2, 200, 1),
 		(1, 3, 200, 1),
-		(1, 4, 200, 1),
 
 		(2, 3, 200, 1),
 		(2, 4, 200, 1),

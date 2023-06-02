@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Empleados } from 'src/app/Models/Empleados';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 @Component({
   selector: 'app-listempleados',
@@ -11,13 +12,18 @@ import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 })
 export class ListempleadosComponent implements OnInit {
   empleados!: Empleados[];
-  filtro: string = '';
+  imageUrl: string = ''; 
   p: number = 1;
-
+  filtro: string = '';
+  showModalD=false;
+  idEmpleado!: number;
   constructor(
     private service:ParqServicesService, 
     private elementRef: ElementRef, 
-    private router:Router) { }
+    private router:Router,
+    private renderer2: Renderer2,
+    private imgbbService: ImgbbService,
+    ) { }
 
 
   ngOnInit(): void {
@@ -57,28 +63,52 @@ export class ListempleadosComponent implements OnInit {
     this.router.navigate(['editarempleados']);
   }
 
-  GuardarId(empleados: Empleados) {
-    localStorage.setItem('idEmpleadosEliminar', empleados.empl_ID.toString());
-  }
   
-  Eliminar() {
-    const idEmpleado = localStorage.getItem('idEmpleadosEliminar');
-    if (idEmpleado) {
-      this.service.deleteEmpleado(idEmpleado)
-        .subscribe((response: any) => {
-          if (response.code == 200) {
-            ToastUtils.showSuccessToast(response.message);
-            localStorage.setItem('idEmpleadosEliminar', '');
-            this.empleadosList();
-          } else {
-            ToastUtils.showErrorToast(response.message);
-          }
-        });
-    }
-  }
 
-  Cerrar(){
-    localStorage.setItem('idEmpleadosEliminar', '');
-  }
+
+
   
-  }  
+  //#region   MODAL DELETE
+    onDelete(id: number){
+      this.idEmpleado = id;
+      this.openDeleteModal();
+    }
+
+    openDeleteModal() {
+      const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
+      this.renderer2.setStyle(modalDelete, 'display', 'block');
+      setTimeout(() => {
+        this.renderer2.addClass(modalDelete, 'show');
+        this.showModalD = true;
+      }, 0);
+    }
+
+    closeDeleteModal() {
+      const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
+      this.renderer2.removeClass(modalDelete, 'show');
+      setTimeout(() => {
+        this.renderer2.setStyle(modalDelete, 'display', 'none');
+        this.showModalD = false;
+      }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
+    }
+
+    Eliminar() {
+
+      if (this.idEmpleado) {
+        this.service.deleteEmpleado(this.idEmpleado.toString())
+          .subscribe((response: any) => {
+            if (response.code == 200) {
+              ToastUtils.showSuccessToast(response.message);
+              localStorage.setItem('idEmpleadosEliminar', '');
+              this.empleadosList();
+            } else {
+              ToastUtils.showErrorToast(response.message);
+            }
+            this.closeDeleteModal();
+          });
+      }
+    }
+  //#endregion
+
+
+}

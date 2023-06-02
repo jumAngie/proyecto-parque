@@ -79,7 +79,7 @@
                            <div class="card-body">   
                                  <div class="row ms-1">
                                     <div class="row mt-3 mb-3">
-                                       <button (click)="openModal()" class="ov-btn-grow-primary col-2" style="height: 2.4rem; ">
+                                       <button (click)="openCreateModal()" class="ov-btn-grow-primary col-2" style="height: 2.4rem; ">
                                           <i class="fas fa-plus-circle "></i> <label class="ms-2">Añadir</label>
                                        </button>                                 
                                       <div class="search-bar col-6">
@@ -153,46 +153,52 @@
        </div>
     </section>
  </main>
- <div class="modal" #modalElement tabindex="-1">
-   <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-         <div class="modal-header bg-warning">
-            <h5 class="modal-title text-dark">Añadir insumos</h5>               
-         </div>
-         <div class="modal-body text-center text-dark"> 
-            <div class="d-flex justify-content-center mt-1">
-               <div class="col-md-10"> 
-                  <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="GolosinaRequerida"></i>
-                  <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Golosina:</label>
-                  <div class="input-group">
-                     <span class="input-group-text"><i class="bi bi-hypnotize" style="color: blueviolet;"></i></span>
-                     <select id="golo_ID" [(ngModel)]="sendInsumos.golo_ID" class="form-select" (change)="clearGolosinaError()">                        
-                        <option *ngFor="let option of golosinas" [value]="option.golo_ID">{{ option.golo_Nombre }}</option>
-                     </select>
-                  </div>
-               </div>
-               
-            </div>
-            <div class="d-flex justify-content-center mt-2">
-               <div class="col-md-6">
-                  <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="StockRequerido"></i>
-                  <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cantidad:</label>
-                  <div class="input-group">
-                     <span class="input-group-text"><i class="bi bi-basket3-fill" style="color: blueviolet;"></i></span>
-                     <input id="insu_Stock" [(ngModel)]="sendInsumos.insu_Stock" type="number" class="form-control" ((input))="clearStockError()">
-                  </div>               
-               </div>
-            </div>
 
-         </div>
-         <div class="modal-footer"> 
-            <button (click)="Guardar()" class="ov-btn-grow-primary col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-               <i class="bi bi-check-circle-fill "></i>Agregar
-            </button>
-            <button type="button" (click)="closeModal()" class="ov-btn-grow-d col-3 ms-1" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
-               <i class="bi bi-reply-fill"></i>Cancelar
-            </button> 
+
+
+
+<!-- MODAL CREATE -->
+<div [ngClass]="{'slide-in': showModalC}" class="modal-shadow modal" id="modalCreate">
+
+
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header bg-warning">
+               <h5 class="modal-title text-dark">Añadir insumos</h5>               
+            </div>
+            <div class="modal-body text-center text-dark"> 
+               <div class="d-flex justify-content-center mt-1">
+                  <div class="col-md-6"> 
+                     <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="GolosinaRequerida"></i>
+                     <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Golosina:</label>
+                     <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-hypnotize" style="color: blueviolet;"></i></span>
+                        <select id="golo_ID" [(ngModel)]="sendInsumos.golo_ID" class="form-select" (change)="clearGolosinaError()">                        
+                           <option *ngFor="let option of golosinas" [value]="option.golo_ID">{{ option.golo_Nombre }}</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="ms-3 col-md-6">
+                     <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="StockRequerido"></i>
+                     <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cantidad:</label>
+                     <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-basket3-fill" style="color: blueviolet;"></i></span>
+                        <input id="insu_Stock" [(ngModel)]="sendInsumos.insu_Stock" type="number" class="form-control" ((input))="clearStockError()">
+                     </div>               
+                  </div>
+               </div>   
+            </div>
+            <div class="modal-footer"> 
+               <button (click)="Guardar()" class="ov-btn-grow-primary col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+                  <i class="bi bi-check-circle-fill "></i>Agregar
+               </button>
+               <button type="button" (click)="closeCreateModal()" class="ov-btn-grow-d col-3 ms-1" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+                  <i class="bi bi-reply-fill"></i>Cancelar
+               </button> 
+            </div>
          </div>
       </div>
-   </div>
 </div>
+<!-- /MODAL CREATE -->
+
+
