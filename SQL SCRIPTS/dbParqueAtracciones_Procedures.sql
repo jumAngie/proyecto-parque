@@ -1,5 +1,5 @@
-USE dbParqueAtracciones
-GO
+--USE dbParqueAtracciones2
+--GO
 
 
 
