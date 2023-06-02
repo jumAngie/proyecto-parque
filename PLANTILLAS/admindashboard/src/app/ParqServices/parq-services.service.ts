@@ -17,7 +17,7 @@ import { VentasQuiosco } from '../Models/VentasQuiosco';
 import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
-import { HistorialVisitantesAtraccion } from '../Models/HistorialVisitantesAtraccion';
+import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
 
 @Injectable({
   providedIn: 'root'
@@ -205,7 +205,7 @@ export class ParqServicesService {
   }
 
   //Gráfica
-  getChartData(item: HistorialVisitantesAtraccion){
+  getChartData(item: filterChartData){
     return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
   }
 }

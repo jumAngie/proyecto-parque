@@ -468,33 +468,38 @@ GO
 
 
 INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
-VALUES	('ChocoDelight', 5, 1),
-		('Rainbow Drops', 3, 1),
-		('Cotton Candy Crunch', 2, 1),
-		('Sourlicious Gummies', 4, 1),
-		('Popcorn Munchies', 3, 1),
-		('Fruity Swirl Lollipop', 1, 1)
+VALUES	('ChocoDelight', 10, 1),
+		('Rainbow Drops', 15, 1),
+		('Cotton Candy Crunch', 20, 1),
+		('Sourlicious Gummies', 5, 1),
+		('Popcorn Munchies', 25, 1),
+		('Fruity Swirl Lollipop', 15, 1)
 GO
 
 
 INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCreador)
-VALUES	(1, 1, 50, 1),
-		(1, 2, 100, 1),
-		(1, 3, 90, 1),
-		(1, 4, 100, 1),
-		(2, 3, 75, 1),
-		(2, 4, 60, 1),
-		(2, 4, 75, 1),
-		(3, 5, 80, 1),
-		(3, 6, 90, 1),
-		(3, 5, 60, 1),
-		(4, 1, 70, 1),
-		(4, 2, 85, 1),
-		(4, 6, 85, 1),
-		(5, 3, 55, 1),
-		(5, 4, 40, 1),
-		(6, 5, 65, 1),
-		(6, 6, 50, 1)
+VALUES	(1, 1, 200, 1),
+		(1, 2, 200, 1),
+		(1, 3, 200, 1),
+		(1, 4, 200, 1),
+
+		(2, 3, 200, 1),
+		(2, 4, 200, 1),
+		(2, 6, 200, 1),
+
+		(3, 4, 200, 1),
+		(3, 6, 200, 1),
+		(3, 5, 200, 1),
+
+		(4, 1, 200, 1),
+		(4, 2, 200, 1),
+		(4, 6, 200, 1),
+
+		(5, 3, 200, 1),
+		(5, 4, 200, 1),
+
+		(6, 5, 200, 1),
+		(6, 6, 200, 1)
 GO
 
 

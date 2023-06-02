@@ -11,6 +11,9 @@ export class HistorialVisitantesAtraccion{
     hiat_FechaCreacion!: String;
     hiat_UsuarioModificador!: number;
     hiat_FechaModificacion!: String;
-    initalDate!: String;
-    finalDate!: String;
+}
+
+export class filterChartData{
+    fechaInicial!: String;
+    fechaFinal!: String;
 }

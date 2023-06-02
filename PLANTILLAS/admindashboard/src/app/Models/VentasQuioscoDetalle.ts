@@ -4,6 +4,7 @@ export class VentasQuioscoDetalle{
     insu_ID!: number;
     golo_Nombre!: String;
     golo_Precio!: number;
+    golo_Img!: String;
     deta_Cantidad!: number;
     deta_Habilitado!: number;
     deta_Estado!: number;
@@ -15,5 +16,5 @@ export class VentasQuioscoDetalle{
     deta_UsuarioModificador!: number;
     deta_UsuarioModificador_Nombre!: String;
     deta_FechaModificacion!: String; 
-    valorFinalPorInsumo: any;
+    valorFinalPorInsumo!: number;
 }

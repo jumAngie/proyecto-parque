@@ -31,31 +31,95 @@
                    ></div>
                 </div>
                 <div class="card-body">
-                  <div class="row mt-3 ">
-                     <div class="col-4">
-                        <button (click)="Agregar()" class="ov-btn-grow-primary" style="height: 2.4rem; width: 10rem;">
+                  <div class="row ms-1">
+                     <div class="row">
+                        <button (click)="Agregar()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
                           <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Nuevo</label>
                        </button>
-
+                       <div class="search-bar mt-3 col-6">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Buscar..."
+                            [(ngModel)]="filtro"
+                          />
+                        </div>    
+                        <div class="col-4 mt-3">                                                                          
+                           <div class="input-group" style="height: 2.4rem;">                                       
+                               <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
+                              <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
+                              <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" >
+                                 <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
+                              </select>
+                           </div>                                                                        
+                        </div>              
                      </div>
-                    <div class="col-4"></div>
-                    <div class="col-4">                                                                          
-                       <div class="input-group" style="height: 2.4rem;">                                       
-                           <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
-                          <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
-                          <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" (change)="onPageSizeChanged()" >
-                             <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
-                          </select>
-                       </div>                                                                        
-                    </div>                     
+                     <div class="row">
+                        <table
+                        class="table table-hover table-striped mt-2"                       
+                      >
+                        <thead>
+                          <tr>
+                            <th scope="col">Venta #</th>
+                            <th scope="col">Método de pago</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="
+                              let item of filtrarVentas()
+                                | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
+                            "
+                          >
+
+                            <th scope="row">{{ item.vent_ID }}</th>
+                            <td>{{ item.pago_Nombre }}</td>
+                            <td>{{ item.clie_Nombres + ' ' + item.clie_Apellidos}}</td>
+                            <td>{{ item.vent_FechaCreacion }}</td>
+          
+                            <td>
+                              <button
+                                class="ov-btn-grow-u"
+                                (click)="onEdit(item)"
+                                style="margin-left: 10px; height: 2.5rem;"
+                              >
+                                <i class="bi bi-pen-fill"></i> Editar
+                              </button>
+                              <button (click)="onDetail(item)" class="ov-btn-grow-primary" style="margin-left: 10px; height: 2.5rem;">
+                                 <i class="bi bi-newspaper"></i> Detalles
+                              </button>
+                              <button
+                                class="ov-btn-grow-d"
+                                style="margin-left: 10px; height: 2.5rem;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#verticalycentered"
+                                (click)="onDelete(item)"
+                              >
+                                <i class="bi bi-trash-fill"></i> Eliminar
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>     
+                      <div class="pagination d-flex justify-content-center mt-4">
+                        <pagination-controls
+                          (pageChange)="p = $event"
+                          previousLabel="Anterior"
+                          nextLabel="Siguiente"
+                          firstLabel="Primera"
+                          lastLabel="Última"
+                          screenReaderPaginationLabel="Paginación"
+                          screenReaderPageLabel="Página"
+                          screenReaderCurrentLabel="Página actual"
+                        >
+                        </pagination-controls>
+                      </div>                                   
+                     </div>
                   </div>
-                  <div class="row mt-3 mb-0">
-                     <ag-grid-angular
-                     style="width: 100%; height: 400px;"
-                     class="ag-theme-alpine table table-striped table-hoover table-responsive"
-                     [gridOptions]="gridOptions"
-                   ></ag-grid-angular>                  
-                  </div>                 
+
                 </div>
              </div>
           </div>

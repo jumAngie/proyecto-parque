@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Quioscos } from 'src/app/Models/Quioscos';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
-import { GridOptions, GridApi, ColumnApi } from 'ag-grid-community';
-import { QuioscoActionsRenderer } from './QuioscoActionsRenderer.component';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 @Component({
@@ -14,82 +12,46 @@ import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 export class ListarquioscosComponent implements OnInit{
   quioscos!: Quioscos[];
-  gridOptions: GridOptions = {};
   deleteID: any;
+
+  filtro: String = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
 
   constructor(
     private service: ParqServicesService,
     private router: Router,
-    private elementRef: ElementRef,
-    private renderer2: Renderer2,
   ){};
 
   ngOnInit(): void{
-    this.gridOptions = {
-      columnDefs: [
-        {headerName: 'ID', field: 'quio_ID', width: 75, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Quiosco', field: 'quio_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Dirección', field: 'quio_ReferenciaUbicacion', width: 240, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Zona', field: 'area_Nombre', width: 200, autoHeight: true, autoHeaderHeight: true},
-        {
-          headerName: 'Acciones',
-          width: 290, 
-          sortable: false,
-          filter: false,
-          cellRenderer: 'actionsRenderer',
-          cellRendererParams: {
-            onDetail: this.onDetail.bind(this),
-            onEdit: this.onEdit.bind(this),
-            onDelete: this.onDelete.bind(this),
-          }
-        },
-      ],      
-      rowData: this.quioscos,
-      pagination: true,
-      paginationPageSize: 7,            
-      defaultColDef: {
-        sortable: true,
-        filter: true,
-        resizable: true,
-        unSortIcon: true,
-        wrapHeaderText: true,
-        wrapText: true,
-      },
-      frameworkComponents: {
-        actionsRenderer: QuioscoActionsRenderer,
-      },
-      localeText: {
-        // Encabezados de columna
-        columnMenuName: 'Menú de columnas',
-        columnHide: 'Ocultar',
-        columnShowAll: 'Mostrar todo',
-        columnDefs: 'Definiciones de columnas',
-        // Otros textos
-        loadingOoo: 'Cargando...',
-        noRowsToShow: 'No hay filas para mostrar',
-        page: 'Página',
-        more: 'Más',
-        to: 'a',
-        of: 'de',
-        next: 'Siguiente',
-        last: 'Último',
-        first: 'Primero',
-        previous: 'Anterior', 
-      },
-    }
 
     this.getQuioscos();
   };
  
+
   getQuioscos(){
     this.service.getQuioscos().subscribe((response: any) =>{
       if(response.success){
-        this.quioscos = response.data;
-        this.gridOptions.api?.setRowData(this.quioscos);
+        this.quioscos = response.data;        
       }
     });
   };
   
+  filtrarQuioscos(): Quioscos[]{
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.quioscos.filter(quiosco => {
+        const nombreValido = quiosco.quio_Nombre.toLowerCase().includes(filtroLowerCase);
+        const direccionValido = quiosco.quio_ReferenciaUbicacion.toLowerCase().includes(filtroLowerCase);
+        const areaNombreValido = quiosco.area_Nombre.toLowerCase().includes(filtroLowerCase);
+
+        return nombreValido || direccionValido || areaNombreValido
+    });
+  };
+
+
   Agregar(){
     this.router.navigate(['quioscos-crear']);
   }
@@ -100,23 +62,14 @@ export class ListarquioscosComponent implements OnInit{
   }
   
   onEdit(rowData: any): void {
-    localStorage.setItem('quio_ID', rowData.quio_ID);
-            
+    localStorage.setItem('quio_ID', rowData.quio_ID);          
     this.router.navigate(['quioscos-editar']);         
   }
   
   onDelete(rowData: any): void {
-    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
-    this.renderer2.addClass(modalElement, 'show');
-    this.renderer2.setStyle(modalElement, 'display', 'block');
     this.deleteID = rowData.quio_ID;
   }
 
-  closeModal(): void {
-    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
-    this.renderer2.removeClass(modalElement, 'show');
-    this.renderer2.setStyle(modalElement, 'display', 'none');
-  }
 
   confirmDelete(){
     this.service.deleteQuiosco(this.deleteID).subscribe((response : any) =>{
@@ -129,7 +82,6 @@ export class ListarquioscosComponent implements OnInit{
         ToastUtils.showErrorToast(response.message);
       }
     })
-    this.closeModal();
   }
 
 };

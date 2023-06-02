@@ -20,6 +20,12 @@ export class DetalleQuioscoComponent implements OnInit{
   golosinas!: Golosinas[];
   sendInsumos: InsumosQuiosco = new InsumosQuiosco();
 
+  filtro: String = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
+
   gridOptions: GridOptions = {};
 
   GolosinaRequerida = false;
@@ -36,6 +42,27 @@ export class DetalleQuioscoComponent implements OnInit{
   ){};
 
   ngOnInit(): void {
+
+
+    this.quiosco = JSON.parse(localStorage.getItem('quiosco') ?? '')     
+
+    this.getInsumos();
+    this.getGolosinas();    
+ 
+  }
+
+  filtrarInsumos(): InsumosQuiosco[]{
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.insumos.filter(insumo => {
+        const nombreValido = insumo.golo_Nombre.toLowerCase().includes(filtroLowerCase);
+        const precioValido = insumo.golo_Precio.toString().toLowerCase().includes(filtroLowerCase);        
+
+        return nombreValido || precioValido
+    });    
+  }
+
+  getGridData(){
     this.gridOptions = {
       columnDefs: [
         {headerName: 'ID', field: 'golo_ID', width: 150, autoHeight: true, autoHeaderHeight: true},
@@ -73,17 +100,6 @@ export class DetalleQuioscoComponent implements OnInit{
         previous: 'Anterior', 
       },
     };
-
-    this.quiosco = JSON.parse(localStorage.getItem('quiosco') ?? '')     
-
-    this.getInsumos();
-    this.getGolosinas();    
- 
-    // const myElementRef = this.elementRef.nativeElement.querySelector('#myElement');
-    // console.log(myElementRef);
-
-    // const myElementRendered = this.renderer2.selectRootElement('#myElement');
-    // console.log(myElementRendered);
   }
 
   openModal(): void {
@@ -99,7 +115,6 @@ export class DetalleQuioscoComponent implements OnInit{
     
     this.clearModal();
   }
-
 
   clearModal(): void{
     const selectElement = this.elementRef.nativeElement.querySelector('#golo_ID');

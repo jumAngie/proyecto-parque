@@ -2812,7 +2812,8 @@ CREATE OR ALTER VIEW parq.VW_tbGolosinas
 AS
 	SELECT	golo_ID, 
 			golo_Nombre, 
-			golo_Precio, 
+			golo_Precio,
+			golo_Img,
 			golo_Habilitado, 
 			
 			golo_Estado, 
@@ -2851,8 +2852,8 @@ GO
 --*************** INSERT DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Insert
 	@golo_Nombre			VARCHAR(300), 
-	@golo_Img				NVARCHAR(MAX),
 	@golo_Precio			INT,
+	@golo_Img				NVARCHAR(MAX),
 	@golo_UsuarioCreador	INT
 AS
 BEGIN
@@ -2864,8 +2865,8 @@ BEGIN
 				END
 			ELSE
 				BEGIN
-					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
-					VALUES(@golo_Nombre, @golo_Precio, @golo_UsuarioCreador)
+					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_Img,golo_UsuarioCreador)
+					VALUES(@golo_Nombre, @golo_Precio, @golo_Img, @golo_UsuarioCreador)
 
 					SELECT 200 AS codeStatus, 'Golosina ingresada con éxito' AS messageStatus
 				END
@@ -2885,6 +2886,8 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_Nombre					VARCHAR(300),
 @golo_Img						NVARCHAR(MAX),
 @golo_Precio					INT, 
+@golo_Img						NVARCHAR(MAX),
+
 @golo_UsuarioModificador		INT
 AS
 BEGIN
@@ -2899,6 +2902,7 @@ BEGIN
 					UPDATE parq.tbGolosinas
 					SET golo_Nombre = @golo_Nombre, 
 						golo_Precio = @golo_Precio, 
+						golo_Img = @golo_Img,
 						golo_UsuarioModificador = @golo_UsuarioModificador, 
 						golo_FechaModificacion = GETDATE()
 					WHERE golo_ID = @golo_ID
@@ -2969,7 +2973,8 @@ AS
 
 			insu.golo_ID, 
 			golo_Nombre,
-			golo_Precio,			
+			golo_Precio,
+			golo_Img,			
 			insu_Stock, 
 
 			insu_Habilitado, 
@@ -3230,7 +3235,8 @@ AS
 			deta.vent_ID,
 			deta.insu_ID,
 			golo.golo_Nombre,
-			golo.golo_Precio,						
+			golo.golo_Precio,
+			golo_Img,						
 			deta_Cantidad, 
 
 			deta_Habilitado, 
@@ -3343,6 +3349,12 @@ END
 GO
 
 
+SELECT * FROM fact.tbVentasQuioscoDetalle WHERE vent_ID = (SELECT MAX(vent_ID) FROM fact.tbVentasQuiosco)
+
+SELECT * FROM parq.tbInsumosQuiosco WHERE insu_ID = 18
+GO
+
+
 
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_DeleteInsumo
 	@vent_ID INT,
@@ -3374,8 +3386,6 @@ BEGIN
 END
 GO
 
-SELECT * FROM fila.tbHistorialVisitantesAtraccion
-GO
 
 CREATE OR ALTER VIEW fila.VW_tbHistorialVisitantesAtraccion
 AS
@@ -3396,25 +3406,34 @@ FROM fila.tbHistorialVisitantesAtraccion AS hist
 INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
 
-CREATE OR ALTER PROCEDURE fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData
-	@hiat_FechaFiltro DATE
+
+							SELECT COUNT(*) FROM fila.tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = '2023-05-29'
+							GO
+CREATE OR ALTER PROCEDURE	fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData --'2023-05-28', '2023-05-30'
+	@fechaInicial DATE,
+	@fechaFinal DATE
+
 AS
 	BEGIN
-		IF @hiat_FechaFiltro IS NULL OR @hiat_FechaFiltro = ''
+		IF (@fechaInicial IS NULL AND @fechaFinal IS NULL) OR (@fechaInicial = '' AND @fechaFinal = '')
 			BEGIN
-				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				DECLARE @tempDate DATE = (SELECT MAX(hiat_FechaFiltro) FROM fila.VW_tbHistorialVisitantesAtraccion)
+				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion
 				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC				
 			END
 		ELSE 
 			BEGIN
-				SELECT TOP(5) atra_ID, atra_Nombre , COUNT(ticl_ID)  AS ticl_ID FROM fila.VW_tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = @hiat_FechaFiltro
+				SELECT TOP(5)	atra_ID, 
+								atra_Nombre, 
+								COUNT(ticl_ID) AS ticl_ID 
+				FROM fila.VW_tbHistorialVisitantesAtraccion 
+				WHERE (hiat_FechaFiltro BETWEEN @fechaInicial AND @fechaFinal) OR (hiat_FechaFiltro BETWEEN @fechaFinal AND @fechaInicial)
 				GROUP BY atra_ID, atra_Nombre
 				ORDER BY ticl_ID DESC
 			END
 	END
 GO
-
 
 
 

@@ -2,9 +2,8 @@ import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Router, TitleStrategy } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
-import { GridOptions, GridApi, ColumnApi } from 'ag-grid-community';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
-import { VetasActionsRenderer } from './VentasActionsRenderer';
+import { VentasQuiosco } from 'src/app/Models/VentasQuiosco';
 
 @Component({
   selector: 'app-list',
@@ -13,11 +12,15 @@ import { VetasActionsRenderer } from './VentasActionsRenderer';
 })
 
 export class VentasListComponent implements OnInit {
+  ventas!: VentasQuiosco[];
   ventasQuioscoDetalle!: VentasQuioscoDetalle[];
   deleteID: any;
-  gridOptions: GridOptions = {};
+
+  filtro: String = '';
+  p: number = 1;
   selectedPageSize = 5;
-  pageSizeOptions: number[] = [5, 10, 20, 30]; // Opciones de tamaño de página
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
 
   constructor(
     private service: ParqServicesService, 
@@ -25,77 +28,31 @@ export class VentasListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.gridOptions = {
-      columnDefs: [
-        {headerName: 'Venta #: ', field: 'vent_ID', width: 150, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Método de págo', field: 'pago_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Fecha', field: 'vent_FechaCreacion', width: 300, autoHeight: true, autoHeaderHeight: true},
-        {
-          headerName: 'Acciones',
-          width: 350, 
-          sortable: false,
-          filter: false,
-          cellRenderer: 'actionsRenderer',
-          cellRendererParams: {
-            onDetail: this.onDetail.bind(this),
-            onEdit: this.onEdit.bind(this),
-            onDelete: this.onDelete.bind(this),
-          }
-        },
-      ],            
-      rowData: this.ventasQuioscoDetalle,
-      pagination: true,
-      paginationPageSize: this.selectedPageSize,
-      context: {
-        pageSizeOptions: this.pageSizeOptions
-      },
-      defaultColDef: {
-        sortable: true,
-        lockVisible: true,
-        filter: true,
-        resizable: true,
-        unSortIcon: true,
-        wrapHeaderText: true,
-        wrapText: true,
-      },
-      frameworkComponents: {
-        actionsRenderer: VetasActionsRenderer,
-      },
-      localeText: {
-        // Encabezados de columna
-        columnMenuName: 'Menú de columnas',
-        columnHide: 'Ocultar',
-        columnShowAll: 'Mostrar todo',
-        columnDefs: 'Definiciones de columnas',
-        // Otros textos
-        loadingOoo: 'Cargando...',
-        noRowsToShow: 'No hay filas para mostrar',
-        page: 'Página',
-        more: 'Más',
-        to: 'a',
-        of: 'de',
-        next: 'Siguiente',
-        last: 'Último',
-        first: 'Primero',
-        previous: 'Anterior', 
-      },
-    }
 
     this.getVentas();
-    this.onPageSizeChanged();
   }
 
-  onPageSizeChanged(): void {
-    this.gridOptions.api?.paginationSetPageSize(this.selectedPageSize);
-  }
+
   
+  filtrarVentas(){
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.ventas.filter(venta => {
+      const ventaID = venta.vent_ID.toString().toLowerCase().includes(filtroLowerCase);
+      const pagoNomrbe = venta.pago_Nombre.toLowerCase().includes(filtroLowerCase);
+      const fecha = venta.vent_FechaCreacion.toString().toLowerCase().includes(filtroLowerCase);
+      const nombres = venta.clie_Nombres.toLowerCase().includes(filtroLowerCase);
+      const apellidos = venta.clie_Apellidos.toLowerCase().includes(filtroLowerCase);
+      return ventaID || pagoNomrbe || fecha || nombres || apellidos
+    })
+  }
 
   getVentas(){
     this.service.getVentas()
     .subscribe((response: any) => {
+      console.log(response);
       if(response.success){
-        this.ventasQuioscoDetalle = response.data;
-        this.gridOptions.api?.setRowData(this.ventasQuioscoDetalle);
+        this.ventas = response.data;
       }
     })
   }

@@ -21,12 +21,12 @@ namespace ParqueDiversion.BusinessLogic.Services
         }
 
         #region Historial Visitantes Atracción
-        public ServiceResult GetChartData(tbHistorialVisitantesAtraccion item)
+        public ServiceResult GetChartData(string fechaInicial, string fechaFinal)
         {
             var result = new ServiceResult();
             try
             {
-                var list = _historialVisitantesAtraccionRepository.GraphicData(item);
+                var list = _historialVisitantesAtraccionRepository.GraphicData(fechaInicial, fechaFinal);
                 return result.Ok(list);
             }
             catch (Exception ex)

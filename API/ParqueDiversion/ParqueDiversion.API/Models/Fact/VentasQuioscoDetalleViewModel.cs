@@ -12,6 +12,7 @@ namespace ParqueDiversion.API.Models
         public int? insu_ID { get; set; }
         public string golo_Nombre { get; set; }
         public int? golo_Precio { get; set; }
+        public string golo_Img { get; set; }
         public int? deta_Cantidad { get; set; }
         public int? deta_Habilitado { get; set; }
         public int? deta_Estado { get; set; }

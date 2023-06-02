@@ -4,24 +4,27 @@
   </div>
   <div class="card-body">
     <div class="row text-center">
-      <div class="col-4">  
-        <div class="mt-1"></div>        
-        <i class="bi bi-exclamation-circle-fill" style="color: orange;" ></i>                                 
-        <label for="fechaFiltro" class="ms-1 form-label text-dark">Escoge una fecha inicial:</label>  
+      <i class="bi bi-exclamation-circle-fill" style="color: orange;" ></i>                                 
+      <label for="fechaFiltro" class="ms-1 form-label text-dark">Filtra por un rango de fechas: {{dateMessage}} </label>  
+    </div>
+    <div class="row text-center">
+      <div class="col-4">        
         <div class="input-group" style="height: 3rem;">                                       
            <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
-           <input [(ngModel)]="initialDate" type="date" class="form-control" id="fechaFiltro" (change)="onDateChange()">                                                                                                                   
+           <input (change)="onDateChange()" [(ngModel)]="initialDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
         </div>
      </div>
-      <div class="col-4">  
-        <div class="mt-1"></div>        
-        <i class="bi bi-exclamation-circle-fill" style="color: orange;" ></i>                                 
-        <label for="fechaFiltro" class="ms-1 form-label text-dark">Escoge una fecha final:</label>  
+      <div class="col-4">        
         <div class="input-group" style="height: 3rem;">                                       
            <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
-           <input [(ngModel)]="finalDate" type="date" class="form-control" id="fechaFiltro" (change)="onDateChange()">                                                                                                                   
+           <input (change)="onDateChange()" [(ngModel)]="finalDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
         </div>
      </div>
+     <!-- <div class="col-4">
+      <button (click)="onDateChange()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+        <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Filtrar</label>
+     </button>
+     </div> -->
     </div>
     <div class="row mt-3">
       <div class="col-lg-12">

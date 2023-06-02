@@ -3,7 +3,6 @@ import { Empleados } from 'src/app/Models/Empleados';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-listempleados',
@@ -15,7 +14,11 @@ export class ListempleadosComponent implements OnInit {
   filtro: string = '';
   p: number = 1;
 
-  constructor(private service:ParqServicesService, private elementRef: ElementRef, private router:Router) { }
+  constructor(
+    private service:ParqServicesService, 
+    private elementRef: ElementRef, 
+    private router:Router) { }
+
 
   ngOnInit(): void {
     this.empleadosList();

@@ -37,13 +37,13 @@ namespace ParqueDiversion.DataAccess.Repositories.Fila
             throw new NotImplementedException();
         }
 
-        public IEnumerable<VW_tbHistorialVisitantesAtraccion> GraphicData(tbHistorialVisitantesAtraccion item)
+        public IEnumerable<VW_tbHistorialVisitantesAtraccion> GraphicData(string fechaInicial, string fechaFinal)
         {
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@hiat_FechaFiltro", item.hiat_FechaFiltro, DbType.Date, ParameterDirection.Input);
-
+            parametros.Add("@fechaInicial", fechaInicial, DbType.Date, ParameterDirection.Input);
+            parametros.Add("@fechaFinal", fechaFinal, DbType.Date, ParameterDirection.Input);
             return db.Query<VW_tbHistorialVisitantesAtraccion>(ScriptsDatabase.UDP_GetChartData, parametros, commandType: CommandType.StoredProcedure);
         }
     }
