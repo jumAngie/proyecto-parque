@@ -6,6 +6,7 @@ import { Areas } from 'src/app/Models/Areas';
 import { Regiones } from 'src/app/Models/Regiones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 import { Empleados } from 'src/app/Models/Empleados';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 @Component({
   selector: 'app-create',
@@ -18,9 +19,11 @@ export class CreateQuioscoComponent implements OnInit{
   areas!: Areas[];
   regiones!: Regiones[];
   empleados!: Empleados[];
-
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
   selectedImage: any;
+  imageUrl: string = ''; 
+  ImagenRequerido = false;
+
 
   //VALIRABLES PARA VALIDACIÓN DE S
   AreaRequerido = false;
@@ -32,6 +35,7 @@ export class CreateQuioscoComponent implements OnInit{
   constructor(
     private service: ParqServicesService,
     private router: Router,
+    private imgbbService: ImgbbService
   ){};
   ngOnInit(): void {
     this.quiosco.empl_ID = 0;
@@ -194,18 +198,35 @@ export class CreateQuioscoComponent implements OnInit{
     });
   }  
   
-  handleImageChange(event: any) {
+  handleImageUpload(event: any) {
     const file = event.target.files[0];
-    const reader = new FileReader();
 
-    reader.onload = (e: any) => {
-      this.selectedImage = e.target.result;
-    };
-    
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+
+        this.uploadImageToServer(file);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
-  removeImage(){
-    this.selectedImage = '';
+  uploadImageToServer(file: File) {
+    this.imgbbService.Upload_IMG(file)
+      .subscribe(
+        response => {
+
+          this.imageUrl = response.data.url;
+          this.quiosco.quio_Imagen = (this.imageUrl)
+        },
+        error => {
+          // Manejar errores en la carga de la imagen
+          console.error(error);
+        }
+      );
+  }
+  deleteImage() {
+    this.imageUrl = "";
+    this.quiosco.quio_Imagen="";
   }
 }

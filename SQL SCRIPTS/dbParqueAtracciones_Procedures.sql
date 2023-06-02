@@ -2851,7 +2851,8 @@ GO
 --*************** INSERT DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Insert
 	@golo_Nombre			VARCHAR(300), 
-	@golo_Precio			INT, 
+	@golo_Img				NVARCHAR(MAX),
+	@golo_Precio			INT,
 	@golo_UsuarioCreador	INT
 AS
 BEGIN
@@ -2881,7 +2882,8 @@ GO
 --*************** UPDATE DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_ID						INT, 
-@golo_Nombre					VARCHAR(300), 
+@golo_Nombre					VARCHAR(300),
+@golo_Img						NVARCHAR(MAX),
 @golo_Precio					INT, 
 @golo_UsuarioModificador		INT
 AS

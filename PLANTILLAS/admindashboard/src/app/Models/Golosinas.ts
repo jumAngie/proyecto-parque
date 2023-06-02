@@ -1,6 +1,7 @@
 export class Golosinas{
     golo_ID!: number;
     golo_Nombre!:String;
+    golo_Img!:string;
     golo_Precio!: number;
     golo_Habilitado!: number;
     golo_Estado!: Boolean;
