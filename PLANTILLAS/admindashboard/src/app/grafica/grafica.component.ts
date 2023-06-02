@@ -3,6 +3,7 @@ import { HistorialVisitantesAtraccion } from '../Models/HistorialVisitantesAtrac
 import { ParqServicesService } from '../ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Color, colorSets } from '@swimlane/ngx-charts';
+import { ToastUtils } from '../Utilities/ToastUtils';
 
 @Component({
   selector: 'app-grafica',
@@ -32,7 +33,8 @@ import { Color, colorSets } from '@swimlane/ngx-charts';
 export class GraficaComponent implements OnInit{
   chartData!: HistorialVisitantesAtraccion[];
   sendParams: HistorialVisitantesAtraccion = new HistorialVisitantesAtraccion();
-  date: any;
+  initialDate: any;
+  finalDate: any;
   data: {
     name: string,
     value: string,
@@ -75,8 +77,7 @@ export class GraficaComponent implements OnInit{
   roundDomains = true;
   wrapTicks = true;
   barPadding = 20;
-  valueFormatting = (value: number) => `${value.toLocaleString()}`;
-  //tooltipTemplate: any = (data: any) => `<span class="tooltip-label">${data.label}</span><span class="tooltip-value">${data.value.toLocaleString()}%</span>`;
+  valueFormatting = (value: number) => `${value.toLocaleString()}`;  
   
   constructor(
     private service: ParqServicesService,
@@ -90,17 +91,32 @@ export class GraficaComponent implements OnInit{
   }
 
   getChartData(){
-    this.sendParams.hiat_FechaFiltro = this.date;
-    this.service.getChartData(this.sendParams).subscribe((response : any) =>{
-      console.log(response)
-      if (response.success) {
-        this.chartData = response.data;
-        this.data = this.chartData.map(item => ({
-          name: item.atra_Nombre.toString(),
-          value: item.ticl_ID.toLocaleString()
-        }));
-      }
-    })
+    this.sendParams.initalDate = this.initialDate;
+    this.sendParams.finalDate = this.finalDate;
+
+    console.log(this.sendParams);
+    // this.service.getChartData(this.sendParams).subscribe((response : any) =>{
+    //   console.log(response)
+    //   if (response.success) {
+    //     this.chartData = response.data;
+    //     this.data = this.chartData.map(item => ({
+    //       name: item.atra_Nombre.toString(),
+    //       value: item.ticl_ID.toLocaleString()
+    //     }));
+    //   }
+    // })
+  }
+
+  validateFilterDates(){
+    if(!this.initialDate && !this.finalDate ){
+      ToastUtils.showWarningToast('Fechas de inicio y fin requeridas!.');
+    }else if(!this.initialDate){
+      ToastUtils.showWarningToast('');
+    }
+  }
+
+  validateFinalDate(){
+
   }
 
   onDateChange(){

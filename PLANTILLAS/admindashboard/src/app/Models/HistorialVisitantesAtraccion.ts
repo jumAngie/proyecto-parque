@@ -10,5 +10,7 @@ export class HistorialVisitantesAtraccion{
     hiat_UsuarioCreador!: number;
     hiat_FechaCreacion!: String;
     hiat_UsuarioModificador!: number;
-    hiat_FechaModificacion!: String
+    hiat_FechaModificacion!: String;
+    initalDate!: String;
+    finalDate!: String;
 }

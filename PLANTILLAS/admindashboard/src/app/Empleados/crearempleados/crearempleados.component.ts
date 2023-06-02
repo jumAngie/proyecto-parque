@@ -102,7 +102,7 @@ export class CrearempleadosComponent implements OnInit {
       ToastUtils.showWarningToast('¡Hay campos vacíos!')
     }
     else if (errors == 0 && formatosinvalidos != 0){
-
+      
     }
     else{
       ToastUtils.showWarningToast('Entro al else final. Investigar POR QUE')
