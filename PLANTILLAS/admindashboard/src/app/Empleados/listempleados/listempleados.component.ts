@@ -43,6 +43,11 @@ export class ListempleadosComponent implements OnInit {
     });
   }
 
+  detailEmpleados(empleados: Empleados){
+    localStorage.setItem('empleado_Detail_Id', empleados.empl_ID?.toString());
+    this.router.navigate(['detallempleados']);
+  }
+
   Editar(empleados: Empleados){
     localStorage.setItem('idEmpleado', empleados.empl_ID.toString());
     console.log(localStorage.getItem('idEmpleado'));

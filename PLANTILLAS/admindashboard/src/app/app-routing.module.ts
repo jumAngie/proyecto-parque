@@ -91,6 +91,7 @@ import { ListticketsclienteComponent } from './TicketsCliente/listticketscliente
 
 import { CreateticketsComponent } from './Tickets/createtickets/createtickets.component';
 import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
+import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -161,6 +162,7 @@ const routes: Routes = [
   {path: 'listempleados', component: ListempleadosComponent},
   {path: 'crearempleados', component: CrearempleadosComponent},
   {path: 'editarempleados', component: EditarempleadosComponent},
+  {path: 'detallempleados', component: DetallesempleadosComponent},
   
   //Quioscos
   {path: 'quioscos-listado', component: ListarquioscosComponent},
