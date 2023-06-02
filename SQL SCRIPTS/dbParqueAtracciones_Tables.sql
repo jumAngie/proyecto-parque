@@ -380,6 +380,7 @@ CREATE TABLE parq.tbGolosinas(
 	golo_ID						INT IDENTITY(1,1),
 	golo_Nombre					VARCHAR(300),
 	golo_Precio					INT,
+	golo_Img					NVARCHAR(MAX),
 	golo_Habilitado				INT DEFAULT 1,
 	golo_Estado					INT DEFAULT 1,
 	golo_UsuarioCreador			INT,

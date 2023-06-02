@@ -16,6 +16,7 @@ namespace ParqueDiversion.Entities.Entities
         public int golo_ID { get; set; }
         public string golo_Nombre { get; set; }
         public int? golo_Precio { get; set; }
+        public string golo_Img { get; set; }
         public int? golo_Habilitado { get; set; }
         public int? golo_Estado { get; set; }
         public int? golo_UsuarioCreador { get; set; }

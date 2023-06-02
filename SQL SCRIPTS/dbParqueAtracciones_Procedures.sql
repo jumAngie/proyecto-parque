@@ -2812,7 +2812,8 @@ CREATE OR ALTER VIEW parq.VW_tbGolosinas
 AS
 	SELECT	golo_ID, 
 			golo_Nombre, 
-			golo_Precio, 
+			golo_Precio,
+			golo_Img,
 			golo_Habilitado, 
 			
 			golo_Estado, 
@@ -2851,7 +2852,8 @@ GO
 --*************** INSERT DE GOLOSINAS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Insert
 	@golo_Nombre			VARCHAR(300), 
-	@golo_Precio			INT, 
+	@golo_Precio			INT,
+	@golo_Img				NVARCHAR(MAX),
 	@golo_UsuarioCreador	INT
 AS
 BEGIN
@@ -2863,8 +2865,8 @@ BEGIN
 				END
 			ELSE
 				BEGIN
-					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_UsuarioCreador)
-					VALUES(@golo_Nombre, @golo_Precio, @golo_UsuarioCreador)
+					INSERT INTO parq.tbGolosinas(golo_Nombre, golo_Precio, golo_Img,golo_UsuarioCreador)
+					VALUES(@golo_Nombre, @golo_Precio, @golo_Img, @golo_UsuarioCreador)
 
 					SELECT 200 AS codeStatus, 'Golosina ingresada con éxito' AS messageStatus
 				END
@@ -2883,6 +2885,8 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_ID						INT, 
 @golo_Nombre					VARCHAR(300), 
 @golo_Precio					INT, 
+@golo_Img						NVARCHAR(MAX),
+
 @golo_UsuarioModificador		INT
 AS
 BEGIN
@@ -2897,6 +2901,7 @@ BEGIN
 					UPDATE parq.tbGolosinas
 					SET golo_Nombre = @golo_Nombre, 
 						golo_Precio = @golo_Precio, 
+						golo_Img = @golo_Img,
 						golo_UsuarioModificador = @golo_UsuarioModificador, 
 						golo_FechaModificacion = GETDATE()
 					WHERE golo_ID = @golo_ID
@@ -2967,7 +2972,8 @@ AS
 
 			insu.golo_ID, 
 			golo_Nombre,
-			golo_Precio,			
+			golo_Precio,
+			golo_Img,			
 			insu_Stock, 
 
 			insu_Habilitado, 
@@ -3228,7 +3234,8 @@ AS
 			deta.vent_ID,
 			deta.insu_ID,
 			golo.golo_Nombre,
-			golo.golo_Precio,						
+			golo.golo_Precio,
+			golo_Img,						
 			deta_Cantidad, 
 
 			deta_Habilitado, 
@@ -3341,6 +3348,12 @@ END
 GO
 
 
+SELECT * FROM fact.tbVentasQuioscoDetalle WHERE vent_ID = (SELECT MAX(vent_ID) FROM fact.tbVentasQuiosco)
+
+SELECT * FROM parq.tbInsumosQuiosco WHERE insu_ID = 18
+GO
+
+
 
 CREATE OR ALTER PROCEDURE fact.UDP_tbVentasQuioscoDetalle_DeleteInsumo
 	@vent_ID INT,
@@ -3391,6 +3404,7 @@ SELECT	hiat_ID,
 FROM fila.tbHistorialVisitantesAtraccion AS hist
 INNER JOIN parq.tbAtracciones AS atra ON hist.atra_ID = atra.atra_ID
 GO
+
 
 							SELECT COUNT(*) FROM fila.tbHistorialVisitantesAtraccion WHERE hiat_FechaFiltro = '2023-05-29'
 							GO

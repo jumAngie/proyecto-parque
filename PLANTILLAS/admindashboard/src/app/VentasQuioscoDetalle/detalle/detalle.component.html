@@ -89,31 +89,94 @@
                                 <div class="col-8"> 
                                        <div class="row mt-3  mb-0">
                                           <div class="col-12">
-                                             <ag-grid-angular
-                                                style=" height: 290px;"
-                                                class="ag-theme-alpine table table-striped table-hover table-responsive table-bordered mb-0"
-                                                [gridOptions]="gridOptions"
-                                             ></ag-grid-angular>                                         
+                                             <div class="row ms-1">
+                                                <div class="col-12">
+                                                   <div class="row">
+                                                     <div class="search-bar mt-3 col-6">
+                                                        <input
+                                                          type="text"
+                                                          class="form-control"
+                                                          placeholder="Buscar..."
+                                                          [(ngModel)]="filtro"
+                                                        />
+                                                      </div>    
+                                                      <div class="col-6 mt-3">                                                                          
+                                                         <div class="input-group" style="height: 2.4rem;">                                       
+                                                             <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
+                                                            <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
+                                                            <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" >
+                                                               <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
+                                                            </select>
+                                                         </div>                                                                        
+                                                      </div>              
+                                                   </div>
+                                                   <div class="row mt-2">
+                                                      <table
+                                                      class="table table-hover table-striped mt-2 col-12 mb-0"                       
+                                                    >
+                                                      <thead>
+                                                        <tr>
+                                                          <th scope="col">Insumo</th>
+                                                          <th scope="col">Precio unitario</th>
+                                                          <th scope="col">Cantidad</th>
+                                                          <th scope="col">Valor neto</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        <tr
+                                                          *ngFor="
+                                                            let item of filtrarDetalles()
+                                                              | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
+                                                          "
+                                                        >
+                                                          <th scope="row">{{ item.golo_Nombre }}</th>
+                                                          <td>{{ item.golo_Precio }}</td>
+                                                          <td>{{ item.deta_Cantidad }}</td>
+                                                          <td>{{ item.valorFinalPorInsumo }}</td>
+   
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                      <div class="pagination d-flex justify-content-center col-7 mt-4">
+                                                         <pagination-controls
+                                                            (pageChange)="p = $event"
+                                                            previousLabel="Anterior"
+                                                            nextLabel="Siguiente"
+                                                            firstLabel="Primera"
+                                                            lastLabel="Última"
+                                                            screenReaderPaginationLabel="Paginación"
+                                                            screenReaderPageLabel="Página"
+                                                            screenReaderCurrentLabel="Página actual"
+                                                         >
+                                                         </pagination-controls>
+                                                      
+                                                      </div>    
+                                                      <div class="col-5 mt-1">
+                                                         <table class=" table table-striped table-hover table-bordered table-light">
+                                                               <tbody>
+                                                                  <tr>
+                                                                     <th > <label class="d-flex justify-content-left">Subtotal: </label></th>
+                                                                     <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_Subtotal}}</label></th>
+                                                                  </tr>
+                                                                  <tr>
+                                                                     <th> <label class="d-flex justify-content-left">ISV:</label> </th>
+                                                                     <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_ISV}}</label></th>
+                                                                  </tr>
+                                                                  <tr>
+                                                                     <th> <label class="d-flex justify-content-left"> Gran Total:</label></th>
+                                                                     <th> <label class="d-flex justify-content-left font-weight-bold">Lps. {{totalRow.vent_GranTotal}} </label> </th>
+                                                                  </tr>
+                                                               </tbody>
+                                                            </table>
+                                                      </div>  
+   
+                                                   </div>
+
+                                                </div>
+                                             </div>
+                                    
                                           </div>
-                                          <div class="col-8"></div>
-                                          <div class="col-4">
-                                              <table class=" table table-striped table-hover table-bordered table-light">
-                                                  <tbody>
-                                                      <tr>
-                                                        <th > <label class="d-flex justify-content-left">Subtotal: </label></th>
-                                                        <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_Subtotal}}</label></th>
-                                                      </tr>
-                                                      <tr>
-                                                          <th> <label class="d-flex justify-content-left">ISV:</label> </th>
-                                                          <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_ISV}}</label></th>
-                                                      </tr>
-                                                      <tr>
-                                                          <th> <label class="d-flex justify-content-left"> Gran Total:</label></th>
-                                                          <th> <label class="d-flex justify-content-left font-weight-bold">Lps. {{totalRow.vent_GranTotal}} </label> </th>
-                                                      </tr>
-                                                  </tbody>
-                                               </table>
-                                          </div>
+
                                       </div>
                                 </div>
                               </div>

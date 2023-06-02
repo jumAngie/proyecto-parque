@@ -7,7 +7,7 @@ namespace ParqueDiversion.API.Models
 {
     public class InsumosQuioscoViewModel
     {
-        public int insu_ID { get; set; }                
+        public int insu_ID { get; set; }
         public int? quio_ID { get; set; }
         public string quio_Nombre { get; set; }
         public int? area_ID { get; set; }
@@ -21,6 +21,7 @@ namespace ParqueDiversion.API.Models
         public int? golo_ID { get; set; }
         public string golo_Nombre { get; set; }
         public int? golo_Precio { get; set; }
+        public string golo_Img { get; set; }
         public int? insu_Stock { get; set; }
         public int? insu_Habilitado { get; set; }
         public int? insu_Estado { get; set; }
