@@ -20,12 +20,20 @@ export class DetalleQuioscoComponent implements OnInit{
   golosinas!: Golosinas[];
   sendInsumos: InsumosQuiosco = new InsumosQuiosco();
 
+  filtro: String = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
+
   gridOptions: GridOptions = {};
 
   GolosinaRequerida = false;
   StockRequerido = false;
   id: any;
 
+  showModalD=false;
+  showModalC=false;
 
   constructor(
     private service: ParqServicesService,
@@ -36,71 +44,51 @@ export class DetalleQuioscoComponent implements OnInit{
   ){};
 
   ngOnInit(): void {
-    this.gridOptions = {
-      columnDefs: [
-        {headerName: 'ID', field: 'golo_ID', width: 150, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Golosina', field: 'golo_Nombre', width: 310, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Precio unitario', field: 'golo_Precio', width: 250, autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Stock', field: 'insu_Stock', width: 250, autoHeight: true, autoHeaderHeight: true},
-      ],
-      rowData: this.insumos,
-      pagination: true,
-      paginationPageSize: 7,   
-      defaultColDef: {
-        sortable: true,
-        filter: true,
-        resizable: true,
-        unSortIcon: true,
-        wrapHeaderText: true,
-        wrapText: true,
-      },
-      localeText: {
-        // Encabezados de columna
-        columnMenuName: 'Menú de columnas',
-        columnHide: 'Ocultar',
-        columnShowAll: 'Mostrar todo',
-        columnDefs: 'Definiciones de columnas',
-        // Otros textos
-        loadingOoo: 'Cargando...',
-        noRowsToShow: 'No hay filas para mostrar',
-        page: 'Página',
-        more: 'Más',
-        to: 'a',
-        of: 'de',
-        next: 'Siguiente',
-        last: 'Último',
-        first: 'Primero',
-        previous: 'Anterior', 
-      },
-    };
+
 
     this.quiosco = JSON.parse(localStorage.getItem('quiosco') ?? '')     
 
     this.getInsumos();
-    this.getGolosinas();    
- 
-    // const myElementRef = this.elementRef.nativeElement.querySelector('#myElement');
-    // console.log(myElementRef);
-
-    // const myElementRendered = this.renderer2.selectRootElement('#myElement');
-    // console.log(myElementRendered);
-  }
-
-  openModal(): void {
-    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
-    this.renderer2.addClass(modalElement, 'show');
-    this.renderer2.setStyle(modalElement, 'display', 'block');
-  }
-
-  closeModal(): void {
-    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
-    this.renderer2.removeClass(modalElement, 'show');
-    this.renderer2.setStyle(modalElement, 'display', 'none');
+    this.getGolosinas();   
     
-    this.clearModal();
+    this.showModalC = false;
+    this.showModalD = false;
+ 
+  }
+
+  filtrarInsumos(): InsumosQuiosco[]{
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.insumos.filter(insumo => {
+        const nombreValido = insumo.golo_Nombre.toLowerCase().includes(filtroLowerCase);
+        const precioValido = insumo.golo_Precio.toString().toLowerCase().includes(filtroLowerCase);        
+
+        return nombreValido || precioValido
+    });    
+  }
+
+//#region MODAL CREATE INSUMOS
+  openCreateModal() {
+    const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
+    this.renderer2.setStyle(modalCreate, 'display', 'block');
+    setTimeout(() => {
+      this.renderer2.addClass(modalCreate, 'show');
+      this.showModalC = true;
+    }, 0);
   }
 
 
+  closeCreateModal(){
+    const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
+    this.renderer2.removeClass(modalCreate, 'show');
+    this.clearModal();
+    setTimeout(() => {
+      this.renderer2.setStyle(modalCreate, 'display', 'none');
+      this.showModalC = false;
+    }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
+  
+  }
+  
   clearModal(): void{
     const selectElement = this.elementRef.nativeElement.querySelector('#golo_ID');
     this.renderer2.setProperty(selectElement, 'value', '');
@@ -114,6 +102,10 @@ export class DetalleQuioscoComponent implements OnInit{
     this.StockRequerido = false;
     this.GolosinaRequerida = false;
   }
+//#endregion
+
+
+
 
   getGolosinas(){
     this.service.getGolosinas().subscribe((response: any) =>{

@@ -13,6 +13,7 @@ export class InsumosQuiosco{
     golo_ID!: number;
     golo_Nombre!:String;
     golo_Precio!: number;
+    golo_Img!: String;
     insu_Stock!: any;
     insu_Habilitado!: number;
     insu_Estado!: number;

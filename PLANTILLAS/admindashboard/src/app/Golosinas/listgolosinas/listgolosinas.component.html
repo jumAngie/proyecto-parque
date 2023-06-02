@@ -111,7 +111,7 @@
 
 
 <!-- MODAL CREATE -->
-<div class="modal" id="modalCreate" tabindex="-1">
+<div [ngClass]="{'slide-in': showModal}" class="modal-shadow modal" id="modalCreate">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-light">
@@ -121,6 +121,58 @@
 
           <div class="row" style="text-align: center; margin-top: 20px">
             <div class="col-md-6">
+              <div class="d-flex justify-content-center align-items-center point">
+                <input
+                  id="uploadBtn"
+                  type="file"
+                  class="point"
+                  style="display: none"
+                  accept="image/*"
+                  (change)="handleImageUpload($event)"
+                />
+                <div class="position-relative">
+                  <label
+                    for="uploadBtn"
+                    class="img-circle-medium point"
+                    [style.background-image]="'url(' + createGolosina.golo_Img + ')'"
+                  >
+                    <span
+                      *ngIf="!createGolosina.golo_Img"
+                      class="mt-5 text-center d-flex align-items-center justify-content-center"
+                    >
+                      <i>
+                        <img
+                          src="../../assets/img/foto.png"
+                          width="60px"
+                          class="mt-4 point"
+                          alt=""
+                      /></i>
+                    </span>
+                    <span
+                      *ngIf="!createGolosina.golo_Img"
+                      class="text-center d-flex align-items-center justify-content-center"
+                    >
+                      Añadir Imagen
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center mt-2">
+                <i
+                  *ngIf="createGolosina.golo_Img"
+                  class="point"
+                  (click)="deleteImage()"
+                >
+                  <img
+                    src="../../assets/img/fotoeliminar.png"
+                    width="50px"
+                    alt=""
+                  />
+                </i>
+              </div>
+            </div>
+            <div class="col-md-6">
+            <div class="col-md-12">
               <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Golosina_Create_Requerido" ></i>
               <span>Golosina:</span>
               <div class="input-group" style="height: 3rem">
@@ -128,7 +180,7 @@
                 <input [(ngModel)]="createGolosina.golo_Nombre" type="text" class="form-control" id="golo_Nombre" placeholder="Golosina" (input)="clearGolosinaCreateError()"/>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Precio_Create_Requerido" ></i>
               <span>Precio:</span>
               <div class="input-group" style="height: 3rem">
@@ -136,10 +188,21 @@
                 <input [(ngModel)]="createGolosina.golo_Precio" type="text" class="form-control" id="golo_Precio" placeholder="Precio" (input)="clearPrecioCreateError()"/>
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="col-md-6">
+                  <img src="https://media2.giphy.com/media/oVbPKZAjURuV6B15OL/giphy.gif?cid=ecf05e47hshcyn5zt8bro4qi6iubr506m2m9qpfi0rkfttyi&ep=v1_gifs_related&rid=giphy.gif&ct=s"
+                    style="width: 90px; height: 90px; margin-right: 50px; text-align: center;" alt="Warning Sign" />
+                </div>
+                <div class="col-md-5">
+                  <img src="https://media1.giphy.com/media/f6o8sE5Fmo13Sm3mmq/giphy.gif?cid=ecf05e47bkzr37314mp5rci1y3nysofg1dkxd3z67a68hkn9&ep=v1_gifs_related&rid=giphy.gif&ct=s"
+                    style="width: 100px; height: 100px; margin-left: 50px; text-align: center;" alt="Warning Sign" />
+                </div>
+              </div>
+            </div>
           </div>
-        <img src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s"
-          style=" width: 100px; height: 100px; margin-right: 30px; text-align: center;"alt="Warning Sign"/>
       </div>
+    </div>
       <div class="modal-footer">
         <button (click)="confirmCreate()" type="button" class="ov-btn-grow-primary" style="margin-left: 10px; height: 2.5rem;">
         <i class="bi bi-check-circle-fill "></i> Agregar
@@ -151,38 +214,101 @@
     </div>
   </div>
 </div>
-
+<!-- /MODAL CREATE -->
 
 <!-- MODAL UPDATE -->
-<div class="modal" id="modalUpdate" tabindex="-1">
+<div [ngClass]="{'slide-in': showModalU}" class="modal-shadow modal" id="modalUpdate" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-light">
         <h5 class="modal-title text-dark"><b>Edición</b></h5>               
      </div>
-      <div class="modal-body" style="text-align: center">
-
-          <div class="row" style="text-align: center; margin-top: 20px">
-            <div class="col-md-6">
-              <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Golosina_Update_Requerido" ></i>
-              <span>Golosina:</span>
-              <div class="input-group" style="height: 3rem">
-                <span class="input-group-text" ><i class="bi bi-person-fill" style="color: rgb(43, 137, 226)" ></i></span>
-                <input [(ngModel)]="updateGolosina.golo_Nombre" type="text" class="form-control" id="golo_Nombre_Edit" placeholder="Golosina" (input)="clearGolosinaUpdateError()"/>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Precio_Update_Requerido" ></i>
-              <span>Precio:</span>
-              <div class="input-group" style="height: 3rem">
-                <span class="input-group-text" ><i class="bi bi-person-fill" style="color: rgb(43, 137, 226)" ></i></span>
-                <input [(ngModel)]="updateGolosina.golo_Precio" type="text" class="form-control" id="golo_Precio_Edit" placeholder="Precio" (input)="clearPrecioUpdateError()"/>
-              </div>
-            </div>
-          </div>
-        <img src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s"
-          style=" width: 100px; height: 100px; margin-right: 30px; text-align: center;"alt="Warning Sign"/>
+      <!-- Modal Body -->
+<div class="modal-body" style="text-align: center">
+  <div class="row" style="text-align: center; margin-top: 20px">
+    <div class="col-md-6">
+      <div class="d-flex justify-content-center align-items-center point">
+        <input
+          id="uploadBtn"
+          type="file"
+          class="point"
+          style="display: none"
+          accept="image/*"
+          (change)="handleImageUpload($event)"
+        />
+        <div class="position-relative">
+          <label
+            for="uploadBtn"
+            class="img-circle-medium point"
+            [style.background-image]="'url(' + createGolosina.golo_Img + ')'"
+          >
+            <span
+              *ngIf="!createGolosina.golo_Img"
+              class="mt-5 text-center d-flex align-items-center justify-content-center"
+            >
+              <i>
+                <img
+                  src="../../assets/img/foto.png"
+                  width="60px"
+                  class="mt-4 point"
+                  alt=""
+                /></i>
+            </span>
+            <span
+              *ngIf="!createGolosina.golo_Img"
+              class="text-center d-flex align-items-center justify-content-center"
+            >
+              Añadir Imagen
+            </span>
+          </label>
+        </div>
       </div>
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <i
+          *ngIf="createGolosina.golo_Img"
+          class="point"
+          (click)="deleteImage()"
+        >
+          <img
+            src="../../assets/img/fotoeliminar.png"
+            width="50px"
+            alt=""
+          />
+        </i>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Golosina_Update_Requerido"></i>
+        <span>Golosina:</span>
+        <div class="input-group" style="height: 3rem">
+          <span class="input-group-text"><i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i></span>
+          <input [(ngModel)]="updateGolosina.golo_Nombre" type="text" class="form-control" id="golo_Nombre_Edit" placeholder="Golosina" (input)="clearGolosinaUpdateError()" />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="Precio_Update_Requerido"></i>
+        <span>Precio:</span>
+        <div class="input-group" style="height: 3rem">
+          <span class="input-group-text"><i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i></span>
+          <input [(ngModel)]="updateGolosina.golo_Precio" type="text" class="form-control" id="golo_Precio_Edit" placeholder="Precio" (input)="clearPrecioUpdateError()" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="col-md-6">
+            <img src="https://media2.giphy.com/media/oVbPKZAjURuV6B15OL/giphy.gif?cid=ecf05e47hshcyn5zt8bro4qi6iubr506m2m9qpfi0rkfttyi&ep=v1_gifs_related&rid=giphy.gif&ct=s"
+              style="width: 90px; height: 90px; margin-right: 50px; text-align: center;" alt="Warning Sign" />
+          </div>
+          <div class="col-md-6">
+            <img src="https://media1.giphy.com/media/f6o8sE5Fmo13Sm3mmq/giphy.gif?cid=ecf05e47bkzr37314mp5rci1y3nysofg1dkxd3z67a68hkn9&ep=v1_gifs_related&rid=giphy.gif&ct=s"
+              style="width: 100px; height: 100px; margin-left: 50px; text-align: center;" alt="Warning Sign" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
       <div class="modal-footer">
         <button (click)="confirmUpdate()" type="button" class="ov-btn-grow-primary" style="margin-left: 10px; height: 2.5rem;">
         <i class="bi bi-check-circle-fill "></i> Actualizar
@@ -194,12 +320,13 @@
     </div>
   </div>
 </div>
+<!--/MODAL UPDATE -->
 
 
 
 
 <!-- MODAL DELETE -->
-<div class="modal fade" id="modalDelete" tabindex="-1">
+<div [ngClass]="{'slide-in': showModalD}" class="modal-shadow modal"  id="modalDelete" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-danger">
@@ -223,3 +350,4 @@
     </div>
   </div>
 </div>
+<!--/MODAL DELETE -->

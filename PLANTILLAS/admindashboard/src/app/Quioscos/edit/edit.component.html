@@ -91,35 +91,34 @@
 
                            </div>
                            <div class="col-md-6">
-                              <div class="row g-3 mt-1">
-                                 <div class="col-md-12">
-                                    <div class="card mt-1">
-                                       <div class="card-header text-center">                                          
-                                          <div class="form-group">
-                                             <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
-                                             <label for="imagen" class="ms-1 form-label text-dark">Imagen:</label>
-                                             <input type="file" class="form-control" id="imagen" (change)="handleImageChange($event)" accept="image/*">
-                                          </div>
-                                       </div>
-                                       <div class="card-body text-center mt-3">
-                                          <div class="my-image-container">
-                                            <div class="my-circular-container">
-                                             <div class="card-body" *ngIf="selectedImage">
-                                                <img #imageInput [src]="selectedImage">
-                                             </div>
-                                            </div>
-                                          </div>
-                                        </div>                                        
-                                       <div class="card-footer text-center">
-                                          <button (click)="removeImage()" class="ov-btn-grow-d mt-1" style="height: 2.4rem; margin-left: 0;">
-                                             <i class="bi bi-trash-fill"></i>
-                                             Quitar Imagen
-                                          </button>                                          
-                                       </div>
-                                    </div>
-                                 </div>                                 
-                              </div>                                 
-                           </div>
+                              <div class="d-flex justify-content-center align-items-center point">
+                                <input id="uploadBtn" type="file" class="point" style="display: none;" accept="image/*"
+                                  (change)="handleImageUpload($event)">
+                                <div class="position-relative">
+                                  <label for="uploadBtn" class="img-circle-medium point"
+                                    [style.background-image]="'url(' + quiosco.quio_Imagen + ')'">
+                                    <span *ngIf="!quiosco.quio_Imagen"
+                                      class="mt-5 text-center d-flex align-items-center justify-content-center">
+                                      <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4 point" alt=""></i>
+                                    </span>
+                                    <span *ngIf="!quiosco.quio_Imagen"
+                                      class="text-center d-flex align-items-center justify-content-center">
+                                      Añadir Foto
+                                    </span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="d-flex justify-content-center align-items-center mt-2">
+                                <i *ngIf="quiosco.quio_Imagen" class="point" (click)="deleteImage()">
+                                  <img src="../../assets/img/fotoeliminar.png" width="50px" alt="">
+                                </i>
+                               </div>
+                              <div class="d-flex justify-content-center align-items-center mt-2">
+                               <i  *ngIf="ImagenRequerido">
+                                 <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
+                               </i>
+                              </div>
+                            </div>
 
                         </div>
                      </div>   

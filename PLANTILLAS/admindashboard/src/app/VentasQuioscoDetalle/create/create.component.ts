@@ -9,6 +9,7 @@ import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
 import { GridOptions } from 'ag-grid-community';
 import { InsumosQuiosco } from 'src/app/Models/InsumosQuiosco';
 import { DetallesActionsRenderer } from './DetallesActionsRenderer';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -45,6 +46,11 @@ export class VentasCrearComponent implements OnInit{
   btnSendDetails = false;
   btnCloseReceipt = false;
   
+  showModedData: VentasQuioscoDetalle[] = [];
+  filtro: String = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
 
   constructor(
     private service: ParqServicesService,
@@ -55,12 +61,11 @@ export class VentasCrearComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.quioscoID = 1;
+    this.quioscoID = 2;
     this.venta.clie_ID = 1;
     this.venta.pago_ID = 0;
     this.detalle.insu_ID = 0;
 
-    this.loadTable();
 
     this.getPagos();
     this.getClientes();
@@ -68,6 +73,19 @@ export class VentasCrearComponent implements OnInit{
     this.disableFields(false);
     this.disableContentFields(true);
   };
+
+  filtrarInsumos(){
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.showDetalles.filter(detalle => {
+        const nombreValido = detalle.golo_Nombre.toLowerCase().includes(filtroLowerCase);
+        const direccionValido = detalle.golo_Precio.toString().toLowerCase().includes(filtroLowerCase);
+        const areaNombreValido = detalle.deta_Cantidad.toString().toLowerCase().includes(filtroLowerCase);
+        const totalProds = detalle.valorFinalPorInsumo.toString().toLowerCase().includes(filtroLowerCase);
+        return nombreValido || direccionValido || areaNombreValido || totalProds
+    });    
+  }
+
 
 //#region CARGAR DATOS
   getPagos(){
@@ -92,99 +110,21 @@ export class VentasCrearComponent implements OnInit{
         this.insumos = response.data;
       }
     }) 
-  }
-
-  loadTable(){
-    this.gridOptions = {
-      columnDefs: [        
-        {headerName: 'Golosina', field: 'golo_Nombre', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Precio unitario', field: 'golo_Precio', autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Cantidad', field: 'deta_Cantidad',  autoHeight: true, autoHeaderHeight: true},
-        {headerName: 'Valor', field: 'valorFinalPorInsumo'},
-        {
-          headerName: 'Acciones',
-          width: 200,
-          sortable: false,
-          filter: false,
-          cellRenderer: 'actionsRenderer',
-          cellRendererParams: {
-            onDeleteDetail: this.onDeleteDetail.bind(this),
-          }
-        },
-      ],
-      columnHoverHighlight: true,          
-      rowData: this.showDetalles,
-      pagination: true,
-      paginationPageSize: 7,   
-      defaultColDef: {
-        sortable: true,
-        filter: true,
-        resizable: true,
-        unSortIcon: true,
-        wrapHeaderText: true,
-        wrapText: true,
-      },
-      frameworkComponents:{
-        actionsRenderer: DetallesActionsRenderer,
-      },
-      localeText: {
-        // Encabezados de columna
-        columnMenuName: 'Menú de columnas',
-        columnHide: 'Ocultar',
-        columnShowAll: 'Mostrar todo',
-        columnDefs: 'Definiciones de columnas',
-        // Otros textos
-        loadingOoo: 'Aún no hay insumos por mostrar',
-        noRowsToShow: 'Aún no hay insumos por mostrar',
-        page: 'Página',
-        more: 'Más',
-        to: 'a',
-        of: 'de',
-        next: 'Siguiente',
-        last: 'Último',
-        first: 'Primero',
-        previous: 'Anterior', 
-      },
-    };
   };
 
   reloadDetails(){
-    this.service.getDetallesByVenta(this.detalle.vent_ID).subscribe((response : any) =>{
+    this.service.getDetallesByVenta(this.detalle.vent_ID).subscribe((response : any) =>{      
       if (response.success) {
         this.showDetalles = response.data;
 
-        const showModedData: VentasQuioscoDetalle[] = [];
-
         for (let i = 0; i < this.showDetalles.length; i++) {
           const showDetalleItem = this.showDetalles[i];
-
-          const showTransformedData: VentasQuioscoDetalle = {
-            deta_ID: showDetalleItem.deta_ID,
-            vent_ID: showDetalleItem.vent_ID,
-            insu_ID: showDetalleItem.insu_ID,
-            golo_Nombre: showDetalleItem.golo_Nombre,
-            golo_Precio: showDetalleItem.golo_Precio,
-            deta_Cantidad: showDetalleItem.deta_Cantidad,
-            deta_Habilitado: showDetalleItem.deta_Habilitado,
-            deta_Estado: showDetalleItem.deta_Estado,
-            empl_crea: showDetalleItem.empl_crea,
-            empl_modifica: showDetalleItem.empl_modifica,
-            deta_UsuarioCreador: showDetalleItem.deta_UsuarioCreador,
-            deta_UsuarioCreador_Nombre: showDetalleItem.deta_UsuarioCreador_Nombre,
-            deta_FechaCreacion: showDetalleItem.deta_FechaCreacion,
-            deta_UsuarioModificador: showDetalleItem.deta_UsuarioModificador,
-            deta_UsuarioModificador_Nombre: showDetalleItem.deta_UsuarioCreador_Nombre,
-            deta_FechaModificacion: showDetalleItem.deta_FechaModificacion,
-            valorFinalPorInsumo: showDetalleItem.golo_Precio * showDetalleItem.deta_Cantidad                  
-          };
-
-          showModedData.push(showTransformedData);
-        };
-
-        this.gridOptions.api?.setRowData(showModedData);
-        const Subtotal = showModedData.reduce((total, detalleItem) => total + detalleItem.valorFinalPorInsumo, 0);
-        const ISV = Subtotal * 0.15;
-        const GranTotal = Subtotal + ISV;
+          showDetalleItem.valorFinalPorInsumo = showDetalleItem.golo_Precio * showDetalleItem.deta_Cantidad;
+        }
+        
+        const Subtotal = this.showDetalles.reduce((total, detalleItem) => total + detalleItem.valorFinalPorInsumo, 0);
+        const ISV = (Subtotal * 0.15).toFixed(2);
+        const GranTotal = (parseFloat(Subtotal.toString()) + parseFloat(ISV.toString())).toFixed(2);
 
         this.totalRow = {
           vent_Subtotal: Subtotal,
@@ -242,7 +182,7 @@ export class VentasCrearComponent implements OnInit{
     this.renderer2.setProperty(Cantidad, 'value', '');
 
     this.detalle.insu_ID = 0;
-    this.detalle.deta_Cantidad = 0;
+    this.detalle.deta_Cantidad == null;
   };
 
   closeModal(){
@@ -275,7 +215,7 @@ export class VentasCrearComponent implements OnInit{
       if (errors == 0) {      
   
         this.venta.vent_UsuarioCreador = 1;
-        this.venta.quio_ID = 1;
+        this.venta.quio_ID = this.quioscoID;
 
         this.service.createVenta(this.venta).subscribe((response : any) =>{
           if (response.code == 200) {
@@ -317,6 +257,7 @@ export class VentasCrearComponent implements OnInit{
 
       if (errors == 0) {
         this.detalle.deta_UsuarioCreador = 1;
+        console.log(this.detalle);
         this.service.createVentaDetalle(this.detalle).subscribe((response : any) =>{
           if (response.code == 200) {
             this.clearContentInputs();

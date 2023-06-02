@@ -28,11 +28,16 @@ namespace ParqueDiversion.API.Controllers.Fila
         }
 
         [HttpPost("ChartData")]
-        public IActionResult ChartData(HistorialVisitantesAtraccionViewModel item)
+        public IActionResult ChartData([FromBody] filterChartData item)
         {
-            var mappedItem = _mapper.Map<tbHistorialVisitantesAtraccion>(item);
-            var result = _filaServices.GetChartData(mappedItem);
+            var result = _filaServices.GetChartData(item.fechaInicial, item.fechaFinal);
             return Ok(result);
+        }
+
+        public class filterChartData
+        {
+            public string fechaInicial { get; set; }
+            public string fechaFinal { get; set; }
         }
     }
 }

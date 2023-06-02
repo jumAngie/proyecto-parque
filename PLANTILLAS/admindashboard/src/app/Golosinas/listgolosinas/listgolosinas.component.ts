@@ -2,6 +2,7 @@ import { TitleCasePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Golosinas } from 'src/app/Models/Golosinas';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
+import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 @Component({
@@ -15,7 +16,10 @@ export class ListgolosinasComponent implements OnInit {
   createGolosina: Golosinas = new Golosinas();
   deleteGolosina: Golosinas = new Golosinas();
   golo_ID: any;
-
+  showModal=false;
+  showModalU=false;
+  showModalD=false;
+  imageUrl: string = ''; 
   p: number = 1;
   filtro: string = '';
 
@@ -30,13 +34,16 @@ export class ListgolosinasComponent implements OnInit {
     private service:ParqServicesService,
     private elementRef: ElementRef,
     private renderer2: Renderer2,
-
+    private imgbbService: ImgbbService,
   ) { }
 
   ngOnInit(): void {
   
     this.getGolosinas();
     this.createGolosina.golo_Precio = 0;
+    this.showModal=false;
+    this.showModalU=false;
+    this.showModalD=false;
   }
   
   getGolosinas(){
@@ -63,17 +70,22 @@ export class ListgolosinasComponent implements OnInit {
 
 
 //#region MODAL CREATE
-openCreateModal(){
+openCreateModal() {
   const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
-  this.renderer2.addClass(modalCreate, 'show');
   this.renderer2.setStyle(modalCreate, 'display', 'block');
-
+  setTimeout(() => {
+    this.renderer2.addClass(modalCreate, 'show');
+    this.showModal = true;
+  }, 0);
 }
-closeCreateModal(){
+closeCreateModal(): void {
   const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
   this.renderer2.removeClass(modalCreate, 'show');
-  this.renderer2.setStyle(modalCreate, 'display', 'none');
-  
+  setTimeout(() => {
+    this.renderer2.setStyle(modalCreate, 'display', 'none');
+    this.showModal = false;
+  }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
+
   this.createGolosina.golo_UsuarioCreador = 0;
   this.createGolosina.golo_Nombre = '';
   this.createGolosina.golo_Precio = 0;
@@ -84,6 +96,7 @@ closeCreateModal(){
   const golo_Precio = this.elementRef.nativeElement.querySelector('#golo_Precio');
   this.renderer2.setProperty(golo_Precio, 'value', '');
 }
+
 
 confirmCreate(){
   var errors = 0;
@@ -161,17 +174,24 @@ confirmCreate(){
     }
   }
 
-  openUpdateModal(){
+  openUpdateModal() {
     const modalUpdate = this.elementRef.nativeElement.querySelector('#modalUpdate');
-    this.renderer2.addClass(modalUpdate, 'show');
     this.renderer2.setStyle(modalUpdate, 'display', 'block');
+    setTimeout(() => {
+      this.renderer2.addClass(modalUpdate, 'show');
+      this.showModalU = true;
+    }, 0);
   }
-
+  
   closeUpdateModal(): void {
     const modalUpdate = this.elementRef.nativeElement.querySelector('#modalUpdate');
     this.renderer2.removeClass(modalUpdate, 'show');
-    this.renderer2.setStyle(modalUpdate, 'display', 'none');
+    setTimeout(() => {
+      this.renderer2.setStyle(modalUpdate, 'display', 'none');
+      this.showModalU = false;
+    }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
   }
+  
 //#endregion MODAL UPDATE
 
 
@@ -181,17 +201,24 @@ confirmCreate(){
     this.openDeleteModal();
   }
 
-  openDeleteModal(){
+  openDeleteModal() {
     const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
-    this.renderer2.addClass(modalDelete, 'show');
-    this.renderer2.setStyle(modalDelete, 'display', 'block'); 
+    this.renderer2.setStyle(modalDelete, 'display', 'block');
+    setTimeout(() => {
+      this.renderer2.addClass(modalDelete, 'show');
+      this.showModalD = true;
+    }, 0);
   }
 
-  closeDeleteModal(){
+  closeDeleteModal() {
     const modalDelete = this.elementRef.nativeElement.querySelector('#modalDelete');
     this.renderer2.removeClass(modalDelete, 'show');
-    this.renderer2.setStyle(modalDelete, 'display', 'none');    
+    setTimeout(() => {
+      this.renderer2.setStyle(modalDelete, 'display', 'none');
+      this.showModalD = false;
+    }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
   }
+  
 
   confirmDelete(){
     this.service.deleteGolosina(this.deleteGolosina).subscribe((response : any) =>{
@@ -291,4 +318,40 @@ confirmCreate(){
       }
     }
   //#endregion VALIDACIONES ACTUALIZAR 
+
+
+
+  handleImageUpload(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+
+        this.uploadImageToServer(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  uploadImageToServer(file: File) {
+    this.imgbbService.Upload_IMG(file)
+      .subscribe(
+        response => {
+
+          this.imageUrl = response.data.url;
+          this.createGolosina.golo_Img = (this.imageUrl)
+          this.updateGolosina.golo_Img = (this.imageUrl)
+        },
+        error => {
+          // Manejar errores en la carga de la imagen
+          console.error(error);
+        }
+      );
+  }
+  deleteImage() {
+    this.imageUrl = "";
+    this.createGolosina.golo_Img="";
+    this.updateGolosina.golo_Img="";
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HistorialVisitantesAtraccion } from '../Models/HistorialVisitantesAtraccion';
+import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
 import { ParqServicesService } from '../ParqServices/parq-services.service';
 import { Router } from '@angular/router';
 import { Color, colorSets } from '@swimlane/ngx-charts';
@@ -8,6 +8,7 @@ import { ToastUtils } from '../Utilities/ToastUtils';
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
+  styleUrls: ['./grafica.component.css'],
   template: `
 <ngx-charts-bar-vertical
   [view]="view"
@@ -32,7 +33,7 @@ import { ToastUtils } from '../Utilities/ToastUtils';
 })
 export class GraficaComponent implements OnInit{
   chartData!: HistorialVisitantesAtraccion[];
-  sendParams: HistorialVisitantesAtraccion = new HistorialVisitantesAtraccion();
+  sendParams: filterChartData = new filterChartData();
   initialDate: any;
   finalDate: any;
   data: {
@@ -41,7 +42,7 @@ export class GraficaComponent implements OnInit{
   }[] = [];
   view: [number, number] = [800, 500]; // Vista del gráfico
   colorScheme: string | Color = 'picnic'; 
-
+  dateMessage = '';
   /* 
   COLOR SCHEMES:{
     vivid
@@ -70,7 +71,7 @@ export class GraficaComponent implements OnInit{
   leyendTitle = 'Atracciones';
   showXAxisLabel = true; // Mostrar etiqueta del eje X
   showYAxisLabel = true; // Mostrar etiqueta del eje Y
-  xAxisLabel = 'Atracciones más visitadas del dia'; // Etiqueta del eje X
+  xAxisLabel = ''; // Etiqueta del eje X
   yAxisLabel = 'Cantidad de personas'; // Etiqueta del eje Y
   animations = true;
   showDataLabel = true;
@@ -91,20 +92,20 @@ export class GraficaComponent implements OnInit{
   }
 
   getChartData(){
-    this.sendParams.initalDate = this.initialDate;
-    this.sendParams.finalDate = this.finalDate;
+    this.sendParams.fechaInicial = this.initialDate;
+    this.sendParams.fechaFinal = this.finalDate;
 
     console.log(this.sendParams);
-    // this.service.getChartData(this.sendParams).subscribe((response : any) =>{
-    //   console.log(response)
-    //   if (response.success) {
-    //     this.chartData = response.data;
-    //     this.data = this.chartData.map(item => ({
-    //       name: item.atra_Nombre.toString(),
-    //       value: item.ticl_ID.toLocaleString()
-    //     }));
-    //   }
-    // })
+    this.service.getChartData(this.sendParams).subscribe((response : any) =>{
+      console.log(response)
+      if (response.success) {
+        this.chartData = response.data;
+        this.data = this.chartData.map(item => ({
+          name: item.atra_Nombre.toString(),
+          value: item.ticl_ID.toLocaleString()
+        }));
+      }
+    })
   }
 
   validateFilterDates(){
@@ -115,11 +116,40 @@ export class GraficaComponent implements OnInit{
     }
   }
 
-  validateFinalDate(){
-
-  }
-
   onDateChange(){
-    this.getChartData();
+    this.dateMessage = '';
+    this.xAxisLabel = '';
+    if(this.initialDate && this.finalDate){
+      this.getChartData();
+      
+      if(this.initialDate == this.finalDate){
+        ToastUtils.showInfoToast('Aquí tienes los datos del '+ this.formatDateToWords(this.initialDate));      
+        this.dateMessage = 'Mostrando datos del ' + this.formatDateToWords(this.initialDate);
+        this.xAxisLabel = 'Atracciones más visitadas del ' + this.formatDateToWords(this.initialDate);
+
+      }else{
+        ToastUtils.showInfoToast('Aqui tienes los datos del '+ this.formatDateToWords(this.initialDate) + ' al ' +  this.formatDateToWords(this.finalDate));      
+        this.dateMessage = 'Mostrando datos del ' + this.formatDateToWords(this.initialDate) + ' al ' +  this.formatDateToWords(this.finalDate);
+        this.xAxisLabel = 'Atracciones más visitadas del ' + this.formatDateToWords(this.initialDate) + ' al ' +  this.formatDateToWords(this.finalDate);
+      }
+      
+    }
   }
+
+  formatDateToWords(dateString: string): string {
+    const months = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+      'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ];
+  
+    const parts = dateString.split('-');
+    const year = Number(parts[0]);
+    const monthIndex = Number(parts[1]) - 1;
+    const day = Number(parts[2]);
+  
+    const month = months[monthIndex];
+  
+    return `${day} de ${month} de ${year}`;
+  }
+  
 }
