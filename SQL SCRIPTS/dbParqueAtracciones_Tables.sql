@@ -1,9 +1,9 @@
-CREATE DATABASE dbParqueAtracciones
-GO
+--CREATE DATABASE dbParqueAtracciones
+--GO
 
 
-USE dbParqueAtracciones
-GO
+--USE dbParqueAtracciones2
+--GO
 CREATE SCHEMA gral
 GO
 CREATE SCHEMA parq

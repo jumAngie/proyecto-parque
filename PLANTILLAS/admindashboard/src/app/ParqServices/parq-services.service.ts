@@ -18,6 +18,7 @@ import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
 import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
+import { Ticket } from '../Models/Tikectks';
 
 @Injectable({
   providedIn: 'root'
@@ -203,7 +204,11 @@ export class ParqServicesService {
   getTicketsCliente(){
     return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
   }
-
+    // servicios de tickets //
+  getTicket(){
+      return this.http.get<Ticket[]>(this.apiService.apiUrl + 'Ticket/List')
+    }
+    
   //Gráfica
   getChartData(item: filterChartData){
     return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
