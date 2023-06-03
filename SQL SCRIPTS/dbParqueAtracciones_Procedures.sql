@@ -2320,7 +2320,7 @@ END
 GO
 
 --*************** FIND DE ATRACCIONES ******************-
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND 
 	@atra_ID INT
 AS
 BEGIN
@@ -2331,7 +2331,7 @@ END
 GO
 
 --*************** INSERT DE ATRACCIONES ******************-
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT	
 	@area_ID					INT, 
 	@atra_Nombre				VARCHAR(300), 
 	@atra_Descripcion			VARCHAR(300), 
@@ -2353,6 +2353,15 @@ BEGIN
 				BEGIN
 					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
 					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
+			
+					DECLARE @tifi_ID INT= (SELECT CAST(IDENT_CURRENT(' parq.tbAtracciones')AS INT))
+					
+					INSERT INTO fila.tbFilasAtraccion
+					(tifi_ID,atra_ID,fiat_UsuarioCreador)
+					VALUES
+					(@tifi_ID,1,@atra_UsuarioCreador),
+					(@tifi_ID,1,@atra_UsuarioCreador)
+
 					SELECT 200 AS codeStatus, 'Atracción creada con éxito' AS messageStatus
 				END
 		COMMIT
@@ -2884,7 +2893,6 @@ GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_ID						INT, 
 @golo_Nombre					VARCHAR(300),
-@golo_Img						NVARCHAR(MAX),
 @golo_Precio					INT, 
 
 @golo_UsuarioModificador		INT

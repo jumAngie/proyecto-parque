@@ -3,7 +3,7 @@
        <h1>Atraccioness</h1>
        <nav>
           <ol class="breadcrumb">
-             <li class="breadcrumb-item" ><a routerLink="/atraccioness-listado"> Listado</a></li>             
+             <li class="breadcrumb-item" ><a routerLink="/atracciones-listado"> Listado</a></li>             
              <li class="breadcrumb-item active"> <a routerLink="/atraccioness-detalle">Detalle</a> </li>
           </ol>
        </nav>
@@ -56,6 +56,9 @@
                                  <label class="col-12 ">Región: {{atracciones.atra_regi_Nombre}}</label>
                                  <label class="col-12 ">Dirección: {{atracciones.atra_ReferenciaUbicacion}}</label>
                               </div>
+                              <div class="row mt-2">
+                                 <img [src]="atracciones.atra_Imagen" style="border-radius: 10%; border: 3rem; border-color: black;">
+                              </div> 
                            </div>
                         </div>
                      </div>
@@ -76,6 +79,7 @@
                                  <label class="col-12 ">Zona: {{atracciones.area_Nombre}}</label>
                                  <label class="col-12 ">Región: {{atracciones.area_regi_Nombre}}</label>
                                  <label class="col-12 ">Ubicación: {{atracciones.atra_ReferenciaUbicacion}}</label>                                 
+                                 <label class="col-12">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</label>                                 
                               </div>
                               <div class="row mt-2">
                                  <img [src]="'assets/img/MAPA/'+atracciones.area_Imagen" style="border-radius: 10%; border: 3rem; border-color: black;">
