@@ -144,3 +144,19 @@
   }
   
   
+
+  .custom-image {
+    border-radius: 12%;
+    border-width: 20px;
+    border: 6rem;
+    border-color: black;
+    width: 220px;
+    height: 220px;
+    transition: transform 0.5s, box-shadow 0.5s;
+  }
+  
+  .custom-image:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  

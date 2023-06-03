@@ -171,6 +171,7 @@
   border-radius: 0.20rem;
   max-width: 100%;
   height: 110%;
+  margin-bottom:28px;
 }
 
 
@@ -258,8 +259,8 @@
 
 .my-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
-  transition: box-shadow 0.5s ease, transform 0.3s ease;
+  transform: scale(1.1);
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
 }
 
 
@@ -305,3 +306,38 @@
 .point:hover {
   cursor: pointer;
 }
+
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.tooltip-container img {
+  position: relative;
+  z-index: 0;
+}
+
+

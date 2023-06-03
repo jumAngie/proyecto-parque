@@ -64,16 +64,9 @@
         </div>
       </div>
 
-      <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4"
-      >
-        <div
-          *ngFor="
-            let usuario of usuariosFiltrados
-              | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
-          "
-          class="col card border shadow rounded-md p-4 d-flex flex-column"
-        >
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4">
+        <div *ngFor="let usuario of usuariosFiltrados | paginate : { itemsPerPage: itemsPerPage, currentPage: p }" 
+            class="col card border shadow rounded-md p-4 d-flex flex-column hover-effect">
           <div class="card-body">
             <div class="text-center">
               <img

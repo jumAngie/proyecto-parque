@@ -60,12 +60,7 @@
             style="margin-left: 10px; margin-right: 10px; margin-top: 20px"
           >
             <div
-              class="col-md-4"
-              *ngFor="
-                let item of filtrarGolosinas()
-                  | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
-              "
-            >
+              class="col-md-4 hover-effect" *ngFor="let item of filtrarGolosinas()| paginate : { itemsPerPage: selectedPageSize, currentPage: p }">
               <div class="card h-100 mb-3">
                 <div class="card-body">
                   <h5 class="card-title">

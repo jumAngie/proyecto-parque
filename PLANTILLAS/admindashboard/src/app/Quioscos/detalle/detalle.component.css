@@ -185,4 +185,7 @@
   .point:hover {
     cursor: pointer;
   }
+  .card {
+    height: 100%; /* Establece una altura fija para la carta */
+  }
   
