@@ -1,9 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { Router, RouterEvent, TitleStrategy } from '@angular/router';
+import { Router } from '@angular/router';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
-import { GraficaComponent } from 'src/app/grafica/grafica.component';
 import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
 @Component({
@@ -13,11 +12,13 @@ import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 })
 export class ListAtraccionesComponent implements OnInit {
   atracciones!: Atracciones[];
+  filtro: String = '';
   p: number = 1;
-  filtro: string = '';
-  deleteID!: number;
+  selectedPageSize = 2;
+  pageSizeOptions: number[] = [2, 4 ,6, 8]; // Opciones de tamaño de página
+
   showModalD=false;
-  imageUrl: string = ''; 
+  deleteID!: number;
 
   constructor(
     private service: ParqServicesService,
@@ -43,7 +44,9 @@ export class ListAtraccionesComponent implements OnInit {
 
   filtrarAtracciones(): Atracciones[] {
     return this.atracciones.filter(atracciones => {
-      return atracciones.atra_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
+      const atraccion = atracciones.atra_Nombre.toLowerCase().includes(this.filtro.toLowerCase());
+
+      return atraccion
     });
   }
 

@@ -9,27 +9,6 @@ import { ToastUtils } from '../Utilities/ToastUtils';
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
   styleUrls: ['./grafica.component.css'],
-  template: `
-<ngx-charts-bar-vertical
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="data"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [legendTitle]="leyendTitle"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [animations]="animations"
-  [showDataLabel]="showDataLabel"
-  [roundDomains]="roundDomains"
-  [dataLabelFormatting]="valueFormatting"  
-  >
-</ngx-charts-bar-vertical>
-`,
 })
 export class GraficaComponent implements OnInit{
   chartData!: HistorialVisitantesAtraccion[];
@@ -40,7 +19,7 @@ export class GraficaComponent implements OnInit{
     name: string,
     value: string,
   }[] = [];
-  view: [number, number] = [800, 500]; // Vista del gráfico
+  view: [number, number] = [1250, 500]; // Vista del gráfico
   colorScheme: string | Color = 'picnic'; 
   dateMessage = '';
   /* 

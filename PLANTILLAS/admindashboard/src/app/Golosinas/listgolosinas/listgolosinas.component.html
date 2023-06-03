@@ -5,6 +5,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
         <li class="breadcrumb-item active">Golosinas</li>
+        <li class="breadcrumb-item active">Listado</li>        
       </ol>
     </nav>
   </div>
@@ -30,19 +31,29 @@
               style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
             ></div>
           </div>
-          <div class="row ms-4 col-11">
-            <button (click)="openCreateModal()" class="ov-btn-grow-primary mt-3 col-2" style="height: 2.4rem; margin-left: 0">
-              <i class="fas fa-plus-circle mr-1"></i>Nuevo
-            </button>
+          <div class="row ms-1 mt-3 mb-2 col-12">
+                <button (click)="openCreateModal()" class="ov-btn-grow-primary col-2" style="height: 2.4rem;">
+                  <i class="fas fa-plus-circle mr-1"></i> <label for="" class="ms-2">Nuevo</label>
+                </button>
+    
+                <div class="search-bar col-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Buscar..."
+                    [(ngModel)]="filtro"
+                  />
+                </div>
+                <div class="col-4">                                                                          
+                  <div class="input-group" style="height: 2.4rem;">                                       
+                      <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
+                    <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
+                    <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" >
+                        <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
+                    </select>
+                  </div>  
+              </div>
 
-            <div class="search-bar mt-3 col-10">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Buscar..."
-                [(ngModel)]="filtro"
-              />
-            </div>
           </div>
           <div
             class="row g-3"
@@ -52,7 +63,7 @@
               class="col-md-4"
               *ngFor="
                 let item of filtrarGolosinas()
-                  | paginate : { itemsPerPage: 6, currentPage: p }
+                  | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
               "
             >
               <div class="card h-100 mb-3">
@@ -67,10 +78,11 @@
                   <div class="d-flex align-items-center">
                     <div class="card-image-container">
                       <img
-                        src="https://www.stockupmarket.com/wp-content/uploads/2020/08/CapN_Crunchs_Cotton_Candy_Crunch_Sweetened_Corn__Oat_Cereal_15.4_Ounce.png"
+                        *ngIf="item.golo_Img"
+                        [src]="item.golo_Img"
                         alt="Imagen del producto"
                         class="card-image"
-                      />
+                      />                     
                     </div>
                     <div class="ps-3">
                       <span>
@@ -134,10 +146,10 @@
                   <label
                     for="uploadBtn"
                     class="img-circle-medium point"
-                    [style.background-image]="'url(' + createGolosina.golo_Img + ')'"
+                    [style.background-image]="'url(' + imageUrl + ')'"
                   >
                     <span
-                      *ngIf="!createGolosina.golo_Img"
+                      *ngIf="!imageUrl"
                       class="mt-5 text-center d-flex align-items-center justify-content-center"
                     >
                       <i>
@@ -149,7 +161,7 @@
                       /></i>
                     </span>
                     <span
-                      *ngIf="!createGolosina.golo_Img"
+                      *ngIf="!imageUrl"
                       class="text-center d-flex align-items-center justify-content-center"
                     >
                       Añadir Imagen
@@ -158,17 +170,14 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center align-items-center mt-2">
-                <i
-                  *ngIf="createGolosina.golo_Img"
-                  class="point"
-                  (click)="deleteImage()"
-                >
-                  <img
-                    src="../../assets/img/fotoeliminar.png"
-                    width="50px"
-                    alt=""
-                  />
-                </i>
+                <img
+                *ngIf="imageUrl"
+                src="../../assets/img/fotoeliminar.png"
+                width="50px"
+                alt=""
+                class="point"
+                (click)="deleteImage()"
+              />
               </div>
             </div>
             <div class="col-md-6">
@@ -321,9 +330,6 @@
   </div>
 </div>
 <!--/MODAL UPDATE -->
-
-
-
 
 <!-- MODAL DELETE -->
 <div [ngClass]="{'slide-in': showModalD}" class="modal-shadow modal"  id="modalDelete" tabindex="-1">

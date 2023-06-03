@@ -1,56 +1,112 @@
-<div class="card d-flex text-center">
-  <div class="card-header">
-    <div class="card-title">Atracciones más visitadas</div>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Gráfica</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
+        <li class="breadcrumb-item active">Gráfica</li>
+      </ol>
+    </nav>
   </div>
-  <div class="card-body">
-    <div class="row text-center">
-      <i class="bi bi-exclamation-circle-fill" style="color: orange;" ></i>                                 
-      <label for="fechaFiltro" class="ms-1 form-label text-dark">Filtra por un rango de fechas: {{dateMessage}} </label>  
-    </div>
-    <div class="row text-center">
-      <div class="col-4">        
-        <div class="input-group" style="height: 3rem;">                                       
-           <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
-           <input (change)="onDateChange()" [(ngModel)]="initialDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
-        </div>
-     </div>
-      <div class="col-4">        
-        <div class="input-group" style="height: 3rem;">                                       
-           <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
-           <input (change)="onDateChange()" [(ngModel)]="finalDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
-        </div>
-     </div>
-     <!-- <div class="col-4">
-      <button (click)="onDateChange()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
-        <i class="fas fa-plus-circle mr-1"></i> <label class="ms-1">Filtrar</label>
-     </button>
-     </div> -->
-    </div>
-    <div class="row mt-3">
+  <section class="section dashboard">
+    <div class="row">
       <div class="col-lg-12">
-        <ngx-charts-bar-vertical
-          [view]="view"
-          [scheme]="colorScheme"
-          [results]="data"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [legend]="showLegend"
-          [legendTitle]="leyendTitle"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel"
-          [animations]="animations"
-          [showDataLabel]="showDataLabel"
-          [roundDomains]="roundDomains"
-          [dataLabelFormatting]="valueFormatting"
-          [wrapTicks]="wrapTicks"
-          [barPadding]="barPadding"  
-          >
-        </ngx-charts-bar-vertical>
+        <div class="card">
+          <div class="card-header" style="padding: 0; position: relative">
+            <div
+              class="banner"
+              style="
+                background-image: url('/assets/img/BANNERS-VR-FINAL/GOLOSINAS.png');
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-size: contain;
+                background-position: center;
+                height: 0;
+                padding-bottom: 23%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+              "
+            ></div>
+            <div
+              class="overlay"
+              style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+            ></div>
+          </div>
+          <div class="card d-flex text-center">
+            <div class="card-header">
+              <h1 style="font-weight: bolder;">Atracciones más visitadas</h1>
+            </div>
+            <div class="card-body">
+              <div class="row text-center mt-3">
+
+                <label for="fechaFiltro" class="ms-1 form-label text-dark card-title">
+                  <i class="bi bi-exclamation-circle-fill" style="color: darkturquoise; margin-right: 5px;" ></i>                                 
+                  Filtra por un rango de fechas:
+                </label>  
+              </div>
+              <div class="row text-center mb-1">
+                <div class="col-2"></div>
+                <div class="col-4">        
+                  <div class="input-group" style="height: 3rem;">                                       
+                    <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
+                    <input (change)="onDateChange()" [(ngModel)]="initialDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
+                  </div>
+                </div>
+                <div class="col-4">        
+                  <div class="input-group" style="height: 3rem;">                                       
+                    <input (change)="onDateChange()" [(ngModel)]="finalDate" type="date" class="form-control" id="fechaFiltro" >                                                                                                                   
+                    <span class="input-group-text"><i class="bi bi-calendar-check-fill" style="color: blueviolet;"></i></span>
+                    </div>
+                  </div>
+                <div class="col-2"></div>
+                </div>
+                <div *ngIf="xAxisLabel" class="row text-center mt-3">
+                  <label for="fechaFiltro" class="ms-1 form-label text-dark card-title">
+                    <i  class="bi bi-check-square-fill" style="color: rgb(27, 151, 58); margin-right: 5px;" ></i>                  
+                    {{xAxisLabel}}
+                  </label>                  
+                </div>                
+              <div class="row ">
+                <div class="col-lg-12">
+                  <ngx-charts-bar-vertical
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="data"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [legendTitle]="leyendTitle"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [animations]="animations"
+                    [showDataLabel]="showDataLabel"
+                    [roundDomains]="roundDomains"
+                    [dataLabelFormatting]="valueFormatting"
+                    [wrapTicks]="wrapTicks"
+                    [barPadding]="barPadding"  
+                    >
+                  </ngx-charts-bar-vertical>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
 

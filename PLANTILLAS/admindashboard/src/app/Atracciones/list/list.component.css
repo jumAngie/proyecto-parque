@@ -192,3 +192,11 @@
 .point:hover {
   cursor: pointer;
 }
+
+.card-hov {
+  transition: transform 0.5s;
+}
+
+.card-hov:hover {
+  transform: scale(1.04);
+}
