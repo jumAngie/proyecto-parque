@@ -32,6 +32,8 @@ namespace ParqueDiversion.DataAccess.Context
         public virtual DbSet<VW_tbClientes> VW_tbClientes { get; set; }
         public virtual DbSet<VW_tbClientesRegistrados> VW_tbClientesRegistrados { get; set; }
         public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
+        public virtual DbSet<VW_tbFilasAtraccion> VW_tbFilasAtraccion { get; set; }
+        public virtual DbSet<VW_tbFilasPosiciones> VW_tbFilasPosiciones { get; set; }
         public virtual DbSet<VW_tbGolosinas> VW_tbGolosinas { get; set; }
         public virtual DbSet<VW_tbHistorialVisitantesAtraccion> VW_tbHistorialVisitantesAtraccion { get; set; }
         public virtual DbSet<VW_tbInsumosQuiosco> VW_tbInsumosQuiosco { get; set; }
@@ -415,6 +417,10 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.Property(e => e.clie_FechaModificacion).HasColumnType("datetime");
 
+                entity.Property(e => e.clie_NombreCompleto)
+                    .HasMaxLength(601)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.clie_Nombres)
                     .HasMaxLength(300)
                     .IsUnicode(false);
@@ -448,8 +454,16 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.ToView("VW_tbClientesRegistrados", "parq");
 
+                entity.Property(e => e.clie_Apellidos)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_NombreCompleto)
+                    .HasMaxLength(601)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.clie_Nombres)
-                    .HasMaxLength(600)
+                    .HasMaxLength(300)
                     .IsUnicode(false);
 
                 entity.Property(e => e.clre_Email).HasMaxLength(300);
@@ -457,6 +471,8 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.clre_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.clre_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.clre_ID).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.clre_Usuario)
                     .HasMaxLength(300)
@@ -469,10 +485,6 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.empl_crea)
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
-                entity.Property(e => e.usu_Creador).HasMaxLength(100);
-
-                entity.Property(e => e.usu_Modificador).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbEmpleados>(entity =>
@@ -552,6 +564,36 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.empl_modifica)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbFilasAtraccion>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbFilasAtraccion", "fila");
+
+                entity.Property(e => e.atra_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.tifi_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbFilasPosiciones>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbFilasPosiciones", "fila");
+
+                entity.Property(e => e.Cliente_Nombre)
+                    .HasMaxLength(601)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.fipo_HoraIngreso).HasMaxLength(30);
+
+                entity.Property(e => e.fipo_ID).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<VW_tbGolosinas>(entity =>
@@ -1046,6 +1088,14 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.HasIndex(e => e.clre_Usuario, "UQ_parq_tbClientesRegistrados_clre_Usuario")
                     .IsUnique();
 
+                entity.Property(e => e.clie_Apellidos)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_Nombres)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.clre_Email).HasMaxLength(300);
 
                 entity.Property(e => e.clre_Estado).HasDefaultValueSql("((1))");
@@ -1061,11 +1111,6 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.clre_Usuario)
                     .HasMaxLength(300)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.clie)
-                    .WithMany(p => p.tbClientesRegistrados)
-                    .HasForeignKey(d => d.clie_ID)
-                    .HasConstraintName("FK_parq_tbClientesRegistrados_tbClientes_clie_ID");
             });
 
             modelBuilder.Entity<tbDepartamentos>(entity =>
@@ -1670,6 +1715,11 @@ namespace ParqueDiversion.DataAccess.Context
                     .WithMany(p => p.tbTicketsCliente)
                     .HasForeignKey(d => d.clie_ID)
                     .HasConstraintName("FK_parq_tbTicletsCliente_tbClientes_clie_ID");
+
+                entity.HasOne(d => d.clre)
+                    .WithMany(p => p.tbTicketsCliente)
+                    .HasForeignKey(d => d.clre_ID)
+                    .HasConstraintName("FK_parq_tbTicletsCliente_tbClientesRegistrados_clre_ID");
 
                 entity.HasOne(d => d.tckt)
                     .WithMany(p => p.tbTicketsCliente)

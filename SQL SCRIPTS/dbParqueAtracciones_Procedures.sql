@@ -1432,6 +1432,7 @@ AS
 SELECT [clie_ID]
       ,[clie_Nombres]
       ,[clie_Apellidos]
+	  ,[clie_Nombres]+' '+[clie_Apellidos] AS clie_NombreCompleto
       ,[clie_DNI]
       ,[clie_Sexo]
       ,[clie_Telefono]
@@ -1556,24 +1557,19 @@ BEGIN
 		BEGIN TRAN 
 
 			DECLARE @TicketsClientesOcupa		INT = (SELECT COUNT(*) FROM parq.tbTicketsCliente		WHERE clie_ID =	@clie_ID)
-			DECLARE @ClientesRegistradosOcupa	INT = (SELECT COUNT(*) FROM parq.tbClientesRegistrados	WHERE clie_ID =	@clie_ID)
+		
 			DECLARE @RatingsOcupa				INT = (SELECT COUNT(*) FROM parq.tbRatings				WHERE clie_ID =	@clie_ID)
 			DECLARE @VentasQuioscoOcupa			INT = (SELECT COUNT(*) FROM fact.tbVentasQuiosco		WHERE clie_ID =	@clie_ID)
 
-			DECLARE @EnUso INT = @TicketsClientesOcupa + @ClientesRegistradosOcupa + @RatingsOcupa + @VentasQuioscoOcupa
+			
 
-				IF	@EnUso > 0
-					BEGIN
-						SELECT 500 AS codeStatus, 'El Cliente que desea eliminar est� en uso' AS messageStatus
-					END
-				ELSE
-					BEGIN
+			
 						UPDATE parq.tbClientes
 							SET
 							clie_Estado		=	0
 							WHERE clie_ID	=	@clie_ID
 							SELECT 200 AS codeStatus, 'Cliente eliminado con éxito' AS messageStatus
-					END
+				
 		COMMIT
 	END TRY
 	BEGIN CATCH
@@ -1591,26 +1587,22 @@ GO
 CREATE OR ALTER VIEW parq.VW_tbClientesRegistrados
 AS
 SELECT [clre_ID]
-      ,clire.clie_ID
-	  ,clie.clie_Nombres + clie.clie_Apellidos AS clie_Nombres
+	  ,[clie_Nombres]
+	  ,[clie_Apellidos]
+	  ,[clie_Nombres]+' '+[clie_Apellidos] AS clie_NombreCompleto
       ,[clre_Usuario]
       ,[clre_Email]
       ,clre_Clave
       ,[clre_Habilitado]
       ,[clre_Estado]
       ,[clre_UsuarioCreador]
-	  ,usu1.usua_Usuario AS usu_Creador
       ,[clre_FechaCreacion]
       ,[clre_UsuarioModificador]
-	  ,usu2.usua_Usuario AS usu_Modificador
       ,[clre_FechaModificacion]
 	   , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clre_UsuarioCreador)
 	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = clre_UsuarioModificador)
   FROM parq.tbClientesRegistrados clire
-  INNER JOIN acce.tbUsuarios usu1
-  ON	usu1.usua_ID = clire.clre_UsuarioCreador	LEFT  JOIN acce.tbUsuarios usu2
-  ON	usu2.usua_ID = clire.clre_UsuarioModificador
-  INNER JOIN parq.tbClientes clie ON clire.clie_ID = clie.clie_ID
+  
 
 --*************** SELECT DE CLIENTESREGISTRADOS ******************-
 GO
@@ -1642,7 +1634,8 @@ GO
 
 --*************** INSERT DE CLIENTES REGISTRADOS ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_INSERT
-	@clie_ID				INT,
+	@clie_Nombres			NVARCHAR(300),
+	@clie_Apellidos			NVARCHAR(300),
 	@clre_Usuario			VARCHAR(300), 
 	@clre_Email				NVARCHAR(300), 
 	@clre_Clave				NVARCHAR(300), 
@@ -1679,8 +1672,8 @@ BEGIN
 				DECLARE @CLAVE2 VARBINARY (MAX) = HASHBYTES('SHA2_512', @clre_Clave)
 				DECLARE @INCRI2 VARCHAR(MAX) = CONVERT(VARCHAR(MAX), @CLAVE2 ,2)
 
-				INSERT INTO parq.tbClientesRegistrados([clie_ID], [clre_Usuario],[clre_Email], clre_Clave, [clre_UsuarioCreador])
-				VALUES								  (@clie_ID, @clre_Usuario, @clre_Email, @INCRI2, @clre_UsuarioCreador)
+				INSERT INTO parq.tbClientesRegistrados(clie_Nombres,clie_Apellidos, [clre_Usuario],[clre_Email], clre_Clave, [clre_UsuarioCreador])
+				VALUES								  (@clie_Nombres,@clie_Apellidos, @clre_Usuario, @clre_Email, @INCRI2, @clre_UsuarioCreador)
 				SELECT 200 AS codeStatus, 'El usuario fue registrado con éxito' AS messageStatus
 			 END
 			 ELSE
@@ -1700,7 +1693,8 @@ GO
 --*************** UPDATE DE CLIENTES REGISTRADOS ******************--
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientesRegistrados_UPDATE
 	@clre_ID					INT,
-	@clie_ID					INT,
+	@clie_Nombres				NVARCHAR(300),
+	@clie_Apellidos				NVARCHAR(300),
 	@clre_Usuario				VARCHAR(300), 
 	@clre_Email					NVARCHAR(300), 
 	@clre_UsuarioModificador	INT
@@ -1734,7 +1728,9 @@ BEGIN
 			 IF (@UsuarioOcupado = 0 AND @EmailOcupado = 0)
 			 BEGIN
 				UPDATE parq.tbClientesRegistrados
-				SET clie_ID = @clie_ID, clre_Usuario = @clre_Usuario, 
+				SET clie_Nombres = @clie_Nombres,
+					clie_Apellidos = @clie_Apellidos,
+					clre_Usuario = @clre_Usuario, 
 					clre_Email = @clre_Email, 
 					clre_UsuarioModificador = @clre_UsuarioModificador
 				WHERE clre_ID = @clre_ID
@@ -3473,6 +3469,8 @@ GO
 INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (9, N'Venta de Tickets', N'/listticketsclientes', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
 GO
 INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (10, N'Tipos de Ticket', N'/listtitckets', NULL, NULL, N'PARQ', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
+GO
+INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Menu], [pant_HtmlID], [pant_Identificador], [pant_Icono], [pant_Estado], [pant_UsuarioCreador], [pant_FechaCreacion], [pant_UsuarioModificador], [pant_FechaModificacion]) VALUES (11, N'Filas', N'/filas', NULL, NULL, N'FILA', N'bi bi-circle', 1, 1, CAST(N'2023-05-30T11:42:17.247' AS DateTime), NULL, NULL)
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO

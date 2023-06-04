@@ -154,6 +154,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[fila].[VW_tbFilasAtraccion]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fila].[VW_tbFilasPosiciones]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[fila].[VW_tbHistorialVisitantesAtraccion]",
          "ObjectType": 3
       },
@@ -222,7 +230,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-J5O0M9U\\SQLEXPRESS.dbParqueAtracciones",
+   "UiHint": "ISAAC\\SQLEXPRESS.dbParqueAtracciones",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpParams} from '@angular/common/http'
 import { Cargos } from '../Models/Cargos';
 import { Golosinas } from '../Models/Golosinas';
 import { Atracciones } from '../Models/Atracciones';
@@ -18,6 +18,8 @@ import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
 import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
+import { Filas } from '../Models/Filas';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -207,5 +209,35 @@ export class ParqServicesService {
   //Gráfica
   getChartData(item: filterChartData){
     return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
+  }
+
+  //Filas
+  getFilasPosiciones(tifi_ID:number,atra_ID:number) {
+    const url = `${this.apiService.apiUrl}Filas/Listado?tifi_ID=${tifi_ID}&atra_ID=${atra_ID}`;
+    return this.http.get<Filas[]>(url);
+  }
+
+  PostPosiciones(atra_ID: number, ticl_ID: string): Observable<Filas[]> {
+    const url = `${this.apiService.apiUrl}Filas/Insert`;
+    const params = new HttpParams()
+      .set('atra_ID', Number(atra_ID))
+      .set('ticl_ID', String(ticl_ID));
+    return this.http.post<Filas[]>(url, null, { params });
+  }
+  
+  DeletePosicion(fipo_ID: number): Observable<Filas[]> {
+    const url = `${this.apiService.apiUrl}Filas/Delete`;
+    const params = new HttpParams()
+      .set('fipo_ID', String(fipo_ID));
+    return this.http.delete<Filas[]>(url, { params });
+  }
+  
+  
+  DeletePosiciones(fipo_ID: number,fiat_ID:number): Observable<Filas[]> {
+    const url = `${this.apiService.apiUrl}Filas/DeleteCompleto`;
+    const params = new HttpParams()
+      .set('fipo_ID', String(fipo_ID))
+      .set('fiat_ID', String(fiat_ID));
+    return this.http.delete<Filas[]>(url, { params });
   }
 }

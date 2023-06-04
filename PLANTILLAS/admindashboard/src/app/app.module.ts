@@ -90,6 +90,7 @@ import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.c
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
 import { GraficaComponent } from './grafica/grafica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +163,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ListticketsclienteComponent,
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
-    GraficaComponent
+    GraficaComponent,
+    FilasListadoComponent
   ],
   imports: [
     BrowserModule,

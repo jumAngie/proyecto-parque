@@ -10,7 +10,6 @@ namespace ParqueDiversion.Entities.Entities
     {
         public tbClientes()
         {
-            tbClientesRegistrados = new HashSet<tbClientesRegistrados>();
             tbRatings = new HashSet<tbRatings>();
             tbTicketsCliente = new HashSet<tbTicketsCliente>();
             tbVentasQuiosco = new HashSet<tbVentasQuiosco>();
@@ -29,7 +28,6 @@ namespace ParqueDiversion.Entities.Entities
         public int? clie_UsuarioModificador { get; set; }
         public DateTime? clie_FechaModificacion { get; set; }
 
-        public virtual ICollection<tbClientesRegistrados> tbClientesRegistrados { get; set; }
         public virtual ICollection<tbRatings> tbRatings { get; set; }
         public virtual ICollection<tbTicketsCliente> tbTicketsCliente { get; set; }
         public virtual ICollection<tbVentasQuiosco> tbVentasQuiosco { get; set; }

@@ -93,12 +93,18 @@ import { CreateticketsComponent } from './Tickets/createtickets/createtickets.co
 import { ListticketsComponent } from './Tickets/listtickets/listtickets.component';
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
 
+import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
+
+
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'accordion', component: AccordionComponent },
+
   { path: 'roles', component: IndexComponent },
+  { path: 'filas', component: FilasListadoComponent },
   { path: 'usuarios', component: UsuariosComponent },
+  
   { path: 'badges', component: BadgesComponent },
   { path: 'breadcrumbs', component: BreadcrumbsComponent },
   { path: 'buttons', component: ButtonsComponent },

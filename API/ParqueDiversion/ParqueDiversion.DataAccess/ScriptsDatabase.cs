@@ -210,5 +210,11 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_GetChartData = "fila.UDP_VW_tbHistorialVisitantesAtraccion_GraphicData ";
         #endregion
 
+        #region Filas
+        public static string UDP_FilasPosiciones_SELECT= "fila.UDP_tbFilasPosiciones_SELECT";
+        public static string UDP_FilasPosiciones_INSERT = "fila.tbFilasPosiciones_INSERT";
+        public static string UDP_FilasPosiciones_DELETE_COMPLETO = "fila.tbFilasPosiciones_DELETE_COMPLETO";
+        public static string UDP_FilasPosiciones_DELETE = "fila.tbFilasPosiciones_DELETE";
+        #endregion
     }
 }

@@ -402,18 +402,18 @@ SET regi_UsuarioCreador = 1
 
 
 INSERT INTO parq.tbClientes(clie_Nombres, clie_Apellidos, clie_DNI, clie_Sexo, clie_Telefono)
-VALUES	('Consumidor', 'Final', '0000-0000-00000', NULL, '0000-0000'),
-		('Juan', 'Camaney',   '0502-0045-57848', 'M', '8855-4477'),
-		('Maria', 'Antonieta','0224-5578-44157', 'F', '9985-2240'),
-		('David', 'Castillo', '0544-2235-42517', 'M', '7754-1142'),
-		('Alejandra', 'Peña', '0104-5575-11245', 'F', '8852-2241')
+VALUES	('Consumidor', 'Final'	, '0000-0000-00000', NULL, '0000-0000'),
+		('Juan', 'Camaney'		,   '0502-0045-57848', 'M', '8855-4477'),
+		('Maria', 'Antonieta'	,'0224-5578-44157', 'F', '9985-2240'),
+		('David', 'Castillo'	, '0544-2235-42517', 'M', '7754-1142'),
+		('Alejandra', 'Peña'	, '0104-5575-11245', 'F', '8852-2241')
 GO
 
 
 
-INSERT INTO parq.tbClientesRegistrados(clie_ID, clre_Usuario, clre_Clave, clre_Email, clre_UsuarioCreador)
-VALUES	( 2, 'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
-		( 4, 'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com', 1)
+INSERT INTO parq.tbClientesRegistrados(clie_Nombres,clie_Apellidos, clre_Usuario, clre_Clave, clre_Email, clre_UsuarioCreador)
+VALUES	( 'David', 'Castillo',	'Juanca123', 'juanca123@', 'camaney.juan@gmail.com', 1),
+		( 'Alejandra', 'Peña',	'ItsAle504', 'itsale504', 'peña.alejandra@gmail.com', 1)
 GO
 
 
