@@ -10,6 +10,7 @@ namespace ParqueDiversion.Entities.Entities
     {
         public tbMetodosPago()
         {
+            tbTicketsCliente = new HashSet<tbTicketsCliente>();
             tbVentasQuiosco = new HashSet<tbVentasQuiosco>();
         }
 
@@ -22,6 +23,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? pago_UsuarioModificador { get; set; }
         public DateTime? pago_FechaModificacion { get; set; }
 
+        public virtual ICollection<tbTicketsCliente> tbTicketsCliente { get; set; }
         public virtual ICollection<tbVentasQuiosco> tbVentasQuiosco { get; set; }
     }
 }

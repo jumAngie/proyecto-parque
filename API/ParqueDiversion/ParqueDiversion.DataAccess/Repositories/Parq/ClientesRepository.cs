@@ -71,5 +71,15 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             return db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_Clientes_Update, parametros, commandType: CommandType.StoredProcedure);
 
         }
+
+        public VW_tbClientes SearchByDNI(string dni)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@clie_DNI", dni, DbType.String, ParameterDirection.Input);
+
+            return db.QueryFirst<VW_tbClientes>(ScriptsDatabase.UDP_Clientes_SearchByDNI, parametros, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

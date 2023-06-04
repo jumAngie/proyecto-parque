@@ -12,14 +12,17 @@ import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
+
 export class EditAtraccionesComponent implements OnInit {
   atracciones: Atracciones = new Atracciones();
   areas!: Areas[];
   regiones!: Regiones[];
+  selectedImage: any;
   areasForStyle: {area_ID: String, isSelected: boolean, area_Nombre: String, area_Imagen: String}[] = [];
   imageUrl: string = ''; 
 
-  selectedImage: any;
+  @ViewChild('imageInput') imageInput!: ElementRef<HTMLInputElement>;
+
 
   //VALIRABLES PARA VALIDACIÓN DE S
   NombreRequerido = false;
@@ -104,7 +107,8 @@ export class EditAtraccionesComponent implements OnInit {
     errorsArray[4] = this.validarTiempoDuracion();
     errorsArray[5] = this.validarRegion();
     errorsArray[6] = this.validarArea();
-
+    errorsArray[7] = this.validarImagen();
+    
     for (let i = 0; i < errorsArray.length; i++) {
       if(errorsArray[i] == true){
         errors++;
@@ -144,6 +148,16 @@ export class EditAtraccionesComponent implements OnInit {
     }
   }
 
+  validarImagen() {
+    if(!this.atracciones.atra_Imagen){
+      this.ImagenRequerido = true;      
+      return true;
+    }else{
+      this.ImagenRequerido = false;
+      return false;
+    }
+  }
+
   validarDescripcion(){
     if(!this.atracciones.atra_Descripcion){
       this.DescripcionRequerido = true;
@@ -165,8 +179,8 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarLimitePersonas(){
-    if(this.atracciones.atra_LimitePersonas.toString().trim() == '' || this.atracciones.atra_LimitePersonas == 0){
-      this.LimitePersonasRequerido = true;
+    if(this.atracciones.atra_LimitePersonas == 0 || !this.atracciones.atra_LimitePersonas){
+      this.LimitePersonasRequerido = true;      
       return true;
     }else{
       this.LimitePersonasRequerido = false;
@@ -175,8 +189,8 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarTiempoDuracion(){
-    if(this.atracciones.atra_DuracionRonda.toString().trim() == '' || this.atracciones.atra_DuracionRonda == 0){
-      this.DuracionRondaRequerido = true;
+    if( this.atracciones.atra_DuracionRonda == 0 || !this.atracciones.atra_DuracionRonda){
+      this.DuracionRondaRequerido = true;          
       return true;
     }else{
       this.DuracionRondaRequerido = false;
@@ -185,8 +199,8 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarRegion(){
-    if(this.atracciones.regi_ID.toString().trim() == '' || this.atracciones.regi_ID == 0){
-      this.RegionRequerido = true;    
+    if(this.atracciones.regi_ID == 0 || !this.atracciones.regi_ID){
+      this.RegionRequerido = true;      
       return true;
     }else{
       this.RegionRequerido = false;
@@ -195,8 +209,8 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   validarArea(){
-    if(!this.atracciones.area_ID){
-      this.AreaRequerido = true;
+    if( this.atracciones.area_ID == 0 || !this.atracciones.area_ID){
+      this.AreaRequerido = true;      
       return true;
     }else{
       this.AreaRequerido = false;
@@ -223,13 +237,13 @@ export class EditAtraccionesComponent implements OnInit {
   }
 
   clearLimitePersonasError(){
-    if(this.atracciones.atra_LimitePersonas.toString().trim() !== ''){
+    if(this.atracciones.atra_LimitePersonas.toString() !== '' || this.atracciones.atra_LimitePersonas != 0){
       this.LimitePersonasRequerido = false;
     }
   }
 
   clearDuracionRondaError(){
-    if(!this.atracciones.atra_DuracionRonda){
+    if(this.atracciones.atra_DuracionRonda !=0 || this.atracciones.atra_DuracionRonda.toString() != ''){
       this.DuracionRondaRequerido = false;
     }
   }

@@ -7,8 +7,6 @@ import { Regiones } from 'src/app/Models/Regiones';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 
-
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -234,7 +232,6 @@ export class CreateAtraccionesComponent implements OnInit {
   mostrarIdCarta(cartaId: string) {
     this.atracciones.area_ID = parseInt(cartaId);
     this.clearAreaError();
-    console.log(this.atracciones.area_ID);
     // Lógica para cambiar el estado de selección de la carta
     this.areasForStyle.forEach(carta => {
       carta.isSelected = carta.area_ID === cartaId;
