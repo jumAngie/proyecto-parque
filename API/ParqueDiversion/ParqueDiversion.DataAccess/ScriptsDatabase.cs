@@ -32,6 +32,7 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_Clientes_Find = "parq.UDP_tbClientes_FIND";
         public static string UDP_Clientes_Update = "parq.UDP_tbClientes_UPDATE";
         public static string UDP_Clientes_Delete = "parq.UDP_tbClientes_DELETE";
+        public static string UDP_Clientes_SearchByDNI = "parq.UDP_VW_tbClientes_SearchByDNI";
         #endregion
 
         #region Clientes Registrados
@@ -64,6 +65,8 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_TicketClientes_Find = "parq.UDP_tbTicketClientes_FIND";
         public static string UDP_TicketClientes_Update = "parq.UDP_tbTicketClientes_UPDATE";
         public static string UDP_TicketClientes_Delete = "parq.UDP_tbTicketClientes_DELETE";
+
+        public static string UDP_TicketsCliente_FullInsert = "parq.UDP_tbTicketsCliente_FullInsert";
         #endregion
 
         #region Atracciones

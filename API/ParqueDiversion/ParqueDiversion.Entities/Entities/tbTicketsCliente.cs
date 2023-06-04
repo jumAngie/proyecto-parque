@@ -28,8 +28,10 @@ namespace ParqueDiversion.Entities.Entities
         public DateTime? ticl_FechaCreacion { get; set; }
         public int? ticl_UsuarioModificador { get; set; }
         public DateTime? ticl_FechaModificacion { get; set; }
+        public int? pago_ID { get; set; }
 
         public virtual tbClientes clie { get; set; }
+        public virtual tbMetodosPago pago { get; set; }
         public virtual tbTickets tckt { get; set; }
         public virtual ICollection<tbFilasPosiciones> tbFilasPosiciones { get; set; }
         public virtual ICollection<tbHistorialFilasPosiciones> tbHistorialFilasPosiciones { get; set; }

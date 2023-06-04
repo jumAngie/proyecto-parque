@@ -6,27 +6,20 @@ using System.Collections.Generic;
 
 namespace ParqueDiversion.Entities.Entities
 {
-    public partial class VW_tbTicketClientes
+    public partial class VW_tbTicketsClienteForInsert
     {
         public int ticl_ID { get; set; }
         public int? tckt_ID { get; set; }
-        public string tckt_Nombre { get; set; }
         public int? clie_ID { get; set; }
         public string clie_Nombres { get; set; }
+        public string clie_Apellidos { get; set; }
+        public string clie_DNI { get; set; }
+        public string clie_Sexo { get; set; }
+        public string clie_Telefono { get; set; }
         public int? ticl_Cantidad { get; set; }
         public int? pago_ID { get; set; }
-        public string pago_Nombre { get; set; }
-        public DateTime? ticl_FechaCompra { get; set; }
         public DateTime? ticl_FechaUso { get; set; }
-        public int? ticl_Habilitado { get; set; }
-        public int? ticl_Estado { get; set; }
         public int? ticl_UsuarioCreador { get; set; }
-        public string usu_Crea { get; set; }
-        public DateTime? ticl_FechaCreacion { get; set; }
         public int? ticl_UsuarioModificador { get; set; }
-        public string usu_Modifica { get; set; }
-        public DateTime? ticl_FechaModificacion { get; set; }
-        public string empl_crea { get; set; }
-        public string empl_Modifica { get; set; }
     }
 }

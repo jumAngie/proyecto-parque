@@ -69,5 +69,24 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
 
             return db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_TicketClientes_Update, parametros, commandType: CommandType.StoredProcedure);
         }
+
+        public RequestStatus FullInsert(VW_tbTicketsClienteForInsert item)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@clie_Nombres", item.clie_Nombres, DbType.String, ParameterDirection.Input);
+            parametros.Add("@clie_Apellidos", item.clie_Apellidos, DbType.String, ParameterDirection.Input);
+            parametros.Add("@clie_DNI", item.clie_DNI, DbType.String, ParameterDirection.Input);
+            parametros.Add("@clie_Telefono", item.clie_Telefono, DbType.String, ParameterDirection.Input);
+            parametros.Add("@clie_Sexo", item.clie_Sexo, DbType.String, ParameterDirection.Input);
+
+            parametros.Add("@tckt_ID", item.tckt_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@ticl_Cantidad", item.ticl_Cantidad, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@pago_ID", item.pago_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@ticl_UsuarioCreador", item.ticl_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_TicketsCliente_FullInsert, parametros, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace ParqueDiversion.DataAccess.Context
         public virtual DbSet<VW_tbRegiones> VW_tbRegiones { get; set; }
         public virtual DbSet<VW_tbTicketClientes> VW_tbTicketClientes { get; set; }
         public virtual DbSet<VW_tbTickets> VW_tbTickets { get; set; }
+        public virtual DbSet<VW_tbTicketsClienteForInsert> VW_tbTicketsClienteForInsert { get; set; }
         public virtual DbSet<VW_tbVentasQuiosco> VW_tbVentasQuiosco { get; set; }
         public virtual DbSet<VW_tbVentasQuioscoDetalle> VW_tbVentasQuioscoDetalle { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
@@ -74,7 +75,7 @@ namespace ParqueDiversion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<VW_Departamentos>(entity =>
             {
@@ -748,6 +749,8 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.pago_Nombre).HasMaxLength(200);
+
                 entity.Property(e => e.tckt_Nombre)
                     .HasMaxLength(300)
                     .IsUnicode(false);
@@ -786,8 +789,38 @@ namespace ParqueDiversion.DataAccess.Context
                 entity.Property(e => e.tckt_Nombre)
                     .HasMaxLength(300)
                     .IsUnicode(false);
+            });
 
-                entity.Property(e => e.usu_Creador).HasMaxLength(100);
+            modelBuilder.Entity<VW_tbTicketsClienteForInsert>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbTicketsClienteForInsert", "parq");
+
+                entity.Property(e => e.clie_Apellidos)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_DNI)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.clie_Nombres)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.clie_Sexo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.clie_Telefono)
+                    .HasMaxLength(9)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.ticl_FechaUso).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<VW_tbVentasQuiosco>(entity =>
@@ -1670,6 +1703,11 @@ namespace ParqueDiversion.DataAccess.Context
                     .WithMany(p => p.tbTicketsCliente)
                     .HasForeignKey(d => d.clie_ID)
                     .HasConstraintName("FK_parq_tbTicletsCliente_tbClientes_clie_ID");
+
+                entity.HasOne(d => d.pago)
+                    .WithMany(p => p.tbTicketsCliente)
+                    .HasForeignKey(d => d.pago_ID)
+                    .HasConstraintName("FK_parq_tbTicketsCliente_gral_tbMetodosPago_pago_ID");
 
                 entity.HasOne(d => d.tckt)
                     .WithMany(p => p.tbTicketsCliente)

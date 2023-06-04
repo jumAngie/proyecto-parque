@@ -19,6 +19,7 @@ import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
 import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
 import { Ticket } from '../Models/Tikectks';
+import { FullTicktesCliente } from '../Models/FullTicketsCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +124,9 @@ export class ParqServicesService {
   getClientes(){
     return this.http.get<Clientes[]>(this.apiService.apiUrl + 'Clientes/List');
   }
+  getClienteByDNI(data: Clientes){
+    return this.http.post<Clientes[]>(this.apiService.apiUrl + 'Clientes/BuscarClienteDNI', data);
+  }
 
   
   // servicios de clientes registrados//
@@ -208,7 +212,10 @@ export class ParqServicesService {
   getTicket(){
       return this.http.get<Ticket[]>(this.apiService.apiUrl + 'Ticket/List')
     }
-    
+  newTicket(data: FullTicktesCliente){
+    return this.http.post<FullTicktesCliente[]>(this.apiService.apiUrl + 'TicketClientes/InsertTicket', data)
+  }    
+
   //Gráfica
   getChartData(item: filterChartData){
     return this.http.post<HistorialVisitantesAtraccion[]>(this.apiService.apiUrl +'HistorialVisitantesAtraccion/ChartData', item);
