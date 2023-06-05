@@ -109,7 +109,7 @@
                        </div>
                        <div class="col-md-12 mt-3"> 
                         <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="EmpleadoRequerido"></i>
-                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Golosina:</label>
+                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Empleado encargado:</label>
                         <div class="input-group" style="height: 3rem;">
                            <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
                            <select [(ngModel)]="quiosco.empl_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearEmpleadoError()">
@@ -136,7 +136,7 @@
                      <div class="row mt-2">
                         <div class="card-title text-center mb-0">
                            <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="AreaRequerido"></i>
-                           <b>Elige la zona donde estará ubicada esta atracción:</b> 
+                           <b>Elige la zona donde estará ubicado este quiosco:</b> 
                         </div>
                         <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
                            <div class="card my-card p-0 m-0 mb-0" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">

@@ -356,13 +356,17 @@ sendData(){
       if(pagoInvalido == true){
         ToastUtils.showWarningToast('Método de pago requerido')
       }else{
+        const usua_ID = localStorage.getItem('usua_ID');
+        if (usua_ID == null) {
+          this.router.navigate(['pages-login']);
+        }
         const ticketArray = [];
         const cantidadArray = [];
         ticketArray[0] = this.selectedClassicTicket;
         ticketArray[1] = this.selectedVIPTicket;
         cantidadArray[0] = this.cantidadClasicos;
         cantidadArray[1] = this.cantidadVIP;
-        this.fullTicket.ticl_UsuarioCreador = 1
+        this.fullTicket.ticl_UsuarioCreador = parseInt(usua_ID ?? '')
   
         for (let i = 0; i < ticketArray.length && cantidadArray.length; i++) {          
           
@@ -441,13 +445,17 @@ sendData(){
       }else if((this.selectedClassicTicket != 0 && this.cantidadClasicos == 0) || (this.selectedVIPTicket != 0 && this.cantidadVIP == 0)){
           ToastUtils.showWarningToast('Debes comprar almenos un ticket')
       }else{
+        const usua_ID = localStorage.getItem('usua_ID');
+        if (usua_ID == null) {
+          this.router.navigate(['pages-login']);
+        }
           const ticketArray = [];
           const cantidadArray = [];
           ticketArray[0] = this.selectedClassicTicket;
           ticketArray[1] = this.selectedVIPTicket;
           cantidadArray[0] = this.cantidadClasicos;
           cantidadArray[1] = this.cantidadVIP;
-          this.fullTicket.ticl_UsuarioCreador = 1
+          this.fullTicket.ticl_UsuarioCreador = parseInt(usua_ID ?? '');
   
           for (let i = 0; i < ticketArray.length && cantidadArray.length; i++) {          
             
