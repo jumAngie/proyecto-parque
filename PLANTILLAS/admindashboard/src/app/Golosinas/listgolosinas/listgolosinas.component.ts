@@ -119,9 +119,8 @@ clearCreateModal(){
 
 confirmCreate(){
   var errors = 0;
-  var formatosInvalidos = 0
   const errorsArray: boolean[] = [];
-  const formatosArray: boolean[] = [];
+
 
   errorsArray[0] = this.validateGolosinaCreate();
   errorsArray[1] = this.validatePrecioCreate();
@@ -134,17 +133,8 @@ confirmCreate(){
     }    
   }
 
-  formatosArray[0] = this.FormatoValidoPrecio;
-  for (let i = 0; i < formatosArray.length; i++) {
-    if (formatosArray[i] == true) {
-      formatosInvalidos++;
-    }else{
-      formatosInvalidos;
-    }
-    
-  }
 
-  if (errors == 0 && formatosInvalidos == 0) {
+  if (errors == 0) {
     const usua_ID = localStorage.getItem('usua_ID');
     if (usua_ID == null) {
       this.router.navigate(['pages-login']);
@@ -163,8 +153,6 @@ confirmCreate(){
     })
   }else if(errors != 0){
     ToastUtils.showWarningToast('¡Hay campos vacíos!');
-  }else if(errors == 0 && formatosInvalidos != 0){
-
   }else{
     
   }
@@ -308,10 +296,14 @@ confirmCreate(){
         return true;
       } else if (!regex.test(this.createGolosina.golo_Precio.toString())) {
         this.Precio_Create_Requerido = true;
-        this.FormatoValidoPrecio = true
         ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
-        return false ;
-      } else {
+        return true ;
+      }else if(this.createGolosina.golo_Precio <= 0){
+        this.Precio_Create_Requerido = true;
+        ToastUtils.showWarningToast('Precio no puede ser menor a uno')
+        return true ;        
+      } 
+      else {
         this.Precio_Create_Requerido = false;
         return false;
       }
@@ -367,6 +359,10 @@ confirmCreate(){
       }else if (!regex.test(this.updateGolosina.golo_Precio.toString())) {
         this.Precio_Update_Requerido = true;
         ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
+        return true;
+      } else if (this.updateGolosina.golo_Precio <= 0) {
+        this.Precio_Update_Requerido = true;
+        ToastUtils.showWarningToast('Precio no puede ser menor a uno')
         return true;
       } else{
         this.Precio_Update_Requerido = false;

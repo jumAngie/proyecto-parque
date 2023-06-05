@@ -165,7 +165,8 @@ export class DetalleQuioscoComponent implements OnInit{
     }
   };
 
-  validarGolosina(){
+  validarGolosina(){        
+
     if(!this.sendInsumos.golo_ID){
       this.GolosinaRequerida = true;
       return true;
@@ -176,10 +177,21 @@ export class DetalleQuioscoComponent implements OnInit{
   };
 
   validarStock(){
+    const regex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
     if(!this.sendInsumos.insu_Stock){
       this.StockRequerido = true;
       return true;
-    }else{
+    }else if(!regex.test(this.sendInsumos.insu_Stock.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
+      this.StockRequerido = true;
+      return true;
+    }else if(this.sendInsumos.insu_Stock <= 0){      
+      ToastUtils.showWarningToast('La cantidad no puede ser menor a uno');
+      this.StockRequerido = true;
+      return true;
+    }
+    else{
       this.StockRequerido = false;
       return false;
     }
