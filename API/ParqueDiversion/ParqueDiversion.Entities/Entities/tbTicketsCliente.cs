@@ -32,8 +32,8 @@ namespace ParqueDiversion.Entities.Entities
         public DateTime? ticl_FechaModificacion { get; set; }
 
         public virtual tbClientes clie { get; set; }
-        public virtual tbMetodosPago pago { get; set; }
         public virtual tbClientesRegistrados clre { get; set; }
+        public virtual tbMetodosPago pago { get; set; }
         public virtual tbTickets tckt { get; set; }
         public virtual ICollection<tbFilasPosiciones> tbFilasPosiciones { get; set; }
         public virtual ICollection<tbHistorialFilasPosiciones> tbHistorialFilasPosiciones { get; set; }

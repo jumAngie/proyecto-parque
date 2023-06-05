@@ -21,5 +21,7 @@ namespace ParqueDiversion.Entities.Entities
         public DateTime? ticl_FechaUso { get; set; }
         public int? ticl_UsuarioCreador { get; set; }
         public int? ticl_UsuarioModificador { get; set; }
+
+        public int wasSearched { get; set; }
     }
 }

@@ -43,7 +43,7 @@
                   Nuevo
                 </button>
   
-                <div class="search-bar mt-3 col-10">
+                <div class="search-bar mt-3 col-6">
                   <input
                     type="text"
                     class="form-control"
@@ -51,6 +51,15 @@
                     [(ngModel)]="filtro"
                   />
                 </div>
+                <div class="col-4 ">                                                                          
+                  <div class="input-group" style="height: 2.4rem;">                                       
+                      <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
+                     <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
+                     <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" >
+                        <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
+                     </select>
+                  </div>                                                                        
+               </div> 
               </div>
               <table
                 class="table table-hover"
@@ -72,7 +81,7 @@
                   <tr
                     *ngFor="
                       let item of filtrarTickets()
-                        | paginate : { itemsPerPage: 10, currentPage: p }
+                        | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
                     "
                   >
                     <th scope="row">{{ item.ticl_ID }}</th>

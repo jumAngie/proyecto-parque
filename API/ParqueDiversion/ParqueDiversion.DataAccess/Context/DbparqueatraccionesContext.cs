@@ -77,7 +77,7 @@ namespace ParqueDiversion.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<VW_Departamentos>(entity =>
             {
@@ -1758,10 +1758,6 @@ namespace ParqueDiversion.DataAccess.Context
                     .WithMany(p => p.tbTicketsCliente)
                     .HasForeignKey(d => d.pago_ID)
                     .HasConstraintName("FK_parq_tbTicketsCliente_gral_tbMetodosPago_pago_ID");
-                entity.HasOne(d => d.clre)
-                    .WithMany(p => p.tbTicketsCliente)
-                    .HasForeignKey(d => d.clre_ID)
-                    .HasConstraintName("FK_parq_tbTicletsCliente_tbClientesRegistrados_clre_ID");
 
                 entity.HasOne(d => d.tckt)
                     .WithMany(p => p.tbTicketsCliente)
