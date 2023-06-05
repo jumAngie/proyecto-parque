@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Atracciones } from 'src/app/Models/Atracciones';
 import { temporizadores } from 'src/app/Models/Temporizadores';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 
 @Component({
   selector: 'app-temporizadores-listado',
@@ -37,10 +38,11 @@ export class TemporizadoresListadoComponent {
   HoraExpira:string="";
   Posicion:Number=0;
   Expiracion:any;
-
+  temp_ID=0;
 
   AtraccionRe=false;
   TicketRe=false;
+  HoraRequerida=false;
 
   itemsPerPage = 10;
   paginacionConfig: any = {
@@ -140,18 +142,168 @@ export class TemporizadoresListadoComponent {
 
 
   Insert(){
+    var Error = 0;
 
+    if (this.ticl_ID=="") {
+      
+      this.TicketRe=true;
+      Error=Error+1;
+    }
+    else{
+      this.TicketRe=false;
+    }
+
+    if (this.atra_ID==0) {
+      this.AtraccionRe=true;
+      Error = Error+1;
+    }
+    else{
+      this.AtraccionRe=false;
+    }
+
+    if (this.hora==0 || this.minuto==0) {
+      this.HoraRequerida=true;
+      Error = Error+1;
+    }
+    else{
+      this.HoraRequerida=false;
+    }
+
+    if ((this.hora<0 || this.hora>23)|| (this.minuto<0 || this.minuto>60)) {
+      this.HoraRequerida=true;
+      Error = Error+1;
+    }
+
+    if (Error>0) {
+      ToastUtils.showWarningToast("Hay Campos Vacios");
+      return;
+    }
+
+    var tempExpiracion = this.hora.toString() + ":"+this.minuto.toString()+":00"
+
+    this.PService.PostTemporizadores(this.ticl_ID,this.atra_ID,tempExpiracion).subscribe(
+      (response: any) => {
+      
+        if (response.code==200) {
+          ToastUtils.showSuccessToast( response.message);   
+          setTimeout(() => {
+          window.location.href = '/temporizadores'
+        }, 1000);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
+      },
+      (error: any) => {
+        console.error('Error al guardar el rol', error);
+      }
+    );
+  }
+
+  Extender() {
+    var Error = 0;
+  
+  
+
+  
+    if (this.hora < 0) {
+      this.HoraRequerida = true;
+      Error = Error + 1;
+    } else {
+      this.HoraRequerida = false;
+    }
+  
+    if (Error >= 1) {
+      ToastUtils.showWarningToast("Hay Campos Vacios o que no cumplen su Formato");
+      return;
+    }
+  
+    var tempExpiracion = this.hora.toString() + ":" + this.minuto.toString() + ":00";
+  
+    if (this.PService) {
+      this.PService.ExtenderTemporizadores(this.temp_ID, tempExpiracion).subscribe(
+        (response: any) => {
+          if (response.success) {
+            ToastUtils.showSuccessToast(response.message);
+            this.updateTempo();
+          } else {
+            ToastUtils.showErrorToast(response.message);
+          }
+        },
+        (error: any) => {
+          console.error('Error', error);
+        }
+      );
+    } else {
+      console.error('this.PService no está inicializado correctamente');
+    }
+  }
+  
+  updateTempo() {
+    this.PService.getTemporizadores(this.listado).subscribe((data) => {
+      this.tempo = data;
+      this.tempoFiltrado = data;
+      this.paginacionConfig.totalItems = this.tempo.length;
+      console.log(this.tempo);
+    });
   }
 
   Delete(){
-
+    this.PService.DeleteTemporizador(this.temp_ID).subscribe(
+      (response: any) => {
+      
+        if (response.code==200) {
+          ToastUtils.showSuccessToast( response.message);   
+          setTimeout(() => {
+          window.location.href = '/temporizadores'
+        }, 1000);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
+      },
+      (error: any) => {
+        console.error('Error al guardar el rol', error);
+      }
+    );
   }
 
   DeleteCompleto(){
-
+    this.PService.DeleteCompletoTemporizador().subscribe(
+      (response: any) => {
+      
+        if (response.code==200) {
+          ToastUtils.showSuccessToast( response.message);   
+          setTimeout(() => {
+          window.location.href = '/temporizadores'
+        }, 1000);
+        }
+        if ( response.code==409) {
+          ToastUtils.showWarningToast( response.message);   
+        }
+        if ( response.code==500) {
+          ToastUtils.showErrorToast( response.message);   
+        }
+      },
+      (error: any) => {
+        console.error('Error al guardar el rol', error);
+      }
+    );
   }
 
   Modal(data: temporizadores) {
+    this.temp_ID = data.temp_ID;
+
+    this.AtraccionRe=false;
+    this.TicketRe=false;
+    this.HoraRequerida=false;
+
     const tiempoFaltanteEnSegundos = this.convertirTiempoAsegundos(data.tiempoFaltante);
     this.endTime = Date.now() + tiempoFaltanteEnSegundos * 1000;
     this.startTimer();
@@ -204,9 +356,21 @@ export class TemporizadoresListadoComponent {
     const [minutos, segundos] = tiempo.split(':').map(Number);
     return minutos * 60 + segundos;
   }
-
+  
+  limitarCaracteres(event: any, maxLength: number) {
+    if (event.target.value.length > maxLength) {
+      event.target.value = event.target.value.slice(0, maxLength);
+    }
+  }
+  
   
   Limpiar(){
-
+    this.atra_ID=0;
+    this.minuto=0;
+    this.hora=0;
+    this.ticl_ID="";
+    this.AtraccionRe=false;
+    this.TicketRe=false;
+    this.HoraRequerida=false;
   }
 }

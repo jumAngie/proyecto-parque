@@ -1,10 +1,10 @@
 <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Filas</h1>
+      <h1>Temporizadores</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
-          <li class="breadcrumb-item">Filas</li>
+          <li class="breadcrumb-item">Temporizadores</li>
           <li class="breadcrumb-item active">Listado</li>
         </ol>
       </nav>
@@ -62,7 +62,7 @@
         <div class="row col-12 ms-4 mt-2 mb-2" style="margin-left: .4rem;">
             <button
               class="ov-btn-grow-success mt-3 col-4"
-              style="height: 2.4rem; margin-left: 0;max-width: 18.6rem;"
+              style="height: 2.4rem; margin-left: 0;max-width: 20.6rem;"
               [ngClass]="{ 'active-button': listado == 1 }"
               (click)="Activos()"
             >
@@ -74,7 +74,7 @@
           
             <button
               class="ov-btn-grow-success mt-3 col-4 ms-1"
-              style="height: 2.4rem; margin-left: 0; max-width: 18.6rem;"
+              style="height: 2.4rem; margin-left: 0; max-width: 20.6rem;"
               [ngClass]="{ 'active-button': listado == 2 }"
               (click)="Expirados()"
             >
@@ -84,7 +84,7 @@
 
             <button
             class="ov-btn-grow-success mt-3 col-4 ms-2"
-            style="height: 2.4rem; margin-left: 0; max-width: 18.6rem;"
+            style="height: 2.4rem; margin-left: 0; max-width: 20.6rem;"
             [ngClass]="{ 'active-button': listado == 2 }"
             data-bs-toggle="modal"
             data-bs-target="#eliminarCompleto"
@@ -107,7 +107,8 @@
                 <th>Cliente</th>
                 <th>Atracción</th>
                 <th>Hora Expiración</th>
-                <th>Acciones</th>
+                <th *ngIf="listado==2">Fecha de Creación</th>
+                <th *ngIf="listado==1">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -119,8 +120,8 @@
                   <td>{{ tempo.cliente_Nombre }}</td>
                   <td>{{ tempo.atra_Nombre }}</td>
                   <td>{{ tempo.temp_Expiracion_Formateada }}</td>
-
-                  <td>
+                  <td *ngIf="listado==2">{{ tempo.temp_FechaCreacion | date:'dd/MM/yyyy' }}</td>
+                  <td *ngIf="listado==1">
                       
                       <button class="ov-btn-grow-success"
                       data-bs-toggle="modal"
@@ -187,46 +188,42 @@
         <div class="modal-header">
           <h5 class="modal-title">Nuevo Temporizador</h5>
         </div>
-        <div class="modal-body align-items-center ">
-            <div class="row col-12">
-          <i
-            class="bi bi-exclamation-circle-fill"
-            style="color: orange; margin-right: 10px"
-            *ngIf="AtraccionRe"
-          ></i>
-          <label>Atracción:</label>
-          <select [(ngModel)]="atra_ID" class="form-select text-center" >
-            <option value="0">Atracción</option>
-            <option *ngFor="let attr of ddlAtracciones" [value]="attr.atra_ID">
-              {{ attr.atra_Nombre }}
-            </option>
-          </select>
-          <i
-          class="bi bi-exclamation-circle-fill"
-          style="color: orange; margin-right: 10px"
-          *ngIf="TicketRe"
-        ></i>
-          <label class="mt-3">Código Ticket:</label>
-          <input
-          [(ngModel)]="ticl_ID" class="form-control text-center" placeholder="Código Ticket">
-          <label class="mt-3 mb-3">Hora de Expiración:</label>
-          <div class="col-6">
-            <label>Hora:</label>
-            <input type="number" class="form-control " [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" min="0" max="23">
-          </div>
-        
-          <div class="col-6">
-            <label >Minuto:</label>
-            <input type="number" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" min="0" max="59">
+        <div class="modal-body align-items-center">
+          <div class="row col-10 offset-1">
+            <label>
+              <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="AtraccionRe"></i>
+              Atracción:
+            </label>
+            <select [(ngModel)]="atra_ID" class="form-select text-center">
+              <option value="0">Atracción</option>
+              <option *ngFor="let attr of ddlAtracciones" [value]="attr.atra_ID">{{ attr.atra_Nombre }}</option>
+            </select>
+            <label class="mt-3">
+              <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="TicketRe"></i>
+              Código Ticket:
+            </label>
+            <input [(ngModel)]="ticl_ID" class="form-control text-center" placeholder="Código Ticket" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+            <div class="mt-3 col-12">
+              <div class="row">
+                <label class="mb-1">
+                  <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="HoraRequerida"></i>
+                  Hora de Expiración:
+                </label>
+                <div class="col-6">
+                  <label>Hora:</label>
+                  <input type="text" class="form-control" [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" (input)="limitarCaracteres($event, 2)" />
+                </div>
+                <div class="col-6">
+                  <label>Minuto:</label>
+                  <input type="text" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" (input)="limitarCaracteres($event, 2)" />
+                </div>
+              </div>
+              
+            </div>
           </div>
         </div>
-    </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-success btn ov-btn-grow-primary"
-            (click)="Insert()"
-            >
+          <button type="button" class="btn btn-success btn ov-btn-grow-primary" (click)="Insert()">
             <i class="bi bi-check-circle-fill"></i>
             Guardar
           </button>
@@ -238,6 +235,7 @@
       </div>
     </div>
   </div>
+  
   <!--/Modal Insert-->
 
 
@@ -251,7 +249,7 @@
         </div>
         <div class="modal-body" style="text-align: center">
           <h5 style="text-align: center; margin-top: 20px">
-            <b>Se eliminarán los Temporizadores que han Vencidos</b><br>
+            <b>Se eliminarán los Temporizadores que han Expirado</b><br>
             <b>¿Desea Continuar?</b>
           </h5>
           <img
@@ -342,7 +340,7 @@
   <!--/Modal Eliminar-->
 
   <!--Modal Reloj-->
-<div class="modal fade" id="reloj" tabindex="-1">
+<div class="modal fade" data-backdrop="static" id="reloj" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #4741d7;">
@@ -395,16 +393,20 @@
         <div class="modal-body" style="text-align: center">
             <div class="row col-12">
 
+              <div class="row ms-2">
+                <label class="mb-1">
+                  <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px" *ngIf="HoraRequerida"></i>
+                  Hora de Expiración:
+                </label>
                 <div class="col-6">
                   <label>Hora:</label>
-                  <input type="number" class="form-control " [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" min="0" max="23">
+                  <input type="text" class="form-control" [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" (input)="limitarCaracteres($event, 2)" />
                 </div>
-              
                 <div class="col-6">
-                  <label >Minuto:</label>
-                  <input type="number" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" min="0" max="59">
+                  <label>Minuto:</label>
+                  <input type="text" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" (input)="limitarCaracteres($event, 2)" />
                 </div>
-
+              </div>
               </div>
               
         </div>
@@ -413,7 +415,7 @@
               type="button"
               class="ov-btn-grow-success"
               style="margin-left: 10px; height: 2.5rem"
-              (click)="Delete()"
+              (click)="Extender()"
             >
               <i class="bi bi-check-circle-fill"></i> Confirmar
             </button>

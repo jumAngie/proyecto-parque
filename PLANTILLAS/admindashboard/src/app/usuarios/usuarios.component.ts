@@ -289,7 +289,7 @@ export class UsuariosComponent {
         if ( response.code==200) {setTimeout(() => {
           window.location.href = '/usuarios'
         }, 800);
-        }
+        } 
         if ( response.code==409) {
           ToastUtils.showWarningToast( response.message);   
         }
