@@ -8,7 +8,6 @@ namespace ParqueDiversion.Entities.Entities
 {
     public partial class VW_tbFilasPosiciones
     {
-        public int posicion { get; set; }
         public int fipo_ID { get; set; }
         public int? fiat_ID { get; set; }
         public int? ticl_ID { get; set; }

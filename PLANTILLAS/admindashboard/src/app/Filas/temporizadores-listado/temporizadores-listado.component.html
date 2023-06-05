@@ -1,0 +1,436 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Filas</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
+          <li class="breadcrumb-item">Filas</li>
+          <li class="breadcrumb-item active">Listado</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="card">
+      <div class="card-header" style="padding: 0; position: relative">
+        <div
+          class="banner"
+          style="
+            background-image: url('../../assets/img/BANNERS-VR-FINAL/USUARIOS.png');
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-size: contain;
+            background-position: center;
+            height: 0;
+            padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+          "
+        ></div>
+        <div
+          class="overlay"
+          style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+        ></div>
+      </div>
+      <div class="card-body">
+        <div class="row ms-4 col-11">
+          <button
+            class="ov-btn-grow-primary mt-3 col-2"
+            style="height: 2.4rem; margin-left: 0"
+            data-bs-toggle="modal"
+            data-bs-target="#crear"
+            (click)="Limpiar()"
+          >
+            <i class="fas fa-plus-circle mr-1"></i>
+            Nuevo
+          </button>
+          <div class="search-bar mt-3 col-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar..."
+              [(ngModel)]="filtro"
+              (keyup)="filtrado()"
+            />
+          </div>
+          <div class="mt-3 col-2">
+            <select [(ngModel)]="itemsPerPage" class="form-select" (change)="onChangeItemsPerPage($event)">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="row col-12 ms-4 mt-2 mb-2" style="margin-left: .4rem;">
+            <button
+              class="ov-btn-grow-success mt-3 col-4"
+              style="height: 2.4rem; margin-left: 0;max-width: 18.6rem;"
+              [ngClass]="{ 'active-button': listado == 1 }"
+              (click)="Activos()"
+            >
+              <i class="fas fa-hourglass-start"></i>
+              Activos
+            </button>
+          
+
+          
+            <button
+              class="ov-btn-grow-success mt-3 col-4 ms-1"
+              style="height: 2.4rem; margin-left: 0; max-width: 18.6rem;"
+              [ngClass]="{ 'active-button': listado == 2 }"
+              (click)="Expirados()"
+            >
+              <i class="fas fa-hourglass-end"></i>
+              Expirados
+            </button>
+
+            <button
+            class="ov-btn-grow-success mt-3 col-4 ms-2"
+            style="height: 2.4rem; margin-left: 0; max-width: 18.6rem;"
+            [ngClass]="{ 'active-button': listado == 2 }"
+            data-bs-toggle="modal"
+            data-bs-target="#eliminarCompleto"
+          >
+          
+          <i class="fas fa-hourglass-end"></i>
+          <i class="fas fa-times"></i>
+            Vaciar Expirados
+          </button>
+
+          </div>
+          
+
+        <table class="table table-hover" style="margin-top: 20px; margin-left: 10px; margin-right: 10px">
+            <thead>
+              <tr>
+                <th>Posición</th>
+                <th>ID</th>
+                <th>Ticket</th>
+                <th>Cliente</th>
+                <th>Atracción</th>
+                <th>Hora Expiración</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="tempoFiltrado.length > 0; else noData">
+                <tr *ngFor="let tempo of tempoFiltrado | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                  <td>{{ tempo.posicion }}</td>
+                  <td>{{ tempo.temp_ID }}</td>
+                  <td>{{ tempo.ticl_ID }}</td>
+                  <td>{{ tempo.cliente_Nombre }}</td>
+                  <td>{{ tempo.atra_Nombre }}</td>
+                  <td>{{ tempo.temp_Expiracion_Formateada }}</td>
+
+                  <td>
+                      
+                      <button class="ov-btn-grow-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#Extender"
+                      (click)="Modal(tempo)"
+                      >
+                      <i class="fas fa-clock ml-1"></i>
+                      Extender
+                    </button>
+
+                    <button class="ov-btn-grow-primary ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#reloj"
+                    (click)="Modal(tempo)"
+                    >
+                    <i class="fas fa-stopwatch ms-1"></i>
+                    Visualizar
+                  </button>
+
+                    <button class="ov-btn-grow-d ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#eliminar"
+                    (click)="Modal(tempo)"
+                    >
+                    <i class="bi bi-trash-fill ml-1"></i> 
+                    Eliminar
+                      </button>
+                </td>
+                </tr>
+              </ng-container>
+              <ng-template #noData>
+                <tr>
+                  <td colspan="7" style="text-align: center;">Sin contenido</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+          
+
+  
+        <div class="pagination d-flex justify-content-center mt-4">
+          <pagination-controls
+            (pageChange)="p = $event"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            firstLabel="Primera"
+            lastLabel="Última"
+            screenReaderPaginationLabel="Paginación"
+            screenReaderPageLabel="Página"
+            screenReaderCurrentLabel="Página actual"
+          >
+          </pagination-controls>
+        </div>
+  
+      </div>
+    </div>
+  </main>
+
+
+  <!--/Modal Insert-->
+  <div class="modal fade" id="crear" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nuevo Temporizador</h5>
+        </div>
+        <div class="modal-body align-items-center ">
+            <div class="row col-12">
+          <i
+            class="bi bi-exclamation-circle-fill"
+            style="color: orange; margin-right: 10px"
+            *ngIf="AtraccionRe"
+          ></i>
+          <label>Atracción:</label>
+          <select [(ngModel)]="atra_ID" class="form-select text-center" >
+            <option value="0">Atracción</option>
+            <option *ngFor="let attr of ddlAtracciones" [value]="attr.atra_ID">
+              {{ attr.atra_Nombre }}
+            </option>
+          </select>
+          <i
+          class="bi bi-exclamation-circle-fill"
+          style="color: orange; margin-right: 10px"
+          *ngIf="TicketRe"
+        ></i>
+          <label class="mt-3">Código Ticket:</label>
+          <input
+          [(ngModel)]="ticl_ID" class="form-control text-center" placeholder="Código Ticket">
+          <label class="mt-3 mb-3">Hora de Expiración:</label>
+          <div class="col-6">
+            <label>Hora:</label>
+            <input type="number" class="form-control " [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" min="0" max="23">
+          </div>
+        
+          <div class="col-6">
+            <label >Minuto:</label>
+            <input type="number" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" min="0" max="59">
+          </div>
+        </div>
+    </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-success btn ov-btn-grow-primary"
+            (click)="Insert()"
+            >
+            <i class="bi bi-check-circle-fill"></i>
+            Guardar
+          </button>
+          <button type="button" class="btn ov-btn-grow-d" data-bs-dismiss="modal">
+            <i class="bi bi-reply-fill"></i>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Modal Insert-->
+
+
+  
+<!--Modal Eliminar-->
+<div class="modal fade" id="eliminarCompleto" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header " style="background-color: #9e5fc5;">
+          <h5 class="modal-title text-light"><b>Confirmar</b></h5>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h5 style="text-align: center; margin-top: 20px">
+            <b>Se eliminarán los Temporizadores que han Vencidos</b><br>
+            <b>¿Desea Continuar?</b>
+          </h5>
+          <img
+            src="../../../assets/img/Reloj.gif"
+            style="
+              width: 220px;
+              height: 200px;
+              margin-right: 30px;
+              text-align: center;
+            "
+            class="offset-1"
+            alt="Warning Sign"
+          />
+        </div>
+        <div class="modal-footer">
+         
+            <button
+              type="button"
+              class="ov-btn-grow-success"
+              style="margin-left: 10px; height: 2.5rem"
+              (click)="DeleteCompleto()"
+            >
+              <i class="bi bi-check-circle-fill"></i> Confirmar
+            </button>
+            <button
+              type="button"
+              class="ov-btn-grow-d"
+              data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem"
+              (click)="Activos()"
+            >
+              <i class="bi bi-reply-fill"></i>
+              Cancelar
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Modal Eliminar-->
+  
+  
+<!--Modal Eliminar-->
+<div class="modal fade" id="eliminar" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-light"><b>Confirmar</b></h5>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h5 style="text-align: center; margin-top: 20px">
+            <b>¿Desea eliminar este registro?</b>
+          </h5>
+          <img
+            src="https://media0.giphy.com/media/ZyvTZ5ErOd1XyoKa0h/giphy.gif?cid=6c09b952125055d34915c1cdd5fb9e29241e377dbf424c5d&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=s"
+            style="
+              width: 100px;
+              height: 100px;
+              margin-right: 30px;
+              text-align: center;
+            "
+            alt="Warning Sign"
+          />
+        </div>
+        <div class="modal-footer">
+         
+            <button
+              type="button"
+              class="ov-btn-grow-in "
+              style="margin-left: 10px; height: 2.5rem"
+              (click)="Delete()"
+            >
+              <i class="bi bi-check-circle-fill"></i> Confirmar
+            </button>
+            <button
+              type="button"
+              class="ov-btn-grow-d"
+              data-bs-dismiss="modal"
+              style="margin-left: 10px; height: 2.5rem"
+              (click)="Activos()"
+            >
+              <i class="bi bi-reply-fill"></i>
+              Cancelar
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Modal Eliminar-->
+
+  <!--Modal Reloj-->
+<div class="modal fade" id="reloj" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #4741d7;">
+          <h5 class="modal-title text-light"><b>Temporizador</b></h5>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h5 style="text-align: center; margin-top: 20px" id="cronometro">Minutos Restantes: {{ tiempoFaltante }}</h5>
+          <h5 style="text-align: center; margin-top: 20px" id="cronometro">Expira: {{ HoraExpira }}</h5>
+          <img
+            src="../../../assets/img/Reloj.png"
+            style="
+              width: 220px;
+              height: 200px;
+              margin-right: 30px;
+              text-align: center;
+            "
+            class="offset-1"
+            alt="Warning Sign"
+          />
+          <h5 style="text-align: center; margin-top: 20px" id="cronometro">Posicion: {{ Posicion }}</h5>
+          <h5 style="text-align: center; margin-top: 20px" id="cronometro">Cliente: {{ ClienteModal }}</h5>
+          <h5 style="text-align: center; margin-top: 20px" id="cronometro">Atracción: {{ AtaccionModal }}</h5>
+
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="ov-btn-grow-d"
+            data-bs-dismiss="modal"
+            style="margin-left: 10px; height: 2.5rem"
+            (click)="Activos()"
+          >
+            <i class="bi bi-reply-fill"></i>
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Modal Reloj-->
+  
+  
+  <!--Modal Reloj-->
+<div class="modal fade" id="Extender" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #9e5fc5;">
+          <h5 class="modal-title text-light"><b>Extender Tiempo</b></h5>
+        </div>
+        <div class="modal-body" style="text-align: center">
+            <div class="row col-12">
+
+                <div class="col-6">
+                  <label>Hora:</label>
+                  <input type="number" class="form-control " [(ngModel)]="hora" (ngModelChange)="actualizarHora($event)" min="0" max="23">
+                </div>
+              
+                <div class="col-6">
+                  <label >Minuto:</label>
+                  <input type="number" class="form-control" [(ngModel)]="minuto" (ngModelChange)="actualizarMinuto($event)" min="0" max="59">
+                </div>
+
+              </div>
+              
+        </div>
+        <div class="modal-footer">
+            <button
+              type="button"
+              class="ov-btn-grow-success"
+              style="margin-left: 10px; height: 2.5rem"
+              (click)="Delete()"
+            >
+              <i class="bi bi-check-circle-fill"></i> Confirmar
+            </button>
+          <button
+            type="button"
+            class="ov-btn-grow-d"
+            data-bs-dismiss="modal"
+            style="margin-left: 10px; height: 2.5rem"
+            (click)="Activos()"
+          >
+            <i class="bi bi-reply-fill"></i>
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Modal Reloj-->
+  
+  

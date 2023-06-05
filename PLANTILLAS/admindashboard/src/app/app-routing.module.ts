@@ -94,6 +94,7 @@ import { ListticketsComponent } from './Tickets/listtickets/listtickets.componen
 import { DetallesempleadosComponent } from './Empleados/detallesempleados/detallesempleados.component';
 
 import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
+import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/temporizadores-listado.component';
 
 
 const routes: Routes = [
@@ -103,6 +104,7 @@ const routes: Routes = [
 
   { path: 'roles', component: IndexComponent },
   { path: 'filas', component: FilasListadoComponent },
+  { path: 'temporizadores', component: TemporizadoresListadoComponent },
   { path: 'usuarios', component: UsuariosComponent },
   
   { path: 'badges', component: BadgesComponent },

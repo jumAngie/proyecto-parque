@@ -53,5 +53,42 @@ namespace ParqueDiversion.API.Controllers.Fila
             return Ok(result);
         }
 
+        //TEMPORIZADORES
+
+        [HttpGet("ListadoTemporizadores")]
+        public IActionResult ListadoTemporizadores(int listado)
+        {
+            var result = _filaServices.ListadoTemporizadores((int)listado);
+            return Ok(result);
+        }
+
+        [HttpPost("InsertTemporizador")]
+        public IActionResult InsertTemporizador(string ticl_ID, string atra_ID, string temp_Expiracion)
+        {
+            var result = _filaServices.InsertTempo(ticl_ID, atra_ID, temp_Expiracion);
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteTemporizador")]
+        public IActionResult DeleteTemporizador(int temp_ID)
+        {
+            var result = _filaServices.DeleteTempo(temp_ID);
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteCompletoTemporizador")]
+        public IActionResult DeleteCompletoTemporizador()
+        {
+            var result = _filaServices.DeleteTempoCompleto();
+            return Ok(result);
+        }
+
+        [HttpPut("ExtenderHora")]
+        public IActionResult ExtenderHora(int temp_ID,string temp_Expiracion)
+        {
+            var result = _filaServices.ExtenderTempo(temp_ID, temp_Expiracion);
+            return Ok(result);
+        }
+
     }
 }

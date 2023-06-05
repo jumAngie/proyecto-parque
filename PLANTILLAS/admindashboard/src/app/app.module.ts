@@ -91,6 +91,7 @@ import { AtraccionesDetailComponent } from './Atracciones/detail/detail.componen
 import { GraficaComponent } from './grafica/grafica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
+import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/temporizadores-listado.component';
 
 @NgModule({
   declarations: [
@@ -164,7 +165,8 @@ import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.compo
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
     GraficaComponent,
-    FilasListadoComponent
+    FilasListadoComponent,
+    TemporizadoresListadoComponent
   ],
   imports: [
     BrowserModule,

@@ -140,5 +140,133 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
         #endregion
+
+        #region Temporizador
+
+        //INDEX
+        public IEnumerable<WV_tbTemporizadores> ListadoTemporizadores(int listado)
+        {
+            try
+            {
+                var list = _filasRepository.List(listado);
+                return list;
+            }
+            catch (Exception e)
+            {
+                _ = e.Message;
+                return Enumerable.Empty<WV_tbTemporizadores>();
+            }
+        }
+
+        //INSERT
+        public ServiceResult InsertTempo(string ticl_ID, string atra_ID, string temp_Expiracion)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _filasRepository.Insert(ticl_ID, atra_ID, temp_Expiracion);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //EXTENDER
+        public ServiceResult ExtenderTempo(int temp_ID, string temp_Expiracion)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _filasRepository.Extender(temp_ID, temp_Expiracion);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+        //Delete
+        public ServiceResult DeleteTempo(int temp_ID)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _filasRepository.DeleteTempo(temp_ID);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //Delete
+        public ServiceResult DeleteTempoCompleto()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _filasRepository.DeleteTempoCompleto();
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
     }
 }

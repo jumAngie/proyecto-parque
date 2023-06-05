@@ -436,6 +436,10 @@ VALUES	(1, 2, 4),
 		(2, 5, 3),
 		(2, 3, 2),
 		(1, 4, 6)
+
+INSERT INTO parq.tbTicketsCliente(tckt_ID, clre_ID, ticl_Cantidad)
+VALUES	(1, 1, 4),
+		(2, 2, 3)
 GO
 
 
