@@ -13,6 +13,7 @@ export class UsersProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

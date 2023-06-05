@@ -145,7 +145,17 @@ export class CreateAtraccionesComponent implements OnInit {
   }
 
   validarLimitePersonas(){
-    if(this.atracciones.atra_LimitePersonas == 0 || !this.atracciones.atra_LimitePersonas){
+    const regex = /^[0-9]+(\.[0-9]{1,2})?$/;   
+    
+    if(!this.atracciones.atra_LimitePersonas){
+      this.LimitePersonasRequerido = true;      
+      return true;
+    }else if(!regex.test(this.atracciones.atra_LimitePersonas.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos');
+      this.LimitePersonasRequerido = true;      
+      return true;
+    }else if(this.atracciones.atra_LimitePersonas <= 1){      
+      ToastUtils.showWarningToast('El limite de personas debe ser superior a uno');
       this.LimitePersonasRequerido = true;      
       return true;
     }else{
@@ -155,10 +165,21 @@ export class CreateAtraccionesComponent implements OnInit {
   }
 
   validarTiempoDuracion(){
-    if( this.atracciones.atra_DuracionRonda == 0 || !this.atracciones.atra_DuracionRonda){
+    const regex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    if(!this.atracciones.atra_DuracionRonda){
       this.DuracionRondaRequerido = true;          
       return true;
-    }else{
+    }else if(!regex.test(this.atracciones.atra_DuracionRonda.toString())){
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos')      
+      this.DuracionRondaRequerido = true;          
+      return true;
+    }else if(this.atracciones.atra_DuracionRonda <= 0){      
+      ToastUtils.showWarningToast('La duración por ronda debe ser superior a uno.')      
+      this.DuracionRondaRequerido = true;          
+      return true;
+    }
+    else{
       this.DuracionRondaRequerido = false;
       return false;
     }

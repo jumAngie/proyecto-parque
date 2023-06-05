@@ -49,9 +49,7 @@ export class PagesLoginComponent implements OnInit {
         console.error('Error >', error);
       }
     );
-  }
-  
-}
-  
+  } 
+  } 
 }
 

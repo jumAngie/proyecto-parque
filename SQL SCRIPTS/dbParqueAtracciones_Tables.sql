@@ -1,5 +1,5 @@
-CREATE DATABASE dbParqueAtracciones
-GO
+--CREATE DATABASE dbParqueAtracciones
+--GO
 
 
 USE dbParqueAtracciones
@@ -216,10 +216,10 @@ CREATE TABLE parq.tbClientes(
 
 	CONSTRAINT PK_parq_tbClientes_clie_ID PRIMARY KEY(clie_ID),
 	CONSTRAINT CK_parq_tbClientes_clie_Sexo CHECK (clie_Sexo = 'M' OR clie_Sexo = 'F'),
-	CONSTRAINT UQ_parq_tbClientes_clie_DNI UNIQUE (clie_DNI),
-	CONSTRAINT UQ_parq_tbClientes_clie_Telefono UNIQUE (clie_Telefono),
 )
 GO
+
+
 
 CREATE TABLE parq.tbClientesRegistrados(
 	clre_ID						INT IDENTITY(1,1),
