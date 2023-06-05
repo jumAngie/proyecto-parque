@@ -47,18 +47,25 @@ export class ReporteComponent implements OnInit {
       doc.setTextColor(40);
   
       // Agregar imagen
-      const imgData = 'https://i.ibb.co/WHS3vpM/header-image.png';
-      doc.addImage(imgData, 'PNG', 10, 10, 50, 20); // Ajusta la posición y las dimensiones de la imagen según sea necesario
+      const imgData = 'https://i.ibb.co/CwxtKsY/Fondito.png';
+      doc.addImage(imgData, 'PNG', 10, 10, pageWidth - 20, 80);
   
       // Agregar título
-      doc.setFont('Pacifico', 'bold');
-      doc.text('Tickets vendidos', 10, 30); // Ajusta la posición del título según sea necesario
-  
-      // Agregar subtítulo con las fechas de inicio y fin
-      doc.setFontSize(16);
       doc.setFont('Arial', 'normal');
-      doc.text('Fecha de inicio: 01/06/2023', 10, 50);
-      doc.text('Fecha de fin: 30/06/2023', 10, 65);
+      doc.text('Reporte Tickets Vendidos', 20, 100); // Adjust the position based on your needs
+  
+      // Agregar dirección
+      doc.setFontSize(12);
+      doc.text('Dirección: San Pedro Sula, Cortés', 20, 110);
+  
+      // Agregar fecha generada
+      const currentDate = new Date();
+      const generatedDate = currentDate.toLocaleDateString();
+      doc.text(`Generado: ${generatedDate}`, 20, 120);
+  
+      // Agregar generado por
+      const generatedBy = localStorage.getItem('usua_Usuario');
+      doc.text(`Generado por el Usuario: ${generatedBy}`, 20, 115);
     };
   
     const footer = (doc: any) => {
@@ -72,7 +79,7 @@ export class ReporteComponent implements OnInit {
     const mantenimientos: TicketsCliente[] = this.ticketsInforme;
   
     const columns = [
-      { header: 'Nombre del cliente', dataKey: 'clie_Nombres' },
+      { header: 'Cliente', dataKey: 'clie_Nombres' },
       { header: 'Identificación', dataKey: 'clie_DNI' },
       { header: 'Teléfono', dataKey: 'clie_Telefono' },
       { header: 'Ticket', dataKey: 'tckt_Nombre' },
@@ -80,70 +87,43 @@ export class ReporteComponent implements OnInit {
       { header: 'Forma de pago', dataKey: 'pago_Nombre' }
     ] as { header: string; dataKey: keyof TicketsCliente }[];
   
-    // Llamar a la función de encabezado en la primera página
+    doc.setFontSize(18);
+    const pageWidth = doc.internal.pageSize.width;
+    doc.setTextColor(40);
+    doc.setTextColor(40);
+  
+    // Llamar a las funciones de encabezado y pie de página
     header(doc);
+    footer(doc);
   
-    // Calcular el espacio disponible para el contenido de la tabla en cada página
-    const startY = doc.previousAutoTable.finalY || 80; // La posición de inicio de la primera tabla es 80
-    const pageHeight = doc.internal.pageSize.height;
-    let availableSpace = pageHeight - startY - 20; // 20 es un margen inferior
+    const startY = 130;
+    const rowHeight = 20;
+    const columnWidth = pageWidth / columns.length;
+  // Dibujar encabezado de tabla
+columns.forEach((column, index) => {
+  doc.setFillColor(230, 230, 230); // Light gray color (adjust the RGB values as needed)
+  doc.setFont('Arial', 'bold');
+  doc.rect(index * columnWidth, startY, columnWidth, rowHeight, 'F');
+  doc.setTextColor(0);
+  doc.setFontSize(12); // Set smaller font size
+  doc.text(column.header, index * columnWidth + 5, startY + 15);
+});
+
   
-    // Establecer estilos para la tabla
-    doc.setFontSize(12);
-    doc.setFillColor(245, 245, 245); // Color de fondo para las celdas de encabezado
-    doc.setTextColor(0); // Color del texto para las celdas de encabezado
-    doc.setFont('Arial', 'bold');
+    // Dibujar contenido de la tabla
+    mantenimientos.forEach((mantenimiento, rowIndex) => {
+      const dataRow = columns.map((column) => mantenimiento[column.dataKey]);
+      doc.setFont('Arial', 'normal');
+      doc.setDrawColor(0);
+      doc.setFillColor("255");
+      doc.setTextColor(0);
   
-    let currentPage = 1;
-    let tableDataIndex = 0;
-  
-    while (tableDataIndex < mantenimientos.length) {
-      // Obtener el contenido de la tabla en formato adecuado para la página actual
-      const tableData = mantenimientos
-        .slice(tableDataIndex)
-        .map((mantenimiento) => columns.map((column) => mantenimiento[column.dataKey]));
-  
-      // Verificar si se ajusta el contenido en la página actual
-      const table = (doc as any).autoTable({
-        head: [columns.map((column) => column.header)],
-        body: tableData,
-        startY: currentPage === 1 ? startY : 20, // 20 es un margen superior para las páginas siguientes
-        styles: {
-          fillColor: [255, 255, 255], // Color de fondo para las celdas del cuerpo
-          textColor: [0, 0, 0], // Color del texto para las celdas del cuerpo
-        },
-        columnStyles: {
-          0: { columnWidth: 70 }, // Ancho de la primera columna
-          1: { columnWidth: 50 }, // Ancho de la segunda columna
-          2: { columnWidth: 50 }, // Ancho de la tercera columna
-          3: { columnWidth: 70 }, // Ancho de la cuarta columna
-          4: { columnWidth: 30 }, // Ancho de la quinta columna
-          5: { columnWidth: 50 }, // Ancho de la sexta columna
-        },
-        didDrawPage: function (data: any) {
-          // Llamar a la función de encabezado en cada página
-          header(doc);
-  
-          // Llamar a la función de pie de página en cada página
-          footer(doc);
-        },
+      dataRow.forEach((data, columnIndex) => {
+        doc.rect(columnIndex * columnWidth, startY + (rowIndex + 1) * rowHeight, columnWidth, rowHeight, 'FD');
+        doc.setFontSize(10); // Set smaller font size
+        doc.text(data.toString(), columnIndex * columnWidth + 5, startY + (rowIndex + 1) * rowHeight + 15);
       });
-  
-      // Obtener la altura total de la tabla en la página actual
-      const tableHeight = table.height;
-  
-      // Verificar si se ajusta el contenido en la página actual
-      if (tableHeight < availableSpace) {
-        // Todavía hay espacio en la página actual para mostrar más contenido
-        currentPage++;
-        tableDataIndex += tableData.length;
-      } else {
-        // No hay suficiente espacio en la página actual para mostrar más contenido
-        doc.addPage();
-        currentPage = 1;
-        availableSpace = pageHeight - startY - 20; // 20 es un margen inferior
-      }
-    }
+    });
   
     // Generar el PDF
     const pdfOutput = doc.output('blob');
@@ -154,5 +134,6 @@ export class ReporteComponent implements OnInit {
     // Mostrar el PDF en el visor
     this.pdfViewer.nativeElement.src = url;
   }
+  
   
 }
