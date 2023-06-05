@@ -106,7 +106,7 @@
                         </div>
                       </div>                      
                       
-                      <div class="col-6 mt-3">
+                      <div class="col-6 mt-3 mb-4">
                         <i *ngIf="SexoRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
                         <span>Sexo:</span>
                         <div class="text-center">
@@ -140,7 +140,7 @@
                  </div>                                             
                 </div>
                 <div class="card-body">
-                  <div class="row col-lg-12">
+                  <div class="row col-lg-12 mb-3">
                       <div class="col-6 mt-2">
                         <div class="row">
                           <div class="grid-container mb-4" style="margin-top: 20px">
@@ -234,9 +234,9 @@
                  </div>                                             
                 </div>
                 <div class="card-body">
-                  <div class="row col-lg-12">
+                  <div class="row col-lg-12 mt-4">
 
-                    <div class="col-md-12 mt-4"> 
+                    <div class="col-md-6 "> 
                       <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="PagoRequerido"></i>
                       <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Método de págo:</label>
                       <div class="input-group" style="height: 3rem;">
@@ -247,13 +247,16 @@
                          </select>
                       </div>
                    </div> 
+                   <button (click)="sendData()" class="ov-btn-grow-primary col-3" style="height: 2.6rem; margin-left: 0; margin-top: 2.2rem;">
+                     <i class="fas fa-plus-circle mr-1"></i>                           
+                     Confirmar compra
+                   </button>                 
+                   <button (click)="Volver()" class="ov-btn-grow-d col-2 ms-3" style="height: 2.6rem; margin-left: 0; margin-top: 2.2rem;">
+                     <i class="bi bi-reply-fill"></i>                     
+                     Cancelar
+                   </button>                 
+
                   </div>                   
-                </div>
-                <div class="card-footer">
-                  <button (click)="sendData()" class="ov-btn-grow-primary col-3" style="height: 2.6rem; margin-left: 0">
-                    <i class="fas fa-plus-circle mr-1"></i>                           
-                    Confirmar compra
-                  </button>                 
                 </div>
               </div> 
             </div>

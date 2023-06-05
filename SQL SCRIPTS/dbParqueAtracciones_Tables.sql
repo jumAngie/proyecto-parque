@@ -1,5 +1,5 @@
-CREATE DATABASE dbParqueAtracciones
-GO
+--CREATE DATABASE dbParqueAtracciones
+--GO
 
 
 USE dbParqueAtracciones

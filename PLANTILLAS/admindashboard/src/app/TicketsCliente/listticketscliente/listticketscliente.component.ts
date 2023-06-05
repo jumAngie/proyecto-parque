@@ -54,4 +54,11 @@ export class ListticketsclienteComponent {
       localStorage.setItem('idTicketEliminar', ticketscliente.ticl_ID.toString());
     }
 
+    onEdit(): void {
+      ToastUtils.showErrorToast('Esta venta ya ha finalizado, imposible editar.')
+   }
+   
+   onDelete(): void {
+     ToastUtils.showErrorToast('Esta venta ya ha finalizado, imposible eliminar')
+   }
 }

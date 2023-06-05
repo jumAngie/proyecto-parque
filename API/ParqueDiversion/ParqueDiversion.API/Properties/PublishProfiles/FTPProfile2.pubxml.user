@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPwmFwp7yCk6GxGZ3LKWj/AAAAAACAAAAAAAQZgAAAAEAACAAAADlef9f+T2jpUhE60XmR8l2LaearthLZ+dwsxp7c/Hh1wAAAAAOgAAAAAIAACAAAAB4vTer+VRcjfAy0o3yrnmpPI/MEd/rW/2AN78zv5DP7yAAAABMt2JSymquCl6hKrVSxzRqLdNf+I30SxfD7QIT4xFTFUAAAAAfrvZSx3hCaw2gqHkQKA93Birl8arm4q+ENVa9n+oYg5z3s8HGM0n4JhJVJWovbU47A13jhTnDQBqJ/mOR1YED</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ParqueAtracciones2.somee.com/www.ParqueAtracciones2.somee.com</_PublishTargetUrl>
+    <History>False|2023-06-05T18:35:48.5947244Z;</History>
+  </PropertyGroup>
+</Project>

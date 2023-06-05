@@ -443,6 +443,9 @@ sendData(){
       this.cantidadVIPRequerido = false;      
     }    
   }
+  Volver(){
+    this.router.navigate(['listticketsclientes']);
+  }
 //#endregion
 
 
