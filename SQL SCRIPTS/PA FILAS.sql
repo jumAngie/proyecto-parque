@@ -1,42 +1,42 @@
 USE dbParqueAtracciones
 GO
-INSERT INTO fila.tbTipoFilas
-(tifi_Nombre,tifi_UsuarioCreador)
-VALUES
-('CLASICA',1),
-('VIP',1)
+--INSERT INTO fila.tbTipoFilas
+--(tifi_Nombre,tifi_UsuarioCreador)
+--VALUES
+--('CLASICA',1),
+--('VIP',1)
 
-GO
+--GO
 
-INSERT INTO fila.tbFilasAtraccion
-(tifi_ID,atra_ID,fiat_UsuarioCreador)
-VALUES
-(1,1,1),
-(2,1,1),
-(1,2,1),
-(2,2,1),
-(1,3,1),
-(2,3,1),
-(1,4,1),
-(2,4,1)
+--INSERT INTO fila.tbFilasAtraccion
+--(tifi_ID,atra_ID,fiat_UsuarioCreador)
+--VALUES
+--(1,1,1),
+--(2,1,1),
+--(1,2,1),
+--(2,2,1),
+--(1,3,1),
+--(2,3,1),
+--(1,4,1),
+--(2,4,1)
 
 
 
-GO
+--GO
 
-SELECT * FROM fila.tbFilasAtraccion
-SELECT * FROM parq.tbTicketsCliente
-SELECT * FROM fila.tbFilasPosiciones
+--SELECT * FROM fila.tbFilasAtraccion
+--SELECT * FROM parq.tbTicketsCliente
+--SELECT * FROM fila.tbFilasPosiciones
 
-SELECT * FROM parq.tbTicketsCliente
-go
-INSERT INTO fila.tbFilasPosiciones(fiat_ID,ticl_ID,fipo_HoraIngreso)
-VALUES	(2,2,GETDATE()),
-		(2,3,GETDATE()),
-		(1,4,GETDATE()),
-		(2,5,GETDATE()),
-		(1,6,GETDATE())
-GO
+--SELECT * FROM parq.tbTicketsCliente
+--go
+--INSERT INTO fila.tbFilasPosiciones(fiat_ID,ticl_ID,fipo_HoraIngreso)
+--VALUES	(2,2,GETDATE()),
+--		(2,3,GETDATE()),
+--		(1,4,GETDATE()),
+--		(2,5,GETDATE()),
+--		(1,6,GETDATE())
+--GO
 
 CREATE OR ALTER VIEW fila.VW_tbFilasAtraccion
 AS 
@@ -174,14 +174,14 @@ GO
 
 --------------------------------------------TEMPORIZADORES------------------------------------------------------------------------
   
-  INSERT INTO [fila].[tbTemporizadores]
-  ([ticl_ID],[atra_ID],[temp_Expiracion])
+  SELECT * FROM parq.tbTicketsCliente
+
+  INSERT INTO [fila].[tbTemporizadores] ([ticl_ID],[atra_ID],[temp_Expiracion])
   VALUES
-  (1,3,'23:00:00'),
+  (6,3,'23:00:00'),
   (2,2,'10:00:00'),  
   (4,1,'12:00:00'),  
   (5,4,'18:00:00')
-
   GO
 
   CREATE OR ALTER VIEW fila.WV_tbTemporizadores
@@ -241,11 +241,11 @@ GO
   BEGIN TRY
 	BEGIN TRANSACTION;
 
-		DECLARE @Atracción	NVARCHAR(MAX) = (SELECT atra_Nombre FROM fila.WV_tbTemporizadores WHERE ticl_ID = @ticl_ID AND TiempoFaltante NOT LIKE '00:00')
+		DECLARE @Atraccion	NVARCHAR(MAX) = (SELECT atra_Nombre FROM fila.WV_tbTemporizadores WHERE ticl_ID = @ticl_ID AND TiempoFaltante NOT LIKE '00:00')
 
 		IF EXISTS (SELECT * FROM fila.WV_tbTemporizadores WHERE ticl_ID = @ticl_ID AND TiempoFaltante NOT LIKE '00:00')
 			BEGIN
-				SELECT 409 AS codeStatus, 'Ticket Registrado Actualmente con Temporizador para: '+@Atracción  AS messageStatus;
+				SELECT 409 AS codeStatus, 'Ticket Registrado Actualmente con Temporizador para: '+@Atraccion  AS messageStatus;
 			END
 		ELSE
 			BEGIN
@@ -254,7 +254,7 @@ GO
 				VALUES
 				(@ticl_ID,@atra_ID,@temp_Expiracion)
 
-				SELECT 200 AS codeStatus, 'Temporizador Registrado con Éxito'  AS messageStatus;
+				SELECT 200 AS codeStatus, 'Temporizador Registrado con Ã©xito'  AS messageStatus;
 
 			END
 		COMMIT TRANSACTION;
@@ -302,7 +302,7 @@ GO
 			DELETE FROM [fila]. [tbTemporizadores]
 			WHERE temp_ID = @temp_ID
 
-			SELECT 200 AS codeStatus, 'Temporizador Eliminado con Éxito' AS messageStatus;
+			SELECT 200 AS codeStatus, 'Temporizador Eliminado con ï¿½xito' AS messageStatus;
 		END TRY
 		BEGIN CATCH
 			SELECT 500 AS codeStatus, ERROR_MESSAGE () AS messageStatus
@@ -321,7 +321,7 @@ GO
 								WHERE TiempoFaltante = '00:00'
 								AND CAST(temp_FechaCreacion AS DATE) = CAST(GETDATE() AS DATE))
 
-			SELECT 200 AS codeStatus, 'Temporizadores Eliminados con Éxito' AS messageStatus;
+			SELECT 200 AS codeStatus, 'Temporizadores Eliminados con Ã©xito' AS messageStatus;
 		END TRY
 		BEGIN CATCH
 			SELECT 500 AS codeStatus, ERROR_MESSAGE () AS messageStatus

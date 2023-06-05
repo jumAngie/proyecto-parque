@@ -26,6 +26,7 @@ export class ListticketsclienteComponent {
     TicketsClientesList(){
       this.service.getTicketsCliente()
       .subscribe((response: any) => {
+        console.log(response);
         if (response.success) {
           this.ticketscliente = response.data;
         }

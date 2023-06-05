@@ -98,6 +98,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
 import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/temporizadores-listado.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +174,8 @@ import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/t
     GraficaComponent,
     MapComponent,
     FilasListadoComponent,
-    TemporizadoresListadoComponent
+    TemporizadoresListadoComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,

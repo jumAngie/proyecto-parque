@@ -89,5 +89,14 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
 
             return db.QueryFirst<RequestStatus>(ScriptsDatabase.UDP_TicketsCliente_FullInsert, parametros, commandType: CommandType.StoredProcedure);
         }
+
+        public IEnumerable<VW_tbTicketClientes> Reporte(int id)
+        {
+            using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@clie_ID", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbTicketClientes>(ScriptsDatabase.UDP_ReporteByCliente, parametros, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
