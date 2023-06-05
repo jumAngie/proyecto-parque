@@ -22,8 +22,8 @@ export class DetalleQuioscoComponent implements OnInit{
 
   filtro: String = '';
   p: number = 1;
-  selectedPageSize = 5;
-  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+  selectedPageSize = 3;
+  pageSizeOptions: number[] = [3, 6 ,9]; // Opciones de tamaño de página
 
 
   gridOptions: GridOptions = {};

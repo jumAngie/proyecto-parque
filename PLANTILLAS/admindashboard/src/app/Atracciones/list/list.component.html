@@ -30,20 +30,30 @@
          ></div>
        </div>
       <div class="card-body">
-         <div class="row col-lg-12 ms-1">
-            <button (click)="AgregarAtraccion()" class="ov-btn-grow-primary mb-2 mt-3 col-2" style="height: 2.4rem; margin-left: 0;">
+         <div class="row col-lg-12 ms-1 mt-3 mb-1">
+            <button (click)="AgregarAtraccion()" class="ov-btn-grow-primary col-2" style="height: 2.4rem; margin-left: 0;">
               <i class="fas fa-plus-circle mr-1"></i>
               Nuevo
             </button>
 
-            <div class="search-bar mt-3 col-10">
+            <div class="search-bar  col-6">
               <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
             </div>
+
+            <div class="col-4 ">                                                                          
+              <div class="input-group" style="height: 2.4rem;">                                       
+                  <label style="margin-top: 0.5rem; margin-right: 0.5rem; font-weight: bold  ;">Registros por página:</label>
+                 <span class="input-group-text"><i class="bi bi-filter-square-fill" style="color: blueviolet;"></i></span>
+                 <select id="pageSize" class="form-select" [(ngModel)]="selectedPageSize" >
+                    <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</option>
+                 </select>
+              </div>                                                                        
+           </div>             
           </div>
       </div>
 
-      <div class="row row-cols-1 row-cols-sm-1 row-cols-sm-3 justify-content-center align-items-stretch gap-4 mt-2">
-         <div *ngFor="let atraccion of filtrarAtracciones() | paginate: { itemsPerPage: 2, currentPage: p }" class="card border shadow rounded-md p-2 d-flex flex-column">
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-sm-3 justify-content-center align-items-stretch gap-5 mt-2 ">
+         <div *ngFor="let atraccion of filtrarAtracciones() | paginate: { itemsPerPage: selectedPageSize, currentPage: p }" class="card border shadow rounded-md p-2 d-flex flex-column card-hov">
            <img [src]="atraccion.atra_Imagen" alt="" class="card-img-top img-fluid image-resize">
            <div class="card-body">
              <h3 class="text-xl mt-3 font-semibold">{{ atraccion.atra_Nombre }}</h3>
@@ -63,7 +73,7 @@
          </div>
       </div>
 
-      <div class="pagination d-flex justify-content-center mt-4">
+      <div class="pagination d-flex justify-content-center mt-2">
          <pagination-controls (pageChange)="p = $event"
                               previousLabel="Anterior"
                               nextLabel="Siguiente"
@@ -77,7 +87,6 @@
    </div>
 
    <div>
-      <app-grafica></app-grafica>
 
    </div>
 </main>

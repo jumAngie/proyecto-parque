@@ -1,5 +1,5 @@
---USE dbParqueAtracciones2
---GO
+USE dbParqueAtracciones
+GO
 
 
 
@@ -1478,6 +1478,14 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE parq.UDP_VW_tbClientes_SearchByDNI
+ @clie_DNI CHAR(15)
+AS
+BEGIN
+	SELECT * FROM parq.VW_tbClientes WHERE clie_DNI = @clie_DNI
+END
+GO
+
 --*************** INSERT DE CLIENTES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbClientes_INSERT
 	@clie_Nombres			VARCHAR(300), 
@@ -1974,10 +1982,10 @@ SELECT [tckt_ID]
       ,[tckt_Habilitado]
       ,[tckt_Estado]
       ,[tckt_UsuarioCreador]
-	  ,usu1.usua_Usuario AS usu_Creador
+	  --,usu1.usua_Usuario AS usu_Creador
       ,[tckt_FechaCreacion]
       ,[tckt_UsuarioModificador]
-	  ,usu2.usua_UsuarioModificador AS usu_Modificador
+	  --,usu2.usua_UsuarioModificador AS usu_Modificador
       ,[tckt_FechaModificacion]
 	  , empl_crea =		(SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = tckt_UsuarioCreador)
 	  , empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE usua_ID = tckt_UsuarioModificador)
@@ -2131,6 +2139,8 @@ SELECT [ticl_ID]
       ,tcli.clie_ID
 	  , clie.clie_Nombres + ' ' + clie.clie_Apellidos AS clie_Nombres
       ,[ticl_Cantidad]
+	  ,tcli.pago_ID
+	  ,pago_Nombre
       ,[ticl_FechaCompra]
       ,[ticl_FechaUso]
       ,[ticl_Habilitado]
@@ -2149,9 +2159,10 @@ SELECT [ticl_ID]
   ON	usu2.usua_ID = tcli.ticl_UsuarioModificador
   INNER JOIN parq.tbTickets tick ON tcli.tckt_ID = tick.tckt_ID
   INNER JOIN parq.tbClientes clie ON tcli.clie_ID = clie.clie_ID
+  INNER JOIN gral.tbMetodosPago AS pago ON tcli.pago_ID = pago.pago_ID
+GO
 
 --*************** SELECT DE TICKETCLIENTES ******************-
-GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_SELECT
 AS
 BEGIN
@@ -2195,8 +2206,102 @@ BEGIN
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 	END CATCH
 END
---*************** UPDATE DE TICKETCLIENTES ******************-
 GO
+
+SELECT * FROM parq.tbClientes
+SELECT * FROM parq.tbTicketsCliente
+GO
+
+CREATE OR ALTER VIEW parq.VW_tbTicketsClienteForInsert
+AS
+SELECT	ticl_ID,
+		ticl.tckt_ID, 
+
+		ticl.clie_ID, 
+		clie_Nombres, 
+		clie_Apellidos, 
+		clie_DNI,
+		clie_Sexo, 
+		clie_Telefono,
+
+		ticl_Cantidad, 
+		ticl.pago_ID,
+		ticl_FechaUso,
+		ticl_UsuarioCreador,
+		ticl_UsuarioModificador
+FROM parq.tbTicketsCliente AS ticl
+INNER JOIN parq.tbClientes AS clie ON ticl.clie_ID = clie.clie_ID
+INNER JOIN parq.tbTickets AS tckt ON ticl.tckt_ID = tckt.tckt_ID
+INNER JOIN gral.tbMetodosPago AS pago ON ticl.pago_ID = pago.pago_ID
+GO
+
+
+
+CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_FullInsert
+	@clie_Nombres			VARCHAR(300), 
+	@clie_Apellidos			VARCHAR(300), 
+	@clie_DNI				CHAR(15), 
+	@clie_Sexo				CHAR(1), 
+	@clie_Telefono			CHAR(9), 
+
+	@tckt_ID				INT,
+	@ticl_Cantidad			INT,
+	@pago_ID				INT,
+	@ticl_UsuarioCreador	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION 
+			IF EXISTS (SELECT * FROM parq.tbClientes WHERE clie_DNI = @clie_DNI)
+				BEGIN
+					DECLARE @clie_ID INT = (SELECT clie_ID FROM parq.tbClientes WHERE clie_DNI = @clie_DNI)
+
+					INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, pago_ID, ticl_FechaCompra, ticl_UsuarioCreador)
+					VALUES(@tckt_ID, @clie_ID, @ticl_Cantidad, @pago_ID, GETDATE(), @ticl_UsuarioCreador)
+
+					SELECT 200 AS codeStatus, 'Ticket ingresado con éxito' AS messageStatus
+
+				END
+			ELSE
+				BEGIN
+					
+					IF EXISTS (SELECT * FROM parq.tbClientes WHERE clie_Telefono = @clie_Telefono)
+						BEGIN
+							SELECT 409 AS codeStatus, 'Ya existe un registro con este numero de teléfono' AS messageStatus
+						END
+					ELSE IF EXISTS (SELECT * FROM parq.tbClientes WHERE clie_DNI = @clie_DNI)
+						BEGIN
+							SELECT 409 AS codeStatus, 'Ya existe un registro con este DNI' AS messageStatus	
+						END
+					ELSE
+						BEGIN
+							INSERT INTO parq.tbClientes(clie_Nombres, clie_Apellidos, clie_DNI, clie_Sexo, clie_Telefono, clie_UsuarioCreador)
+							VALUES(@clie_Nombres, @clie_Apellidos, @clie_DNI, @clie_Sexo, @clie_Telefono, @ticl_UsuarioCreador)
+
+							DECLARE @Newclie_ID INT = (SELECT SCOPE_IDENTITY())
+					
+							INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, pago_ID, ticl_FechaCompra, ticl_UsuarioCreador)
+							VALUES(@tckt_ID, @Newclie_ID, @ticl_Cantidad, @pago_ID, GETDATE(), @ticl_UsuarioCreador)
+
+							SELECT 200 AS codeStatus, 'Ticket ingresado con éxito' AS messageStatus
+						END
+				END
+
+		COMMIT
+	END TRY
+
+	BEGIN CATCH
+		ROLLBACK
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+END
+GO
+
+
+EXECUTE parq.UDP_tbTicketsCliente_FullInsert 'PRUEBA', 'PRUEBA', '1234-5678-91234', 'F', '1234-4321', 2, 5, 3, 1 
+GO
+
+--*************** UPDATE DE TICKETCLIENTES ******************-
 CREATE OR ALTER PROCEDURE parq.UDP_tbTicketClientes_UPDATE
 	@ticl_ID				INT,
 	@tckt_ID				INT, 
@@ -2320,7 +2425,7 @@ END
 GO
 
 --*************** FIND DE ATRACCIONES ******************-
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_FIND 
 	@atra_ID INT
 AS
 BEGIN
@@ -2331,7 +2436,7 @@ END
 GO
 
 --*************** INSERT DE ATRACCIONES ******************-
-CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT
+CREATE OR ALTER PROCEDURE parq.UDP_tbAtracciones_INSERT	
 	@area_ID					INT, 
 	@atra_Nombre				VARCHAR(300), 
 	@atra_Descripcion			VARCHAR(300), 
@@ -2353,6 +2458,15 @@ BEGIN
 				BEGIN
 					INSERT INTO parq.tbAtracciones(area_ID, atra_Nombre, atra_Descripcion, regi_ID, atra_ReferenciaUbicacion, atra_LimitePersonas, atra_DuracionRonda, atra_Imagen, atra_UsuarioCreador)
 					VALUES						 (@area_ID, @atra_Nombre, @atra_Descripcion, @regi_ID, @atra_ReferenciaUbicacion, @atra_LimitePersonas, @atra_DuracionRonda, @atra_Imagen, @atra_UsuarioCreador)
+			
+					DECLARE @tifi_ID INT= (SELECT CAST(IDENT_CURRENT(' parq.tbAtracciones')AS INT))
+					
+					INSERT INTO fila.tbFilasAtraccion
+					(tifi_ID,atra_ID,fiat_UsuarioCreador)
+					VALUES
+					(@tifi_ID,1,@atra_UsuarioCreador),
+					(@tifi_ID,1,@atra_UsuarioCreador)
+
 					SELECT 200 AS codeStatus, 'Atracción creada con éxito' AS messageStatus
 				END
 		COMMIT
@@ -2884,9 +2998,8 @@ GO
 CREATE OR ALTER PROCEDURE parq.UDP_tbGolosinas_Update
 @golo_ID						INT, 
 @golo_Nombre					VARCHAR(300),
-@golo_Img						NVARCHAR(MAX),
 @golo_Precio					INT, 
-
+@golo_Img						NVARCHAR(MAX),
 @golo_UsuarioModificador		INT
 AS
 BEGIN

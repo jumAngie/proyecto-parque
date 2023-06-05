@@ -24,12 +24,13 @@ export class UsuariosComponent {
   filtro: string = '';
   p: number = 1;
   imageUrl: string = ''; 
-  itemsPerPage: number = 6;
+  itemsPerPage: number = 3;
   paginacionConfig: any = {
     itemsPerPage: 10, // Cantidad de elementos por página
     currentPage: 1, // Página actual
     totalItems: 0 // Total de elementos en la tabla (se actualizará en la carga de datos)
   };
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
 
   usuarior=false;
   claver=false;

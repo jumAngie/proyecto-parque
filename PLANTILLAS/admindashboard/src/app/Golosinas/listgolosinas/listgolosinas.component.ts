@@ -20,15 +20,19 @@ export class ListgolosinasComponent implements OnInit {
   showModalU=false;
   showModalD=false;
   imageUrl: string = ''; 
-  p: number = 1;
   filtro: string = '';
+  p: number = 1;
+  selectedPageSize = 3;
+  pageSizeOptions: number[] = [3, 6, 9, 12]; // Opciones de tamaño de página
+
 
   Golosina_Create_Requerido = false;
   Precio_Create_Requerido = false;
+  Imagen_Create_Requerido = false;
 
   Golosina_Update_Requerido = false;
   Precio_Update_Requerido = false;
-
+  Imagen_Update_Requerido = false;
 
   constructor(
     private service:ParqServicesService,
@@ -71,6 +75,8 @@ export class ListgolosinasComponent implements OnInit {
 
 //#region MODAL CREATE
 openCreateModal() {
+  this.clearCreateModal();
+
   const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
   this.renderer2.setStyle(modalCreate, 'display', 'block');
   setTimeout(() => {
@@ -86,15 +92,21 @@ closeCreateModal(): void {
     this.showModal = false;
   }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
 
-  this.createGolosina.golo_UsuarioCreador = 0;
-  this.createGolosina.golo_Nombre = '';
-  this.createGolosina.golo_Precio = 0;
+  this.clearCreateModal();
 
   const golo_Nombre = this.elementRef.nativeElement.querySelector('#golo_Nombre');
   this.renderer2.setProperty(golo_Nombre, 'value', '');
 
   const golo_Precio = this.elementRef.nativeElement.querySelector('#golo_Precio');
   this.renderer2.setProperty(golo_Precio, 'value', '');
+}
+
+
+clearCreateModal(){
+  this.createGolosina.golo_UsuarioCreador = 0;
+  this.createGolosina.golo_Nombre = '';
+  this.createGolosina.golo_Precio = 0;
+  this.createGolosina.golo_Img = '';
 }
 
 
@@ -264,6 +276,15 @@ confirmCreate(){
       }
     }
     
+    validateImagenCreate(){
+      if(!this.createGolosina.golo_Img){
+        this.Imagen_Create_Requerido = true;
+        return true;        
+      }else{
+        this.Imagen_Create_Requerido = false;
+        return false;
+      }
+    }
 
     clearGolosinaCreateError(){
       if(this.createGolosina.golo_Nombre){
@@ -274,6 +295,12 @@ confirmCreate(){
     clearPrecioCreateError(){
       if(this.createGolosina.golo_Precio){
         this.Precio_Create_Requerido = false;
+      }
+    }
+
+    clearImagenError(){
+      if(this.createGolosina.golo_Img){
+        this.Imagen_Create_Requerido = false;
       }
     }
   //#endregion

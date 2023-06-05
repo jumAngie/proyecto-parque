@@ -39,18 +39,23 @@
               <div class="col-md-6" *ngFor="let item of areas; let i = index">
                 <div class="card-img-overlay-mod" style="position: relative;">
                   <img [src]="'assets/img/MAPA/' + item.area_Imagen" class="img-thumbnail-space img-fluid" [style.zIndex]="1" />
-                  <div class="badges-container" style="position: absolute; top: 0; left: 0;">
+                  <div class="badges-container" style="position: absolute; top: 0; left: 0; margin-top: 120px; margin-left: 200px;">
                     <span class="badge"
+                          style="margin-left: 55px; float: left; margin-top: 45px;"
                           *ngFor="let atraccion of atraccionesPorArea[item.area_ID]"
                           (click)="detailAtraccion(atraccion)"
-                          [style.backgroundColor]="'beige'"
-                          [style.color]="'black'"
+
                           [style.position]="'relative'"
                           [style.zIndex]="2"                          
                           
                           >
-                      {{ atraccion.atra_Nombre }} 
-                    </span> 
+                          <div class="tooltip-container">
+                            <img [src]="atraccion.atra_Imagen" class="custom-image">
+                            <div class="tooltip">
+                              <div class="tooltip-content">{{ atraccion.atra_Nombre }}</div>
+                            </div>
+                          </div>                                                    
+                    </span>
                   </div>
                 </div> 
               </div>

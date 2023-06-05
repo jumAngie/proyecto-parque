@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -90,6 +90,12 @@ import { VentasDetalleComponent } from './VentasQuioscoDetalle/detalle/detalle.c
 import { AtraccionesDetailComponent } from './Atracciones/detail/detail.component';
 import { GraficaComponent } from './grafica/grafica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MapComponent } from './map/map.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -162,7 +168,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ListticketsclienteComponent,
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
-    GraficaComponent
+    GraficaComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -176,7 +183,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgbAlertModule,
     NgSelectModule,
     AgGridModule,
-    NgxChartsModule
+    NgxChartsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatButtonModule    
   ],
   providers: [ParqServicesService],
   bootstrap: [AppComponent]

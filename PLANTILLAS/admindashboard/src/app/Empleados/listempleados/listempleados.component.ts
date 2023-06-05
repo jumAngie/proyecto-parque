@@ -12,9 +12,11 @@ import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
 })
 export class ListempleadosComponent implements OnInit {
   empleados!: Empleados[];
-  imageUrl: string = ''; 
-  p: number = 1;
   filtro: string = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
   showModalD=false;
   idEmpleado!: number;
   constructor(

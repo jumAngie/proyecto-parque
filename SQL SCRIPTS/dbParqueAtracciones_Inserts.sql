@@ -1,5 +1,5 @@
-﻿--USE dbParqueAtracciones2
---GO
+﻿USE dbParqueAtracciones
+GO
 
 
 INSERT INTO gral.tbEstadosCiviles (civi_Descripcion)
@@ -425,17 +425,18 @@ VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento,
 GO
 
 
-INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio)
-VALUES	('Clásico', 150),
-		('VIP', 450)
+INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio, tckt_UsuarioCreador)
+VALUES	('Clásico', 150, 1),
+		('VIP', 450, 1)
 GO
 
 
-INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad)
-VALUES	(1, 2, 4),
-		(2, 5, 3),
-		(2, 3, 2),
-		(1, 4, 6)
+
+INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, ticl_UsuarioCreador)
+VALUES	(1, 2, 4, 1),
+		(2, 5, 3, 1),
+		(2, 3, 2, 1),
+		(1, 4, 6, 1)
 GO
 
 

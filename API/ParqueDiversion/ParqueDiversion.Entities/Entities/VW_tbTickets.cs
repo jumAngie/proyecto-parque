@@ -14,10 +14,8 @@ namespace ParqueDiversion.Entities.Entities
         public int? tckt_Habilitado { get; set; }
         public int? tckt_Estado { get; set; }
         public int? tckt_UsuarioCreador { get; set; }
-        public string usu_Creador { get; set; }
         public DateTime? tckt_FechaCreacion { get; set; }
         public int? tckt_UsuarioModificador { get; set; }
-        public int? usu_Modificador { get; set; }
         public DateTime? tckt_FechaModificacion { get; set; }
         public string empl_crea { get; set; }
         public string empl_Modifica { get; set; }

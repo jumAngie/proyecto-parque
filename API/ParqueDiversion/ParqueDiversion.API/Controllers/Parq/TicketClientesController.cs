@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ParqueDiversion.API.Models;
+using ParqueDiversion.API.Models.Park;
 using ParqueDiversion.BusinessLogic.Services;
 using ParqueDiversion.Entities.Entities;
 using System;
@@ -59,6 +60,14 @@ namespace ParqueDiversion.API.Controllers
         {
             var listado = _parqueServices.BorrarTicketClientes(id);
             return Ok(listado);
+        }
+
+        [HttpPost("InsertTicket")]
+        public IActionResult TicketFullInsert(TicketsClienteFullInsertViewModel item)
+        {
+            var list = _mapper.Map<VW_tbTicketsClienteForInsert>(item);
+            var result = _parqueServices.FullTicketInsert(list);
+            return Ok(result);
         }
     }
 }

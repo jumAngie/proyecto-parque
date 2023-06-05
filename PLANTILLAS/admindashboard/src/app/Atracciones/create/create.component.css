@@ -1,212 +1,212 @@
 /* primary button */
 .ov-btn-grow-primary {
-    background: #fff; /* color de fondo */
-    color: #4741d7; /* color de fuente */
-    border: 2px solid #4741d7; /* tamaño y color de borde */
-    border-radius: 3px; /* redondear bordes */
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    display: inline-block;
-  }
-  
-  .ov-btn-grow-primary:hover {
-    color: #fff; /* color de fuente hover */
-  }
-  
-  .ov-btn-grow-primary::after {
-    content: "";
-    background: #4741d7; /* color de fondo hover */
-    position: absolute;
-    z-index: -1;
-    padding: 0; /* ajusta el padding a 0 */
-    display: block;
-    left: -50%;
-    right: -50%;
-    top: -50%; /* ajusta el valor para aumentar la altura */
-    bottom: -50%; /* ajusta el valor para aumentar la altura */
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.3s ease;
-  }
-  
-  .ov-btn-grow-primary:hover::after {
-    transition: all 0.3s ease-out;
-    transform: skewX(-45deg) scale(1, 1);
-  }
-  
-  
-  /* insert button */
-  .ov-btn-grow-in {
-    background: #fff; /* color de fondo */
-    color: #3cda49; /* color de fuente */
-    border: 2px solid #3cda49; /* tamaño y color de borde */
-    border-radius: 3px; /* redondear bordes */
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    display: inline-block;
-  }
-  
-  .ov-btn-grow-in:hover {
-    color: #fff; /* color de fuente hover */
-  }
-  
-  .ov-btn-grow-in::after {
-    content: "";
-    background: #3cda49; /* color de fondo hover */
-    position: absolute;
-    z-index: -1;
-    padding: 0; /* ajusta el padding a 0 */
-    display: block;
-    left: -50%;
-    right: -50%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.3s ease;
-  }
-  
-  .ov-btn-grow-in:hover::after {
-    transition: all 0.3s ease-out;
-    transform: skewX(-45deg) scale(1, 1);
-  }
-  
-  
-  /* edit button */
-  .ov-btn-grow-u {
-    background: #fff; /* color de fondo */
-    color: #e0de55; /* color de fuente */
-    border: 2px solid #e0de55; /* tamaño y color de borde */
-    border-radius: 3px; /* redondear bordes */
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    display: inline-block;
-  }
-  
-  .ov-btn-grow-u:hover {
-    color: #fff; /* color de fuente hover */
-  }
-  
-  .ov-btn-grow-u::after {
-    content: "";
-    background: #e0de55; /* color de fondo hover */
-    position: absolute;
-    z-index: -1;
-    padding: 0; /* ajusta el padding a 0 */
-    display: block;
-    left: -50%;
-    right: -50%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.3s ease;
-  }
-  
-  .ov-btn-grow-u:hover::after {
-    transition: all 0.3s ease-out;
-    transform: skewX(-45deg) scale(1, 1);
-  }
-  
-  
-  /* delete button */
-  .ov-btn-grow-d {
-    background: #fff; /* color de fondo */
-    color: #da5c3c; /* color de fuente */
-    border: 2px solid #da5c3c; /* tamaño y color de borde */
-    border-radius: 3px; /* redondear bordes */
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    display: inline-block;
-  }
-  
-  .ov-btn-grow-d:hover {
-    color: #fff; /* color de fuente hover */
-  }
-  
-  .ov-btn-grow-d::after {
-    content: "";
-    background: #da5c3c; /* color de fondo hover */
-    position: absolute;
-    z-index: -1;
-    padding: 0; /* ajusta el padding a 0 */
-    display: block;
-    left: -50%;
-    right: -50%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.3s ease;
-  }
-  
-  .ov-btn-grow-d:hover::after {
-    transition: all 0.3s ease-out;
-    transform: skewX(-45deg) scale(1, 1);
-  }
-  
-  .square-image {
-    width: 100%;
-    height: 0;
-    padding-top: 100%; /* Establece un alto proporcional al ancho */
-    object-fit: cover; /* Ajusta la imagen al contenedor */
- }
- 
- .my-card {
-  margin-bottom: 1px; /* Ajusta el margen inferior según tus necesidades */
-  margin-left: 1px;
-  margin-right: 1px;
-  margin-top: 1px;
-  height: 110%;  
+  background: #fff; /* color de fondo */
+  color: #4741d7; /* color de fuente */
+  border: 2px solid #4741d7; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-primary:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-primary::after {
+  content: "";
+  background: #4741d7; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: -50%; /* ajusta el valor para aumentar la altura */
+  bottom: -50%; /* ajusta el valor para aumentar la altura */
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-primary:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+
+/* insert button */
+.ov-btn-grow-in {
+  background: #fff; /* color de fondo */
+  color: #3cda49; /* color de fuente */
+  border: 2px solid #3cda49; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-in:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-in::after {
+  content: "";
+  background: #3cda49; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-in:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+/* edit button */
+.ov-btn-grow-u {
+background: #fff; /* color de fondo */
+color: #d77d41; /* color de fuente */
+border: 2px solid #d77d41; /* tamaño y color de borde */
+border-radius: 3px; /* redondear bordes */
+position: relative;
+z-index: 1;
+overflow: hidden;
+display: inline-block;
+}
+
+.ov-btn-grow-u:hover {
+color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-u::after {
+content: "";
+background: #d77d41; /* color de fondo hover */
+position: absolute;
+z-index: -1;
+padding: 0; /* ajusta el padding a 0 */
+display: block;
+left: -50%;
+right: -50%;
+top: 0;
+bottom: 0;
+transform: skewX(-45deg) scale(0, 1);
+transition: all 0.3s ease;
+}
+
+.ov-btn-grow-u:hover::after {
+transition: all 0.3s ease-out;
+transform: skewX(-45deg) scale(1, 1);
+}
+
+
+/* delete button */
+.ov-btn-grow-d {
+  background: #fff; /* color de fondo */
+  color: #da5c3c; /* color de fuente */
+  border: 2px solid #da5c3c; /* tamaño y color de borde */
+  border-radius: 3px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-d:hover {
+  color: #fff; /* color de fuente hover */
+}
+
+.ov-btn-grow-d::after {
+  content: "";
+  background: #da5c3c; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 0; /* ajusta el padding a 0 */
+  display: block;
+  left: -50%;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.3s ease;
+}
+
+.ov-btn-grow-d:hover::after {
+  transition: all 0.3s ease-out;
+  transform: skewX(-45deg) scale(1, 1);
+}
+
+.square-image {
+  width: 100%;
+  height: 0;
+  padding-top: 100%; /* Establece un alto proporcional al ancho */
+  object-fit: cover; /* Ajusta la imagen al contenedor */
+}
+
+.my-card {
+margin-bottom: 1px; /* Ajusta el margen inferior según tus necesidades */
+margin-left: 1px;
+margin-right: 1px;
+margin-top: 1px;
+height: 110%;  
 }
 
 .img-container {
-  margin-bottom: 0;
+margin-bottom: 0;
 }
 
 
 .img-thumbnail-space {
-  padding: 0.15rem;
-  background-color: #fff;
-  border: 0.1px solid #dee2e6;
-  border-radius: 0.20rem;
-  max-width: 100%;
-  height: 110%;
+padding: 0.15rem;
+background-color: #fff;
+border: 0.1px solid #dee2e6;
+border-radius: 0.20rem;
+max-width: 100%;
+height: 110%;
+margin-bottom:28px;
 }
 
 
 .img-thumbnail-space-v2 {
-  padding: 0.15rem;
-  background-color: #fff;
-  border: 0.1px solid #dee2e6;
-  border-radius: 50%; /* Hace que el contenedor sea circular */
-  max-width: 100%;
-  height: auto;
-  overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor circular */
+padding: 0.15rem;
+background-color: #fff;
+border: 0.1px solid #dee2e6;
+border-radius: 50%; /* Hace que el contenedor sea circular */
+max-width: 100%;
+height: auto;
+overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor circular */
 }
 
 .img-thumbnail-space-v2 img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor sin alterar su proporción */
+width: 100%;
+height: auto;
+object-fit: cover; /* Ajusta la imagen al tamaño del contenedor sin alterar su proporción */
 }
 
 
 .my-image-container {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
 
 .my-circular-container {
-  width: 230px; /* Tamaño deseado del contenedor circular */
-  height: 210px; /* Tamaño deseado del contenedor circular */
-  overflow: hidden;
+width: 230px; /* Tamaño deseado del contenedor circular */
+height: 210px; /* Tamaño deseado del contenedor circular */
+overflow: hidden;
 }
 
 .my-circular-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 
@@ -214,97 +214,130 @@
 
 
 .col-img {
-  position: relative;
-  width: 100%;
-  min-height: 1px;
-  padding-right: 0px;
-  padding-left: 0px;
+position: relative;
+width: 100%;
+min-height: 1px;
+padding-right: 0px;
+padding-left: 0px;
 }
 
 @media (min-width: 768px) {
-  .col-img {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
+.col-img {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
 }
 
 
 .selected-animation {
-  animation-name: example;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+animation-name: example;
+animation-duration: 1s;
+animation-fill-mode: forwards;
 }
 
 @keyframes example {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+0% {
+  transform: scale(1);
+}
+50% {
+  transform: scale(1.1);
+}
+100% {
+  transform: scale(1);
+}
 }
 
 .selected-ribbon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 5px;
-  font-weight: bold;
+position: absolute;
+top: 10px;
+left: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+color: white;
+padding: 5px;
+font-weight: bold;
 }
 
 .my-card:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
-  transition: box-shadow 0.5s ease, transform 0.3s ease;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+transform: scale(1.1);
+transition: box-shadow 0.5s ease, transform 0.5s ease;
 }
 
 
 .card-img-overlay-mod {
-  position: absolute;
-  top: 15;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1.25rem;
-  background-color: rgba(175, 172, 172, 0.212);
-  color: #ffffff;
+position: absolute;
+top: 15;
+right: 0;
+bottom: 0;
+left: 0;
+padding: 1.25rem;
+background-color: rgba(175, 172, 172, 0.212);
+color: #ffffff;
 }
 
 
 
 .card-body-mod {
-  flex: 1 1 auto;
-  padding: 1.25rem;
+flex: 1 1 auto;
+padding: 1.25rem;
 }
 
 @media (min-width: 576px) {
-  .card-body-mod {
-    padding: 1.5rem;
-  }
+.card-body-mod {
+  padding: 1.5rem;
+}
 }
 
 .card-body-mod {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
-
-
 
 
 .img-circle-medium {
-  width: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
-  height: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
-  background-size: cover;
-  background-position: center;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px 2px #00000060;
-  margin-top: 30%;
+width: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
+height: 200px; /* Ajusta el tamaño del visualizador según tus necesidades */
+background-size: cover;
+background-position: center;
+border-radius: 20px;
+box-shadow: 0px 0px 5px 2px #00000060;
+margin-top: 30%;
 }
 
 .point:hover {
-  cursor: pointer;
+cursor: pointer;
 }
+
+
+.tooltip-container {
+position: relative;
+display: inline-block;
+}
+
+.tooltip-container:hover .tooltip {
+visibility: visible;
+opacity: 1;
+}
+
+.tooltip {
+position: absolute;
+bottom: 100%;
+left: 50%;
+transform: translateX(-50%);
+background-color: rgba(0, 0, 0, 0.8);
+color: #fff;
+padding: 5px;
+border-radius: 5px;
+font-size: 16px;
+visibility: hidden;
+opacity: 0;
+transition: opacity 0.3s, visibility 0.3s;
+white-space: nowrap;
+z-index: 1;
+}
+
+.tooltip-container img {
+position: relative;
+z-index: 0;
+}
+
+
