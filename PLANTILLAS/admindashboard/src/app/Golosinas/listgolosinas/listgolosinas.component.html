@@ -233,10 +233,10 @@
           <label
             for="uploadBtn"
             class="img-circle-medium point"
-            [style.background-image]="'url(' + createGolosina.golo_Img + ')'"
+            [style.background-image]="'url(' + updateGolosina.golo_Img + ')'"
           >
             <span
-              *ngIf="!createGolosina.golo_Img"
+              *ngIf="!updateGolosina.golo_Img"
               class="mt-5 text-center d-flex align-items-center justify-content-center"
             >
               <i>
@@ -248,7 +248,7 @@
                 /></i>
             </span>
             <span
-              *ngIf="!createGolosina.golo_Img"
+              *ngIf="!updateGolosina.golo_Img"
               class="text-center d-flex align-items-center justify-content-center"
             >
               Añadir Imagen
@@ -258,7 +258,7 @@
       </div>
       <div class="d-flex justify-content-center align-items-center mt-2">
         <i
-          *ngIf="createGolosina.golo_Img"
+          *ngIf="updateGolosina.golo_Img"
           class="point"
           (click)="deleteImage()"
         >

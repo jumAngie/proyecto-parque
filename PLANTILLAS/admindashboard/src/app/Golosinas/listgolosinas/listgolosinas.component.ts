@@ -79,6 +79,7 @@ export class ListgolosinasComponent implements OnInit {
 //#region MODAL CREATE
 openCreateModal() {
   this.clearCreateModal();
+  this.imageUrl="";
 
   const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
   this.renderer2.setStyle(modalCreate, 'display', 'block');
@@ -168,9 +169,11 @@ confirmCreate(){
   }
 
   onUpdate(golosinas: Golosinas){
+    
     this.updateGolosina.golo_ID = golosinas.golo_ID;
     this.updateGolosina.golo_Nombre = golosinas.golo_Nombre;
     this.updateGolosina.golo_Precio = golosinas.golo_Precio;
+    this.updateGolosina.golo_Img = golosinas.golo_Img
     this.openUpdateModal();
   }
 
