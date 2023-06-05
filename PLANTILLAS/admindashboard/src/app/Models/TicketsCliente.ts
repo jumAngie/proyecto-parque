@@ -5,6 +5,8 @@ export class TicketsCliente {
     clie_ID!: number;
     clie_Nombres!: string;
     ticl_Cantidad!: number;
+    pago_ID!: number;
+    pago_Nombre!: String;        
     ticl_FechaCompra!: Date;
     ticl_FechaUso!: Date;
     ticl_Habilitado!: number;

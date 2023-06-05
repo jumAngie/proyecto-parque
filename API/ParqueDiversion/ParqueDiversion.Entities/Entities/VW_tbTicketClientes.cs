@@ -14,6 +14,8 @@ namespace ParqueDiversion.Entities.Entities
         public int? clie_ID { get; set; }
         public string clie_Nombres { get; set; }
         public int? ticl_Cantidad { get; set; }
+        public int? pago_ID { get; set; }
+        public string pago_Nombre { get; set; }
         public DateTime? ticl_FechaCompra { get; set; }
         public DateTime? ticl_FechaUso { get; set; }
         public int? ticl_Habilitado { get; set; }

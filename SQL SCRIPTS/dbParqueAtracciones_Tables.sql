@@ -285,6 +285,7 @@ CREATE TABLE parq.tbTicketsCliente(
 	clie_ID						INT,
 	clre_ID						INT,
 	ticl_Cantidad				INT,
+	pago_ID						INT,
 	ticl_FechaCompra			DATETIME DEFAULT GETDATE(),
 	ticl_FechaUso				DATETIME,
 	ticl_Habilitado				INT DEFAULT 1,
@@ -298,6 +299,7 @@ CREATE TABLE parq.tbTicketsCliente(
 	CONSTRAINT FK_parq_tbTicletsCliente_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes(clie_ID),
 	CONSTRAINT FK_parq_tbTicletsCliente_tbClientesRegistrados_clre_ID FOREIGN KEY (clre_ID) REFERENCES parq.tbClientesRegistrados(clre_ID),
 	CONSTRAINT FK_parq_tbTicketsCliente_tbTickets_tckt_ID FOREIGN KEY (tckt_ID) REFERENCES parq.tbTickets (tckt_ID),
+	CONSTRAINT FK_parq_tbTicketsCliente_gral_tbMetodosPago_pago_ID FOREIGN KEY(pago_ID) REFERENCES gral.tbMetodosPago (pago_ID),
 	CONSTRAINT CK_parq_tbTicketsCliente_ticl_Cantidad CHECK (ticl_Cantidad > 0),
 )
 GO
@@ -489,9 +491,15 @@ CREATE TABLE fila.tbFilasPosiciones(
 	fipo_HoraIngreso	TIME,
 	
 	CONSTRAINT PK_fila_tbFilasPosiciones_fipo_ID PRIMARY KEY (fipo_ID),
-	CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
-	CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
+	--CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
+	--CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
 )
+GO
+
+ALTER TABLE fila.tbFilasPosiciones
+ADD CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID)
+ALTER TABLE fila.tbFilasPosiciones
+ADD CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
 GO
 
 CREATE TABLE fila.tbHistorialFilasPosiciones(

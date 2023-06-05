@@ -5,11 +5,12 @@ import { ParqServicesService } from 'src/app/ParqServices/parq-services.service'
 import { Cargos } from 'src/app/Models/Cargos';
 import { ToastUtils } from 'src/app/Utilities/ToastUtils';
 import { Router } from '@angular/router';
+import { local } from 'd3-selection';
 
 @Component({
   selector: 'app-editarempleados',
   templateUrl: './editarempleados.component.html',
-  styleUrls: ['./editarempleados.component.scss']
+  styleUrls: ['./editarempleados.component.scss'],
 })
 export class EditarempleadosComponent {
   empleados: Empleados = new Empleados();
@@ -31,34 +32,40 @@ export class EditarempleadosComponent {
   FormatoValidoDNI = false;
   FormatoValidoCorreo = false;
 
-  constructor(private service:ParqServicesService, private elementRef: ElementRef, private router:Router) { }
+  constructor(
+    private service: ParqServicesService,
+    private elementRef: ElementRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.CargarDatos();
   }
 
-  CargarDatos(){
+  CargarDatos() {
     // DDL ESTADO CIVIL
-    this.service.getEstadoCivil()
-    .subscribe(data => {
+    this.service.getEstadoCivil().subscribe((data) => {
       this.estadosciviles = data;
     });
 
     // DDL CARGOS
-    this.service.getCargos().subscribe(data => {
+    this.service.getCargos().subscribe((data) => {
       this.cargos = data;
-  });
+    });
 
     // CARGAR LOS DATOS AL FORMULARIO
-    const idEmpleado: number | undefined = isNaN(parseInt(localStorage.getItem("idEmpleado") ?? '', 10)) ? undefined: parseInt(localStorage.getItem("idEmpleado") ?? '', 10)
-    this.service.getEmpleadosId(idEmpleado)
-    .subscribe((data)=>{
+    const idEmpleado: number | undefined = isNaN(
+      parseInt(localStorage.getItem('idEmpleado') ?? '', 10)
+    )
+      ? undefined
+      : parseInt(localStorage.getItem('idEmpleado') ?? '', 10);
+    this.service.getEmpleadosId(idEmpleado).subscribe((data) => {
       this.empleados = data;
       console.log(data);
-    })
+    });
   }
 
-  actulizarEmpleado(){
+  actulizarEmpleado() {
     var errors = 0;
     console.log(this.empleados);
     const errorsArray: boolean[] = [];
@@ -77,65 +84,65 @@ export class EditarempleadosComponent {
     formatosArray[1] = this.FormatoValidoDNI;
     formatosArray[2] = this.FormatoValidoCorreo;
 
-    for (let i=0; i < formatosArray.length; i++) {
-      if(formatosArray[i] == true){
+    for (let i = 0; i < formatosArray.length; i++) {
+      if (formatosArray[i] == true) {
         formatosinvalidos++;
-      }
-      else{
+      } else {
         formatosinvalidos;
       }
     }
 
     for (let i = 0; i < errorsArray.length; i++) {
-      if(errorsArray[i] == true){
+      if (errorsArray[i] == true) {
         errors++;
-      }
-      else{
+      } else {
         errors;
-      }  
+      }
     }
 
-    if(errors == 0 && formatosinvalidos == 0){
-      this.empleados.empl_UsuarioModificador = 1;
-      console.log(this.empleados);
-      this.service.editEmpleados(this.empleados)
-      .subscribe((response: any) =>{
-        console.log(response)
-        if(response.code == 200){
-          ToastUtils.showSuccessToast(response.message);          
-          this.router.navigate(['listempleados']);
-        }else{
-          ToastUtils.showErrorToast(response.message);
-        }
-      })
-    }
-    else if(errors != 0){
-      ToastUtils.showWarningToast('Hay campos vacios!');
-    }
-    else if (errors == 0 && formatosinvalidos != 0){
+    if (errors == 0 && formatosinvalidos == 0) {
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }
+      else
+      {
+        this.empleados.empl_UsuarioModificador = parseInt(usua_ID);
+        this.service
+          .editEmpleados(this.empleados)
+          .subscribe((response: any) => {
+            console.log(response);
+            if (response.code == 200) {
+              ToastUtils.showSuccessToast(response.message);
+              this.router.navigate(['listempleados']);
+            } else {
+              ToastUtils.showErrorToast(response.message);
+            }
+          });
+      }
+      } else if (errors != 0) {
+        ToastUtils.showWarningToast('Hay campos vacios!');
+      } else if (errors == 0 && formatosinvalidos != 0) {
+      } else {
+        ToastUtils.showWarningToast('Entró al else final. Investigar POR QUÉ');
+      }
+    } 
 
-    }
-    else{
-      ToastUtils.showWarningToast('Entró al else final. Investigar POR QUÉ')
-    }
-  }
-
-  
   validarPrimerNombre() {
-    if(!this.empleados.empl_PrimerNombre){
+    if (!this.empleados.empl_PrimerNombre) {
       this.PrimerNombreRequerido = true;
       return true;
-    }else{
+    } else {
       this.PrimerNombreRequerido = false;
       return false;
     }
   }
 
-  validarPrimerApellido(){
-    if(!this.empleados.empl_PrimerApellido){
+  validarPrimerApellido() {
+    if (!this.empleados.empl_PrimerApellido) {
       this.PrimerApellidoRequerido = true;
       return true;
-    }else{
+    } else {
       this.PrimerApellidoRequerido = false;
       return false;
     }
@@ -149,7 +156,9 @@ export class EditarempleadosComponent {
       return true;
     } else if (!dniPattern.test(this.empleados.empl_DNI)) {
       this.FormatoValidoDNI = true;
-      ToastUtils.showWarningToast('Formato de DNI inválido. El formato debe ser XXXX-XXXX-XXXXX');
+      ToastUtils.showWarningToast(
+        'Formato de DNI inválido. El formato debe ser XXXX-XXXX-XXXXX'
+      );
       return false;
     } else {
       this.DNIRequerido = false;
@@ -158,98 +167,96 @@ export class EditarempleadosComponent {
     }
   }
 
- validarEmail() {
-  const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  validarEmail() {
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-  if (!this.empleados.empl_Email) {
-    this.EmailRequerido = true;
-    return true;
-  } else if (!emailPattern.test(this.empleados.empl_Email)) {
-    this.FormatoValidoCorreo = true;
-    ToastUtils.showWarningToast('Correo Electrónico inválido. Por favor, ingrese un correo válido.');
-    return false;
-  } else {
-    this.EmailRequerido = false;
-    this.FormatoValidoCorreo = false;
-    return false;
+    if (!this.empleados.empl_Email) {
+      this.EmailRequerido = true;
+      return true;
+    } else if (!emailPattern.test(this.empleados.empl_Email)) {
+      this.FormatoValidoCorreo = true;
+      ToastUtils.showWarningToast(
+        'Correo Electrónico inválido. Por favor, ingrese un correo válido.'
+      );
+      return false;
+    } else {
+      this.EmailRequerido = false;
+      this.FormatoValidoCorreo = false;
+      return false;
+    }
   }
-}
 
-
-  validarSexo(){
-    if(!this.empleados.empl_Sexo){
+  validarSexo() {
+    if (!this.empleados.empl_Sexo) {
       this.SexoRequerido = true;
       return true;
-    }else{
+    } else {
       this.SexoRequerido = false;
       return false;
     }
   }
 
-  validarTelefono(){
-
+  validarTelefono() {
     const telefonitoPattern = /^\d{4}-\d{4}$/;
 
-    if(!this.empleados.empl_Telefono){
+    if (!this.empleados.empl_Telefono) {
       this.TelefonoRequerido = true;
       return true;
-    }else if (!telefonitoPattern.test(this.empleados.empl_Telefono)) {
+    } else if (!telefonitoPattern.test(this.empleados.empl_Telefono)) {
       this.FormatoValidoTelefono = true;
-      ToastUtils.showWarningToast('Formato de Telefono inválido. El formato debe ser XXXX-XXXX');
+      ToastUtils.showWarningToast(
+        'Formato de Telefono inválido. El formato debe ser XXXX-XXXX'
+      );
       return false;
-    }
-      else{
+    } else {
       this.TelefonoRequerido = false;
       this.FormatoValidoTelefono = false;
       return false;
     }
   }
 
-  validarCargo(){
-    if(!this.empleados.carg_ID){
+  validarCargo() {
+    if (!this.empleados.carg_ID) {
       this.CargoRequerido = true;
       return true;
-    }else{
+    } else {
       this.CargoRequerido = false;
       return false;
     }
   }
 
-  validarEstadoCivil(){
-    if(!this.empleados.civi_ID){
+  validarEstadoCivil() {
+    if (!this.empleados.civi_ID) {
       this.EstCivilRequerido = true;
       return true;
-    }else{
+    } else {
       this.EstCivilRequerido = false;
       return false;
     }
   }
- 
 
   // formateos
   formatoDNI() {
     const dniSinGuiones = this.empleados.empl_DNI.replace(/-/g, '');
     let grupos = dniSinGuiones.match(/^(\d{4})(\d{4})(\d+)/);
-    
+
     if (grupos) {
       grupos.shift();
       this.empleados.empl_DNI = grupos.filter(Boolean).join('-');
     }
   }
-  
-  
-  formatoTelefono(){
+
+  formatoTelefono() {
     const telefonoSinGuines = this.empleados.empl_Telefono.replace(/-/g, '');
     let numeritos = telefonoSinGuines.match(/^(\d{4})(\d{4})/);
 
-    if(numeritos){
+    if (numeritos) {
       numeritos.shift();
       this.empleados.empl_Telefono = numeritos.filter(Boolean).join('-');
     }
   }
 
-  Volver(){
+  Volver() {
     this.router.navigate(['listempleados']);
   }
-
 }

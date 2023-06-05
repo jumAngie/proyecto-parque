@@ -1,5 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Golosinas } from 'src/app/Models/Golosinas';
 import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
 import { ImgbbService } from 'src/app/Service_IMG/imgbb-service.service';
@@ -20,21 +21,27 @@ export class ListgolosinasComponent implements OnInit {
   showModalU=false;
   showModalD=false;
   imageUrl: string = ''; 
-  p: number = 1;
   filtro: string = '';
+  p: number = 1;
+  selectedPageSize = 3;
+  pageSizeOptions: number[] = [3, 6, 9, 12]; // Opciones de tamaño de página
+
 
   Golosina_Create_Requerido = false;
   Precio_Create_Requerido = false;
+  Imagen_Create_Requerido = false;
+  FormatoValidoPrecio = false;
 
   Golosina_Update_Requerido = false;
   Precio_Update_Requerido = false;
-
+  Imagen_Update_Requerido = false;
 
   constructor(
     private service:ParqServicesService,
     private elementRef: ElementRef,
     private renderer2: Renderer2,
     private imgbbService: ImgbbService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -71,6 +78,8 @@ export class ListgolosinasComponent implements OnInit {
 
 //#region MODAL CREATE
 openCreateModal() {
+  this.clearCreateModal();
+
   const modalCreate = this.elementRef.nativeElement.querySelector('#modalCreate');
   this.renderer2.setStyle(modalCreate, 'display', 'block');
   setTimeout(() => {
@@ -86,9 +95,7 @@ closeCreateModal(): void {
     this.showModal = false;
   }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
 
-  this.createGolosina.golo_UsuarioCreador = 0;
-  this.createGolosina.golo_Nombre = '';
-  this.createGolosina.golo_Precio = 0;
+  this.clearCreateModal();
 
   const golo_Nombre = this.elementRef.nativeElement.querySelector('#golo_Nombre');
   this.renderer2.setProperty(golo_Nombre, 'value', '');
@@ -98,9 +105,23 @@ closeCreateModal(): void {
 }
 
 
+clearCreateModal(){
+  this.Golosina_Create_Requerido = false;
+  this.Precio_Create_Requerido = false;
+  this.Imagen_Create_Requerido = false;
+  this.FormatoValidoPrecio = false;
+  this.createGolosina.golo_UsuarioCreador = 0;
+  this.createGolosina.golo_Nombre = '';
+  this.createGolosina.golo_Precio = 0;
+  this.createGolosina.golo_Img = '';
+}
+
+
 confirmCreate(){
   var errors = 0;
+  var formatosInvalidos = 0
   const errorsArray: boolean[] = [];
+  const formatosArray: boolean[] = [];
 
   errorsArray[0] = this.validateGolosinaCreate();
   errorsArray[1] = this.validatePrecioCreate();
@@ -113,8 +134,22 @@ confirmCreate(){
     }    
   }
 
-  if (errors == 0) {
-    this.createGolosina.golo_UsuarioCreador = 1;
+  formatosArray[0] = this.FormatoValidoPrecio;
+  for (let i = 0; i < formatosArray.length; i++) {
+    if (formatosArray[i] == true) {
+      formatosInvalidos++;
+    }else{
+      formatosInvalidos;
+    }
+    
+  }
+
+  if (errors == 0 && formatosInvalidos == 0) {
+    const usua_ID = localStorage.getItem('usua_ID');
+    if (usua_ID == null) {
+      this.router.navigate(['pages-login']);
+    }    
+    this.createGolosina.golo_UsuarioCreador = parseInt(usua_ID ?? '');
     this.service.createGolosina(this.createGolosina).subscribe((response : any) =>{
       if (response.code == 200) {
         ToastUtils.showSuccessToast(response.message);
@@ -126,14 +161,24 @@ confirmCreate(){
         ToastUtils.showErrorToast(response.message);
       }
     })
-  }else{
+  }else if(errors != 0){
     ToastUtils.showWarningToast('¡Hay campos vacíos!');
+  }else if(errors == 0 && formatosInvalidos != 0){
+
+  }else{
+    
   }
 }
 //#endregion MODAL CREATE
 
 
 //#region MODAL UPDATE
+  clearUpdateModal(){
+    this.Golosina_Update_Requerido = false;
+    this.Precio_Update_Requerido = false;
+    this.Imagen_Update_Requerido = false;
+  }
+
   onUpdate(golosinas: Golosinas){
     this.updateGolosina.golo_ID = golosinas.golo_ID;
     this.updateGolosina.golo_Nombre = golosinas.golo_Nombre;
@@ -157,12 +202,17 @@ confirmCreate(){
     }
 
     if (errors == 0) {
-        this.updateGolosina.golo_UsuarioModificador = 1;
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }      
+        this.updateGolosina.golo_UsuarioModificador = parseInt(usua_ID ?? '');
         this.service.updateGolosina(this.updateGolosina).subscribe((response : any) =>{
           if(response.code == 200){
             ToastUtils.showSuccessToast(response.message);
             this.getGolosinas();
             this.closeUpdateModal();
+
           }else if (response.code == 409){
             ToastUtils.showWarningToast(response.message);
           }else{
@@ -181,6 +231,7 @@ confirmCreate(){
       this.renderer2.addClass(modalUpdate, 'show');
       this.showModalU = true;
     }, 0);
+    this.clearUpdateModal();
   }
   
   closeUpdateModal(): void {
@@ -190,6 +241,7 @@ confirmCreate(){
       this.renderer2.setStyle(modalUpdate, 'display', 'none');
       this.showModalU = false;
     }, 300); // Ajusta el tiempo para que coincida con la duración de la transición en CSS
+    this.clearUpdateModal();
   }
   
 //#endregion MODAL UPDATE
@@ -256,14 +308,24 @@ confirmCreate(){
         return true;
       } else if (!regex.test(this.createGolosina.golo_Precio.toString())) {
         this.Precio_Create_Requerido = true;
+        this.FormatoValidoPrecio = true
         ToastUtils.showWarningToast('Solo se aceptan valores numéricos')
-        return true;
+        return false ;
       } else {
         this.Precio_Create_Requerido = false;
         return false;
       }
     }
     
+    validateImagenCreate(){
+      if(!this.createGolosina.golo_Img){
+        this.Imagen_Create_Requerido = true;
+        return true;        
+      }else{
+        this.Imagen_Create_Requerido = false;
+        return false;
+      }
+    }
 
     clearGolosinaCreateError(){
       if(this.createGolosina.golo_Nombre){
@@ -274,6 +336,12 @@ confirmCreate(){
     clearPrecioCreateError(){
       if(this.createGolosina.golo_Precio){
         this.Precio_Create_Requerido = false;
+      }
+    }
+
+    clearImagenError(){
+      if(this.createGolosina.golo_Img){
+        this.Imagen_Create_Requerido = false;
       }
     }
   //#endregion

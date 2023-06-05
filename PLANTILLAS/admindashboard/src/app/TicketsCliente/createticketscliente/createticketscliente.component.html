@@ -3,93 +3,266 @@
     <h1>Tickets</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">Principal</li>
-        <li class="breadcrumb-item">Registrar</li>
-        <li class="breadcrumb-item active">Tickets Cliente</li>
+        <li class="breadcrumb-item"><a routerLink="/dashboard">Principal</a></li>
+        <li class="breadcrumb-item active">Ventas Ticket</li>
+        <li class="breadcrumb-item">Nuevo ticket</li>
       </ol>
     </nav>
   </div>
+
   <section class="section">
-    <div class="card">
-      <div class="tabs-container">
-        <div class="tab" [class.open]="activeTab === 0" [ngClass]="{'inactive': activeTab !== 0}" (click)="activeTab = 0">
-          <summary>
-            <img class="icon" src="https://www.pngall.com/wp-content/uploads/8/Service-PNG-Photo.png" alt="Icon" />
-            <span>Registro de Cliente</span>
-          </summary>
-          <section *ngIf="activeTab === 0" class="content">
-            <h3>Cliente</h3>
-            <!-- Aquí puedes colocar el contenido del formulario de Registro de Cliente -->
-            <form>
-              <!-- Campos del formulario de Registro de Cliente -->
-            </form>
-          </section>
-        </div>
-        <div class="tab" [class.open]="activeTab === 1" [ngClass]="{'inactive': activeTab !== 1}" (click)="activeTab = 1">
-          <summary>
-            <img class="icon" src="https://www.pngall.com/wp-content/uploads/12/Ticket-Transparent.png" alt="Icon" />
-            <span>Registro de Ticket</span>
-          </summary>
-          <section *ngIf="activeTab === 1" class="content">
-            <h3>Ticket</h3>
-            <!-- Aquí puedes colocar el contenido del formulario de Registro de Ticket -->
-            <form>
-              <!-- Campos del formulario de Registro de Ticket -->
-            </form>
-          </section>
-        </div>
-        <div class="tab" [class.open]="activeTab === 2" [ngClass]="{'inactive': activeTab !== 2}" (click)="activeTab = 2">
-          <summary>
-            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1087/1087080.png" alt="Icon" />
-            <span>Confirmar Pago</span>
-          </summary>
-          <section *ngIf="activeTab === 2" class="content">
-            <h3>Pago</h3>
-            <!-- Aquí puedes colocar el contenido del formulario de Confirmar Pago -->
-            <form>
-              <!-- Campos del formulario de Confirmar Pago -->
-            </form>
-          </section>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header" style="padding: 0; position: relative">
+            <div
+              class="banner"
+              style="
+                background-image: url('/assets/img/BANNERS-VR-FINAL/VENTAS-TICKET.png');
+                border-top-left-radius: 10px;
+           border-top-right-radius: 10px;
+           background-size:contain;
+           background-position: center;
+           height: 0;
+           padding-bottom: 26%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+         "
+            ></div>
+            <div
+              class="overlay"
+              style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+            ></div>
+          </div>
+          <div class="card-body bg-light">
+            <div class="row mt-3">
+              <div class="card">
+                <div class="card-header text-center">
+                  <div class="card-title mb-0 mt-0">
+                    <img style="margin-right: 10px; width: 64px; height: 64px;" src="assets/img/TICKETS-VENTA-IMGS/REGISTRO-CLIE.png"/>                                 
+                    <b>Registro del cliente</b> 
+                 </div>                                             
+                </div>
+                <div class="card-body">
+                  <div class="row col-12">
+
+                    <div class="row mb-3 mt-2">
+                      <div class="col-6 ">
+                        <i *ngIf="searchDNI_Requerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <b>Ya existe este cliente? Buscalo por su DNI:</b>
+                        <div class="input-group" >
+                          <span class="input-group-text">
+                            <i class="bi bi-credit-card-2-back-fill" style="color: rgb(43, 137, 226)"></i>
+                          </span>
+                          <input (input)="formato_searchDNI()" [(ngModel)]="searchCliente.clie_DNI" type="text" class="form-control" id="searchCliente" placeholder="Escribe aquí..."/>
+                        </div>
+                      </div> 
+                        <button (click)="sendSearchDNI()" class="ov-btn-grow-u col-2 mt-4" style="height: 2.4rem; margin-left: 0">
+                          <i class="bi bi-search"></i>
+                          Buscar
+                        </button>                    
+                    </div>
+                    
+
+                      <div class="col-6 mt-2">
+                        <i *ngIf="NombresRequerido"  class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <span>Nombres:</span>
+                        <div class="input-group" >
+                          <span class="input-group-text">
+                            <i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
+                          </span>
+                          <input [(ngModel)]="fullTicket.clie_Nombres" type="text" class="form-control" id="Nombres" placeholder="Nombres..."/>
+                        </div>
+                      </div>
+  
+                      <div class="col-6 mt-2">
+                        <i *ngIf="ApellidosRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <span>Apellidos:</span>
+                        <div class="input-group" >
+                          <span class="input-group-text">
+                            <i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
+                          </span>
+                          <input [(ngModel)]="fullTicket.clie_Apellidos" type="text" class="form-control" id="Apellidos" placeholder="Apellidos..."/>
+                        </div>
+                      </div>
+                      
+                      <div class="col-6 mt-3">
+                        <i *ngIf="DNIRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <span>DNI:</span>
+                        <div class="input-group">
+                          <span class="input-group-text">
+                            <i class="bi bi-credit-card-2-back-fill" style="color: rgb(43, 137, 226)"></i>
+                          </span>
+                          <input (input)="formatoDNI()" [(ngModel)]="fullTicket.clie_DNI" type="text" class="form-control" id="DNI" placeholder="DNI..."/>
+                        </div>
+                      </div>
+
+                      <div class="col-6 mt-3">
+                        <i *ngIf="TelefonoRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <span>Teléfono:</span>
+                        <div class="input-group">
+                          <span class="input-group-text">
+                            <i class="bi bi-phone-vibrate-fill" style="color: rgb(43, 137, 226)"></i>
+                          </span>
+                          <input (input)="formatoTelefono()" [(ngModel)]="fullTicket.clie_Telefono" type="text" class="form-control" id="Telefono" placeholder="Teléfono..."/>
+                        </div>
+                      </div>                      
+                      
+                      <div class="col-6 mt-3">
+                        <i *ngIf="SexoRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                        <span>Sexo:</span>
+                        <div class="text-center">
+                          <div class="form-check form-check-inline">
+                            <input [(ngModel)]="fullTicket.clie_Sexo" class="form-check-input" type="radio" name="Sexo" id="gridRadios1" value="F"/>
+                            <label class="form-check-label" for="gridRadios1">
+                              Femenino
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input [(ngModel)]="fullTicket.clie_Sexo" class="form-check-input" type="radio" name="Sexo" id="gridRadios2" value="M"/>
+                            <label class="form-check-label" for="gridRadios2">
+                              Masculino
+                            </label>
+                          </div>
+                        </div>
+                      </div>                    
+
+
+                  </div>                   
+                </div>
+              </div>            
+
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-header text-center">
+                  <div class="card-title mb-0 mt-0">
+                    <img style="margin-right: 10px; width: 64px; height: 64px;" src="assets/img/TICKETS-VENTA-IMGS/COMPRA-TICKET.png"/>                                 
+                    <b>Compra del ticket</b> 
+                 </div>                                             
+                </div>
+                <div class="card-body">
+                  <div class="row col-lg-12">
+                      <div class="col-6 mt-2">
+                        <div class="row">
+                          <div class="grid-container mb-4" style="margin-top: 20px">
+                            <div class="grid-item" >
+                              <img (click)="selectClassicTicket(ticketType[0].tckt_ID)" src="assets/img/TICKETS-TIPOS/TICKET-CLASICO.png" alt="Ticket VIP" class="ticket-image"/>
+                              <div class="selected-icon" *ngIf="selectedClassicTicket === ticketType[0].tckt_ID">                                
+                                <img style="margin-right: 10px; width: 64px; height: 64px;" src="assets/img/TICKETS-VENTA-IMGS/CHECKED-TICKET.png"/>                                                                 
+                              </div>
+                              <div class="info">
+                                <div class="row">
+                                  <div class="col">
+                                    <b>✦ TIPO: </b><span>Ticket {{ ticketType[0].tckt_Nombre }}</span>
+                                  </div>
+                                  <div class="col">
+                                    <b>✦ PRECIO: </b><span>$ {{ ticketType[0].tckt_Precio }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="col-3"></div>
+                          <div class="col-6">
+                            <i *ngIf="cantidadClasicosRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                            <span>Cantidad:</span>
+                            <div class="input-group" >
+                              <span class="input-group-text">
+                                <i  class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
+                              </span>
+                              <input [(ngModel)]="cantidadClasicos" type="number" class="form-control" id="CantidadComun" placeholder="Cantidad..." />
+
+                            </div>
+                            
+                          </div>
+                          <div class="col-3"></div>
+                        </div>
+                      </div>
+  
+                      <div class="col-6 mt-2">
+                        <div class="row">
+                          <div class="grid-container mb-4" style="margin-top: 20px">
+                            <div class="grid-item" >
+                              <img (click)="selectVIPTicket(ticketType[1].tckt_ID)" src="assets/img/TICKETS-TIPOS/TICKET-VIP.png" alt="Ticket VIP" class="ticket-image"/>
+                              <div class="selected-icon" *ngIf="selectedVIPTicket === ticketType[1].tckt_ID">                                
+                                <img style="margin-right: 10px; width: 64px; height: 64px;" src="assets/img/TICKETS-VENTA-IMGS/CHECKED-TICKET.png"/>                                                                 
+                              </div>
+                              <div class="info">
+                                <div class="row">
+                                  <div class="col">
+                                    <b>✦ TIPO: </b><span>Ticket {{ ticketType[1].tckt_Nombre }}</span>
+                                  </div>
+                                  <div class="col">
+                                    <b>✦ PRECIO: </b><span>$ {{ ticketType[1].tckt_Precio }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                                                 
+                          <div class="col-3"></div>
+                          <div class="col-6">
+                            <i *ngIf="cantidadVIPRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                            <span>Cantidad:</span>
+                            <div class="input-group" >
+                              <span class="input-group-text">
+                                <i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
+                              </span>
+                              <input [(ngModel)]="cantidadVIP" type="number" class="form-control" id="CantidadComun" placeholder="Cantidad..." />
+                            </div>
+                          </div>
+                          <div class="col-3"></div>
+
+                        </div>
+                      </div>
+                 
+
+
+                  </div>                   
+                </div>
+              </div> 
+            </div>
+
+
+            <div class="row">
+              <div class="card">
+                <div class="card-header text-center">
+                  <div class="card-title mb-0 mt-0">
+                    <img style="margin-right: 10px; width: 64px; height: 64px;" src="assets/img/TICKETS-VENTA-IMGS/CONFIRMAR-PAGO.png"/>                                 
+                    <b>Confirmación de pago</b> 
+                 </div>                                             
+                </div>
+                <div class="card-body">
+                  <div class="row col-lg-12">
+
+                    <div class="col-md-12 mt-4"> 
+                      <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="PagoRequerido"></i>
+                      <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Método de págo:</label>
+                      <div class="input-group" style="height: 3rem;">
+                         <span class="input-group-text"><i class="bi bi-wallet" style="color: blueviolet;"></i></span>
+                         <select [(ngModel)]="fullTicket.pago_ID" class="form-select" id="pago_ID" aria-label="Regiones" (change)="clearPagoError()">
+                           <option value="0">Selecciona una opción...</option> 
+                           <option *ngFor="let option of pagos" [value]="option.pago_ID">{{ option.pago_Nombre }}</option>
+                         </select>
+                      </div>
+                   </div> 
+                  </div>                   
+                </div>
+                <div class="card-footer">
+                  <button (click)="sendData()" class="ov-btn-grow-primary col-3" style="height: 2.6rem; margin-left: 0">
+                    <i class="fas fa-plus-circle mr-1"></i>                           
+                    Confirmar compra
+                  </button>                 
+                </div>
+              </div> 
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
+ 
   </section>
 </main>
-
-
-
-
-<!--<main id="main" class="main">
-  <div class="pagetitle">
-    <h1>Tickets</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Principal</a></li>
-        <li class="breadcrumb-item">Registrar</li>
-        <li class="breadcrumb-item active">Tickets Cliente</li>
-      </ol>
-    </nav>
-  </div>
-  <section class="section">
-    <div class="card">
-	<div class="tabs">
-		<div class="tab">
-			<button class="tab-button" onclick="openTab(event, 'ticket')">Registro de Tickets</button>
-			<div id="ticket" class="tab-content">
-				<h3>Datos del Ticket</h3>
-				
-			</div>
-		</div>
-		<div class="tab">
-			<button class="tab-button" onclick="openTab(event, 'cliente')">Registro de Cliente</button>
-			<div id="cliente" class="tab-content">
-				<h3>Datos del Cliente</h3>
-				
-			</div>
-		</div>
-	</div>
-    </div>
-  </section>
-</main> -->
-
 

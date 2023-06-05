@@ -60,5 +60,12 @@ namespace ParqueDiversion.API.Controllers
             var listado = _parqueServices.BorrarClientes(id);
             return Ok(listado);
         }
+
+        [HttpPost("BuscarClienteDNI")]
+        public IActionResult SearchClienteByDNI(ClientesViewModel item)
+        {
+            var listado = _parqueServices.SearchClienteByDNI(item.clie_DNI);
+            return Ok(listado);
+        }
     }
 }

@@ -216,15 +216,32 @@ namespace ParqueDiversion.BusinessLogic.Services
             return result.Ok(map);
         }
 
-        public VW_tbClientes FindClientes(int id)
+        public ServiceResult FindClientes(int id)
         {
+            var result = new ServiceResult();
             try
             {
-                return _clientesRepository.Find(id);
+                var list = _clientesRepository.Find(id);
+                return result.Ok(list);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult SearchClienteByDNI(string id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+
+                var list = _clientesRepository.SearchByDNI(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
             }
         }
 
@@ -470,6 +487,31 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return null;
             }
         }
+
+        public ServiceResult FullTicketInsert(VW_tbTicketsClienteForInsert item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var ans = _ticketClientesRepository.FullInsert(item);
+                if(ans.CodeStatus == 200)
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Success);
+                }else if (ans.CodeStatus == 409)
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(ans.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.SetMessage(ex.Message, ServiceResultType.Error);
+            }
+        }
+
         public RequestStatus BorrarTicketClientes(int id)
         {
             try

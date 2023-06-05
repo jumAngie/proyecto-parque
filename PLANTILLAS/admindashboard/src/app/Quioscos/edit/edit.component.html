@@ -3,8 +3,9 @@
         <h1>Quioscos</h1>
         <nav>
            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/quioscos-listado">Listado</a></li>              
-              <li class="breadcrumb-item active"> <a routerLink="/quioscos-editar">Editar quiosco</a></li>
+            <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
+            <li class="breadcrumb-item">Quioscos</li>            
+             <li class="breadcrumb-item active"> <a routerLink="/quioscos-editar">Editar quiosco</a> </li>
            </ol>
         </nav>
      </div>
@@ -29,128 +30,133 @@
          ></div>
       </div>
 
-         <div class="card-body">
-            <div class="row g-3 mt-2">
-               <div class="col-7">
-                  <div class="card">
+      <div class="card-body">
+         <div class="row g-3 mt-2">
+            <div class="col-7">
+               <div class="card h-100">
 
-                     <div class="card-header text-center text-dark ">                              
-                        <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
-                     </div>
-                     
-                     <div class="card-body">
-                        <div class="row g-3">
-                           <div class="col-md-6">
-
-                              <div class="row g-3 mt-1">
-
-                                 <div class="col-md-12">
-                                    <div class="mt-3"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
-                                    <div class="input-group" style="height: 3rem;">                                        
-                                       <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="quiosco.quio_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre" (input)="clearNombreError()"> 
-                                    </div>
-                                 </div>   
-
-                                 <div class="col-md-12">    
-                                    <div class="mt-1"></div>
-                                    <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>                                 
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>                                
-                                    <div class="input-group" style="height: 3rem;">                                       
-                                       <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
-                                       <input [(ngModel)]="quiosco.quio_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12 mt-4"> 
-                                    <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="RegionRequerido"></i>
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Región:</label>
-                                    <div class="input-group" style="height: 3rem;">
-                                       <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
-                                       <select [(ngModel)]="quiosco.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
-                                          <option value="0">Selecciona una opción...</option>
-                                          <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
-                                       </select>
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12 mt-4"> 
-                                    <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="EmpleadoRequerido"></i>
-                                    <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Empleado:</label>
-                                    <div class="input-group" style="height: 3rem;">
-                                       <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
-                                       <select [(ngModel)]="quiosco.empl_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearEmpleadoError()">
-                                          <option value="0">Selecciona una opción...</option>
-                                          <option *ngFor="let option of empleados" [value]="option.empl_ID">{{ option.empl_Nombres }}</option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-
-                           </div>
-                           <div class="col-md-6">
-                              <div class="d-flex justify-content-center align-items-center point">
-                                <input id="uploadBtn" type="file" class="point" style="display: none;" accept="image/*"
-                                  (change)="handleImageUpload($event)">
-                                <div class="position-relative">
-                                  <label for="uploadBtn" class="img-circle-medium point"
-                                    [style.background-image]="'url(' + quiosco.quio_Imagen + ')'">
-                                    <span *ngIf="!quiosco.quio_Imagen"
-                                      class="mt-5 text-center d-flex align-items-center justify-content-center">
-                                      <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4 point" alt=""></i>
-                                    </span>
-                                    <span *ngIf="!quiosco.quio_Imagen"
-                                      class="text-center d-flex align-items-center justify-content-center">
-                                      Añadir Foto
-                                    </span>
-                                  </label>
-                                </div>
-                              </div>
-                              <div class="d-flex justify-content-center align-items-center mt-2">
-                                <i *ngIf="quiosco.quio_Imagen" class="point" (click)="deleteImage()">
-                                  <img src="../../assets/img/fotoeliminar.png" width="50px" alt="">
-                                </i>
-                               </div>
-                              <div class="d-flex justify-content-center align-items-center mt-2">
-                               <i  *ngIf="ImagenRequerido">
-                                 <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
-                               </i>
-                              </div>
-                            </div>
-
-                        </div>
-                     </div>   
+                  <div class="card-header text-center text-dark ">                              
+                     <h4 style="font-size: xx-large;"> <i class="bi bi-info-circle-fill" style="color: blueviolet;"></i> Información</h4>
                   </div>
-               </div>
+                  
+                  <div class="card-body">
+                     <div class="row g-3">
+                        <div class="col-md-6">
 
-               <div class="col-5">
-                  <div class="card">
-                     
-                     <div class="card-header text-center text-dark ">                                
-                        <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: blueviolet;"></i>Ubicación</h4>
-                     </div>
+                           <div class="row g-3 mt-1">
 
-                     <div class="card-body">
-                        <div class="row mt-2">
-                           <div class="card-title text-center mb-0">
-                              <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="AreaRequerido"></i>
-                              Elige la zona donde estará ubicada esta atracción:
-                           </div>
-                           <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
-                              <div class="card my-card p-0 m-0 mb-4" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
-                                 <img [src]="'assets/img/MAPA/'+item.area_Imagen" class="img-thumbnail-space">
-                                 <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
+                              <div class="col-md-12">
+                                 <div class="mt-3"></div>
+                                 <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="NombreRequerido"></i>                                 
+                                 <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Nombre:</label>
+                                 <div class="input-group" style="height: 3rem;">                                        
+                                    <span class="input-group-text"><i class="bi bi-pen-fill" style="color: blueviolet;"></i></span>
+                                    <input [(ngModel)]="quiosco.quio_Nombre" type="text" class="form-control" id="atra_Nombre" placeholder="Nombre" (input)="clearNombreError()"> 
+                                 </div>
+                              </div>   
+
+                              <div class="col-md-12">    
+                                 <div class="mt-1"></div>
+                                 <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="UbicacionRequerido"></i>                                 
+                                 <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Ubicación referencia:</label>                                
+                                 <div class="input-group" style="height: 3rem;">                                       
+                                    <span class="input-group-text"><i class="bi bi-geo-alt-fill" style="color: blueviolet;"></i></span>
+                                    <input [(ngModel)]="quiosco.quio_ReferenciaUbicacion" class="form-control" placeholder="Ubicación referencia" id="atra_ReferenciaUbicacion" (input)="clearUbicacionError()">
+                                 </div>
                               </div>
+
+                              <div class="col-md-12 mt-4"> 
+                                 <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="RegionRequerido"></i>
+                                 <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Región:</label>
+                                 <div class="input-group" style="height: 3rem;">
+                                    <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                                    <select [(ngModel)]="quiosco.regi_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearRegionError()">
+                                       <option value="0">Selecciona una opción...</option>
+                                       <option *ngFor="let option of regiones" [value]="option.regi_ID">{{ option.regi_Nombre }}</option>
+                                    </select>
+                                 </div>
+                              </div>                              
                            </div>
 
                         </div>
+                        <div class="col-md-6">
+                       <div class="d-flex justify-content-center align-items-center point">
+                         <input id="uploadBtn" type="file" class="point" style="display: none;" accept="image/*"
+                           (change)="handleImageUpload($event)">
+                         <div class="position-relative">
+                           <label for="uploadBtn" class="img-circle-medium point"
+                             [style.background-image]="'url(' + quiosco.quio_Imagen + ')'">
+                             <span *ngIf="!quiosco.quio_Imagen"
+                               class="mt-5 text-center d-flex align-items-center justify-content-center">
+                               <i> <img src="../../assets/img/foto.png" width="60px" class="mt-4 point" alt=""></i>
+                             </span>
+                             <span *ngIf="!quiosco.quio_Imagen"
+                               class="text-center d-flex align-items-center justify-content-center">
+                               Añadir Foto
+                             </span>
+                           </label>
+                         </div>
+                       </div>
+                       <div class="d-flex justify-content-center align-items-center mt-2">
+                         <i *ngIf="quiosco.quio_Imagen" class="point" (click)="deleteImage()">
+                           <img src="../../assets/img/fotoeliminar.png" width="50px" alt="">
+                         </i>
+                        </div>
+                       <div class="d-flex justify-content-center align-items-center mt-2">
+                        <i  *ngIf="ImagenRequerido">
+                          <i class="bi bi-exclamation-circle-fill" style="color: orange;"></i>
+                        </i>
+                       </div>
+                       <div class="col-md-12 mt-3"> 
+                        <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="EmpleadoRequerido"></i>
+                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Empleado encargado:</label>
+                        <div class="input-group" style="height: 3rem;">
+                           <span class="input-group-text"><i class="bi bi-compass-fill" style="color: blueviolet;"></i></span>
+                           <select [(ngModel)]="quiosco.empl_ID" class="form-select" id="floatingSelectRegion" aria-label="Regiones" (change)="clearEmpleadoError()">
+                              <option value="0">Selecciona una opción...</option>
+                              <option *ngFor="let option of empleados" [value]="option.empl_ID">{{ option.empl_Nombres }}</option>
+                           </select>
+                        </div>
+                     </div>
+                     </div>
+
+                     </div>
+                  </div>   
+               </div>
+            </div>
+
+            <div class="col-5">
+               <div class="card h-100">
+                  
+                  <div class="card-header text-center text-dark ">                                
+                     <h4 style="font-size: xx-large;"><i class="bi bi-geo-alt-fill mr-1" style="color: blueviolet;"></i>Ubicación</h4>
+                  </div>
+
+                  <div class="card-body">
+                     <div class="row mt-2">
+                        <div class="card-title text-center mb-0">
+                           <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="AreaRequerido"></i>
+                           <b>Elige la zona donde estará ubicado este quiosco:</b> 
+                        </div>
+                        <div class="col-img" *ngFor="let item of areasForStyle; let i = index" [class.active]="i === 0">
+                           <div class="card my-card p-0 m-0 mb-0" [class.selected-animation]="item.isSelected" [attr.atra_ID]="item.area_ID" (click)="mostrarIdCarta(item.area_ID.toString())">
+                              
+                              <div class="tooltip-container">
+                                 <img [src]="'assets/img/MAPA/'+item.area_Imagen" class="img-thumbnail-space">
+                                 
+                                 <div class="tooltip">{{item.area_Nombre}}</div>
+                               </div>
+                                                              
+                              <div class="selected-ribbon" *ngIf="item.isSelected">Seleccionado</div>
+                           </div>
+                        </div>
+
                      </div>
                   </div>
                </div>
             </div>
          </div>
+      </div>
 
          <div class="card-footer">
             <div class="d-flex justify-content-end">

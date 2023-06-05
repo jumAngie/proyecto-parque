@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ParqueDiversion.API.Models;
 using ParqueDiversion.API.Models.Fila;
+using ParqueDiversion.API.Models.Park;
 using ParqueDiversion.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace ParqueDiversion.API.Extensions
             CreateMap<GolosinasViewModel, tbGolosinas>().ReverseMap();
             CreateMap<InsumosQuioscoViewModel, tbInsumosQuiosco>().ReverseMap();
             CreateMap<RatingsViewModel, tbRatings>().ReverseMap();
+            CreateMap<TicketsClienteFullInsertViewModel, VW_tbTicketsClienteForInsert>().ReverseMap();
             #endregion
 
             #region Facturación

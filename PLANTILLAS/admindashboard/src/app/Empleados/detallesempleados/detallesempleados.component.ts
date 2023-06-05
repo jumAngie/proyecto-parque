@@ -20,7 +20,6 @@ export class DetallesempleadosComponent {
 
   ngOnInit(): void {
     this.getEmpleadosDetails();
-    
   }
 
 
@@ -28,13 +27,12 @@ export class DetallesempleadosComponent {
     this.requestData.empl_ID = parseInt(localStorage.getItem('empleado_Detail_Id')?.toString() ?? '')
     this.service.getEmpleadosId(this.requestData.empl_ID).subscribe((response : any) =>{
       console.log(response);
-      if(response.success){
-        this.empleados = response.data[0];
-      }
+        this.empleados = response;
+        console.log(this.empleados);
     })
   };
 
   Volver(){
-    this.router.navigate(['detailEmpleados']);
+    this.router.navigate(['listempleados']);
   }
 }

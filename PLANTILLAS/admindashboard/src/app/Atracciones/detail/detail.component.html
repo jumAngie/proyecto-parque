@@ -32,49 +32,58 @@
                   </div>
                 <div class="card-body">
                   <div class="row mt-3">
-                     <div class="col-6">
-                        <div class="card h-100 " style="border-radius: 20px;">
+                     <div class="col-12">
+                        <div class="card" style="border-radius: 20px;">
                            <div class="card-header text-center">
                               <div class="card-title mb-0 mt-0">
-                                 Información de la atracción
+                                 <img
+                                 style="margin-right: 40px; width: 64px; height: 64px;"
+                                 src="assets/img/DETALLES/theme-park.png"/>
+                                 <b>Información de la atracción</b> 
                               </div>
                            </div>
-                           <div class="card-body text-center">
-                              <div class="row g-2">
-                                 <label class="col-12 card-text">Nombre: {{atracciones.atra_Nombre}}</label>
-                                 <label class="col-12 ">Zona: {{atracciones.area_Nombre}}</label>
-                                 <label class="col-12 ">Región: {{atracciones.atra_regi_Nombre}}</label>
-                                 <label class="col-12 ">Dirección: {{atracciones.atra_ReferenciaUbicacion}}</label>
-                              </div>
-                              <div class="row mt-2">
-                                 <img [src]="atracciones.atra_Imagen" style="border-radius: 10%; border: 3rem; border-color: black;">
+                           <div class="card-body">
+                              <div class="row mt-2 mb-0">
+                                 <div class="col-8">
+                                    <div class="row ms-5">
+
+                                       <label class=" card-text col-12">
+                                          <i class="bi bi-info-circle-fill" style="color: rgb(4, 83, 156)"></i>                                 
+                                          <b> Nombre: </b>
+                                          {{ atracciones.atra_Nombre }}
+                                       </label>                                 
+                                       <label class=" card-text col-12 mt-3">
+                                          <i class="bi bi-info-circle-fill" style="color: rgb(4, 83, 156)"></i>
+                                          <b> Descripción: </b>
+                                          {{ atracciones.atra_Descripcion }}
+                                       </label>                                                               
+                                       <label class=" card-text col-12 mt-3">
+                                          <i class="bi bi-info-circle-fill" style="color: rgb(4, 83, 156)"></i>                                 
+                                          <b> Zona: </b>
+                                          {{ atracciones.area_Nombre }}
+                                       </label>                                 
+                                       <label class=" card-text col-12 mt-3">
+                                          <i class="bi bi-info-circle-fill" style="color: rgb(4, 83, 156)"></i>
+                                          <b> Region: </b>
+                                          {{ atracciones.atra_regi_Nombre }}
+                                       </label>      
+                                       <label class=" card-text col-12 mt-3">
+                                          <i class="bi bi-info-circle-fill" style="color: rgb(4, 83, 156)"></i>
+                                          <b> Dirección: </b>
+                                          {{ atracciones.atra_ReferenciaUbicacion }}
+                                       </label>    
+                                    </div>
+                                 </div>
+                                 <div class="col-4">
+                                    <img [src]="atracciones.atra_Imagen" class="custom-image">
+
+                                 </div>
                               </div> 
                            </div>
                         </div>
                      </div>
-                     <div class="col-6">
-                        <div class="card h-100 " style="border-radius: 20px;">
-                           <div class="card-header text-center">
-                              <div class="card-title mb-0">
-                                 Ubicación de la atracción
-                              </div>
-                           </div>
-                           <div class="card-body text-center">
-                              <div class="row g-2">
-                                 <label class="col-12 ">Zona: {{atracciones.area_Nombre}}</label>
-                                 <label class="col-12 ">Región: {{atracciones.area_regi_Nombre}}</label>
-                                 <label class="col-12 ">Ubicación: {{atracciones.atra_ReferenciaUbicacion}}</label>                                 
-                                 <label class="col-12">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</label>                                 
-                              </div>
-                              <div class="row mt-2">
-                                 <img [src]="'assets/img/MAPA/'+atracciones.area_Imagen" style="border-radius: 10%; border: 3rem; border-color: black;">
-                              </div>                              
-                           </div>
-                        </div>
-                     </div>
                   </div>
-                  <div class="row"></div>
-                  <div class="row mt-3 mb-0">
+                  <div class="row mt-2 mb-0">
                      <div class="col-12">
                         <div class="card">
                            <div class="card-header" style="padding: 0; position: relative">
@@ -100,10 +109,24 @@
                                  <table class="mt-3 table table-striped table-hover table-bordered table-light">
                                     <tbody>
                                           <tr>
-                                             <th > <label class="d-flex justify-content-left">Acción </label></th>
-                                             <th> <label class="d-flex justify-content-left">Usuario</label></th>
-                                             
-                                             <th> <label class="d-flex justify-content-left">Fecha y Hora</label></th>
+                                             <th > 
+                                                <label class="d-flex justify-content-left">
+                                                   <i class="bi bi-pencil-fill" style="margin-right: 10px; color: rgb(4, 83, 156)"></i>                                                
+                                                   Acción 
+                                                </label>
+                                             </th>
+                                             <th> 
+                                                <label class="d-flex justify-content-left">
+                                                   <i class="bi bi-person-circle" style="margin-right: 10px; color: rgb(224, 166, 5)"></i> 
+                                                   Usuario
+                                                </label>
+                                             </th>                                             
+                                             <th> 
+                                                <label class="d-flex justify-content-left">
+                                                   <i class="bi bi-calendar-check-fill" style="margin-right: 10px; color: rgb(156, 4, 4)"></i>                                                    
+                                                   Fecha y Hora
+                                                </label>
+                                             </th>
 
                                           </tr>
                                           <tr>

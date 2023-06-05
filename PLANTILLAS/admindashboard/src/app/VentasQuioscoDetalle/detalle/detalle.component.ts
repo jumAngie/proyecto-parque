@@ -59,7 +59,7 @@ export class VentasDetalleComponent implements OnInit{
 
         const Subtotal = this.detalle.reduce((total, detalleItem) => total + detalleItem.valorFinalPorInsumo, 0);
         const ISV = (Subtotal * 0.15).toFixed(2);
-        const GranTotal = (Subtotal + ISV);
+        const GranTotal = (parseFloat( Subtotal.toString()) + parseFloat(ISV.toString())).toFixed(2);
 
         this.totalRow = {
           vent_Subtotal: Subtotal,

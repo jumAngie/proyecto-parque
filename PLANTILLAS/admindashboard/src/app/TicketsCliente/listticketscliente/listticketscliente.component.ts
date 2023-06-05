@@ -14,6 +14,8 @@ export class ListticketsclienteComponent {
   ticketscliente!: TicketsCliente[];
   filtro: string = '';
   p: number = 1;
+  selectedPageSize = 2;
+  pageSizeOptions: number[] = [2, 4 ,6, 8]; // Opciones de tamaño de página
 
   constructor(private service:ParqServicesService, private elementRef: ElementRef, private router:Router) { }
 

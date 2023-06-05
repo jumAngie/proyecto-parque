@@ -425,9 +425,9 @@ VALUES	('Zona Acuática', 'Zona con ambiente acuatico, lleno de entretenimiento,
 GO
 
 
-INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio)
-VALUES	('Clásico', 150),
-		('VIP', 450)
+INSERT INTO parq.tbTickets(tckt_Nombre, tckt_Precio, tckt_UsuarioCreador)
+VALUES	('Clásico', 150, 1),
+		('VIP', 450, 1)
 GO
 
 
@@ -485,7 +485,6 @@ INSERT INTO parq.tbInsumosQuiosco(quio_ID, golo_ID, insu_Stock, insu_UsuarioCrea
 VALUES	(1, 1, 200, 1),
 		(1, 2, 200, 1),
 		(1, 3, 200, 1),
-		(1, 4, 200, 1),
 
 		(2, 3, 200, 1),
 		(2, 4, 200, 1),

@@ -63,12 +63,16 @@ assignLater(): void {
 }
 
 saveUpdatePantallas(): void {
+  const usua_ID = localStorage.getItem('usua_ID');
+  if (usua_ID == null) {
+    this.router.navigate(['pages-login']);
+  }
   this.pantallasenvio = this.selectedPantallas.map((position, index) => {
     return {
       pant_Id: position,
       pant_Descripcion: "", // Asigna la descripción adecuada si está disponible
       role_ID: this.rolEnvio,
-      ropa_UsuarioCreador: 1
+      ropa_UsuarioCreador: parseInt(usua_ID ?? '') 
 
     };
   });
@@ -100,12 +104,16 @@ saveUpdatePantallas(): void {
 }
 
 save(): void {
+  const usua_ID = localStorage.getItem('usua_ID');
+  if (usua_ID == null) {
+    this.router.navigate(['pages-login']);
+  }
   this.pantallasenvio = this.selectedPeople.map((position, index) => {
     return {
       pant_Id: position,
       pant_Descripcion: "", // Asigna la descripción adecuada si está disponible
       role_ID: this.rolEnvio,
-      ropa_UsuarioCreador: 1
+      ropa_UsuarioCreador: parseInt(usua_ID ?? '')
     };
     
   });

@@ -85,8 +85,14 @@ export class CrearempleadosComponent implements OnInit {
       }  
     }
 
-    if(errors == 0 && formatosinvalidos == 0){      
-      this.empleados.empl_UsuarioCreador = 1;
+    if(errors == 0 && formatosinvalidos == 0){  
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }
+      else
+      {    
+      this.empleados.empl_UsuarioCreador = parseInt(usua_ID);
       this.service.insertEmpleados(this.empleados)
       .subscribe((response: any) =>{
         console.log(response)
@@ -98,6 +104,7 @@ export class CrearempleadosComponent implements OnInit {
         }
       })
     }
+  }
     else if(errors != 0){
       ToastUtils.showWarningToast('¡Hay campos vacíos!')
     }

@@ -34,6 +34,7 @@ namespace ParqueDiversion.DataAccess.Repositories
             var parametros = new DynamicParameters();
             
             parametros.Add("@golo_Nombre", item.golo_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@golo_Img", item.golo_Img, DbType.String, ParameterDirection.Input);
             parametros.Add("@golo_Precio", item.golo_Precio, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@golo_UsuarioCreador", item.golo_UsuarioCreador, DbType.Int32, ParameterDirection.Input);
 
@@ -57,6 +58,7 @@ namespace ParqueDiversion.DataAccess.Repositories
 
             parametros.Add("@golo_ID", item.golo_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@golo_Nombre", item.golo_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@golo_Img", item.golo_Img, DbType.String, ParameterDirection.Input);
             parametros.Add("@golo_Precio", item.golo_Precio, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@golo_UsuarioModificador", item.golo_UsuarioModificador, DbType.Int32, ParameterDirection.Input);
 

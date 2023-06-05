@@ -232,9 +232,13 @@
       {
          "Name": "[parq].[VW_tbTickets]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[parq].[VW_tbTicketsClienteForInsert]",
+         "ObjectType": 3
       }
    ],
-   "UiHint": "ISAAC\\SQLEXPRESS.dbParqueAtracciones",
+   "UiHint": "DESKTOP-J5O0M9U\\SQLEXPRESS.dbParqueAtracciones",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

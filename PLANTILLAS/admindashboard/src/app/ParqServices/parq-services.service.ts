@@ -18,6 +18,8 @@ import { Pagos } from '../Models/Pagos';
 import { Clientes } from '../Models/Clientes';
 import { TicketsCliente } from '../Models/TicketsCliente';
 import { HistorialVisitantesAtraccion, filterChartData } from '../Models/HistorialVisitantesAtraccion';
+import { Ticket } from '../Models/Tikectks';
+import { FullTicktesCliente } from '../Models/FullTicketsCliente';
 import { Filas } from '../Models/Filas';
 import { Observable } from 'rxjs';
 import { temporizadores } from '../Models/Temporizadores';
@@ -125,6 +127,9 @@ export class ParqServicesService {
   getClientes(){
     return this.http.get<Clientes[]>(this.apiService.apiUrl + 'Clientes/List');
   }
+  getClienteByDNI(data: Clientes){
+    return this.http.post<Clientes[]>(this.apiService.apiUrl + 'Clientes/BuscarClienteDNI', data);
+  }
 
   
   // servicios de clientes registrados//
@@ -206,6 +211,13 @@ export class ParqServicesService {
   getTicketsCliente(){
     return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
   }
+    // servicios de tickets //
+  getTicket(){
+      return this.http.get<Ticket[]>(this.apiService.apiUrl + 'Ticket/List')
+    }
+  newTicket(data: FullTicktesCliente){
+    return this.http.post<FullTicktesCliente[]>(this.apiService.apiUrl + 'TicketClientes/InsertTicket', data)
+  }    
 
   //Gráfica
   getChartData(item: filterChartData){

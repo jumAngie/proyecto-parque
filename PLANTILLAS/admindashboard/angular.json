@@ -27,10 +27,12 @@
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
               "node_modules/ag-grid-community/styles/ag-theme-material.css",              
               "node_modules/ag-grid-community/styles/ag-theme-balham.css",                            
+              "node_modules/leaflet/dist/leaflet.css",              
               "src/styles.css"             
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",              
+              "node_modules/jquery/dist/jquery.min.js", 
+              "node_modules/leaflet/dist/leaflet.js",                           
               "src/assets/js/main.js"
             ]            
           },
@@ -101,10 +103,12 @@
               "node_modules/ag-grid-community/styles/ag-theme-material.css",               
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
               "node_modules/ag-grid-community/styles/ag-theme-balham.css",              
+              "node_modules/leaflet/dist/leaflet.css",              
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/leaflet/dist/leaflet.js"              
             ]
             
           }

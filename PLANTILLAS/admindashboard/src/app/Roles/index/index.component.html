@@ -65,17 +65,9 @@
         </div>
       </div>
 
-      <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4"
-      >
-     
-        <div
-          *ngFor="
-            let rol of filtrarRoles()
-              | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
-          "
-          class="card border shadow rounded-md p-4 d-flex flex-column flex-wrap blue-border" 
-        >
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 justify-content-center align-items-stretch gap-5 mt-4">     
+        <div *ngFor="let rol of filtrarRoles() | paginate : { itemsPerPage: itemsPerPage, currentPage: p }" 
+          class="card border shadow rounded-md p-4 d-flex flex-column flex-wrap blue-border hover-effect">
        
           <div class="card-body">
             <h4 class="text-xl font-semibold mt-5 text-center">

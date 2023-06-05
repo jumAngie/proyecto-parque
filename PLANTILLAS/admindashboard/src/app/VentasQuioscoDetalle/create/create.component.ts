@@ -61,8 +61,8 @@ export class VentasCrearComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.quioscoID = 2;
-    this.venta.clie_ID = 1;
+    this.quioscoID = 1;
+    this.venta.clie_ID = 2;
     this.venta.pago_ID = 0;
     this.detalle.insu_ID = 0;
 
@@ -213,8 +213,11 @@ export class VentasCrearComponent implements OnInit{
     }
     else{
       if (errors == 0) {      
-  
-        this.venta.vent_UsuarioCreador = 1;
+        const usua_ID = localStorage.getItem('usua_ID');
+        if (usua_ID == null) {
+          this.router.navigate(['pages-login']);
+        }  
+        this.venta.vent_UsuarioCreador = parseInt(usua_ID ?? '');
         this.venta.quio_ID = this.quioscoID;
 
         this.service.createVenta(this.venta).subscribe((response : any) =>{
@@ -256,8 +259,11 @@ export class VentasCrearComponent implements OnInit{
     }else{
 
       if (errors == 0) {
-        this.detalle.deta_UsuarioCreador = 1;
-        console.log(this.detalle);
+        const usua_ID = localStorage.getItem('usua_ID');
+        if (usua_ID == null) {
+          this.router.navigate(['pages-login']);
+        }        
+        this.detalle.deta_UsuarioCreador = parseInt(usua_ID ?? '');
         this.service.createVentaDetalle(this.detalle).subscribe((response : any) =>{
           if (response.code == 200) {
             this.clearContentInputs();
