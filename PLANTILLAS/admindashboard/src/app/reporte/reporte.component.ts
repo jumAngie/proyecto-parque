@@ -40,7 +40,7 @@ export class ReporteComponent implements OnInit {
 
   generatePDF(): void {
     const doc = new jsPDF();
-  
+
     const header = (doc: any) => {
       doc.setFontSize(18);
       const pageWidth = doc.internal.pageSize.width;
@@ -75,65 +75,69 @@ export class ReporteComponent implements OnInit {
         align: 'left'
       });
     };
-  
+
     const mantenimientos: TicketsCliente[] = this.ticketsInforme;
-  
+
     const columns = [
-      { header: 'Cliente', dataKey: 'clie_Nombres' },
+      { header: 'Nombre del cliente', dataKey: 'clie_Nombres' },
       { header: 'Identificación', dataKey: 'clie_DNI' },
       { header: 'Teléfono', dataKey: 'clie_Telefono' },
       { header: 'Ticket', dataKey: 'tckt_Nombre' },
       { header: 'Cantidad', dataKey: 'ticl_Cantidad' },
       { header: 'Forma de pago', dataKey: 'pago_Nombre' }
     ] as { header: string; dataKey: keyof TicketsCliente }[];
-  
+
     doc.setFontSize(18);
     const pageWidth = doc.internal.pageSize.width;
     doc.setTextColor(40);
     doc.setTextColor(40);
-  
+
     // Llamar a las funciones de encabezado y pie de página
     header(doc);
     footer(doc);
-  
+
     const startY = 130;
     const rowHeight = 20;
-    const columnWidth = pageWidth / columns.length;
-  // Dibujar encabezado de tabla
-columns.forEach((column, index) => {
-  doc.setFillColor(230, 230, 230); // Light gray color (adjust the RGB values as needed)
-  doc.setFont('Arial', 'bold');
-  doc.rect(index * columnWidth, startY, columnWidth, rowHeight, 'F');
-  doc.setTextColor(0);
-  doc.setFontSize(12); // Set smaller font size
-  doc.text(column.header, index * columnWidth + 5, startY + 15);
-});
 
-  
-    // Dibujar contenido de la tabla
-    mantenimientos.forEach((mantenimiento, rowIndex) => {
-      const dataRow = columns.map((column) => mantenimiento[column.dataKey]);
-      doc.setFont('Arial', 'normal');
-      doc.setDrawColor(0);
-      doc.setFillColor("255");
-      doc.setTextColor(0);
-  
-      dataRow.forEach((data, columnIndex) => {
-        doc.rect(columnIndex * columnWidth, startY + (rowIndex + 1) * rowHeight, columnWidth, rowHeight, 'FD');
-        doc.setFontSize(10); // Set smaller font size
-        doc.text(data.toString(), columnIndex * columnWidth + 5, startY + (rowIndex + 1) * rowHeight + 15);
-      });
+    // Obtener el contenido de la tabla en formato adecuado
+    const tableContent = mantenimientos.map((mantenimiento) =>
+      columns.map((column) => mantenimiento[column.dataKey])
+    );
+
+    const footerContent = {
+      text: 'Gracias'
+    };
+
+    // Agregar la primera tabla al documento PDF
+    (doc as any).autoTable({
+      head: [columns.map((column) => column.header)],
+      body: tableContent,
+      footer: footerContent,
+      startY: startY,
     });
-  
+
+    
+    // Establecer el estilo de la segunda tabla
+    const secondTableStyles = {
+      theme: 'striped', // Opciones: 'striped', 'grid', 'plain', 'css', 'inherit'
+      tableLineColor: 200, // Valor entre 0 y 255
+      tableLineWidth: 0.2, // Valor en puntos (por defecto: 0.2)
+      styles: {
+        fontSize: 12,
+        font: 'helvetica', // Opciones: 'helvetica', 'times', 'courier', 'helvetica-bold', 'times-bold', 'courier-bold'
+        fontStyle: 'normal', // Opciones: 'normal', 'bold', 'italic', 'bolditalic'
+        cellPadding: 6, // Valor en puntos (por defecto: 5)
+        minCellHeight: 15, // Valor en puntos (por defecto: 0)
+      }
+    };
+
     // Generar el PDF
     const pdfOutput = doc.output('blob');
-  
+
     // Crear una URL a partir del blob
     const url = URL.createObjectURL(pdfOutput);
-  
+
     // Mostrar el PDF en el visor
     this.pdfViewer.nativeElement.src = url;
   }
-  
-  
 }
