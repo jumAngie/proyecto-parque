@@ -250,6 +250,7 @@ GO
 			BEGIN
 				SELECT 500 AS codeStatus, 'Ticket No exitente, Digite de nuevo' AS messageStatus;
 			END
+
 		IF EXISTS (SELECT * FROM fila.WV_tbTemporizadores WHERE ticl_ID = @ticl_ID AND TiempoFaltante NOT LIKE '00:00')
 			BEGIN
 				SELECT 409 AS codeStatus, 'Ticket Registrado Actualmente con Temporizador para: '+@Atraccion  AS messageStatus;

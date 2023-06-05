@@ -372,7 +372,7 @@ sendData(){
           
           this.fullTicket.tckt_ID = ticketArray[i];
           this.fullTicket.ticl_Cantidad = cantidadArray[i];
-  
+
           if (this.fullTicket.tckt_ID == 0 || this.fullTicket.ticl_Cantidad == 0) {
             
           }else{
@@ -395,96 +395,6 @@ sendData(){
 }
 
 //#region VALIDAR COMPRA DEL TICKET
-  confirmTicketData(){
-    var errors = 0;
-    var formatErrors = 0
-  
-    const formatErrorsArray: boolean[] = [];
-    const errorsArray: boolean[] = [];
-  
-    errorsArray[0] = this.validarNombres();
-    errorsArray[1] = this.validarApellidos();
-    errorsArray[2] = this.validarTelefono();
-    errorsArray[3] = this.validarDNI();
-    errorsArray[4] = this.validarSexo();
-    errorsArray[5] = this.validarPago();
-  
-    for (let i = 0; i < errorsArray.length; i++) {
-      if (errorsArray[i] == true) {
-        errors++;
-      }else{
-        errors;
-      }    
-    }
-  
-    formatErrorsArray[0] = this.FormatoValidoDNI;
-    formatErrorsArray[1] = this.FormatoValidoTelefono;
-  
-    for (let i = 0; i < formatErrorsArray.length; i++) {    
-      if (formatErrorsArray[i] == true) {
-        formatErrors++;
-      }else{
-        formatErrors;
-      }
-    }
-  
-    if (errors == 0 && formatErrors == 0) {
-
-
-
-    }else if (errors != 0) {
-      ToastUtils.showWarningToast('Falta información del cliente!');
-    }
-    else if(errors == 0 && formatErrors != 0){
-  
-    }else{
-  
-    }
-      if (this.selectedClassicTicket == 0 && this.selectedVIPTicket == 0) {
-        ToastUtils.showWarningToast('Debes seleccionar almenos un tipo de ticket!');
-      }else if((this.selectedClassicTicket != 0 && this.cantidadClasicos == 0) || (this.selectedVIPTicket != 0 && this.cantidadVIP == 0)){
-          ToastUtils.showWarningToast('Debes comprar almenos un ticket')
-      }else{
-        const usua_ID = localStorage.getItem('usua_ID');
-        if (usua_ID == null) {
-          this.router.navigate(['pages-login']);
-        }
-          const ticketArray = [];
-          const cantidadArray = [];
-          ticketArray[0] = this.selectedClassicTicket;
-          ticketArray[1] = this.selectedVIPTicket;
-          cantidadArray[0] = this.cantidadClasicos;
-          cantidadArray[1] = this.cantidadVIP;
-          this.fullTicket.ticl_UsuarioCreador = parseInt(usua_ID ?? '');
-  
-          for (let i = 0; i < ticketArray.length && cantidadArray.length; i++) {          
-            
-            this.fullTicket.tckt_ID = ticketArray[i];
-            this.fullTicket.ticl_Cantidad = cantidadArray[i];
-  
-            if (this.fullTicket.tckt_ID == 0 || this.fullTicket.ticl_Cantidad == 0) {
-              
-            }else{
-              this.service.newTicket(this.fullTicket).subscribe((response : any) => {
-                if(response.code == 200){
-                  ToastUtils.showInfoToast(response.message);
-                  this.router.navigate(['listticketsclientes']);
-                  // this.totalResponse200++;
-                  // this.responseMessage = response.message;
-                }else if(response.code == 409){
-                  ToastUtils.showInfoToast(response.message);
-                  // this.totalResponse409++;
-                  // this.responseMessage = response.message;
-                }else{
-                  ToastUtils.showInfoToast(response.message);
-                  // this.totalResponse500++;
-                  // this.responseMessage = response.message;
-                }
-              })            
-            }          
-          }
-      }
-  }
 
   selectClassicTicket(index: number): void {
     if (this.selectedClassicTicket === index) {
@@ -532,6 +442,9 @@ sendData(){
     }else{
       this.cantidadVIPRequerido = false;      
     }    
+  }
+  Volver(){
+    this.router.navigate(['listticketsclientes']);
   }
 //#endregion
 

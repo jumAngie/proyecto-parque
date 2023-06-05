@@ -19,7 +19,7 @@ export class GraficaComponent implements OnInit{
     name: string,
     value: string,
   }[] = [];
-  view: [number, number] = [1250, 500]; // Vista del gráfico
+  view: [number, number] = [1050, 500]; // Vista del gráfico
   colorScheme: string | Color = 'picnic'; 
   dateMessage = '';
   /* 

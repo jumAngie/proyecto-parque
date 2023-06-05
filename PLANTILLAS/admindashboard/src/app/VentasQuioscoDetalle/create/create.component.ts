@@ -8,8 +8,6 @@ import { Clientes } from 'src/app/Models/Clientes';
 import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
 import { GridOptions } from 'ag-grid-community';
 import { InsumosQuiosco } from 'src/app/Models/InsumosQuiosco';
-import { DetallesActionsRenderer } from './DetallesActionsRenderer';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -367,10 +365,21 @@ export class VentasCrearComponent implements OnInit{
   };
 
   validarCantidad(){
-    if (!this.detalle.deta_Cantidad || this.detalle.deta_Cantidad.toString().trim() == '' || this.detalle.deta_Cantidad == 0) {
+    const regex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    if (!this.detalle.deta_Cantidad || this.detalle.deta_Cantidad.toString().trim() == '') {
       this.CantidadRequerido = true;
       return true;
-    }else{
+    }else if(!regex.test(this.detalle.deta_Cantidad.toString())){
+      this.CantidadRequerido = true;
+      ToastUtils.showWarningToast('Solo se aceptan valores numéricos.')
+      return true;      
+    }else if(this.detalle.deta_Cantidad <= 1){      
+      this.CantidadRequerido = true;
+      ToastUtils.showWarningToast('Cantidad no puede ser menor a uno .')
+      return true;      
+    }
+    else{
       this.CantidadRequerido = false;
       return false;
     }

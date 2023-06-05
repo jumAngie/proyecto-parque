@@ -45,27 +45,29 @@ export class ReporteComponent implements OnInit {
       doc.setFontSize(18);
       const pageWidth = doc.internal.pageSize.width;
       doc.setTextColor(40);
-
+  
       // Agregar imagen
-      doc.addImage(
-        'https://i.ibb.co/LSWNrBH/Tooniverse.png',
-        'png',
-        pageWidth - 100,
-        -12,
-        100,
-         80
-      );
-
-      // Agregar texto con más margen superior
-      doc.setFontSize(30);
-      doc.setFont('Pacifico', 'bold');
-      doc.text('Tickets vendidos', 10, 20); // Ajustar el valor para mover el texto hacia arriba
-
-      // Agregar subtítulo con las fechas de inicio y fin
-      doc.setFontSize(16);
+      const imgData = 'https://i.ibb.co/CwxtKsY/Fondito.png';
+      doc.addImage(imgData, 'PNG', 10, 10, pageWidth - 20, 80);
+  
+      // Agregar título
       doc.setFont('Arial', 'normal');
+      doc.text('Reporte Tickets Vendidos', 20, 100); // Adjust the position based on your needs
+  
+      // Agregar dirección
+      doc.setFontSize(12);
+      doc.text('Dirección: San Pedro Sula, Cortés', 20, 110);
+  
+      // Agregar fecha generada
+      const currentDate = new Date();
+      const generatedDate = currentDate.toLocaleDateString();
+      doc.text(`Generado: ${generatedDate}`, 20, 120);
+  
+      // Agregar generado por
+      const generatedBy = localStorage.getItem('usua_Usuario');
+      doc.text(`Generado por el Usuario: ${generatedBy}`, 20, 115);
     };
-
+  
     const footer = (doc: any) => {
       doc.setFontSize(12);
       doc.setFont('Pacifico', 'normal');
@@ -94,7 +96,7 @@ export class ReporteComponent implements OnInit {
     header(doc);
     footer(doc);
 
-    const startY = 60;
+    const startY = 130;
     const rowHeight = 20;
 
     // Obtener el contenido de la tabla en formato adecuado
@@ -114,15 +116,7 @@ export class ReporteComponent implements OnInit {
       startY: startY,
     });
 
-    // Agregar una segunda tabla
-    const secondTableStartY = doc.table.name + 20;
-    const secondTableContent = [
-      ['Columna 1', 'Columna 2', 'Columna 3'],
-      ['Dato 1', 'Dato 2', 'Dato 3'],
-      ['Dato 4', 'Dato 5', 'Dato 6'],
-      // ... Agregar más filas si es necesario
-    ];
-
+    
     // Establecer el estilo de la segunda tabla
     const secondTableStyles = {
       theme: 'striped', // Opciones: 'striped', 'grid', 'plain', 'css', 'inherit'
@@ -136,14 +130,6 @@ export class ReporteComponent implements OnInit {
         minCellHeight: 15, // Valor en puntos (por defecto: 0)
       }
     };
-
-    // Agregar la segunda tabla al documento PDF
-    (doc as any).autoTable({
-      head: [['Encabezado 1', 'Encabezado 2', 'Encabezado 3']],
-      body: secondTableContent,
-      startY: secondTableStartY,
-      ...secondTableStyles
-    });
 
     // Generar el PDF
     const pdfOutput = doc.output('blob');
