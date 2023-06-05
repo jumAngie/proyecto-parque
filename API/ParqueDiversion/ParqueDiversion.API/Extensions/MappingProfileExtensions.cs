@@ -50,6 +50,7 @@ namespace ParqueDiversion.API.Extensions
 
             #region Filas
             CreateMap<HistorialVisitantesAtraccionViewModel, tbHistorialVisitantesAtraccion>().ReverseMap();
+            CreateMap<FilasViewModel, tbFilasPosiciones>().ReverseMap();
             #endregion
         }
     }

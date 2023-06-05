@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParqueDiversion.API", "ParqueDiversion.API\ParqueDiversion.API.csproj", "{A4E3ACF5-07CE-4BCC-B5C9-8D47454C1340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParqueDiversion.API", "ParqueDiversion.API\ParqueDiversion.API.csproj", "{A4E3ACF5-07CE-4BCC-B5C9-8D47454C1340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParqueDiversion.Entities", "ParqueDiversion.Entities\ParqueDiversion.Entities.csproj", "{42CF3D63-D8BA-47D5-8134-EABB0658F225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParqueDiversion.Entities", "ParqueDiversion.Entities\ParqueDiversion.Entities.csproj", "{42CF3D63-D8BA-47D5-8134-EABB0658F225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParqueDiversion.DataAccess", "ParqueDiversion.DataAccess\ParqueDiversion.DataAccess.csproj", "{DF2EC55C-BD2E-4F5D-B163-03F1A99EA42D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParqueDiversion.DataAccess", "ParqueDiversion.DataAccess\ParqueDiversion.DataAccess.csproj", "{DF2EC55C-BD2E-4F5D-B163-03F1A99EA42D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParqueDiversion.BusinessLogic", "ParqueDiversion.BusinessLogic\ParqueDiversion.BusinessLogic.csproj", "{39956828-8C4A-42A7-A09B-9EEFE7ED54D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParqueDiversion.BusinessLogic", "ParqueDiversion.BusinessLogic\ParqueDiversion.BusinessLogic.csproj", "{39956828-8C4A-42A7-A09B-9EEFE7ED54D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D05B8CCF-B9FA-41BF-A8DB-0394BD72970E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
