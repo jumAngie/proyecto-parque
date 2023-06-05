@@ -214,10 +214,18 @@ namespace ParqueDiversion.DataAccess
         #endregion
 
         #region Filas
-        public static string UDP_FilasPosiciones_SELECT= "fila.UDP_tbFilasPosiciones_SELECT";
-        public static string UDP_FilasPosiciones_INSERT = "fila.tbFilasPosiciones_INSERT";
-        public static string UDP_FilasPosiciones_DELETE_COMPLETO = "fila.tbFilasPosiciones_DELETE_COMPLETO";
-        public static string UDP_FilasPosiciones_DELETE = "fila.tbFilasPosiciones_DELETE";
+        public static string UDP_FilasPosiciones_SELECT             = "fila.UDP_tbFilasPosiciones_SELECT";
+        public static string UDP_FilasPosiciones_INSERT             = "fila.UDP_tbFilasPosiciones_INSERT";
+        public static string UDP_FilasPosiciones_DELETE_COMPLETO    = "fila.UDP_tbFilasPosiciones_DELETE_COMPLETO";
+        public static string UDP_FilasPosiciones_DELETE             = "fila.UDP_tbFilasPosiciones_DELETE";
+        #endregion
+
+        #region Temporizadores
+        public static string UDP_Temporizadores_SELECT          = "fila.UDP_tbTemporizadores_SELECT";
+        public static string UDP_Temporizadores_INSERT          = "fila.UDP_tbTemporizadores_INSERT";
+        public static string UDP_Temporizadores_EXTENDER        = "fila.UDP_tbTemporizadores_EXTENDER";
+        public static string UDP_Temporizadores_DELETE_COMPLETO = "fila.UDP_tbTemporizadores_DELETE_COMPLETO";
+        public static string UDP_Temporizadores_DELETE          = "fila.UDP_tbTemporizadores_DELETE";
         #endregion
     }
 }

@@ -44,6 +44,7 @@ namespace ParqueDiversion.DataAccess.Context
         public virtual DbSet<VW_tbTicketsClienteForInsert> VW_tbTicketsClienteForInsert { get; set; }
         public virtual DbSet<VW_tbVentasQuiosco> VW_tbVentasQuiosco { get; set; }
         public virtual DbSet<VW_tbVentasQuioscoDetalle> VW_tbVentasQuioscoDetalle { get; set; }
+        public virtual DbSet<WV_tbTemporizadores> WV_tbTemporizadores { get; set; }
         public virtual DbSet<tbAreas> tbAreas { get; set; }
         public virtual DbSet<tbAtracciones> tbAtracciones { get; set; }
         public virtual DbSet<tbCargos> tbCargos { get; set; }
@@ -956,6 +957,29 @@ namespace ParqueDiversion.DataAccess.Context
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<WV_tbTemporizadores>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("WV_tbTemporizadores", "fila");
+
+                entity.Property(e => e.Cliente_Nombre)
+                    .HasMaxLength(601)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiempoFaltante).HasMaxLength(4000);
+
+                entity.Property(e => e.atra_Nombre)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.temp_Expiracion_Formateada).HasMaxLength(30);
+
+                entity.Property(e => e.temp_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.temp_ID).ValueGeneratedOnAdd();
+            });
+
             modelBuilder.Entity<tbAreas>(entity =>
             {
                 entity.HasKey(e => e.area_ID)
@@ -1675,15 +1699,9 @@ namespace ParqueDiversion.DataAccess.Context
 
                 entity.ToTable("tbTemporizadores", "fila");
 
-                entity.Property(e => e.temp_Estado).HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.temp_FechaCreacion)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.temp_FechaModificacion).HasColumnType("datetime");
-
-                entity.Property(e => e.temp_Habilitado).HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.atra)
                     .WithMany(p => p.tbTemporizadores)

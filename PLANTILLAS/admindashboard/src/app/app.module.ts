@@ -97,6 +97,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 
 import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
+import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/temporizadores-listado.component';
 
 @NgModule({
   declarations: [
@@ -171,7 +172,8 @@ import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.compo
     AtraccionesDetailComponent,
     GraficaComponent,
     MapComponent,
-    FilasListadoComponent
+    FilasListadoComponent,
+    TemporizadoresListadoComponent
   ],
   imports: [
     BrowserModule,

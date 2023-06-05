@@ -22,6 +22,7 @@ import { Ticket } from '../Models/Tikectks';
 import { FullTicktesCliente } from '../Models/FullTicketsCliente';
 import { Filas } from '../Models/Filas';
 import { Observable } from 'rxjs';
+import { temporizadores } from '../Models/Temporizadores';
 
 @Injectable({
   providedIn: 'root'
@@ -252,4 +253,10 @@ export class ParqServicesService {
       .set('fiat_ID', String(fiat_ID));
     return this.http.delete<Filas[]>(url, { params });
   }
+
+    //Temporizadores
+    getTemporizadores(listado:number) {
+      const url = `${this.apiService.apiUrl}Filas/ListadoTemporizadores?listado=${listado}`;
+      return this.http.get<temporizadores[]>(url);
+    }
 }

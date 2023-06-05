@@ -6,15 +6,17 @@ using System.Collections.Generic;
 
 namespace ParqueDiversion.Entities.Entities
 {
-    public partial class tbTemporizadores
+    public partial class WV_tbTemporizadores
     {
         public int temp_ID { get; set; }
+        public long? posicion { get; set; }
         public int? ticl_ID { get; set; }
+        public string Cliente_Nombre { get; set; }
         public int? atra_ID { get; set; }
-        public TimeSpan? temp_Expiracion { get; set; }
+        public string atra_Nombre { get; set; }
+        public string temp_Expiracion { get; set; }
+        public string TiempoFaltante { get; set; }
+        public string temp_Expiracion_Formateada { get; set; }
         public DateTime? temp_FechaCreacion { get; set; }
-
-        public virtual tbAtracciones atra { get; set; }
-        public virtual tbTicketsCliente ticl { get; set; }
     }
 }
