@@ -87,7 +87,6 @@ export class CrearempleadosComponent implements OnInit {
 
     if(errors == 0 && formatosinvalidos == 0){  
       const usua_ID = localStorage.getItem('usua_ID');
-      console.log(usua_ID);
       if (usua_ID == null) {
         this.router.navigate(['pages-login']);
       }

@@ -89,7 +89,11 @@ export class CreateQuioscoComponent implements OnInit{
     }
 
     if(errors == 0){
-      this.quiosco.quio_UsuarioCreador = 1;
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }      
+      this.quiosco.quio_UsuarioCreador = parseInt(usua_ID ?? '');
       this.service.createQuioscos(this.quiosco).subscribe((response: any) =>{
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);

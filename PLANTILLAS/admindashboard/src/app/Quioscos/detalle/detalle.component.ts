@@ -143,7 +143,11 @@ export class DetalleQuioscoComponent implements OnInit{
     }
 
     if (errors == 0) {
-      this.sendInsumos.insu_UsuarioCreador = 1;
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }      
+      this.sendInsumos.insu_UsuarioCreador = parseInt(usua_ID ?? '');
       this.sendInsumos.quio_ID = this.quiosco.quio_ID
       this.service.sendInsumos(this.sendInsumos).subscribe((response : any) =>{
         if (response.code == 200) {

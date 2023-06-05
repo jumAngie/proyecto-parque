@@ -83,10 +83,12 @@ export class CreateAtraccionesComponent implements OnInit {
     }
 
     if(errors == 0){
-      this.atracciones.atra_UsuarioCreador = 1;
-      console.log(this.atracciones);
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }
+      this.atracciones.atra_UsuarioCreador = parseInt(usua_ID ?? '');
       this.service.insertAtracciones(this.atracciones).subscribe((response: any) =>{
-        console.log(response)
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);          
           this.router.navigate(['atracciones-listado']);

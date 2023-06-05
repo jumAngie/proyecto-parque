@@ -114,7 +114,11 @@ export class EditQuioscoComponent implements OnInit {
     }
 
     if(errors == 0){
-      this.quiosco.quio_UsuarioModificador = 1;
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }      
+      this.quiosco.quio_UsuarioModificador = parseInt(usua_ID ?? '');
       this.service.updateQuiosco(this.quiosco).subscribe((response: any) =>{
         if(response.code == 200){
           ToastUtils.showSuccessToast(response.message);

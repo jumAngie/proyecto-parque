@@ -499,9 +499,15 @@ CREATE TABLE fila.tbFilasPosiciones(
 	fipo_HoraIngreso	TIME,
 	
 	CONSTRAINT PK_fila_tbFilasPosiciones_fipo_ID PRIMARY KEY (fipo_ID),
-	CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
-	CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
+	--CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID),
+	--CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
 )
+GO
+
+ALTER TABLE fila.tbFilasPosiciones
+ADD CONSTRAINT FK_fila_tbFilasPosiciones_tbFilasAtraccion_fiat_ID FOREIGN KEY (fiat_ID) REFERENCES fila.tbFilasAtraccion (fiat_ID)
+ALTER TABLE fila.tbFilasPosiciones
+ADD CONSTRAINT FK_fila_tbFilasPosiciones_parq_tbTicketsCliente_ticl_ID FOREIGN KEY (ticl_ID) REFERENCES parq.tbTicketsCliente (ticl_ID)
 GO
 
 CREATE TABLE fila.tbHistorialFilasPosiciones(

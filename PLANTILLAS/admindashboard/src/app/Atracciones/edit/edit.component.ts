@@ -119,8 +119,11 @@ export class EditAtraccionesComponent implements OnInit {
     }
 
     if(errors == 0){
-      this.atracciones.atra_UsuarioModificador = 1;
-      console.log(this.atracciones);
+      const usua_ID = localStorage.getItem('usua_ID');
+      if (usua_ID == null) {
+        this.router.navigate(['pages-login']);
+      }      
+      this.atracciones.atra_UsuarioModificador = parseInt(usua_ID ?? '');
       this.service.editAtracciones(this.atracciones)
       .subscribe((response: any) =>{
         console.log(response)

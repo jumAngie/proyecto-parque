@@ -431,12 +431,14 @@ VALUES	('Clásico', 150, 1),
 GO
 
 
+SELECT * FROM parq.tbClientes
 
 INSERT INTO parq.tbTicketsCliente(tckt_ID, clie_ID, ticl_Cantidad, ticl_UsuarioCreador)
-VALUES	(1, 2, 4, 1),
-		(2, 5, 3, 1),
+VALUES	(1, 6, 4, 1),
+		(2, 2, 3, 1),
 		(2, 3, 2, 1),
-		(1, 4, 6, 1)
+		(1, 4, 6, 1),
+		(1, 5, 6, 1)
 GO
 
 

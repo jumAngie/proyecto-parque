@@ -24,19 +24,18 @@ VALUES
 
 GO
 
-INSERT INTO fila.tbFilasPosiciones
-(fiat_ID,ticl_ID,fipo_HoraIngreso)
-VALUES
-(2,5,GETDATE()),
-(2,6,GETDATE()),
-(1,1,GETDATE()),
-(2,2,GETDATE()),
-(1,3,GETDATE())
+SELECT * FROM fila.tbFilasAtraccion
+SELECT * FROM parq.tbTicketsCliente
+SELECT * FROM fila.tbFilasPosiciones
 
-
-
-
-
+SELECT * FROM parq.tbTicketsCliente
+go
+INSERT INTO fila.tbFilasPosiciones(fiat_ID,ticl_ID,fipo_HoraIngreso)
+VALUES	(2,2,GETDATE()),
+		(2,3,GETDATE()),
+		(1,4,GETDATE()),
+		(2,5,GETDATE()),
+		(1,6,GETDATE())
 GO
 
 CREATE OR ALTER VIEW fila.VW_tbFilasAtraccion
@@ -69,26 +68,26 @@ SELECT
     END AS Cliente_Nombre,
     CONVERT(NVARCHAR(30), fipo_HoraIngreso, 100) AS fipo_HoraIngreso
 FROM fila.tbFilasPosiciones T1
-
-
-
 GO
 
-CREATE OR ALTER PROC fila.UDP_tbFilasPosiciones_SELECT 
+SELECT * FROM fila.tbFilasAtraccion
+GO
+
+CREATE OR ALTER PROC fila.UDP_tbFilasPosiciones_SELECT
 @tifi_ID	INT,
 @atra_ID	INT
 AS
 BEGIN
 	DECLARE @fiat_ID INT = (
-	SELECT fiat_ID FROM  fila.VW_tbFilasAtraccion WHERE tifi_ID = @tifi_ID AND atra_ID = @atra_ID)
+	SELECT fiat_ID FROM fila.VW_tbFilasAtraccion WHERE tifi_ID = @tifi_ID AND atra_ID = @atra_ID)
+	SELECT @fiat_ID
 
 	SELECT  ROW_NUMBER() OVER (ORDER BY fipo_ID) AS posicion,
-	*
+	* 
 	FROM fila.VW_tbFilasPosiciones 
 	WHERE fiat_ID = @fiat_ID
-	
-END
 
+END
 GO
 
 CREATE OR ALTER PROC fila.tbFilasPosiciones_INSERT
@@ -106,7 +105,7 @@ BEGIN
 			DECLARE @fiat INT = (SELECT fiat_ID FROM fila.tbFilasPosiciones WHERE ticl_ID = @ticl_ID)
 			DECLARE @atra INT = (SELECT atra_ID FROM fila.tbFilasAtraccion WHERE fiat_ID = @fiat)
 			DECLARE @atraccion NVARCHAR(MAX) = (SELECT atra_Nombre FROM parq.tbAtracciones WHERE atra_ID = @atra);
-			SELECT 409 AS codeStatus, 'Actualmente este Ticket ya ha sido registrado en una fila de la atracción: ' + @atraccion AS messageStatus;
+			SELECT 409 AS codeStatus, 'Actualmente este Ticket ya ha sido registrado en una fila de la atracciï¿½n: ' + @atraccion AS messageStatus;
 		END
 		ELSE
 		BEGIN
@@ -117,7 +116,7 @@ BEGIN
 			INSERT INTO fila.tbFilasPosiciones (fiat_ID, ticl_ID, fipo_HoraIngreso)
 			VALUES (@fiat_ID, @ticl_ID, GETDATE());
 
-			SELECT 200 AS codeStatus, 'Posición Insertada con éxito' AS messageStatus;
+			SELECT 200 AS codeStatus, 'Posiciï¿½n Insertada con ï¿½xito' AS messageStatus;
 		END
 
 		COMMIT TRANSACTION; 
