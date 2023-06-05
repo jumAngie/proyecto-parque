@@ -1,0 +1,653 @@
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ParqServicesService } from 'src/app/ParqServices/parq-services.service';
+import { Router } from '@angular/router';
+import { Pagos } from 'src/app/Models/Pagos';
+import { VentasQuiosco } from 'src/app/Models/VentasQuiosco';
+import { ToastUtils } from 'src/app/Utilities/ToastUtils';
+import { Clientes } from 'src/app/Models/Clientes';
+import { VentasQuioscoDetalle } from 'src/app/Models/VentasQuioscoDetalle';
+import { GridOptions } from 'ag-grid-community';
+import { InsumosQuiosco } from 'src/app/Models/InsumosQuiosco';
+import { DetallesActionsRenderer } from './DetallesActionsRenderer';
+
+@Component({
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css']
+})
+
+export class VentasCrearComponent implements OnInit{
+  quioscoID: any;
+  pagos!: Pagos[];
+  clientes!: Clientes[];
+  gridOptions: GridOptions = {};
+  showDetalles!: VentasQuioscoDetalle[];
+  insumos!: InsumosQuiosco[];
+  totalRow: any = {};
+
+  venta: VentasQuiosco = new VentasQuiosco();
+  detalle: VentasQuioscoDetalle = new VentasQuioscoDetalle();
+  detalleDelete: VentasQuioscoDetalle = new VentasQuioscoDetalle();
+
+  PagoRequerido = false;
+  ClienteRequerido = false;
+  InsumoRequerido = false;
+  CantidadRequerido = false;
+
+// DESHABILIDAR CAMPOS
+  ClientesDDL_Disabled = false;
+  PagoDDL_Disabled = false;
+  btnCreateHeader_Disabled = false;
+  btnGoBack_Disabled = false;
+
+  InsumosDDL_Disabled = false;
+  Cantidad_Disabled = false;
+  btnSendDetails = false;
+  btnCloseReceipt = false;
+  
+  filtro: String = '';
+  p: number = 1;
+  selectedPageSize = 5;
+  pageSizeOptions: number[] = [5, 10 ,20, 30]; // Opciones de tamaño de página
+
+
+
+  constructor(
+    private service: ParqServicesService,
+    private router: Router,
+    private elementRef: ElementRef,
+    private renderer2: Renderer2, 
+  ){}
+
+  ngOnInit(): void {
+    
+    this.quioscoID = 1;
+    this.venta.clie_ID = 1;
+    this.venta.pago_ID = 0;
+    this.detalle.insu_ID = 0;
+
+
+    this.getPagos();
+    this.getClientes();
+    this.getInsumos();  
+    this.disableFields(false);
+    this.disableContentFields(true);
+  };
+
+//#region CARGAR DATOS
+  getPagos(){
+    this.service.getPagos().subscribe((response: any) =>{
+      if(response.success){
+        this.pagos = response.data;
+      };
+    });
+  };
+
+  getClientes(){
+    this.service.getClientes().subscribe((response: any) =>{
+      if (response.success) {
+        this.clientes = response.data;
+      }
+    })
+  };
+
+  getInsumos(){
+    this.service.getInsumosByQuisco(this.quioscoID).subscribe((response : any) =>{
+      if (response.success) {
+        this.insumos = response.data;
+      }
+    }) 
+  }
+
+  filtrarInsumos(){
+    const filtroLowerCase = this.filtro.toLowerCase();
+
+    return this.showDetalles.filter(detalle => {
+        const nombreValido = detalle.golo_Nombre.toLowerCase().includes(filtroLowerCase);
+        const direccionValido = detalle.golo_Precio.toString().toLowerCase().includes(filtroLowerCase);
+        const areaNombreValido = detalle.deta_Cantidad.toString().toLowerCase().includes(filtroLowerCase);
+        const totalProds = detalle.valorFinalPorInsumo.toString().toLowerCase().includes(filtroLowerCase);
+        return nombreValido || direccionValido || areaNombreValido || totalProds
+    });    
+  }
+
+
+
+  reloadDetails(){
+    this.service.getDetallesByVenta(this.detalle.vent_ID).subscribe((response : any) =>{
+      if (response.success) {
+        this.showDetalles = response.data;
+
+
+        for (let i = 0; i < this.showDetalles.length; i++) {
+          const detalleItem = this.showDetalles[i];
+
+          this.showDetalles.map(item => {
+            item.valorFinalPorInsumo = detalleItem.golo_Precio * detalleItem.deta_Cantidad;
+          })
+        };
+
+        
+        const Subtotal = this.showDetalles.reduce((total, detalleItem) => total += detalleItem.valorFinalPorInsumo, 0);
+        const ISV = (Subtotal * 0.15).toFixed(2);
+        const GranTotal = parseFloat(Subtotal.toString()) + parseFloat(ISV.toString());
+
+        this.totalRow = {
+          vent_Subtotal: Subtotal,
+          vent_ISV: ISV,
+          vent_GranTotal: GranTotal,
+        };
+
+      };
+    });
+  }
+//#endregion
+
+//#region HABILITAR, DESHABILITAR Y LIMPIAR INPUTS
+  disableFields(x: boolean){
+    const ClientesDDL = this.elementRef.nativeElement.querySelector('#clie_ID');
+    this.renderer2.setProperty(ClientesDDL, 'disabled', x);
+    this.ClientesDDL_Disabled = x;
+
+    const PagosDDL = this.elementRef.nativeElement.querySelector('#pago_ID');
+    this.renderer2.setProperty(PagosDDL, 'disabled', x);
+    this.PagoDDL_Disabled = x;
+
+    const btnCreateHeader = this.elementRef.nativeElement.querySelector('#btnCreateHeader');
+    this.renderer2.setProperty(btnCreateHeader, 'disabled', x);
+    this.btnCreateHeader_Disabled = x;
+
+    const btnGoBack = this.elementRef.nativeElement.querySelector('#btnGoBack');
+    this.renderer2.setProperty(btnGoBack, 'disabled', x);
+    this.btnGoBack_Disabled = x;
+  };
+
+  disableContentFields(x: boolean){
+    const InsumosDDL = this.elementRef.nativeElement.querySelector('#insu_ID');
+    this.renderer2.setProperty(InsumosDDL, 'disabled', x);
+    this.InsumosDDL_Disabled = x;
+
+    const Cantidad = this.elementRef.nativeElement.querySelector('#deta_Cantidad');
+    this.renderer2.setProperty(Cantidad, 'disabled', x);
+    this.Cantidad_Disabled = x;
+
+    const btnCloseReceipt = this.elementRef.nativeElement.querySelector('#btnCloseReceipt');
+    this.renderer2.setProperty(btnCloseReceipt, 'disabled', x);
+    this.btnCloseReceipt = x;
+
+    const btnSendDetails = this.elementRef.nativeElement.querySelector('#btnSendDetails');
+    this.renderer2.setProperty(btnSendDetails, 'disabled', x);
+    this.btnSendDetails = x;
+  };
+
+  clearContentInputs(){
+    const InsumosDDL = this.elementRef.nativeElement.querySelector('#insu_ID');
+    this.renderer2.setProperty(InsumosDDL, 'value', '');
+
+    const Cantidad = this.elementRef.nativeElement.querySelector('#deta_Cantidad');
+    this.renderer2.setProperty(Cantidad, 'value', '');
+
+    this.detalle.insu_ID = 0;
+    this.detalle.deta_Cantidad = 0;
+  };
+
+  closeModal(){
+    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
+    this.renderer2.removeClass(modalElement, 'show');
+    this.renderer2.setStyle(modalElement, 'display', 'none');    
+  }
+
+
+//#endregion
+  
+
+//#region ENVIAR DATOS 
+
+  GuardarVenta(){
+    var errors = 0;
+    const errorsArray: boolean[] = [];
+    errorsArray[0] = this.validarPago();
+    errorsArray[1] = this.validarCliente();
+
+    for (let i = 0; i < errorsArray.length; i++) {
+      if (errorsArray[i] == true) {errors++; }
+      else {errors; };      
+    };
+
+    if(this.ClientesDDL_Disabled && this.PagoDDL_Disabled){
+      ToastUtils.showWarningToast('Pero que haces washin');
+    }
+    else{
+      if (errors == 0) {      
+  
+        this.venta.vent_UsuarioCreador = 1;
+        this.venta.quio_ID = 1;
+
+        this.service.createVenta(this.venta).subscribe((response : any) =>{
+          if (response.code == 200) {
+            ToastUtils.showSuccessToast('Factura creada con éxito!');
+
+            this.detalle.vent_ID = response.message.toString();
+            this.disableFields(true);
+            this.disableContentFields(false);
+          }else if(response.code == 409){
+            ToastUtils.showWarningToast(response.message);
+          }else{
+            ToastUtils.showErrorToast(response.message);
+          }
+        })
+      }else{
+        ToastUtils.showWarningToast('Hay campos vacíos!');
+      };
+    };
+  };
+
+  GuardarDetalles(){
+    var errors = 0;
+    const errorsArray: boolean[] = [];
+
+    errorsArray[0] = this.validarInsumo();
+    errorsArray[1] = this.validarCantidad();
+
+    for (let i = 0; i < errorsArray.length; i++) {
+      if(errorsArray[i] == true){
+        errors++;
+      }else{
+        errors;
+      };
+    };
+
+    if(this.InsumosDDL_Disabled && this.Cantidad_Disabled){
+      ToastUtils.showWarningToast('Anda pasha bobo');
+    }else{
+
+      if (errors == 0) {
+        this.detalle.deta_UsuarioCreador = 1;
+        this.service.createVentaDetalle(this.detalle).subscribe((response : any) =>{
+          if (response.code == 200) {
+            this.clearContentInputs();
+            ToastUtils.showSuccessToast(response.message);
+  
+            this.reloadDetails();
+  
+          }else if(response.code == 409){
+            ToastUtils.showWarningToast(response.message);
+          }else{
+            ToastUtils.showErrorToast(response.message);
+          };
+        });
+      }else{
+        ToastUtils.showWarningToast('Hay campos vacios!')
+      };
+    };
+  };
+
+  onDeleteDetail(rowData: any): void{
+    const modalElement = this.elementRef.nativeElement.querySelector('.modal');
+    this.renderer2.addClass(modalElement, 'show');
+    this.renderer2.setStyle(modalElement, 'display', 'block');
+    this.detalleDelete = rowData;
+  };
+
+  confirmDeleteDetail(){
+    this.service.deleteInsumo(this.detalleDelete).subscribe((response : any) =>{
+      if(response.code == 200){
+        this.reloadDetails();
+        ToastUtils.showSuccessToast(response.message);
+      }else if(response.code == 409){
+        ToastUtils.showWarningToast(response.message);
+      }else{
+        ToastUtils.showErrorToast(response.message);
+      }
+    })
+    this.closeModal();
+  }
+  
+  Volver(){
+    this.router.navigate(['ventasquiosco-listado']);
+  };
+
+  closeReceipt(){
+    ToastUtils.showSuccessToast('Venta finalizada exitosamente!');
+    this.router.navigate(['ventasquiosco-listado']);
+  }
+
+//#endregion
+
+
+
+//#region VALIDACIONES DEL ENCABEZADO DE LA FACTURA
+
+
+  validarPago(){
+    if (!this.venta.pago_ID) {
+      this.PagoRequerido = true;
+      return true;
+    }else{
+      this.PagoRequerido = false;
+      return false;
+    }
+  };
+
+  validarCliente(){
+    if (!this.venta.clie_ID) {
+      this.ClienteRequerido = true;
+      return true;
+    }else{
+      this.ClienteRequerido = false;
+      return false;
+    }
+  };
+
+  clearPagoError(){
+    if (this.venta.pago_ID.toString().trim() !== '' || this.venta.pago_ID != 0) {
+      this.PagoRequerido = false;
+    }
+  };
+
+  clearClienteError(){
+    if (this.venta.clie_ID.toString().trim() !== '' || this.venta.clie_ID != 0) {
+      this.ClienteRequerido = false;
+    }
+  };
+//#endregion
+
+
+//#region VALIDACIONES DEL CONTENIDO DE LA FACTURA
+
+  validarInsumo(){
+    if (!this.detalle.insu_ID || this.detalle.insu_ID.toString().trim() == '' || this.detalle.insu_ID == 0) {
+      this.InsumoRequerido = true
+      return true;
+    }else{
+      this.InsumoRequerido = false;
+      return false;
+    }
+  };
+
+  validarCantidad(){
+    if (!this.detalle.deta_Cantidad || this.detalle.deta_Cantidad.toString().trim() == '' || this.detalle.deta_Cantidad == 0) {
+      this.CantidadRequerido = true;
+      return true;
+    }else{
+      this.CantidadRequerido = false;
+      return false;
+    }
+  };
+
+  clearInsumoError(){
+    if (this.detalle.insu_ID.toString().trim() !== '' || this.detalle.insu_ID != 0) {
+      this.InsumoRequerido = false;
+    }
+  };
+
+  clearCantidadError(){
+    if (this.detalle.deta_Cantidad.toString().trim() !== '' || this.detalle.deta_Cantidad != 0) {
+      this.CantidadRequerido = false;
+    }
+  }
+//#endregion
+
+
+
+/////////////////////////////////////////////////////////////////
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Ventas</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item" ><a routerLink="/ventasquiosco-listado"> Listado</a></li>             
+             <li class="breadcrumb-item active"> <a routerLink="/ventasquiosco-crear">Nueva venta</a> </li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section">
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="card bg-light">
+               <div class="card-header" style="padding: 0; position: relative">
+                  <div
+                    class="banner"
+                    style="
+                      background-image: url('/assets/img/BANNERS-VR-FINAL/VENTAS-QUIOSCOS.png');
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;
+                      background-size: contain;
+                      background-position: center;
+                      height: 0;
+                      padding-bottom: 23%; /* Ajusta este valor según la relación de aspecto de tu imagen */
+                    "
+                  ></div>
+                  <div
+                    class="overlay"
+                    style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+                  ></div>
+               </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card mt-3 mb-3 h-100">
+                                <div class="card-header">
+                                    <div class="card-title text-center mb-0 mt-0">
+                                        Encabezado
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                     <div class="col-md-12 mt-4">                                        
+                                        <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="ClienteRequerido"></i>
+                                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cliente:</label>
+                                        <div class="input-group" style="height: 3rem;">
+                                           <span class="input-group-text"><i class="bi bi-person-fill" style="color: blueviolet;"></i></span>
+                                           <select [(ngModel)]="venta.clie_ID" class="form-select" id="clie_ID" aria-label="Regiones" (change)="clearClienteError()">
+                                              <option *ngFor="let option of clientes" [value]="option.clie_ID">{{ option.clie_Nombres + ' ' +option.clie_Apellidos}}</option>
+                                           </select>
+                                        </div>
+                                     </div> 
+                                     <div class="col-md-12 mt-4"> 
+                                        <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="PagoRequerido"></i>
+                                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Método de págo:</label>
+                                        <div class="input-group" style="height: 3rem;">
+                                           <span class="input-group-text"><i class="bi bi-wallet" style="color: blueviolet;"></i></span>
+                                           <select [(ngModel)]="venta.pago_ID" class="form-select" id="pago_ID" aria-label="Regiones" (change)="clearPagoError()">
+                                             <option value="0">Selecciona una opción...</option> 
+                                             <option *ngFor="let option of pagos" [value]="option.pago_ID">{{ option.pago_Nombre }}</option>
+                                           </select>
+                                        </div>
+                                     </div>                                                                    
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                       <button id="btnGoBack" (click)="GuardarVenta()" class="ov-btn-grow-primary  col-5" style="height: 3rem;">
+                                          <i class="fas fa-plus-circle mr-1"></i>
+                                          Crear
+                                       </button>            
+                                       <button id="btnCreateHeader" (click)="Volver()" class="ov-btn-grow-d col-6 ms-3" style="height: 3rem;">
+                                          <i class="bi bi-reply-fill mr-1"></i>
+                                          Cancelar
+                                       </button>
+                                     </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card mt-3 mb-3 h-100">
+                                <div class="card-header ">
+                                    <div class="card-title text-center mb-0 mt-0">
+                                        Contenido
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="col-md-12 mt-4"> 
+                                        <i class="bi bi-exclamation-circle-fill mr-3" style="color: orange;" *ngIf="InsumoRequerido"></i>
+                                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Insumo:</label>
+                                        <div class="input-group" style="height: 3rem;">
+                                           <span class="input-group-text"><i class="bi bi-basket3-fill" style="color: blueviolet;"></i></span>
+                                           <select [(ngModel)]="detalle.insu_ID" class="form-select" id="insu_ID" aria-label="Regiones" (change)="clearInsumoError()">
+                                             <option value="0">Selecciona un insumo...</option> 
+                                             <option *ngFor="let option of insumos" [value]="option.insu_ID">{{ option.golo_Nombre }}</option>
+                                           </select>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-md-12 mt-4">
+                                        <i class="bi bi-exclamation-circle-fill" style="color: orange;" *ngIf="CantidadRequerido"></i>                                 
+                                        <label for="floatingSelectRegion" class="ms-1 form-label text-dark">Cantidad:</label>
+                                        <div class="input-group" style="height: 3rem;">                                       
+                                           <span class="input-group-text"><i class="bi bi-boxes" style="color: blueviolet;"></i></span>
+                                           <input [(ngModel)]="detalle.deta_Cantidad" type="text" class="form-control" id="deta_Cantidad" placeholder="Cantidad" (input)="clearCantidadError()">                                                                               
+                                        </div>                                                                        
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                 <div class="d-flex justify-content-end">
+                                    <button (click)="GuardarDetalles()" id="btnSendDetails" class="ov-btn-grow-primary col-4" style="height: 3rem;">
+                                       <i class="bi bi-cart-plus-fill"></i>
+                                       Agregar insumo
+                                    </button>
+                                    <button id="btnCloseReceipt" class="ov-btn-grow-d col-4 ms-3" style="height: 3rem;" data-bs-toggle="modal" data-bs-target="#modalConfirmClose">
+                                       <i class="bi bi-cart-check-fill"></i>
+                                       Finalizar venta
+                                    </button>
+                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <div class="card mt-3 mb-0">
+                                 <div class="card-header">
+                                    <div class="card-title text-center mb-0 mt-0">
+                                        Insumos añadidos
+                                    </div>                        
+                                 </div>
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="row mt-2">
+                                          <table
+                                          class="table table-hover table-striped mt-2 col-12 mb-0"                       
+                                        >
+                                          <thead>
+                                            <tr>
+                                              <th scope="col">Insumo</th>
+                                              <th scope="col">Precio unitario</th>
+                                              <th scope="col">Cantidad</th>
+                                              <th scope="col">Valor neto</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr
+                                              *ngFor="
+                                                let item of showDetalles
+                                                  | paginate : { itemsPerPage: selectedPageSize, currentPage: p }
+                                              "
+                                            >
+                                              <th scope="row">{{ item.golo_Nombre }}</th>
+                                              <td>{{ item.golo_Precio }}</td>
+                                              <td>{{ item.deta_Cantidad }}</td>
+                                              <td>{{ item.valorFinalPorInsumo }}</td>
+
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                          <div class="pagination d-flex justify-content-center col-7 mt-4">
+                                             <pagination-controls
+                                                (pageChange)="p = $event"
+                                                previousLabel="Anterior"
+                                                nextLabel="Siguiente"
+                                                firstLabel="Primera"
+                                                lastLabel="Última"
+                                                screenReaderPaginationLabel="Paginación"
+                                                screenReaderPageLabel="Página"
+                                                screenReaderCurrentLabel="Página actual"
+                                             >
+                                             </pagination-controls>
+                                          
+                                          </div>     
+
+                                       </div>
+                                    </div>
+                                    <div class="row mb-0">
+                                       <div class="col-8"></div>
+                                       <div class="col-4">
+                                          <table class=" table table-striped table-hover table-bordered table-light">
+                                             <tbody>
+                                                   <tr>
+                                                      <th > <label class="d-flex justify-content-left">Subtotal: </label></th>
+                                                      <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_Subtotal}}</label></th>
+                                                   </tr>
+                                                   <tr>
+                                                      <th> <label class="d-flex justify-content-left">ISV:</label> </th>
+                                                      <th> <label class="d-flex justify-content-left">Lps. {{totalRow.vent_ISV}}</label></th>
+                                                   </tr>
+                                                   <tr>
+                                                      <th> <label class="d-flex justify-content-left"> Gran Total:</label></th>
+                                                      <th> <label class="d-flex justify-content-left font-weight-bold">Lps. {{totalRow.vent_GranTotal}} </label> </th>
+                                                   </tr>
+                                             </tbody>
+                                          </table>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+ </main>
+ <div class="modal fade" #modalElement tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+         <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light">Eliminar</h5>               
+         </div>
+         <div class="modal-body text-center text-dark"> 
+            <div class="d-flex justify-content-center mt-1">
+               <label for="">¿Está seguro que desea eliminar este insumo?</label>               
+            </div>
+         </div>
+         <div class="modal-footer"> 
+            <button (click)="closeModal()" type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" >
+               <i class="bi bi-reply-fill"></i>Cancelar
+            </button> 
+            <button (click)="confirmDeleteDetail()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" >
+               <i class="bi bi-check-circle-fill "></i>Confirmar
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="modalConfirmClose" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+         <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light">Confirmar cerrado de factura</h5>               
+         </div>
+         <div class="modal-body text-center text-dark"> 
+            <div class="d-flex justify-content-center mt-1">
+               <label for="">¿Está seguro que desea cerrar esta venta?</label>               
+            </div>
+         </div>
+         <div class="modal-footer"> 
+            <button  type="button" class="ov-btn-grow-d col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-reply-fill"></i>Cancelar
+            </button> 
+            <button (click)="closeReceipt()" class="ov-btn-grow-in col-3" style="height: 2.4rem; margin-left: 0;" data-bs-dismiss="modal">
+               <i class="bi bi-check-circle-fill "></i>Confirmar
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+};
