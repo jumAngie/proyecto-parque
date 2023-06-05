@@ -2243,7 +2243,7 @@ CREATE OR ALTER PROCEDURE parq.UDP_tbTicketsCliente_FullInsert
 	@clie_DNI				CHAR(15), 
 	@clie_Sexo				CHAR(1), 
 	@clie_Telefono			CHAR(9), 
-
+	@wasSearched			INT,
 	@tckt_ID				INT,
 	@ticl_Cantidad			INT,
 	@pago_ID				INT,
@@ -2252,7 +2252,8 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION 
-			IF EXISTS (SELECT * FROM parq.tbClientes WHERE clie_DNI = @clie_DNI)
+			
+			IF EXISTS (SELECT * FROM parq.tbClientes WHERE  clie_DNI = @clie_DNI AND @wasSearched = 1)
 				BEGIN
 					DECLARE @clie_ID INT = (SELECT clie_ID FROM parq.tbClientes WHERE clie_DNI = @clie_DNI)
 
@@ -2298,7 +2299,7 @@ END
 GO
 
 
-EXECUTE parq.UDP_tbTicketsCliente_FullInsert 'PRUEBA', 'PRUEBA', '1234-5678-91234', 'F', '1234-4321', 2, 5, 3, 1 
+EXECUTE parq.UDP_tbTicketsCliente_FullInsert 'PRUEBA', 'PRUEBA', '1234-5678-91234', 'F', '1234-4321', 0, 2, 5, 3, 1 
 GO
 
 --*************** UPDATE DE TICKETCLIENTES ******************-

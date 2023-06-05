@@ -8,6 +8,7 @@ namespace ParqueDiversion.Entities.Entities
 {
     public partial class VW_tbTicketsClienteForInsert
     {
+        public int wasSearched { get; set; }
         public int ticl_ID { get; set; }
         public int? tckt_ID { get; set; }
         public int? clie_ID { get; set; }

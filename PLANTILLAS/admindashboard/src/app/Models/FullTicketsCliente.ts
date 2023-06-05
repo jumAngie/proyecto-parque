@@ -11,5 +11,6 @@ export class FullTicktesCliente{
     pago_ID!: number;
     ticl_FechaUso!: number;
     ticl_UsuarioCreador!: number;
-    ticl_UsuarioModificador!: number
+    ticl_UsuarioModificador!: number;
+    wasSearched!: number;
 }

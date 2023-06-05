@@ -42,7 +42,7 @@
                  </div>                                             
                 </div>
                 <div class="card-body">
-                  <div class="row col-lg-12">
+                  <div class="row col-12">
 
                     <div class="row mb-3 mt-2">
                       <div class="col-6 ">
@@ -128,16 +128,9 @@
 
                   </div>                   
                 </div>
-                <div class="card-footer">
-                  <button (click)="confirmClienteData()" class="ov-btn-grow-in col-2" style="height: 2.4rem; margin-left: 0">
-                    <i class="bi bi-arrow-right-circle-fill"></i>                          
-                    Siguiente
-                  </button>                  
-                </div>
               </div>            
 
             </div>
-
             <div class="row">
               <div class="card">
                 <div class="card-header text-center">
@@ -171,11 +164,11 @@
                           
                           <div class="col-3"></div>
                           <div class="col-6">
-                            <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                            <i *ngIf="cantidadClasicosRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
                             <span>Cantidad:</span>
                             <div class="input-group" >
                               <span class="input-group-text">
-                                <i class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
+                                <i  class="bi bi-person-fill" style="color: rgb(43, 137, 226)"></i>
                               </span>
                               <input [(ngModel)]="cantidadClasicos" type="number" class="form-control" id="CantidadComun" placeholder="Cantidad..." />
 
@@ -210,7 +203,7 @@
                                                  
                           <div class="col-3"></div>
                           <div class="col-6">
-                            <i class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
+                            <i *ngIf="cantidadVIPRequerido" class="bi bi-exclamation-circle-fill" style="color: orange; margin-right: 10px"></i>
                             <span>Cantidad:</span>
                             <div class="input-group" >
                               <span class="input-group-text">
@@ -227,12 +220,6 @@
 
 
                   </div>                   
-                </div>
-                <div class="card-footer">
-                  <button (click)="confirmTicketData()" class="ov-btn-grow-in col-2" style="height: 2.4rem; margin-left: 0">
-                    <i class="fas fa-plus-circle mr-1"></i>                           
-                    Confirmar
-                  </button>                  
                 </div>
               </div> 
             </div>
@@ -260,19 +247,13 @@
                          </select>
                       </div>
                    </div> 
-
-
-                      
-               
-
-
                   </div>                   
                 </div>
                 <div class="card-footer">
-                  <button class="ov-btn-grow-in col-2" style="height: 2.4rem; margin-left: 0">
+                  <button (click)="sendData()" class="ov-btn-grow-primary col-2" style="height: 2.6rem; margin-left: 0">
                     <i class="fas fa-plus-circle mr-1"></i>                           
-                    Confirmar
-                  </button>                  
+                    Confirmar compra
+                  </button>                 
                 </div>
               </div> 
             </div>

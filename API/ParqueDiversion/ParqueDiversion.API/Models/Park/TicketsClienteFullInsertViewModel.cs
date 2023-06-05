@@ -7,6 +7,7 @@ namespace ParqueDiversion.API.Models.Park
 {
     public class TicketsClienteFullInsertViewModel
     {
+        public int wasSearched { get; set; }
         public int ticl_ID { get; set; }
         public int? tckt_ID { get; set; }
         public int? clie_ID { get; set; }

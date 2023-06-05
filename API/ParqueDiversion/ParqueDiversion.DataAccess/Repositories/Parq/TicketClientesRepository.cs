@@ -80,6 +80,7 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             parametros.Add("@clie_DNI", item.clie_DNI, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_Telefono", item.clie_Telefono, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_Sexo", item.clie_Sexo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@wasSearched", item.wasSearched, DbType.Int32, ParameterDirection.Input);
 
             parametros.Add("@tckt_ID", item.tckt_ID, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@ticl_Cantidad", item.ticl_Cantidad, DbType.Int32, ParameterDirection.Input);
