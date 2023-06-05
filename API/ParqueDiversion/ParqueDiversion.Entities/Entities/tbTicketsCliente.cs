@@ -21,6 +21,7 @@ namespace ParqueDiversion.Entities.Entities
         public int? clie_ID { get; set; }
         public int? clre_ID { get; set; }
         public int? ticl_Cantidad { get; set; }
+        public int? pago_ID { get; set; }
         public DateTime? ticl_FechaCompra { get; set; }
         public DateTime? ticl_FechaUso { get; set; }
         public int? ticl_Habilitado { get; set; }
@@ -29,9 +30,9 @@ namespace ParqueDiversion.Entities.Entities
         public DateTime? ticl_FechaCreacion { get; set; }
         public int? ticl_UsuarioModificador { get; set; }
         public DateTime? ticl_FechaModificacion { get; set; }
-        public int? pago_ID { get; set; }
 
         public virtual tbClientes clie { get; set; }
+        public virtual tbClientesRegistrados clre { get; set; }
         public virtual tbMetodosPago pago { get; set; }
         public virtual tbTickets tckt { get; set; }
         public virtual ICollection<tbFilasPosiciones> tbFilasPosiciones { get; set; }

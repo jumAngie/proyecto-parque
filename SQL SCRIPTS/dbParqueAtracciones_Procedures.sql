@@ -1695,7 +1695,6 @@ BEGIN
 			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
 	END CATCH
 END
---*************** UPDATE DE CLIENTESREGISTRADOS ******************-
 GO
 
 --*************** UPDATE DE CLIENTES REGISTRADOS ******************--

@@ -1749,6 +1749,11 @@ namespace ParqueDiversion.DataAccess.Context
                     .HasForeignKey(d => d.clie_ID)
                     .HasConstraintName("FK_parq_tbTicletsCliente_tbClientes_clie_ID");
 
+                entity.HasOne(d => d.clre)
+                    .WithMany(p => p.tbTicketsCliente)
+                    .HasForeignKey(d => d.clre_ID)
+                    .HasConstraintName("FK_parq_tbTicletsCliente_tbClientesRegistrados_clre_ID");
+
                 entity.HasOne(d => d.pago)
                     .WithMany(p => p.tbTicketsCliente)
                     .HasForeignKey(d => d.pago_ID)

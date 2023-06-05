@@ -154,6 +154,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[fila].[VW_tbFilasAtraccion]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fila].[VW_tbFilasPosiciones]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[fila].[VW_tbHistorialVisitantesAtraccion]",
          "ObjectType": 3
       },

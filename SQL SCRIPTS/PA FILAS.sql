@@ -38,6 +38,7 @@ VALUES
 
 
 GO
+
 CREATE OR ALTER VIEW fila.VW_tbFilasAtraccion
 AS 
 SELECT	fiat_ID,
