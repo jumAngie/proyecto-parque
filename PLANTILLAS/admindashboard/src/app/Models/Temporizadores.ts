@@ -10,5 +10,5 @@ export class temporizadores{
     temp_Expiracion!:string;
     tiempoFaltante!:string;
     temp_Expiracion_Formateada!:string;
-    
+    temp_FechaCreacion!:any
 }

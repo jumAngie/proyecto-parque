@@ -264,4 +264,29 @@ export class ParqServicesService {
       const url = `${this.apiService.apiUrl}Filas/ListadoTemporizadores?listado=${listado}`;
       return this.http.get<temporizadores[]>(url);
     }
+
+    PostTemporizadores(ticl_ID: string, atra_ID: number, temp_Expiracion: string) {
+      const url = `${this.apiService.apiUrl}Filas/InsertTemporizador?ticl_ID=${ticl_ID}&atra_ID=${atra_ID}&temp_Expiracion=${temp_Expiracion}`;
+      return this.http.post<temporizadores[]>(url,null);
+    }
+
+    ExtenderTemporizadores(temp_ID: number, temp_Expiracion: string) {
+      const url = `${this.apiService.apiUrl}Filas/ExtenderHora`;
+      const params = { temp_ID: temp_ID, temp_Expiracion: temp_Expiracion };
+      return this.http.put(url, params);
+    }
+    
+    
+    DeleteTemporizador(temp_ID: number): Observable<Filas[]> {
+      const url = `${this.apiService.apiUrl}Filas/DeleteTemporizador`;
+      const params = new HttpParams()
+        .set('temp_ID', String(temp_ID));
+      return this.http.delete<Filas[]>(url, { params });
+    }
+
+    DeleteCompletoTemporizador(): Observable<Filas[]> {
+      const url = `${this.apiService.apiUrl}Filas/DeleteCompletoTemporizador`;
+    
+      return this.http.delete<Filas[]>(url);
+    }
 }
