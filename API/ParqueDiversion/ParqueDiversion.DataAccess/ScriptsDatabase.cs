@@ -67,6 +67,8 @@ namespace ParqueDiversion.DataAccess
         public static string UDP_TicketClientes_Delete = "parq.UDP_tbTicketClientes_DELETE";
 
         public static string UDP_TicketsCliente_FullInsert = "parq.UDP_tbTicketsCliente_FullInsert";
+
+        public static string UDP_ReporteByCliente = "parq.UDP_VW_tbTicketsCliente_Reporte";
         #endregion
 
         #region Atracciones

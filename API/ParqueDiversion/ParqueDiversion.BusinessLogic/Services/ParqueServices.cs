@@ -59,7 +59,7 @@ namespace ParqueDiversion.BusinessLogic.Services
         }
 
         #region Cargo
-        
+
         public IEnumerable<VW_tbCargos> CargoList()
         {
             try
@@ -72,7 +72,7 @@ namespace ParqueDiversion.BusinessLogic.Services
                 return Enumerable.Empty<VW_tbCargos>();
             }
         }
-        
+
         public ServiceResult InsertarCargos(tbCargos item)
         {
             var result = new ServiceResult();
@@ -106,7 +106,7 @@ namespace ParqueDiversion.BusinessLogic.Services
             }
         }
 
-        
+
 
         public RequestStatus UpdateCargo(tbCargos tabla)
         {
@@ -494,10 +494,10 @@ namespace ParqueDiversion.BusinessLogic.Services
             try
             {
                 var ans = _ticketClientesRepository.FullInsert(item);
-                if(ans.CodeStatus == 200)
+                if (ans.CodeStatus == 200)
                 {
                     return result.SetMessage(ans.MessageStatus, ServiceResultType.Success);
-                }else if (ans.CodeStatus == 409)
+                } else if (ans.CodeStatus == 409)
                 {
                     return result.SetMessage(ans.MessageStatus, ServiceResultType.Conflict);
                 }
@@ -532,6 +532,20 @@ namespace ParqueDiversion.BusinessLogic.Services
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public ServiceResult Reporte(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ticketClientesRepository.Reporte(id);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
             }
         }
         #endregion

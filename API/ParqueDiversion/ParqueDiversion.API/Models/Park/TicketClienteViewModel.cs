@@ -12,6 +12,9 @@ namespace ParqueDiversion.API.Models
         public string tckt_Nombre { get; set; }
         public int? clie_ID { get; set; }
         public string clie_Nombres { get; set; }
+        public string clie_DNI { get; set; }
+        public string clie_Sexo { get; set; }
+        public string clie_Telefono { get; set; }
         public int? ticl_Cantidad { get; set; }
         public int? pago_ID { get; set; }
         public string pago_Nombre { get; set; }
@@ -27,5 +30,7 @@ namespace ParqueDiversion.API.Models
         public DateTime? ticl_FechaModificacion { get; set; }
         public string empl_crea { get; set; }
         public string empl_Modifica { get; set; }
+
+        public int wasSearched { get; set; }
     }
 }

@@ -96,7 +96,7 @@ import { DetallesempleadosComponent } from './Empleados/detallesempleados/detall
 import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
 import { TemporizadoresListadoComponent } from './Filas/temporizadores-listado/temporizadores-listado.component';
 
-
+import { ReporteComponent } from './reporte/reporte.component';
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
@@ -188,6 +188,8 @@ const routes: Routes = [
   {path: 'createtickets', component:CreateticketsComponent},
 
   {path: 'grafica', component: GraficaComponent},
+  {path: 'reporte', component: ReporteComponent},
+
 ];
 
 @NgModule({

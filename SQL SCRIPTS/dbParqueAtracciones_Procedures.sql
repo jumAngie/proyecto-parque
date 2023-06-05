@@ -2133,6 +2133,9 @@ SELECT [ticl_ID]
 	  ,tick.tckt_Nombre
       ,tcli.clie_ID
 	  , clie.clie_Nombres + ' ' + clie.clie_Apellidos AS clie_Nombres
+	  ,clie_DNI
+	  ,clie_Sexo
+	  ,clie_Telefono
       ,[ticl_Cantidad]
 	  ,tcli.pago_ID
 	  ,pago_Nombre
@@ -3580,3 +3583,19 @@ INSERT [acce].[tbPantallas] ([pant_ID], [pant_Descripcion], [pant_URL], [pant_Me
 GO
 SET IDENTITY_INSERT [acce].[tbPantallas] OFF
 GO
+
+
+SELECT * FROM parq.VW_tbTicketClientes
+SELECT * FROM parq.VW_tbClientes
+GO
+
+CREATE OR ALTER PROCEDURE parq.UDP_VW_tbTicketsCliente_Reporte 
+	@clie_ID INT
+AS
+BEGIN
+	SELECT * FROM parq.VW_tbTicketClientes
+END
+GO
+
+SELECT * FROM parq.tbAtracciones
+SELECT * FROM parq.tbQuioscos

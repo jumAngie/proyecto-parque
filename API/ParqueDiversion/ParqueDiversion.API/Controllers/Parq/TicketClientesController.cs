@@ -69,5 +69,12 @@ namespace ParqueDiversion.API.Controllers
             var result = _parqueServices.FullTicketInsert(list);
             return Ok(result);
         }
+
+        [HttpPost("Reporte")]
+        public IActionResult Reporte(int id)
+        {            
+            var result = _parqueServices.Reporte(id);
+            return Ok(result);
+        }
     }
 }

@@ -211,6 +211,11 @@ export class ParqServicesService {
   getTicketsCliente(){
     return this.http.get<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/List')
   }
+  getReporte(id: number){
+    return this.http.post<TicketsCliente[]>(this.apiService.apiUrl + 'TicketClientes/Reporte?id='+id ,id)
+  }
+
+
     // servicios de tickets //
   getTicket(){
       return this.http.get<Ticket[]>(this.apiService.apiUrl + 'Ticket/List')
