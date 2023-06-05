@@ -413,7 +413,7 @@ sendData(){
   }
 
   validarPago(){
-    if (!this.fullTicket.pago_ID) {
+    if (!this.fullTicket.pago_ID || this.fullTicket.pago_ID == 0 || this.fullTicket.pago_ID.toString() == '') {
       this.PagoRequerido = true;
       return true;
     }else{
