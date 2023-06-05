@@ -54,6 +54,7 @@ namespace ParqueDiversion.BusinessLogic
 
             #region Fila
             services.AddScoped<HistorialVisitantesAtraccionRepository>();
+            services.AddScoped<FilasRepository>();
             #endregion
 
 

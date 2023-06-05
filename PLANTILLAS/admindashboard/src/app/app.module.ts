@@ -96,6 +96,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 
+import { FilasListadoComponent } from './Filas/filas-listado/filas-listado.component';
 
 @NgModule({
   declarations: [
@@ -169,7 +170,8 @@ import { MatButtonModule } from '@angular/material/button';
     CreateticketsclienteComponent,
     AtraccionesDetailComponent,
     GraficaComponent,
-    MapComponent
+    MapComponent,
+    FilasListadoComponent
   ],
   imports: [
     BrowserModule,

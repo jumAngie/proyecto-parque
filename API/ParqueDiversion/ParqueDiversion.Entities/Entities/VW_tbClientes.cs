@@ -11,6 +11,7 @@ namespace ParqueDiversion.Entities.Entities
         public int clie_ID { get; set; }
         public string clie_Nombres { get; set; }
         public string clie_Apellidos { get; set; }
+        public string clie_NombreCompleto { get; set; }
         public string clie_DNI { get; set; }
         public string clie_Sexo { get; set; }
         public string clie_Telefono { get; set; }

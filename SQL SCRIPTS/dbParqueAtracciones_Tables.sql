@@ -223,7 +223,8 @@ GO
 
 CREATE TABLE parq.tbClientesRegistrados(
 	clre_ID						INT IDENTITY(1,1),
-	clie_ID						INT,
+	clie_Nombres				VARCHAR(300),
+	clie_Apellidos				VARCHAR(300),
 	clre_Usuario				VARCHAR(300),
 	clre_Email					NVARCHAR(300),
 	clre_Clave					NVARCHAR(MAX),
@@ -235,7 +236,6 @@ CREATE TABLE parq.tbClientesRegistrados(
 	clre_FechaModificacion		DATETIME,
 
 	CONSTRAINT PK_parq_tbClientesRegistrados_clre_ID PRIMARY KEY (clre_ID),
-	CONSTRAINT FK_parq_tbClientesRegistrados_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes(clie_ID),
 	CONSTRAINT UQ_parq_tbClientesRegistrados_clre_Usuario UNIQUE (clre_Usuario),
 	CONSTRAINT UQ_parq_tbClientesRegistrados_clre_Email UNIQUE (clre_Email),
 
@@ -282,7 +282,8 @@ GO
 CREATE TABLE parq.tbTicketsCliente(
 	ticl_ID						INT IDENTITY(1,1),
 	tckt_ID						INT,
-	clie_ID						INT,	
+	clie_ID						INT,
+	clre_ID						INT,
 	ticl_Cantidad				INT,
 	pago_ID						INT,
 	ticl_FechaCompra			DATETIME DEFAULT GETDATE(),
@@ -296,6 +297,7 @@ CREATE TABLE parq.tbTicketsCliente(
 
 	CONSTRAINT PK_parq_tbTicketsCliente_ticl_ID PRIMARY KEY (ticl_ID),
 	CONSTRAINT FK_parq_tbTicletsCliente_tbClientes_clie_ID FOREIGN KEY (clie_ID) REFERENCES parq.tbClientes(clie_ID),
+	CONSTRAINT FK_parq_tbTicletsCliente_tbClientesRegistrados_clre_ID FOREIGN KEY (clre_ID) REFERENCES parq.tbClientesRegistrados(clre_ID),
 	CONSTRAINT FK_parq_tbTicketsCliente_tbTickets_tckt_ID FOREIGN KEY (tckt_ID) REFERENCES parq.tbTickets (tckt_ID),
 	CONSTRAINT FK_parq_tbTicketsCliente_gral_tbMetodosPago_pago_ID FOREIGN KEY(pago_ID) REFERENCES gral.tbMetodosPago (pago_ID),
 	CONSTRAINT CK_parq_tbTicketsCliente_ticl_Cantidad CHECK (ticl_Cantidad > 0),

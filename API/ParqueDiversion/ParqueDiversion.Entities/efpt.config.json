@@ -154,6 +154,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[fila].[VW_tbFilasAtraccion]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fila].[VW_tbFilasPosiciones]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[fila].[VW_tbHistorialVisitantesAtraccion]",
          "ObjectType": 3
       },
@@ -220,13 +228,9 @@
       {
          "Name": "[parq].[VW_tbTickets]",
          "ObjectType": 3
-      },
-      {
-         "Name": "[parq].[VW_tbTicketsClienteForInsert]",
-         "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-115L2GI\\SQLEXPRESS.dbParqueAtracciones",
+   "UiHint": "ISAAC\\SQLEXPRESS.dbParqueAtracciones",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

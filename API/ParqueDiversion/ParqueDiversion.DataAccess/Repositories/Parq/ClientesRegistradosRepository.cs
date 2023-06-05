@@ -37,7 +37,8 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             using var db = new SqlConnection(ParqueDiversionContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@clie_ID", item.clie_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_Nombres", item.clie_Nombres, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_Apellidos", item.clie_Apellidos, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@clre_Usuario", item.clre_Usuario, DbType.String, ParameterDirection.Input);
             parametros.Add("@clre_Email", item.clre_Email, DbType.String, ParameterDirection.Input);
             parametros.Add("@clre_Clave", item.clre_Clave, DbType.String, ParameterDirection.Input);
@@ -60,7 +61,8 @@ namespace ParqueDiversion.DataAccess.Repositories.Parq
             var parametros = new DynamicParameters();
 
             parametros.Add("@clre_ID", item.clre_ID, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@clie_ID", item.clie_ID, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_Apellidos", item.clie_Apellidos, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clre_Usuario", item.clre_Usuario, DbType.String, ParameterDirection.Input);
             parametros.Add("@clre_Usuario", item.clre_Usuario, DbType.String, ParameterDirection.Input);
             parametros.Add("@clre_Email", item.clre_Email, DbType.String, ParameterDirection.Input);
             parametros.Add("@clre_UsuarioModificador", item.clre_UsuarioModificador, DbType.Int32, ParameterDirection.Input);

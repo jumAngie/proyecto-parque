@@ -8,8 +8,14 @@ namespace ParqueDiversion.Entities.Entities
 {
     public partial class tbClientesRegistrados
     {
+        public tbClientesRegistrados()
+        {
+            tbTicketsCliente = new HashSet<tbTicketsCliente>();
+        }
+
         public int clre_ID { get; set; }
-        public int? clie_ID { get; set; }
+        public string clie_Nombres { get; set; }
+        public string clie_Apellidos { get; set; }
         public string clre_Usuario { get; set; }
         public string clre_Email { get; set; }
         public string clre_Clave { get; set; }
@@ -20,6 +26,6 @@ namespace ParqueDiversion.Entities.Entities
         public int? clre_UsuarioModificador { get; set; }
         public DateTime? clre_FechaModificacion { get; set; }
 
-        public virtual tbClientes clie { get; set; }
+        public virtual ICollection<tbTicketsCliente> tbTicketsCliente { get; set; }
     }
 }
