@@ -40,32 +40,27 @@ export class ReporteComponent implements OnInit {
 
   generatePDF(): void {
     const doc = new jsPDF();
-
+  
     const header = (doc: any) => {
       doc.setFontSize(18);
       const pageWidth = doc.internal.pageSize.width;
       doc.setTextColor(40);
-
+  
       // Agregar imagen
-      doc.addImage(
-        'https://i.ibb.co/LSWNrBH/Tooniverse.png',
-        'png',
-        pageWidth - 100,
-        -12,
-        100,
-         80
-      );
-
-      // Agregar texto con más margen superior
-      doc.setFontSize(30);
+      const imgData = 'https://i.ibb.co/WHS3vpM/header-image.png';
+      doc.addImage(imgData, 'PNG', 10, 10, 50, 20); // Ajusta la posición y las dimensiones de la imagen según sea necesario
+  
+      // Agregar título
       doc.setFont('Pacifico', 'bold');
-      doc.text('Tickets vendidos', 10, 20); // Ajustar el valor para mover el texto hacia arriba
-
+      doc.text('Tickets vendidos', 10, 30); // Ajusta la posición del título según sea necesario
+  
       // Agregar subtítulo con las fechas de inicio y fin
       doc.setFontSize(16);
       doc.setFont('Arial', 'normal');
+      doc.text('Fecha de inicio: 01/06/2023', 10, 50);
+      doc.text('Fecha de fin: 30/06/2023', 10, 65);
     };
-
+  
     const footer = (doc: any) => {
       doc.setFontSize(12);
       doc.setFont('Pacifico', 'normal');
@@ -73,9 +68,9 @@ export class ReporteComponent implements OnInit {
         align: 'left'
       });
     };
-
+  
     const mantenimientos: TicketsCliente[] = this.ticketsInforme;
-
+  
     const columns = [
       { header: 'Nombre del cliente', dataKey: 'clie_Nombres' },
       { header: 'Identificación', dataKey: 'clie_DNI' },
@@ -84,74 +79,80 @@ export class ReporteComponent implements OnInit {
       { header: 'Cantidad', dataKey: 'ticl_Cantidad' },
       { header: 'Forma de pago', dataKey: 'pago_Nombre' }
     ] as { header: string; dataKey: keyof TicketsCliente }[];
-
-    doc.setFontSize(18);
-    const pageWidth = doc.internal.pageSize.width;
-    doc.setTextColor(40);
-    doc.setTextColor(40);
-
-    // Llamar a las funciones de encabezado y pie de página
+  
+    // Llamar a la función de encabezado en la primera página
     header(doc);
-    footer(doc);
-
-    const startY = 60;
-    const rowHeight = 20;
-
-    // Obtener el contenido de la tabla en formato adecuado
-    const tableContent = mantenimientos.map((mantenimiento) =>
-      columns.map((column) => mantenimiento[column.dataKey])
-    );
-
-    const footerContent = {
-      text: 'Gracias'
-    };
-
-    // Agregar la primera tabla al documento PDF
-    (doc as any).autoTable({
-      head: [columns.map((column) => column.header)],
-      body: tableContent,
-      footer: footerContent,
-      startY: startY,
-    });
-
-    // Agregar una segunda tabla
-    const secondTableStartY = doc.table.name + 20;
-    const secondTableContent = [
-      ['Columna 1', 'Columna 2', 'Columna 3'],
-      ['Dato 1', 'Dato 2', 'Dato 3'],
-      ['Dato 4', 'Dato 5', 'Dato 6'],
-      // ... Agregar más filas si es necesario
-    ];
-
-    // Establecer el estilo de la segunda tabla
-    const secondTableStyles = {
-      theme: 'striped', // Opciones: 'striped', 'grid', 'plain', 'css', 'inherit'
-      tableLineColor: 200, // Valor entre 0 y 255
-      tableLineWidth: 0.2, // Valor en puntos (por defecto: 0.2)
-      styles: {
-        fontSize: 12,
-        font: 'helvetica', // Opciones: 'helvetica', 'times', 'courier', 'helvetica-bold', 'times-bold', 'courier-bold'
-        fontStyle: 'normal', // Opciones: 'normal', 'bold', 'italic', 'bolditalic'
-        cellPadding: 6, // Valor en puntos (por defecto: 5)
-        minCellHeight: 15, // Valor en puntos (por defecto: 0)
+  
+    // Calcular el espacio disponible para el contenido de la tabla en cada página
+    const startY = doc.previousAutoTable.finalY || 80; // La posición de inicio de la primera tabla es 80
+    const pageHeight = doc.internal.pageSize.height;
+    let availableSpace = pageHeight - startY - 20; // 20 es un margen inferior
+  
+    // Establecer estilos para la tabla
+    doc.setFontSize(12);
+    doc.setFillColor(245, 245, 245); // Color de fondo para las celdas de encabezado
+    doc.setTextColor(0); // Color del texto para las celdas de encabezado
+    doc.setFont('Arial', 'bold');
+  
+    let currentPage = 1;
+    let tableDataIndex = 0;
+  
+    while (tableDataIndex < mantenimientos.length) {
+      // Obtener el contenido de la tabla en formato adecuado para la página actual
+      const tableData = mantenimientos
+        .slice(tableDataIndex)
+        .map((mantenimiento) => columns.map((column) => mantenimiento[column.dataKey]));
+  
+      // Verificar si se ajusta el contenido en la página actual
+      const table = (doc as any).autoTable({
+        head: [columns.map((column) => column.header)],
+        body: tableData,
+        startY: currentPage === 1 ? startY : 20, // 20 es un margen superior para las páginas siguientes
+        styles: {
+          fillColor: [255, 255, 255], // Color de fondo para las celdas del cuerpo
+          textColor: [0, 0, 0], // Color del texto para las celdas del cuerpo
+        },
+        columnStyles: {
+          0: { columnWidth: 70 }, // Ancho de la primera columna
+          1: { columnWidth: 50 }, // Ancho de la segunda columna
+          2: { columnWidth: 50 }, // Ancho de la tercera columna
+          3: { columnWidth: 70 }, // Ancho de la cuarta columna
+          4: { columnWidth: 30 }, // Ancho de la quinta columna
+          5: { columnWidth: 50 }, // Ancho de la sexta columna
+        },
+        didDrawPage: function (data: any) {
+          // Llamar a la función de encabezado en cada página
+          header(doc);
+  
+          // Llamar a la función de pie de página en cada página
+          footer(doc);
+        },
+      });
+  
+      // Obtener la altura total de la tabla en la página actual
+      const tableHeight = table.height;
+  
+      // Verificar si se ajusta el contenido en la página actual
+      if (tableHeight < availableSpace) {
+        // Todavía hay espacio en la página actual para mostrar más contenido
+        currentPage++;
+        tableDataIndex += tableData.length;
+      } else {
+        // No hay suficiente espacio en la página actual para mostrar más contenido
+        doc.addPage();
+        currentPage = 1;
+        availableSpace = pageHeight - startY - 20; // 20 es un margen inferior
       }
-    };
-
-    // Agregar la segunda tabla al documento PDF
-    (doc as any).autoTable({
-      head: [['Encabezado 1', 'Encabezado 2', 'Encabezado 3']],
-      body: secondTableContent,
-      startY: secondTableStartY,
-      ...secondTableStyles
-    });
-
+    }
+  
     // Generar el PDF
     const pdfOutput = doc.output('blob');
-
+  
     // Crear una URL a partir del blob
     const url = URL.createObjectURL(pdfOutput);
-
+  
     // Mostrar el PDF en el visor
     this.pdfViewer.nativeElement.src = url;
   }
+  
 }
