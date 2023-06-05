@@ -19,11 +19,9 @@ export class PagesLoginComponent implements OnInit {
   }
 
   Login() {
-  if (this.username=="") {
-    ToastUtils.showWarningToast("El campo Usuario es Requerido");
-  }
-  if (this.password=="") {
-    ToastUtils.showWarningToast("El campo Contraseña es Requerido");  
+    
+  if (this.password=="" || this.username=="") {
+    ToastUtils.showWarningToast("Hay Campos Vacios");  
   }
 
   if(this.username!="" && this.password!=""){

@@ -63,6 +63,7 @@ assignLater(): void {
 }
 
 saveUpdatePantallas(): void {
+  
   const usua_ID = localStorage.getItem('usua_ID');
   if (usua_ID == null) {
     this.router.navigate(['pages-login']);
@@ -73,26 +74,33 @@ saveUpdatePantallas(): void {
       pant_Descripcion: "", // Asigna la descripción adecuada si está disponible
       role_ID: this.rolEnvio,
       ropa_UsuarioCreador: parseInt(usua_ID ?? '') 
-
+      
     };
   });
-
-    this.service.RolPantPantallasEliminado( this.rolEnvio).subscribe(
-      (response: any) => {
-        console.log(response)
+  
+  this.service.RolPantPantallasEliminado( this.rolEnvio).subscribe(
+    (response: any) => {
+      console.log(response)
       },
       (error: any) => {
         console.error('Error del servicio:', error);
         // Maneja el error de acuerdo a tus necesidades
       }
-    );
- 
-  this.pantallasenvio.forEach((pantalla) => {
+      );
+      
+      var toast = false;
+      this.pantallasenvio.forEach((pantalla) => {
     this.service.RolPantPantallasElim(pantalla).subscribe(
       (response: any) => {
         console.log('Pantalla enviada:', pantalla);
         console.log('Respuesta del servicio:', response);
-        // Realiza las acciones adicionales con la respuesta del servicio según tus necesidades
+        if (toast==false) {
+          ToastUtils.showSuccessToast(response.message);
+          toast=true;
+          setTimeout(() => {
+            window.location.href = '/roles'
+          }, 1000);
+        }
       },
       (error: any) => {
         console.error('Error al enviar la pantalla:', pantalla);
@@ -119,13 +127,19 @@ save(): void {
   });
 
   console.log(this.pantallasenvio);
-  
+  var toast = false;
   this.pantallasenvio.forEach((pantalla) => {
     this.service.RolPantAgg(pantalla).subscribe(
       (response: any) => {
         console.log('Pantalla enviada:', pantalla);
         console.log('Respuesta del servicio:', response);
-        // Realiza las acciones adicionales con la respuesta del servicio según tus necesidades
+        if (toast==false) {
+          ToastUtils.showSuccessToast(response.message);
+          toast=true;
+          setTimeout(() => {
+            window.location.href = '/roles'
+          }, 1000);
+        }// Realiza las acciones adicionales con la respuesta del servicio según tus necesidades
       },
       (error: any) => {
         console.error('Error al enviar la pantalla:', pantalla);
